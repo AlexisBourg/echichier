@@ -1,0 +1,25 @@
+plateau : 8x8
+
+regle de déplacement : on ne peut pas empiler ses propres pièce 
+ 
+pièce :	pion : 	premierdeplacement y+1/+2    deplacement y+1     ataque x+1/-1 et y+1  
+		si y=8 peut se transformer en une autre pièce
+
+	tour : 	deplacement x+k jusqu'a premiere pièce ou bort
+		roque : si roi et tour à possition initial 
+			xTour=xRoi
+			yTour=YRoi
+			xRoi-XTour : si x<0 : xRoi=xRoi-1 sinon xRoi=xRoi+1
+				
+
+	fou :  deplacement x+k et y+k jusqu'a premiere pièce ou bort
+
+	cavalier : x+2/-2 et y+1/-1 ou y+2/-2 et x+1/-1
+
+	reine : (heritage multiple de fou et tour)
+
+	roi :  x+1/-1 ou y+1/-1 ou (x+1/-1) et (y+1/-1)
+
+
+règle de la defence du roi : 	si le roi est en echec : obligation de le defendre 
+				pas le droit de déplacer une pièce qui découvirait le roi

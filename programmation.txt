@@ -1,0 +1,9 @@
+Joueur : 
+pièces[]
+
+
+pièces :
+x
+y
+
+type

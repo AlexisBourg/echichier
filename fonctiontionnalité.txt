@@ -1,0 +1,16 @@
+-pouvoir jouer : 	-à 2 sur le même ordi
+			-contre une ia (voir si on intège des niveaux)
+			-à 2 en réseaux 
+
+truc à faire obligatoirement: 	-coder les règle de déplacement de chaque pion : click sur un pion et 					affichage des case sur lesquels il peut se déplacer.
+
+				
+	
+
+fonctionnalité envisagé	: -classement des parties (critère à definir)
+			  -timer/compteur de tour
+		 	  -pouvoir annuller un coup : tout le temps contre l'ia, contre un autre joueur 		 	   si il est d'accord	
+		 	  -pouvoir enregistrer tout les coup jouer dans la partie afin de pouvoir y 				   revenir à n'importe quel moment : tout le temps contre l'ia, contre un autre 			   joueur si il est d'accord	
+			  -pouvoir mettre en pause une partie et la reprendre quand on veut.
+
+truc optionnel: faire des animations pour la prise d'un pion, en cas de victoire/defaire...	
