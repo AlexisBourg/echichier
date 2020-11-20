@@ -13,7 +13,10 @@ public class Cavalier extends Pièce{
 
     //Methode
     @Override
-    public boolean déplacer(int x, int y) {
-        return false;
+    public int[][] deplacementsPoss(int x, int y) {
+        int[][] destinations = new int[14][2];
+
+
+        return destinations;
     }
 }

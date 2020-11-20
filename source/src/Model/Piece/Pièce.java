@@ -6,14 +6,14 @@ public abstract class Pièce {
     private int coordX;
     private int coordY;
     private Image image;
-
-
+    private Couleur couleur;
 
     //Constructeur
-    public Pièce(int x,int y, Image img){
+    public Pièce(int x,int y, Image img, Couleur couleur){
         coordX=x;
         coordY=y;
         image=img;
+        this.couleur = couleur;
     }
 
     //Methode
@@ -43,5 +43,13 @@ public abstract class Pièce {
         return image;
     }
 
-    public abstract boolean déplacer(int x, int y);
+    public void setCouleur(Couleur couleur) {
+        this.couleur = couleur;
+    }
+
+    public Image getCouleur() {
+        return couleur;
+    }
+
+    public abstract int[][] deplacementsPoss(int x, int y);
 }
