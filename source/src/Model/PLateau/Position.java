@@ -6,7 +6,6 @@ public class Position {
     private int x;
     private int y;
     private boolean Occupé=false;
-
     private Pièce piecePresente;
 
     public Position(int x,int y, Pièce piece){

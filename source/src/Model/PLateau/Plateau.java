@@ -71,6 +71,9 @@ public class Plateau {
     }
 
     public Position getCasse(int x, int y){
+        if (x<0 || x>7 || y<0 || y>7 ){
+            return null;
+        }
         return plateauDejeu[x][y];
     }
 }

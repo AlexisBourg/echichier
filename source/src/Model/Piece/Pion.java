@@ -25,20 +25,33 @@ public class Pion extends Pièce {
     public void setListeDep(List<Position> listePosDep, Plateau plateau){
         int tmpX=getCoordX();
         int tmpY=getCoordY();
+        Position casseTmp;
         if (getCouleur().equals(Couleur.BLANC)){
+            //déplacement basique
             if (!plateau.getCasse(tmpX,tmpY+1).isOccupé()){
                 listePosDep.add(plateau.getCasse(tmpX,tmpY+1));
                 if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY+2).isOccupé()) {
                     listePosDep.add(plateau.getCasse(tmpX,tmpY+2));
                 }
             }
+            //attaque
+            casseTmp=plateau.getCasse(tmpX+1,tmpY+1);
+            if (casseTmp.isOccupé() && casseTmp.getPiece().getCouleur()!=this.getCouleur()){
+                listePosDep.add(casseTmp);
+            }
         }
         else{
-            if (!plateau.getCasse(tmpX,tmpY+1).isOccupé()){
-                listePosDep.add(plateau.getCasse(tmpX,tmpY+1));
-                if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY+2).isOccupé()) {
+            //déplacement basique
+            if (!plateau.getCasse(tmpX,tmpY-1).isOccupé()){
+                listePosDep.add(plateau.getCasse(tmpX,tmpY-1));
+                if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY-2).isOccupé()) {
                     listePosDep.add(plateau.getCasse(tmpX,tmpY+2));
                 }
+            }
+            //attaque
+            casseTmp=plateau.getCasse(tmpX-1,tmpY-1);
+            if (casseTmp.isOccupé() && casseTmp.getPiece().getCouleur()!=this.getCouleur()){
+                listePosDep.add(casseTmp);
             }
         }
 
