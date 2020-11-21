@@ -25,66 +25,46 @@ public class Pion extends Pièce {
     public void setListeDep(List<Position> listePosDep, Plateau plateau){
         int tmpX=getCoordX();
         int tmpY=getCoordY();
-        Position casseTmp;
+        Position caseTmp;
         if (getCouleur().equals(Couleur.BLANC)){
             //déplacement basique
-            if (!plateau.getCasse(tmpX,tmpY+1).isOccupé()){
+            caseTmp=plateau.getCasse(tmpX,tmpY+1);
+            if (plateau.isCaseNull(caseTmp)  && !caseTmp.isOccupé()){
                 listePosDep.add(plateau.getCasse(tmpX,tmpY+1));
                 if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY+2).isOccupé()) {
                     listePosDep.add(plateau.getCasse(tmpX,tmpY+2));
                 }
             }
             //attaque
-            casseTmp=plateau.getCasse(tmpX+1,tmpY+1);
-            if (casseTmp.isOccupé() && casseTmp.getPiece().getCouleur()!=this.getCouleur()){
-                listePosDep.add(casseTmp);
+            caseTmp=plateau.getCasse(tmpX+1,tmpY+1);
+            if (caseTmp.isOccupé() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
+                listePosDep.add(caseTmp);
+            }
+            caseTmp=plateau.getCasse(tmpX+1,tmpY-1);
+            if (caseTmp.isOccupé() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
+                listePosDep.add(caseTmp);
             }
         }
         else{
             //déplacement basique
-            if (!plateau.getCasse(tmpX,tmpY-1).isOccupé()){
+            caseTmp=plateau.getCasse(tmpX,tmpY-1);
+            if (plateau.isCaseNull(caseTmp)  && !caseTmp.isOccupé()){
                 listePosDep.add(plateau.getCasse(tmpX,tmpY-1));
                 if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY-2).isOccupé()) {
                     listePosDep.add(plateau.getCasse(tmpX,tmpY+2));
                 }
             }
             //attaque
-            casseTmp=plateau.getCasse(tmpX-1,tmpY-1);
-            if (casseTmp.isOccupé() && casseTmp.getPiece().getCouleur()!=this.getCouleur()){
-                listePosDep.add(casseTmp);
+            caseTmp=plateau.getCasse(tmpX-1,tmpY-1);
+            if (plateau.isCaseNull(caseTmp)  && caseTmp.isOccupé() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
+                listePosDep.add(caseTmp);
+            }
+            caseTmp=plateau.getCasse(tmpX-1,tmpY+1);
+            if (plateau.isCaseNull(caseTmp)  && caseTmp.isOccupé() && caseTmp.getPiece().getCouleur()!=this.getCouleur()) {
+                listePosDep.add(caseTmp);
             }
         }
 
     }
 
-
-/*    @Override
-    public int[][] deplacementsPoss(int x, int y){
-        int i=0, j=0, k=1;                              // j représente la case du tab contenant le x de destination, k représente la case du tab contenant le y de destination
-        int[][] destinations = new int[2][2];
-
-        if(getCouleur().equals(Couleur.NOIR)){
-            if(getPremierDeplacement()){
-                destinations[i][j]= x;
-                destinations[i][k]= y+2;
-                i+=1;
-                setPremierDeplacement();
-            }
-            destinations[i][j]= x;
-            destinations[i][k]= y+1;
-        }
-        else{
-            if(getPremierDeplacement()){
-                destinations[i][j]= x;
-                destinations[i][k]= y-2;
-                i+=1;
-            }
-            destinations[i][j]= x;
-            destinations[i][k]= y-1;
-        }
-
-        return destinations;
-    }
-
- */
 }
