@@ -39,7 +39,7 @@ public class Tour extends Pièce{
                         }
                         break;
                     }
-                                                               //Position possible à gauche
+                case 1:                                               //Position possible à gauche
                     caseTmp = plateau.getCasse(tmpX, tmpY - 1);
                     while (!plateau.isCaseNull(caseTmp)) {
                         if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
@@ -50,7 +50,7 @@ public class Tour extends Pièce{
                         break;
                     }
                     break;
-                case 2:                                             //Position possible à gauche
+                case 2:                                             //Position possible à droite
                     caseTmp = plateau.getCasse(tmpX+1, tmpY);
                     while (!plateau.isCaseNull(caseTmp)){
                         if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
@@ -72,10 +72,7 @@ public class Tour extends Pièce{
                         break;
                     }
                     break;
-
-            }
-
-
+                }
             }
         }
     }

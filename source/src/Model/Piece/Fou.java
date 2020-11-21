@@ -73,7 +73,6 @@ public class Fou extends Pièce{
                         break;
                     }
                     break;
-
             }
         }
     }
