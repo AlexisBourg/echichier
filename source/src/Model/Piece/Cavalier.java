@@ -16,7 +16,7 @@ public class Cavalier extends Pièce{
 
 
     //Methode
-    @Override
+
     public void setListePosDep(List<Position> listePosDep) {
 
     }

@@ -1,5 +1,6 @@
 package Model.Piece;
 
+import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
 import java.util.List;
@@ -16,18 +17,31 @@ public class Pion extends Pièce {
     //Methode
     public void setPremierDeplacement(){this.premierDeplacement = false;}
 
-    public boolean getPremierDeplacement() {
+    public boolean isPremierDeplacement() {
         return premierDeplacement;
     }
 
-    @Override
-    public void setListePosDep(List<Position> listePosDep) {
+
+    public void setListeDep(List<Position> listePosDep, Plateau plateau){
         int tmpX=getCoordX();
         int tmpY=getCoordY();
-        Position posTmp;
-        if (getPremierDeplacement()){
-
+        if (getCouleur().equals(Couleur.BLANC)){
+            if (!plateau.getCasse(tmpX,tmpY+1).isOccupé()){
+                listePosDep.add(plateau.getCasse(tmpX,tmpY+1));
+                if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY+2).isOccupé()) {
+                    listePosDep.add(plateau.getCasse(tmpX,tmpY+2));
+                }
+            }
         }
+        else{
+            if (!plateau.getCasse(tmpX,tmpY+1).isOccupé()){
+                listePosDep.add(plateau.getCasse(tmpX,tmpY+1));
+                if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY+2).isOccupé()) {
+                    listePosDep.add(plateau.getCasse(tmpX,tmpY+2));
+                }
+            }
+        }
+
     }
 
 

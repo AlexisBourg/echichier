@@ -3,6 +3,8 @@ package Model.PLateau;
 import Model.Piece.*;
 
 public class Plateau {
+
+
     private Position plateauDejeu[][];
 
     /**
@@ -58,5 +60,17 @@ public class Plateau {
 
             }
         }
+    }
+
+    public void setPlateauDejeu(Position[][] plateauDejeu) {
+        this.plateauDejeu = plateauDejeu;
+    }
+
+    public Position[][] getPlateauDejeu() {
+        return plateauDejeu;
+    }
+
+    public Position getCasse(int x, int y){
+        return plateauDejeu[x][y];
     }
 }

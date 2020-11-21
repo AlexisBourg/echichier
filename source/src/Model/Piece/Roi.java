@@ -1,5 +1,6 @@
 package Model.Piece;
 
+import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
 import java.util.List;
@@ -18,12 +19,11 @@ public class Roi extends Pièce {
     //Methode
     public void setPremierDeplacement(){this.premierDeplacement = false;}
 
-    public boolean getPremierDeplacement() {
+    public boolean isPremierDeplacement() {
         return premierDeplacement;
     }
 
-    @Override
-    public void setListePosDep(List<Position> listePosDep) {
 
+    public void setListeDep(List<Position> listePosDep, Plateau plateau){
     }
 }

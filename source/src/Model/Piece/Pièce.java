@@ -1,5 +1,6 @@
 package Model.Piece;
 
+import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
 import java.util.LinkedList;
@@ -62,9 +63,9 @@ public abstract class Pièce{
         return couleur;
     }
 
-    public abstract void setListePosDep(List<Position> listePosDep);
+    public abstract void setListeDep(List<Position> listePosDep, Plateau plateau);
 
-    public List<Position> getListePosDep() {
+    public List<Position> getListeDep() {
         return listePosDep;
     }
 

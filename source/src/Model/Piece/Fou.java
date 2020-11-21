@@ -1,5 +1,6 @@
 package Model.Piece;
 
+import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class Fou extends Pièce{
 
 
     //Methode
-    @Override
-    public void setListePosDep(List<Position> listePosDep) {
+
+    public void setListeDep(List<Position> listePosDep, Plateau plateau) {
 
     }
 
