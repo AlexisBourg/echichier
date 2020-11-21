@@ -22,8 +22,62 @@ public class Tour extends Pièce{
     }
 
 
-    public void setListeDep(List<Position> listePosDep, Plateau plateau){
+    public void setListeDep(List<Position> listePosDep, Plateau plateau) {
+        Position caseTmp;
+        int tmpX, tmpY;
+        for (int i = 0; 0 < 4; i++) {
+            tmpX = getCoordX();
+            tmpY = getCoordY();
+            switch (i) {
+                case 0:                                             //Position possible à droite
+                    caseTmp = plateau.getCasse(tmpX, tmpY + 1);
+                    while (!plateau.isCaseNull(caseTmp)) {
+                        if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+                            listePosDep.add(caseTmp);
+                            tmpY++;
+                            caseTmp = plateau.getCasse(tmpX, tmpY + 1);
+                        }
+                        break;
+                    }
+                                                               //Position possible à gauche
+                    caseTmp = plateau.getCasse(tmpX, tmpY - 1);
+                    while (!plateau.isCaseNull(caseTmp)) {
+                        if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+                            listePosDep.add(caseTmp);
+                            tmpY--;
+                            caseTmp = plateau.getCasse(tmpX, tmpY - 1);
+                        }
+                        break;
+                    }
+                    break;
+                case 2:                                             //Position possible à gauche
+                    caseTmp = plateau.getCasse(tmpX+1, tmpY);
+                    while (!plateau.isCaseNull(caseTmp)){
+                        if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+                            listePosDep.add(caseTmp);
+                            tmpX++;
+                            caseTmp = plateau.getCasse(tmpX, tmpX + 1);
+                        }
+                        break;
+                    }
+                    break;
+                case 3:                                             //Position possible à gauche
+                    caseTmp = plateau.getCasse(tmpX-1, tmpY);
+                    while (!plateau.isCaseNull(caseTmp)) {
+                        if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+                            listePosDep.add(caseTmp);
+                            tmpX--;
+                            caseTmp = plateau.getCasse(tmpX-1, tmpY);
+                        }
+                        break;
+                    }
+                    break;
+
+            }
+
+
+            }
+        }
     }
 
 
-}
