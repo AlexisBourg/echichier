@@ -6,5 +6,5 @@ public enum Image {
     CAVALIER,
     FOU,
     ROI,
-    DAME;
+    REINE;
 }

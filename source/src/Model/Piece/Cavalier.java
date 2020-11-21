@@ -1,22 +1,24 @@
 package Model.Piece;
 
+import Model.PLateau.Position;
+
+import java.util.List;
+
 public class Cavalier extends Pièce{
 
 
     //Attribue
 
     //Constructeur
-    public Cavalier(int x, int y){
-        super(x, y, Image.CAVALIER);
+    public Cavalier(int x, int y, Couleur couleur){
+        super(x, y, Image.CAVALIER,couleur,"Cavalier");
     }
 
 
     //Methode
     @Override
-    public int[][] deplacementsPoss(int x, int y) {
-        int[][] destinations = new int[14][2];
+    public void setListePosDep(List<Position> listePosDep) {
 
-
-        return destinations;
     }
+
 }

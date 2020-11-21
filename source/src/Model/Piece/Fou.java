@@ -1,18 +1,25 @@
 package Model.Piece;
 
+import Model.PLateau.Position;
+
+import java.util.List;
+
 public class Fou extends Pièce{
 
 
     //Attribue
 
     //Constructeur
-    public Fou(int x, int y) {
-        super(x, y, Image.FOU);
+    public Fou(int x, int y, Couleur couleur) {
+        super(x, y, Image.FOU,couleur,"Fou");
     }
+
 
     //Methode
     @Override
-    public boolean déplacer(int x, int y) {
-        return false;
+    public void setListePosDep(List<Position> listePosDep) {
+
     }
+
+
 }
