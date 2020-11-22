@@ -10,7 +10,7 @@ public class Tour extends Pièce{
     private boolean premierDeplacement=true;
     //Constructeur
     public Tour(int x, int y, Couleur couleur){
-        super(x,y,Image.TOUR,couleur, "Tour");
+        super(x,y,couleur, Type.TOUR);
     }
 
 

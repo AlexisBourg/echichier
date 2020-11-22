@@ -12,7 +12,7 @@ public class Reine extends Pièce{
 
     //Constructeur
     public Reine(int x, int y, Couleur couleur) {
-        super(x, y, Image.REINE, couleur,"Reine");
+        super(x, y, couleur,Type.REINE);
     }
 
     //Methode

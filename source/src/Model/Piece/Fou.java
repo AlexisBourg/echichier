@@ -12,7 +12,7 @@ public class Fou extends Pièce{
 
     //Constructeur
     public Fou(int x, int y, Couleur couleur) {
-        super(x, y, Image.FOU,couleur,"Fou");
+        super(x, y,couleur,Type.FOU);
     }
 
 

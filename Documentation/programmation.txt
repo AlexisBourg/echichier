@@ -1,9 +1,37 @@
-Joueur : 
-pièces[]
+je reflechi depuis tout à l'heure sur comment gerer les déplacements et je pense avoir trouver un truc viable :
+chaque pièce à une liste de coordonée de casse où elle peut se déplacer : list<int[][]>
+cette liste se réinitialise à chaque déplacement de la pièce
+elle se créé pour chaque pièce de la façon suivante : 
+------------------------------------pion :
+   si il est blanc, tant que y!=9 ou y+1 et occupé par un pion
+                        on ajoute à la liste x,y+1
+                       si la casse y+1,x+1 est occupé par un pion de couleur differente:
+                                            on ajoute à la liste x+1,x+1
 
+                      si la casse y+1, x-1 est occupé par un pion de couleur differente:
+                                      on ajoute à la liste x-1,y+1
+sinon il est noir, même procède en inversant les y
 
-pièces :
-x
-y
+------------------------------------Tour
 
-type
+tant que x+1 ne comporte pas de pièce  et que x!=9:
+                              on ajoute x+1,y à la liste 
+                              si il y a une pièce et qu elle est de couleur differente, on ajoute aussi les coordonée de celle-ci
+pareil pour x-1
+pareil pour y+1
+pareil pour y-1
+
+------------------------------------Fou
+même principe de la tour mais avec les diagonale
+
+-----------------------------------Roi
+on verifi les case autour de lui et si elles sont prise par un allier on ne l'ajoute pas à la liste
+
+------------------------------------Reine
+un subtile melange des verif du roi, du fou et de la tour
+
+------------------------------------------------------------------------------------------------------------------------------------------
+l'avantage, c'est que si tout ce passe bien, la main devrait se passser comme ca:
+joueur1
+selectionne un pion -> le programme creer la liste de tout les deplacement, donc on peut même les afficher sur le plateau
+selectionne une casse pour le déplacer -> le programme parcour la liste jusquà la case, si elle est dans la liste, place la pièce, dit au joueur de choisir un case valide

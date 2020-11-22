@@ -3,6 +3,7 @@ package Model.Piece;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
+import java.awt.*;
 import java.util.List;
 
 public class Cavalier extends Pièce{
@@ -12,7 +13,7 @@ public class Cavalier extends Pièce{
 
     //Constructeur
     public Cavalier(int x, int y, Couleur couleur){
-        super(x, y, Image.CAVALIER,couleur,"Cavalier");
+        super(x, y, couleur, Type.CAVALIER);
     }
 
 

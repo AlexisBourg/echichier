@@ -10,8 +10,10 @@ public class Pion extends Pièce {
     private boolean premierDeplacement=true;
 
     //Construccteur
+
     public Pion(int x, int y, Couleur couleur){
-        super(x,y,Image.PION, couleur, "Pion");
+        super(x, y, couleur, Type.PION);
+
     }
 
     //Methode

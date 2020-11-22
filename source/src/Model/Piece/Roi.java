@@ -14,7 +14,7 @@ public class Roi extends Pièce {
 
     //Constructeur
     public Roi(int x, int y, Couleur couleur) {
-        super(x, y, Image.ROI, couleur,"Roi");
+        super(x, y, couleur,Type.ROI);
     }
 
     //Methode
