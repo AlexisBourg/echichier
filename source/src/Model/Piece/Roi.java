@@ -2,7 +2,7 @@ package Model.Piece;
 
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

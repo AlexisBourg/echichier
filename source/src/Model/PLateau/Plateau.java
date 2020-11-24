@@ -27,19 +27,22 @@ public class Plateau {
             int yb=0, yn=7;
 
             switch (x){
-                case 0,7:
+                case 0:
+                case 7:
                         plateauDejeu[x][yn].setPiece(new Tour(x,yn,Couleur.NOIR));
                         plateauDejeu[x][yb].setPiece(new Tour(x,yb,Couleur.BLANC));
                         plateauDejeu[x][yn].setEstOccupé(true);
                         plateauDejeu[x][yb].setEstOccupé(true);
                     break;
-                case 1,6:
+                case 1:
+                case 6:
                         plateauDejeu[x][yn].setPiece(new Cavalier(x,yn,Couleur.NOIR));
                         plateauDejeu[x][yb].setPiece(new Cavalier(x,yb,Couleur.BLANC));
                         plateauDejeu[x][yn].setEstOccupé(true);
                         plateauDejeu[x][yb].setEstOccupé(true);
                     break;
-                case 2,5:
+                case 2:
+                case 5:
                         plateauDejeu[x][yn].setPiece(new Fou(x,yn,Couleur.NOIR));
                         plateauDejeu[x][yb].setPiece(new Fou(x,yb,Couleur.BLANC));
                         plateauDejeu[x][yn].setEstOccupé(true);
