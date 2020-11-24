@@ -20,7 +20,7 @@ public abstract class Pièce{
     public Pièce(int x,int y, Couleur couleur, Type type){
         coordX=x;
         coordY=y;
-        this.couleur = couleur;
+        this.couleur=couleur;
         this.type=type;
         switch (type){
             case FOU :
