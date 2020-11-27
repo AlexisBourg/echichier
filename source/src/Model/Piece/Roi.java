@@ -6,7 +6,7 @@ import Model.PLateau.Position;
 
 import java.util.List;
 
-public class Roi extends Pièce {
+public class Roi extends Piece {
 
 
     //Attribue
@@ -25,63 +25,66 @@ public class Roi extends Pièce {
     }
 
 
-    public void setListeDep(List<Position> listePosDep, Plateau plateau){
+    public void setListeDep( Plateau plateau){
+
+        listePosDep.clear();
+
         int tmpX=getCoordX();
         int tmpY=getCoordY();
         Position caseTmp;
 
         caseTmp=plateau.getCasse(tmpX--,tmpY--);
         if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }
 
         caseTmp=plateau.getCasse(tmpX--,tmpY);
         if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }
 
         caseTmp=plateau.getCasse(tmpX--,tmpY++);
         if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }
 
         caseTmp=plateau.getCasse(tmpX,tmpY--);
         if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }
 
         caseTmp=plateau.getCasse(tmpX,tmpY++);
         if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }
 
         caseTmp=plateau.getCasse(tmpX++,tmpY--);
         if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }
 
         caseTmp=plateau.getCasse(tmpX++,tmpY);
         if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }
 
         caseTmp=plateau.getCasse(tmpX++,tmpY++);
         if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupé() || caseTmp.isOccupé() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }

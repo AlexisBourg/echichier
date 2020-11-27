@@ -1,11 +1,16 @@
-package view;
+package Controller;
 
+import Model.PLateau.Position;
+import Model.Piece.Piece;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
-public class Controller {
+import java.util.List;
+
+
+public class ControllerPlateau {
     private int firstSelected = 0;
     private Button selected = new Button();
     private String oldStyle;
@@ -13,7 +18,7 @@ public class Controller {
     private GridPane grid;
 
     @FXML
-    public void caseSelected(MouseEvent mouseEvent) {
+    public /* Piece ->*/ void caseSelected(MouseEvent mouseEvent) {
         if (firstSelected == 0) {
             selected = (Button) mouseEvent.getSource();
             oldStyle = selected.getStyle();
@@ -26,6 +31,9 @@ public class Controller {
             selected.setStyle("-fx-background-color: gray;");
         }
     }
+
+
+
 
 
 

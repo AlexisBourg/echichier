@@ -3,21 +3,22 @@ package Model.Piece;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class Pièce{
+public abstract class Piece {
 
     //Atribut
     private int coordX;
     private int coordY;
-    private String image;
-    private Couleur couleur;
-    private List<Position> listePosDep;
+    private static String image;
+    private static Couleur couleur;
+    protected List<Position> listePosDep;
     private Type type;
 
     //Constructeur
-    public Pièce(int x,int y, Couleur couleur, Type type){
+    public Piece(int x, int y, Couleur couleur, Type type){
         coordX=x;
         coordY=y;
         this.couleur=couleur;
@@ -94,17 +95,12 @@ public abstract class Pièce{
     }
 
 
-    public void setImage(String image) {
-        this.image = image;
-    }
+
 
     public String getImage() {
         return image;
     }
 
-    public void setCouleur(Couleur couleur) {
-        this.couleur = couleur;
-    }
 
     public Couleur getCouleur() {
         return couleur;
@@ -118,10 +114,12 @@ public abstract class Pièce{
         return type;
     }
 
-    public abstract void setListeDep(List<Position> listePosDep, Plateau plateau);
+    public abstract void setListeDep( Plateau plateau);
 
     public List<Position> getListeDep() {
         return listePosDep;
     }
+
+
 
 }

@@ -1,0 +1,15 @@
+#grid{
+    -fx-border-color : yellow;
+    -fx-border-width : 1;
+}
+
+Button{
+    -fx-pref-width: 100;
+    -fx-pref-height: 100;
+    -fx-background-color : black;
+}
+
+
+.white{
+    -fx-background-color : white;
+}

@@ -1,14 +1,14 @@
 package Model.PLateau;
 
-import Model.Piece.Pièce;
+import Model.Piece.Piece;
 
 public class Position {
     private int x;
     private int y;
     private boolean Occupé=false;
-    private Pièce piecePresente;
+    private Piece piecePresente;
 
-    public Position(int x,int y, Pièce piece){
+    public Position(int x,int y, Piece piece){
         this.x=x;
         this.y=y;
         this.piecePresente=piece;
@@ -30,19 +30,21 @@ public class Position {
         return y;
     }
 
-    public void setEstOccupé(boolean estOccupé) {
+    public void setEstOccupe(boolean estOccupé) {
         this.Occupé = estOccupé;
     }
 
-    public boolean isOccupé() {
+    public boolean isOccupe() {
         return Occupé;
     }
 
-    public void setPiece(Pièce piece) {
+    public void setPiece(Piece piece) {
         this.piecePresente = piece;
+        piece.setCoordX(x);
+        piece.setCoordY(y);
     }
 
-    public Pièce getPiece() {
+    public Piece getPiece() {
         return piecePresente;
     }
 }
