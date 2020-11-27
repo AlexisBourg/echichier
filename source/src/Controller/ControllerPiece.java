@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ControllerPiece {
     public boolean deplacementPiècePossible(Position posPieceDep, Position posPieceArr){
-        if(!posPieceDep.isOccupe()){ return false; }
+
 
         Piece pieceTmpD = posPieceDep.getPiece();
 
@@ -24,11 +24,15 @@ public class ControllerPiece {
         return true;
     }
 
-    /*
-    * Methode appeller par caseSelected()
-     */
-    public void deplacerunePièce(Piece piece){
 
+    public void deplacerunePièce(Position positionD, Position positionA){
+        if(!positionD.isOccupe()){ return; }
+        if (!deplacementPiècePossible(positionD, positionA)){
+            System.out.println("Déplacement impossible");
+        }
+        /**
+         * à finir
+         */
 
     }
 }

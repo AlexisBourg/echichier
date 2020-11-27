@@ -11,19 +11,19 @@ import java.util.List;
 
 
 public class ControllerPlateau {
-    private int firstSelected = 0;
+    private boolean firstSelected = false;
     private Button selected = new Button();
     private String oldStyle;
     @FXML
     private GridPane grid;
 
     @FXML
-    public /* Piece ->*/ void caseSelected(MouseEvent mouseEvent) {
-        if (firstSelected == 0) {
+    public void caseSelected(MouseEvent mouseEvent) {
+        if (firstSelected) {
             selected = (Button) mouseEvent.getSource();
             oldStyle = selected.getStyle();
             selected.setStyle("-fx-background-color: gray;");
-            firstSelected += 1;
+            firstSelected = true;
         } else {
             selected.setStyle(oldStyle);
             selected = (Button) mouseEvent.getSource();
