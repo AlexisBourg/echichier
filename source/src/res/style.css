@@ -1,15 +1,41 @@
-#grid{
-    -fx-border-color : yellow;
-    -fx-border-width : 1;
+LabelGauche{
+    -fx-border-width: 1;
+    -fx-border-color: red;
 }
 
-Button{
+LabelDroit{
+    -fx-border-width: 1;
+    -fx-border-color: red;
+}
+
+#gridPrincipale{
+    -fx-max-height: 800;
+    -fx-max-width: 800;
+    -fx-min-height: 300;
+    -fx-min-width: 300;
+    -fx-grid-lines-visible: true;
+    -fx-background-color: yellow;
+    -fx-alignment: CENTER;
+}
+
+#gridSecondaire{
+    -fx-alignment: TOP_RIGHT;
+    -fx-gridLinesVisible: true;
+    -fx-background-color: green;
+}
+
+#gridSecondaire Button{
     -fx-pref-width: 100;
     -fx-pref-height: 100;
-    -fx-background-color : black;
 }
 
+.black{
+    -fx-background-color: black;
+}
 
 .white{
     -fx-background-color : white;
 }
+
+
+

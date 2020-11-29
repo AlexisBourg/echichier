@@ -26,50 +26,50 @@ public abstract class Piece {
         switch (type){
             case FOU :
                 if (couleur.equals(Couleur.BLANC)){
-                    image="/source/src/res/fouB.png";
+                    image="res/ImagesPieces/fouB.png";
                 }
                 else{
-                    image="/source/src/res/fouN.png";
+                    image="res/ImagesPieces/fouN.png";
                 }
                 break;
             case ROI:
                 if (couleur.equals(Couleur.BLANC)){
-                    image="/source/src/res/roiB.png";
+                    image="res/ImagesPieces/roiB.png";
                 }
                 else{
-                    image="/source/src/res/roiN.png";
+                    image="res/ImagesPieces/roiN.png";
                 }
                 break;
             case PION:
                 if (couleur.equals(Couleur.BLANC)){
-                    image="/source/src/res/pionB.png";
+                    image="res/ImagesPieces/pionB.png";
                 }
                 else{
-                    image="/source/src/res/pionN.png";
+                    image="res/ImagesPieces/pionN.png";
                 }
                 break;
             case TOUR:
                 if (couleur.equals(Couleur.BLANC)){
-                    image="/source/src/res/tourB.png";
+                    image="res/ImagesPieces/tourB.png";
                 }
                 else{
-                    image="/source/src/res/tourN.png";
+                    image="res/ImagesPieces/tourN.png";
                 }
                 break;
             case REINE:
                 if (couleur.equals(Couleur.BLANC)){
-                    image="/source/src/res/reineB.png";
+                    image="res/ImagesPieces/reineB.png";
                 }
                 else{
-                    image="/source/src/res/reineN.png";
+                    image="res/ImagesPieces/reineN.png";
                 }
                 break;
             case CAVALIER:
                 if (couleur.equals(Couleur.BLANC)){
-                    image="/source/src/res/cavalierB.png";
+                    image="res/ImagesPieces/cavalierB.png";
                 }
                 else{
-                    image="/source/src/res/cavalierN.png";
+                    image="res/ImagesPieces/cavalierN.png";
                 }
                 break;
         }
@@ -93,8 +93,6 @@ public abstract class Piece {
     public int getCoordY() {
         return coordY;
     }
-
-
 
 
     public String getImage() {
