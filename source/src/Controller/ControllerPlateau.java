@@ -25,17 +25,16 @@ public class ControllerPlateau {
     public void caseSelected(MouseEvent mouseEvent) {
         if (firstSelected) {
             selected = (Button) mouseEvent.getSource();
-            GridPane a = (GridPane) selected.getParent();
-            System.out.println(a.getChildren());
+            //GridPane a = (GridPane) selected.getParent();
+            //System.out.println(a.getChildren());
             oldStyle = selected.getStyle();
             selected.setStyle("-fx-background-color: gray;");
             firstSelected = true;
         } else {
             selected.setStyle(oldStyle);
             selected = (Button) mouseEvent.getSource();
-            System.out.println(selected.getLayoutX());
-            GridPane a = (GridPane) selected.getParent();
-            System.out.println(a.getChildren());
+            //GridPane a = (GridPane) selected.getParent();
+            //System.out.println(a.getChildren());
             oldStyle = selected.getStyle();
             selected.setStyle("-fx-background-color: gray;");
         }
@@ -64,7 +63,7 @@ public class ControllerPlateau {
                 }
                 //System.out.println(grid.getChildren().get(24));
                 //System.out.println(echiquier.getCasse(3, 0).getPiece());
-                //grid.getChildren().get(24).setStyle("-fx-background-color: blue;");
+                grid.getChildren().get(20).setStyle("-fx-background-color: blue;");
                 //grid.getChildren().get(8*(x+1)-(8-y)).setStyle("-fx-background-color: yellow;");
             }
         }
