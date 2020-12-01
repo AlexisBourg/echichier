@@ -12,7 +12,7 @@ public class Plateau {
      */
     public Plateau(){
         plateauDejeu = new Position[8][8];
-        int yb=1, yn=7;
+        int yb=0, yn=7;
 
         for (int x=0;x<8;x++) {
             for (int y=0;y<8;y++) {
@@ -20,7 +20,7 @@ public class Plateau {
             }
         }
         for (int x=0;x<8;x++){
-            plateauDejeu[x][1].setPiece(new Pion(x,2, Couleur.BLANC));
+            plateauDejeu[x][1].setPiece(new Pion(x,1, Couleur.BLANC));
             plateauDejeu[x][1].setEstOccupe(true);
             plateauDejeu[x][6].setPiece(new Pion(x,6, Couleur.NOIR));
             plateauDejeu[x][6].setEstOccupe(true);

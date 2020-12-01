@@ -14,14 +14,14 @@ LabelDroit{
     -fx-min-height: 300;
     -fx-min-width: 300;
     -fx-grid-lines-visible: true;
-    -fx-background-color: yellow;
+    /*-fx-background-color: yellow;*/
     -fx-alignment: CENTER;
 }
 
 #gridSecondaire{
     -fx-alignment: TOP_RIGHT;
     -fx-gridLinesVisible: true;
-    -fx-background-color: green;
+    /*-fx-background-color: green;*/
 }
 
 #gridSecondaire Button{
