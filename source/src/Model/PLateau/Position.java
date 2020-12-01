@@ -8,7 +8,7 @@ public class Position {
     private boolean Occupé=false;
     private Piece piecePresente;
 
-    public Position(int x,int y, Piece piece){
+    public Position(int y,int x, Piece piece){
         this.x=x;
         this.y=y;
         this.piecePresente=piece;

@@ -16,14 +16,14 @@ public class Plateau {
 
         for (int x=0;x<8;x++) {
             for (int y=0;y<8;y++) {
-                plateauDejeu[x][y] = new Position(x,y, null);
+                plateauDejeu[y][x] = new Position(y,x, null);
             }
         }
         for (int x=0;x<8;x++){
-            plateauDejeu[x][1].setPiece(new Pion(x,1, Couleur.BLANC));
-            plateauDejeu[x][1].setEstOccupe(true);
-            plateauDejeu[x][6].setPiece(new Pion(x,6, Couleur.NOIR));
-            plateauDejeu[x][6].setEstOccupe(true);
+            plateauDejeu[1][x].setPiece(new Pion(x,1, Couleur.BLANC));
+            plateauDejeu[1][x].setEstOccupe(true);
+            plateauDejeu[6][x].setPiece(new Pion(x,6, Couleur.NOIR));
+            plateauDejeu[6][x].setEstOccupe(true);
         }
         for (int x=0;x<8;x++){
 
@@ -31,36 +31,36 @@ public class Plateau {
             switch (x){
                 case 0:
                 case 7:
-                        plateauDejeu[x][yn].setPiece(new Tour(x,yn,Couleur.NOIR));
-                        plateauDejeu[x][yb].setPiece(new Tour(x,yb,Couleur.BLANC));
-                        plateauDejeu[x][yn].setEstOccupe(true);
-                        plateauDejeu[x][yb].setEstOccupe(true);
+                        plateauDejeu[yn][x].setPiece(new Tour(x,yn,Couleur.NOIR));
+                        plateauDejeu[yn][x].setEstOccupe(true);
+                        plateauDejeu[yb][x].setPiece(new Tour(x,yb,Couleur.BLANC));
+                        plateauDejeu[yb][x].setEstOccupe(true);
                         break;
                 case 1:
                 case 6:
-                        plateauDejeu[x][yn].setPiece(new Cavalier(x,yn,Couleur.NOIR));
-                        plateauDejeu[x][yb].setPiece(new Cavalier(x,yb,Couleur.BLANC));
-                        plateauDejeu[x][yn].setEstOccupe(true);
-                        plateauDejeu[x][yb].setEstOccupe(true);
+                        plateauDejeu[yn][x].setPiece(new Cavalier(x,yn,Couleur.NOIR));
+                        plateauDejeu[yn][x].setEstOccupe(true);
+                        plateauDejeu[yb][x].setPiece(new Cavalier(x,yb,Couleur.BLANC));
+                        plateauDejeu[yb][x].setEstOccupe(true);
                         break;
                 case 2:
                 case 5:
-                        plateauDejeu[x][yn].setPiece(new Fou(x,yn,Couleur.NOIR));
-                        plateauDejeu[x][yb].setPiece(new Fou(x,yb,Couleur.BLANC));
-                        plateauDejeu[x][yn].setEstOccupe(true);
-                        plateauDejeu[x][yb].setEstOccupe(true);
+                        plateauDejeu[yn][x].setPiece(new Fou(x,yn,Couleur.NOIR));
+                        plateauDejeu[yn][x].setEstOccupe(true);
+                        plateauDejeu[yb][x].setPiece(new Fou(x,yb,Couleur.BLANC));
+                        plateauDejeu[yb][x].setEstOccupe(true);
                         break;
                 case 3:
-                        plateauDejeu[x][yn].setPiece(new Reine(x,yn,Couleur.NOIR));
-                        plateauDejeu[x][yb].setPiece(new Reine(x,yb,Couleur.BLANC));
-                        plateauDejeu[x][yn].setEstOccupe(true);
-                        plateauDejeu[x][yb].setEstOccupe(true);
+                        plateauDejeu[yn][x].setPiece(new Reine(x,yn,Couleur.NOIR));
+                        plateauDejeu[yn][x].setEstOccupe(true);
+                        plateauDejeu[yb][x].setPiece(new Reine(x,yb,Couleur.BLANC));
+                        plateauDejeu[yb][x].setEstOccupe(true);
                         break;
                 case 4:
-                        plateauDejeu[x][yn].setPiece(new Roi(x,yn,Couleur.NOIR));
-                        plateauDejeu[x][yb].setPiece(new Roi(x,yb,Couleur.BLANC));
-                        plateauDejeu[x][yn].setEstOccupe(true);
-                        plateauDejeu[x][yb].setEstOccupe(true);
+                        plateauDejeu[yn][x].setPiece(new Roi(x,yn,Couleur.NOIR));
+                        plateauDejeu[yn][x].setEstOccupe(true);
+                        plateauDejeu[yb][x].setPiece(new Roi(x,yb,Couleur.BLANC));
+                        plateauDejeu[yb][x].setEstOccupe(true);
                         break;
 
             }
