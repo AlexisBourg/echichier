@@ -77,11 +77,11 @@
                 <RowConstraints percentHeight="12.5" />
                 <RowConstraints percentHeight="12.5" />
               </rowConstraints>
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="0" GridPane.columnIndex="1" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="2" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="0" GridPane.columnIndex="3" fx:id="test1" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="4" />
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="0" fx:id="00"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="01"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="2" fx:id="02"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="0" GridPane.columnIndex="3" fx:id="03" />
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="4" fx:id="04"/>
                 <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="0" GridPane.columnIndex="5" />
                 <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="6" />
                 <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="0" GridPane.columnIndex="7" />

@@ -53,17 +53,18 @@ public class ControllerPlateau {
                 //System.out.println(echiquier.getCasse(x, y).isOccupe());
                 //bonjour = (Button)
                 if(echiquier.getCasse(x, y).isOccupe()) {
-                    //image = echiquier.getCasse(x, y).getPiece().getImage();
+                    image = echiquier.getCasse(x, y).getPiece().getImage();
                     //System.out.println(image);
                     //System.out.println(imaged);
                     //System.out.println("x:"+x);
                     //System.out.println("y"+y);
                     //System.out.println(8*(x+1)-(8-y)+"\n");
-                    //grid.getChildren().get(8*(x+1)-(8-y)).setStyle("-fx-background-image: url(\""+image+"\")");
+                    System.out.println(grid.getChildren().get(8*(x+1)-(8-y)).getId());
+                    grid.getChildren().get(8*(x+1)-(8-y)).setStyle("-fx-background-image: url(\""+image+"\")");
                 }
                 //System.out.println(grid.getChildren().get(24));
                 //System.out.println(echiquier.getCasse(3, 0).getPiece());
-                grid.getChildren().get(20).setStyle("-fx-background-color: blue;");
+                //grid.getChildren().get(24).setStyle("-fx-background-color: blue;");
                 //grid.getChildren().get(8*(x+1)-(8-y)).setStyle("-fx-background-color: yellow;");
             }
         }
