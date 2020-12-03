@@ -12,8 +12,8 @@ public abstract class Piece {
     //Atribut
     private int coordX;
     private int coordY;
-    private static String image;
-    private static Couleur couleur;
+    private String image;
+    private Couleur couleur;
     protected List<Position> listePosDep;
     private Type type;
 
@@ -50,6 +50,7 @@ public abstract class Piece {
                 break;
             case TOUR:
                 if (couleur.equals(Couleur.BLANC)){
+                    System.out.println("Bonjour");
                     image="res/ImagesPieces/tourB.png";
                 }
                 else{
