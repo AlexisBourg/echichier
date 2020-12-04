@@ -77,7 +77,7 @@
                 <RowConstraints percentHeight="12.5" />
                 <RowConstraints percentHeight="12.5" />
               </rowConstraints>
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="0" fx:id="00"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="0" fx:id="00" />
                 <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="0" GridPane.columnIndex="1" fx:id="01"/>
                 <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="0" GridPane.columnIndex="2" fx:id="02"/>
                 <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="0" GridPane.columnIndex="3" fx:id="03" />
@@ -95,41 +95,41 @@
                 <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="1" GridPane.columnIndex="6" fx:id="16"/>
                 <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="1" GridPane.columnIndex="7" fx:id="17"/>
 
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="2" GridPane.columnIndex="2" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="2" GridPane.columnIndex="3" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="2" GridPane.columnIndex="4" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="2" GridPane.columnIndex="5" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="2" GridPane.columnIndex="6" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="2" GridPane.columnIndex="7" />
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="2" GridPane.columnIndex="0" fx:id="20"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="21"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="2" GridPane.columnIndex="2" fx:id="22"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="2" GridPane.columnIndex="3" fx:id="23"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="2" GridPane.columnIndex="4" fx:id="24"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="2" GridPane.columnIndex="5" fx:id="25"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="2" GridPane.columnIndex="6" fx:id="26"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="2" GridPane.columnIndex="7" fx:id="27"/>
 
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="3" GridPane.columnIndex="0" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="3" GridPane.columnIndex="1" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="3" GridPane.columnIndex="2" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="3" GridPane.columnIndex="3" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="3" GridPane.columnIndex="4" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="3" GridPane.columnIndex="5" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="3" GridPane.columnIndex="6" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="3" GridPane.columnIndex="7" fx:id="test2"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="3" GridPane.columnIndex="0" fx:id="30"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="31"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="3" GridPane.columnIndex="2" fx:id="32"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="3" GridPane.columnIndex="3" fx:id="33"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="3" GridPane.columnIndex="4" fx:id="34"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="3" GridPane.columnIndex="5" fx:id="35"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="3" GridPane.columnIndex="6" fx:id="36"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="3" GridPane.columnIndex="7" fx:id="37"/>
 
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="4" GridPane.columnIndex="0" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="4" GridPane.columnIndex="1" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="4" GridPane.columnIndex="2" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="4" GridPane.columnIndex="3" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="4" GridPane.columnIndex="4" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="4" GridPane.columnIndex="5" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="4" GridPane.columnIndex="6" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="4" GridPane.columnIndex="7" />
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="4" GridPane.columnIndex="0" fx:id="40"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="41"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="4" GridPane.columnIndex="2" fx:id="42"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="4" GridPane.columnIndex="3" fx:id="43"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="4" GridPane.columnIndex="4" fx:id="44"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="4" GridPane.columnIndex="5" fx:id="45"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="4" GridPane.columnIndex="6" fx:id="46"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="4" GridPane.columnIndex="7" fx:id="47"/>
 
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="5" GridPane.columnIndex="0" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="5" GridPane.columnIndex="1" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="5" GridPane.columnIndex="2" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="5" GridPane.columnIndex="3" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="5" GridPane.columnIndex="4" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="5" GridPane.columnIndex="5" />
-                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="5" GridPane.columnIndex="6" />
-                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="5" GridPane.columnIndex="7" />
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="5" GridPane.columnIndex="0" fx:id="50"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="5" GridPane.columnIndex="1" fx:id="51"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="5" GridPane.columnIndex="2" fx:id="52"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="5" GridPane.columnIndex="3" fx:id="53"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="5" GridPane.columnIndex="4" fx:id="54"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="5" GridPane.columnIndex="5" fx:id="55"/>
+                <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="5" GridPane.columnIndex="6" fx:id="56"/>
+                <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="5" GridPane.columnIndex="7" fx:id="57"/>
 
                 <Button onMouseClicked="#caseSelected" styleClass="white" GridPane.rowIndex="6" GridPane.columnIndex="0" fx:id="60"/>
                 <Button onMouseClicked="#caseSelected" styleClass="black" GridPane.rowIndex="6" GridPane.columnIndex="1" fx:id="61"/>

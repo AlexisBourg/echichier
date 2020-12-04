@@ -40,8 +40,7 @@ public class Position {
 
     public void setPiece(Piece piece) {
         this.piecePresente = piece;
-        piece.setCoordX(x);
-        piece.setCoordY(y);
+        Occupé = true;
     }
 
     public Piece getPiece() {

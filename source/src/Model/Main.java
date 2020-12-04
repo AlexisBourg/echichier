@@ -3,6 +3,7 @@ package Model;
 import Controller.ControllerPlateau;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
+import Model.Parties.Parties;
 import Model.Piece.Couleur;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    public boolean doDeplacement(Plateau echiquier,ControllerPlateau controller, Couleur joueur){
+    /*public boolean doDeplacement(Plateau echiquier,ControllerPlateau controller, Couleur joueur){
         String xy;
         int x,y;
         MouseEvent mouseEvent;
@@ -36,17 +37,18 @@ public class Main extends Application {
             return false;
         }
         if(!controller.deplacementPiècePossible(posDep,posArr)){
-            system.out.println("Déplacement impossible");
+            System.out.println("Déplacement impossible");
             return false;
         }
 
         return true;
-    }
+    } */
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         ControllerPlateau controller = new ControllerPlateau();
-        Plateau echiquier = new Plateau();
+        Parties parties = new Parties();
+        parties.partieLocal();
         Couleur joueur=Couleur.BLANC;
         boolean gameOver = false;
         Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
@@ -54,9 +56,9 @@ public class Main extends Application {
         GridPane q = (GridPane) p.get(2); // On prend la grosse grid
         ObservableList<Node> l =q.getChildrenUnmodifiable();
         GridPane n = (GridPane) l.get(16); // On prend la petite grid
-        controller.chargementPlateau(echiquier, n);
+        controller.chargementPlateau(parties.getEchiquier(), n);
 
-        while(!gameOver){
+        /*while(!gameOver){
             doDeplacement(echiquier,controller,joueur);
             switch (joueur){
                 case BLANC:
@@ -66,8 +68,7 @@ public class Main extends Application {
                     joueur=Couleur.NOIR;
                     break;
             }
-        }
-
+        } */
 
         primaryStage.setTitle("Echec");
         primaryStage.setScene(new Scene(root, 1000, 800));
