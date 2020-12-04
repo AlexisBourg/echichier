@@ -24,21 +24,25 @@ public class ControllerPlateau {
     private String oldStyle;
 
     @FXML
-    public void caseSelected(MouseEvent mouseEvent) {
+    public String caseSelected(MouseEvent mouseEvent) {
+        String xy;
         if (firstSelected) {
             selected = (Button) mouseEvent.getSource();
             oldStyle = selected.getStyle();
             selected.setStyle("-fx-background-color: gray;");
             firstSelected = true;
+            return (String) selected.getId();
+
         } else {
             selected.setStyle(oldStyle);
             selected = (Button) mouseEvent.getSource();
             oldStyle = selected.getStyle();
             selected.setStyle("-fx-background-color: gray;");
+            return null;
         }
     }
 
-    @FXML
+
     public void chargementPlateau(Plateau echiquier, GridPane grid){
         for(int x = 0; x<8; x++){
             for(int y = 0; y<8; y++){
@@ -48,4 +52,33 @@ public class ControllerPlateau {
         }
     }
 
+    public boolean deplacementPiècePossible(Position posPieceDep, Position posPieceArr){
+        Piece pieceTmpD = posPieceDep.getPiece();
+
+        if(posPieceArr.isOccupe()){
+            Piece pieceTmpA = posPieceArr.getPiece();
+            if(pieceTmpA.getCouleur() == pieceTmpD.getCouleur()){ return false; }
+        }
+
+        List<Position> listP =pieceTmpD.getListeDep();
+        if (!listP.contains(posPieceArr)){
+            return false;
+        }
+        return true;
+    }
+
+
+    /*public void deplacerunePièce(Position positionD){
+        Position positionD = new Position();
+        Position positionA = new Position();
+        if(!positionD.isOccupe()){ return; }
+        if(!deplacementPiècePossible(positionD, positionA)){
+            System.out.println("Déplacement impossible");
+        }
+        /**
+         * à finir
+         *
+
+    }
+    */
 }
