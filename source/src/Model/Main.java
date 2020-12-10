@@ -7,6 +7,7 @@ import Model.Parties.Parties;
 import Model.Piece.Couleur;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -46,18 +47,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
         ControllerPlateau controller = new ControllerPlateau();
         Parties parties = new Parties();
-        parties.partieLocal();
+        //parties.partieLocal();
         Couleur joueur=Couleur.BLANC;
         boolean gameOver = false;
-        Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
-        ObservableList<Node> p = root.getChildrenUnmodifiable();
-        GridPane q = (GridPane) p.get(2); // On prend la grosse grid
-        ObservableList<Node> l =q.getChildrenUnmodifiable();
-        GridPane n = (GridPane) l.get(16); // On prend la petite grid
-        controller.chargementPlateau(parties.getEchiquier(), n);
 
+        controller.chargementPlateau(parties.getEchiquier());
         /*while(!gameOver){
             doDeplacement(echiquier,controller,joueur);
             switch (joueur){

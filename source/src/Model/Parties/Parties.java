@@ -28,6 +28,6 @@ public class Parties {
     }
 
     public Boolean echecEtMat(){
-
+        return false;
     }
 }

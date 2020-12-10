@@ -50,7 +50,6 @@ public abstract class Piece {
                 break;
             case TOUR:
                 if (couleur.equals(Couleur.BLANC)){
-                    System.out.println("Bonjour");
                     image="res/ImagesPieces/tourB.png";
                 }
                 else{

@@ -18,23 +18,12 @@ LabelDroit{
     -fx-alignment: CENTER;
 }
 
-#gridSecondaire{
-    -fx-alignment: TOP_RIGHT;
-    -fx-gridLinesVisible: true;
-    /*-fx-background-color: green;*/
-}
-
-#gridSecondaire Button{
-    -fx-pref-width: 100;
-    -fx-pref-height: 100;
-}
-
 .black{
     -fx-background-color: black;
 }
 
 .white{
-    -fx-background-color : white;
+    -fx-background-color: white;
 }
 
 
