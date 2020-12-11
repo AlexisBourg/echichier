@@ -12,114 +12,37 @@ public class Reine extends Piece {
 
     //Constructeur
     public Reine(int x, int y, Couleur couleur) {
-        super(x, y, couleur,Type.REINE);
+        super(x, y, couleur, Type.REINE);
     }
 
     //Methode
 
-    public void setListeDep( Plateau plateau){
+    public void setListeDep(Plateau plateau) {
 
         listePosDep.clear();
 
         Position caseTmp;
-        int tmpX, tmpY;
-        for (int i = 0; 0 < 7; i++) {
-            tmpX = getCoordX();
-            tmpY = getCoordY();
-            switch (i){
-                case 0:                                             //Position possible horizontale droite
-                    caseTmp = plateau.getCasse(tmpX, tmpY + 1);
-                    while (!plateau.isCaseNull(caseTmp)) {
-                        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                            listePosDep.add(caseTmp);
-                            tmpY++;
-                            caseTmp = plateau.getCasse(tmpX, tmpY + 1);
-                        }
-                        break;
-                    }
-                case 1:                                             //Position possible diagonale bas/droit
-                    caseTmp = plateau.getCasse(tmpX++, tmpY--);
-                    while (!plateau.isCaseNull(caseTmp)) {
-                        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                            listePosDep.add(caseTmp);
-                            tmpX++;
-                            tmpY--;
-                            caseTmp = plateau.getCasse(tmpX++, tmpX++);
-                        }
-                        break;
-                    }
-                    break;
-                case 2:                                             //Position possible verticale bas
-                    caseTmp = plateau.getCasse(tmpX-1, tmpY);
-                    while (!plateau.isCaseNull(caseTmp)) {
-                        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                            listePosDep.add(caseTmp);
-                            tmpX--;
-                            caseTmp = plateau.getCasse(tmpX-1, tmpY);
-                        }
-                        break;
-                    }
-                    break;
-                case 3:                                             //Position possible bas/gauche
-                    caseTmp = plateau.getCasse(tmpX--, tmpY--);
-                    while (!plateau.isCaseNull(caseTmp)) {
-                        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                            listePosDep.add(caseTmp);
-                            tmpX--;
-                            tmpY--;
-                            caseTmp = plateau.getCasse(tmpX--, tmpY--);
-                        }
-                        break;
-                    }
-                    break;
-                case 4:                                             //Position possible horizontale gauche
-                    caseTmp = plateau.getCasse(tmpX, tmpY - 1);
-                    while (!plateau.isCaseNull(caseTmp)) {
-                        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                            listePosDep.add(caseTmp);
-                            tmpY--;
-                            caseTmp = plateau.getCasse(tmpX, tmpY - 1);
-                        }
-                        break;
-                    }
-                    break;
-                case 5:                                             //Position possible diagonale haut/gauche
-                    caseTmp = plateau.getCasse(tmpX--, tmpY++);
-                    while (!plateau.isCaseNull(caseTmp)) {
-                        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                            listePosDep.add(caseTmp);
-                            tmpX--;
-                            tmpY++;
-                            caseTmp = plateau.getCasse(tmpX--, tmpY++);
-                        }
-                        break;
-                    }
-                    break;
-                case 6:                                             //Position possible verticale haut
-                    caseTmp = plateau.getCasse(tmpX+1, tmpY);
-                    while (!plateau.isCaseNull(caseTmp)){
-                        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                            listePosDep.add(caseTmp);
-                            tmpX++;
-                            caseTmp = plateau.getCasse(tmpX, tmpX + 1);
-                        }
-                        break;
-                    }
-                    break;
-
-                case 7:                                             //Position possible diagonale haut/droit
-                    caseTmp = plateau.getCasse(tmpX++, tmpY++);
-                    while (!plateau.isCaseNull(caseTmp)) {
-                        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                            listePosDep.add(caseTmp);
-                            tmpX++;
-                            tmpY++;
-                            caseTmp = plateau.getCasse(tmpX++, tmpY++);
-                        }
-                        break;
-                    }
-                    break;
-            }
+        int tmpX = getCoordX(), tmpY = getCoordY();
+        int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        for (int i = 0; 0 < 8; i++) {
+            deplacementPossible(plateau, tmpX + dep[i][0], tmpY + dep[i][1]);
         }
+    }
+        private void deplacementPossible (Plateau plateau,int tmpX, int tmpY){
+            Position caseTmp;
+            int x = getCoordX();
+            int y = getCoordY();
+            caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
+            while (!plateau.isCaseNull(caseTmp)) {
+                if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+                    listePosDep.add(caseTmp);
+                    x += tmpX;
+                    y += tmpY;
+                    caseTmp = plateau.getCasse(x + tmpX, x + tmpY);
+                }
+                return;
+            }
+            return;
+
     }
 }

@@ -32,62 +32,18 @@ public class Roi extends Piece {
         int tmpX=getCoordX();
         int tmpY=getCoordY();
         Position caseTmp;
+        int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        for(int i=0; i<8; i++){
+            caseTmp=plateau.getCasse(tmpX--,tmpY--);
+            deplacementPossible(plateau, caseTmp);
+        }
+    }
 
-        caseTmp=plateau.getCasse(tmpX--,tmpY--);
+    private void deplacementPossible(Plateau plateau, Position caseTmp) {
         if (!plateau.isCaseNull(caseTmp)) {
             if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
         }
-
-        caseTmp=plateau.getCasse(tmpX--,tmpY);
-        if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
-            }
-        }
-
-        caseTmp=plateau.getCasse(tmpX--,tmpY++);
-        if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
-            }
-        }
-
-        caseTmp=plateau.getCasse(tmpX,tmpY--);
-        if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
-            }
-        }
-
-        caseTmp=plateau.getCasse(tmpX,tmpY++);
-        if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
-            }
-        }
-
-        caseTmp=plateau.getCasse(tmpX++,tmpY--);
-        if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
-            }
-        }
-
-        caseTmp=plateau.getCasse(tmpX++,tmpY);
-        if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
-            }
-        }
-
-        caseTmp=plateau.getCasse(tmpX++,tmpY++);
-        if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
-            }
-        }
-
     }
 }

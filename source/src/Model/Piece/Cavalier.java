@@ -19,26 +19,20 @@ public class Cavalier extends Piece {
     @Override
     public void setListeDep(Plateau plateau) {
 
-        Position caseTmp;
+
 
         listePosDep.clear();
-        //TODO faire un tableau de deplacement
-        updateDeplacementValide(plateau, 1,2 );                 //1case à droite, 2casses en haut
-        updateDeplacementValide(plateau, 2,1 );                 //1case à droite, 2casses en haut
-        updateDeplacementValide(plateau, 2,-1 );                 //1case à droite, 2casses en haut
-        updateDeplacementValide(plateau, 1,-2 );                 //1case à droite, 2casses en haut
-        updateDeplacementValide(plateau, -1,-2 );                 //1case à droite, 2casses en haut
-        updateDeplacementValide(plateau, -2,-1 );                 //1case à droite, 2casses en haut
-        updateDeplacementValide(plateau, -2,1 );                 //1case à droite, 2casses en haut
-        updateDeplacementValide(plateau, -1,2 );                 //1case à droite, 2casses en haut
-
+        int[][] dep ={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
+        for (int i=0; i<8; i++) {
+            updateDeplacementValide(plateau, dep[i][0], dep[i][1]);
+        }
     }
 
     private void updateDeplacementValide(Plateau plateau, int dx, int dy) {
         int tmpX=getCoordX();
         int tmpY=getCoordY();
         Position caseTmp;
-        caseTmp=plateau.getCasse(tmpX+dx,tmpY+dy);                        //1case à droite, 2casses en haut
+        caseTmp=plateau.getCasse(tmpX+dx,tmpY+dy);
         if (!plateau.isCaseNull(caseTmp)) {
             if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
