@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class Piece {
+public class Piece {
 
     //Atribut
     private int coordX;
@@ -112,8 +112,9 @@ public abstract class Piece {
         return type;
     }
 
-    public abstract void setListeDep( Plateau plateau);
+    public void setListeDep(Plateau plateau) {
 
+    }
     public List<Position> getListeDep() {
         return listePosDep;
     }

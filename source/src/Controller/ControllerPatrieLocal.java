@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Piece;
 import javafx.scene.input.MouseEvent;
@@ -31,7 +32,7 @@ public class ControllerPatrieLocal extends ControllerPlateau {
 
 
     public void deplacerUnePièce(){
-        String s = caseSelected(null);
+        /*String s = caseSelected(null);
         Position positionD = new Position();
         Position positionA = new Position();
         if(!positionD.isOccupe()){ return; }

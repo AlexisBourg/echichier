@@ -33,6 +33,25 @@ public class Pion extends Piece {
         Position caseTmp;
         if (getCouleur().equals(Couleur.BLANC)){
             //déplacement basique
+            caseTmp=plateau.getCasse(tmpX,tmpY-1);
+            if (plateau.isCaseNull(caseTmp)  && !caseTmp.isOccupe()){
+                listePosDep.add(plateau.getCasse(tmpX,tmpY-1));
+                if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY-2).isOccupe()) {
+                    listePosDep.add(plateau.getCasse(tmpX,tmpY-2));
+                }
+            }
+            //attaque
+            caseTmp=plateau.getCasse(tmpX+1,tmpY-1);
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
+                listePosDep.add(caseTmp);
+            }
+            caseTmp=plateau.getCasse(tmpX-1,tmpY-1);
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
+                listePosDep.add(caseTmp);
+            }
+        }
+        else{
+            //déplacement basique
             caseTmp=plateau.getCasse(tmpX,tmpY+1);
             if (plateau.isCaseNull(caseTmp)  && !caseTmp.isOccupe()){
                 listePosDep.add(plateau.getCasse(tmpX,tmpY+1));
@@ -41,30 +60,11 @@ public class Pion extends Piece {
                 }
             }
             //attaque
-            caseTmp=plateau.getCasse(tmpX+1,tmpY+1);
-            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
-                listePosDep.add(caseTmp);
-            }
-            caseTmp=plateau.getCasse(tmpX+1,tmpY-1);
-            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
-                listePosDep.add(caseTmp);
-            }
-        }
-        else{
-            //déplacement basique
-            caseTmp=plateau.getCasse(tmpX,tmpY-1);
-            if (plateau.isCaseNull(caseTmp)  && !caseTmp.isOccupe()){
-                listePosDep.add(plateau.getCasse(tmpX,tmpY-1));
-                if (isPremierDeplacement() && !plateau.getCasse(tmpX,tmpY-2).isOccupe()) {
-                    listePosDep.add(plateau.getCasse(tmpX,tmpY+2));
-                }
-            }
-            //attaque
-            caseTmp=plateau.getCasse(tmpX-1,tmpY-1);
+            caseTmp=plateau.getCasse(tmpX-1,tmpY+1);
             if (plateau.isCaseNull(caseTmp)  && caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
                 listePosDep.add(caseTmp);
             }
-            caseTmp=plateau.getCasse(tmpX-1,tmpY+1);
+            caseTmp=plateau.getCasse(tmpX+1,tmpY+1);
             if (plateau.isCaseNull(caseTmp)  && caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }
