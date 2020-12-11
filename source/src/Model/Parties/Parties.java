@@ -2,6 +2,7 @@ package Model.Parties;
 
 import Model.Joueur.Joueur;
 import Model.PLateau.Plateau;
+import Model.Piece.Couleur;
 
 public class Parties {
     private Plateau echiquier;
@@ -15,11 +16,21 @@ public class Parties {
     }
 
     public void partieLocal(){
-        int JoueurCourant=1;
+        int i=0;
 
         while(!echecEtMat()){
-            //System.out.println("Tour du joueur n°"+JoueurCourant+":\n");
+            Joueur joueurCourant=joueurs[i];
 
+            System.out.println("Tour du joueur "+joueurCourant.getCouleur()+":\n");
+
+            //selectionne une case de depart
+
+            //selectionne une case d'arrivé
+
+            //doDeplacement(echiquier,controller,joueur);
+
+
+            i=(i+1)%2;
         }
     }
 

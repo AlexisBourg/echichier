@@ -55,4 +55,6 @@ public class Joueur {
     public Piece[] getPieces(){
         return pieces;
     }
+
+    public Couleur getCouleur() { return couleur;}
 }

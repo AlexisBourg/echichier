@@ -48,7 +48,7 @@ public class Plateau {
         return false;
     }
 
-    //  /!\ on doit verifier que x et y ne correspondent pas à une casse null -> isCaseNull() doit rendre false
+    //  /!\ on doit verifier en amont que x et y ne correspondent pas à une casse null -> isCaseNull() doit rendre false
     public Position getCasse(int x, int y){
         return plateauDejeu[x][y];
     }

@@ -49,23 +49,13 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
         ControllerPlateau controller = new ControllerPlateau();
-        Parties parties = new Parties();
+        Parties parties = controller.creerPartie();
         //parties.partieLocal();
         Couleur joueur=Couleur.BLANC;
         boolean gameOver = false;
 
         controller.chargementPlateau(parties.getEchiquier());
-        /*while(!gameOver){
-            doDeplacement(echiquier,controller,joueur);
-            switch (joueur){
-                case BLANC:
-                    joueur=Couleur.NOIR;
-                    break;
-                case NOIR:
-                    joueur=Couleur.NOIR;
-                    break;
-            }
-        } */
+
 
         primaryStage.setTitle("Echec");
         primaryStage.setScene(new Scene(root, 1000, 800));
