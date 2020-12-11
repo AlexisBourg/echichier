@@ -42,9 +42,6 @@ public class ChessGrid extends GridPane {
                 bouton.getStyleClass().add("black");
 
             this.add(bouton, x, y);
-            /*System.out.println("x: "+x+", y: "+y);
-            System.out.println("i"+i);
-            System.out.println(bouton.getId());*/
             x+=1;
             if(x==8){
                 y+=1;
@@ -52,8 +49,5 @@ public class ChessGrid extends GridPane {
             }
 
         }
-
-        //System.out.println(this.getChildrenUnmodifiable().size());
-
     }
 }

@@ -48,14 +48,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
-        ControllerPlateau controller = new ControllerPlateau();
-        Parties parties = controller.creerPartie();
-        //parties.partieLocal();
-        Couleur joueur=Couleur.BLANC;
-        boolean gameOver = false;
-
-        controller.chargementPlateau(parties.getEchiquier());
-
+        Parties parties = new Parties();
+        parties.partieLocal();
 
         primaryStage.setTitle("Echec");
         primaryStage.setScene(new Scene(root, 1000, 800));
