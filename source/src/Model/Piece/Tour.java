@@ -44,7 +44,14 @@ public class Tour extends Piece {
         int y = getCoordY();
         caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
         while (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) { //
+                listeProtecDep.add(caseTmp);
+            }
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+                listePosDep.add(caseTmp);
+                break;
+            }
+            if (!caseTmp.isOccupe()) { //
                 listePosDep.add(caseTmp);
                 x += tmpX;
                 y += tmpY;

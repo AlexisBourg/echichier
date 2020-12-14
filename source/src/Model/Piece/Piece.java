@@ -15,6 +15,7 @@ public class Piece {
     private String image;
     private Couleur couleur;
     protected List<Position> listePosDep;
+    protected List<Position> listeProtecDep;
     private Type type;
 
     //Constructeur
@@ -117,6 +118,13 @@ public class Piece {
     }
     public List<Position> getListeDep() {
         return listePosDep;
+    }
+
+    public void setListeProtecDep(Plateau plateau) {
+
+    }
+    public List<Position> getListeProtecDep() {
+        return listeProtecDep;
     }
 
 

@@ -41,6 +41,9 @@ public class Roi extends Piece {
 
     private void deplacementPossible(Plateau plateau, Position caseTmp) {
         if (!plateau.isCaseNull(caseTmp)) {
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
+                listeProtecDep.add(caseTmp);
+            }
             if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
             }

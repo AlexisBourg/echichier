@@ -18,9 +18,6 @@ public class Cavalier extends Piece {
 
     @Override
     public void setListeDep(Plateau plateau) {
-
-
-
         listePosDep.clear();
         int[][] dep ={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
         for (int i=0; i<8; i++) {
@@ -36,6 +33,9 @@ public class Cavalier extends Piece {
         if (!plateau.isCaseNull(caseTmp)) {
             if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 listePosDep.add(caseTmp);
+            }
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
+                listeProtecDep.add(caseTmp);
             }
         }
     }

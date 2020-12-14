@@ -31,9 +31,9 @@ public class Pion extends Piece {
         int tmpY = getCoordY();
         Position caseTmp;
         if (getCouleur().equals(Couleur.BLANC)) {
-            tmpY++;
-        } else {
             tmpY--;
+        } else {
+            tmpY++;
         }
         deplacementDisponible(plateau, tmpX, tmpY);
     }
@@ -64,6 +64,9 @@ public class Pion extends Piece {
         Position caseTmp;
         caseTmp= plateau.getCasse(tmpX, tmpY );
         if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
+            listePosDep.add(caseTmp);
+        }
+        if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()==this.getCouleur()){
             listePosDep.add(caseTmp);
         }
     }

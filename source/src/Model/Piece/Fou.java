@@ -35,14 +35,19 @@ public class Fou extends Piece {
         int y = getCoordY();
         caseTmp = plateau.getCasse(x+tmpX, y+tmpY);
         while (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
+                listeProtecDep.add(caseTmp);
+            }
+            if (!caseTmp.isOccupe()) { //
                 listePosDep.add(caseTmp);
                 x+=tmpX;
                 y+=tmpY;
                 caseTmp = plateau.getCasse(x+tmpX, x+tmpY);
             }
-            return ;
+            else if(caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()){
+                listePosDep.add(caseTmp);
+                break;
+            }
         }
-        return;
     }
 }
