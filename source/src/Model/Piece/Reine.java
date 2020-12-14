@@ -24,8 +24,8 @@ public class Reine extends Piece {
         Position caseTmp;
         int tmpX = getCoordX(), tmpY = getCoordY();
         int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        for (int i = 0; 0 < 8; i++) {
-            deplacementPossible(plateau, tmpX + dep[i][0], tmpY + dep[i][1]);
+        for (int i = 0; i< 8; i++) {
+            deplacementPossible(plateau, tmpX + dep[i][0],tmpY + dep[i][1]);
         }
     }
         private void deplacementPossible (Plateau plateau,int tmpX, int tmpY){

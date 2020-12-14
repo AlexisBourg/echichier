@@ -85,14 +85,14 @@ public class Parties {
      */
     public List<Position> isPieceMenaParAutre(int x, int y, Plateau echiquier){
         List<Position> liste = new LinkedList<>();
+        int[][] dep={{0,1},{0,-1},{-1,0},{1,0},{1,1},{1,-1},{-1,-1},{-1,1}};
+        int[][] depC={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
         for(int i=0; i<8; i++) {
             // Vérification des lignes et colonnes communes au roi adverse. Si une pièce qui s'y trouve possède la case de la pièce ciblée dans sa liste de déplacement, on ajoute la pièce à la liste des menaces
-            if (echiquier.getCasse(x + i, y).getPiece().getListeDep().contains(echiquier.getCasse(x, y))) { // DROITE
-                liste.add(echiquier.getCasse(x+i, y));
-            }
+            depCommun(x+dep[i][0], y+dep[i][1], echiquier, liste);
 
-            if (echiquier.getCasse(x - i, y).getPiece().getListeDep().contains(echiquier.getCasse(x, y))) { // GAUCHE
+           /* if (echiquier.getCasse(x - i, y).getPiece().getListeDep().contains(echiquier.getCasse(x, y))) { // GAUCHE
                 liste.add(echiquier.getCasse(x-i, y));
             }
             if (echiquier.getCasse(x, y + i).getPiece().getListeDep().contains(echiquier.getCasse(x, y))) { // BAS
@@ -117,14 +117,17 @@ public class Parties {
 
             if(echiquier.getCasse(x - i, y - i).getPiece().getListeDep().contains(echiquier.getCasse(x, y))){ // HAUT GAUCHE
                 liste.add(echiquier.getCasse(x-i, y-i));
-            }
+            }*/
         }
 
         // Vérification des emplacements cavaliers. Si ces pièces contiennent un cavalier, on ajoute la pièce à la liste des menaces
-        if(echiquier.getCasse(x+1, y+2).getPiece().getListeDep().contains(echiquier.getCasse(x, y))){
-            liste.add(echiquier.getCasse(x+1, y+2));
+        for (int i=0;i<8; i++){
+            menaceCavalier(x+depC[i][0],x+depC[i][1], echiquier, liste);
         }
 
+
+
+        /*
         if(echiquier.getCasse(x-1, y+2).getPiece().getListeDep().contains(echiquier.getCasse(x, y))){
             liste.add(echiquier.getCasse(x-1, y+2));
         }
@@ -152,8 +155,27 @@ public class Parties {
         if(echiquier.getCasse(x-2, y+1).getPiece().getListeDep().contains(echiquier.getCasse(x, y))){
             liste.add(echiquier.getCasse(x-2, y+1));
         }
-
+        */
         return liste;
+    }
+
+    private void depCommun(int x, int y, Plateau echiquier, List<Position> liste) {
+        int tmpx=x;
+        int tmpy=y;
+        for (int i=0; i<8;i++){
+            if (echiquier.getCasse(tmpx+x, tmpy+y).getPiece().getListeDep().contains(echiquier.getCasse(x, y))) { // DROITE
+                liste.add(echiquier.getCasse(tmpx + x, tmpy+y));
+                tmpx+=x;
+                tmpy+=y;
+            }
+        }
+    }
+
+
+    private void menaceCavalier(int x, int y, Plateau echiquier, List<Position> liste) {
+        if(echiquier.getCasse(x, y).getPiece().getListeDep().contains(echiquier.getCasse(x, y))){
+            liste.add(echiquier.getCasse(x, y));
+        }
     }
 
     /**
@@ -168,6 +190,7 @@ public class Parties {
         int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), yRoi = joueurAdverse.getPieces()[ROI].getCoordY(), // On récupère les coordonnées du roi adverse.
         x = xRoi, y = yRoi;
         List<Position> pieceDispo;
+        int[][] dep={{1,1},{1,-1},{1,0},{-1,1},{-1,-1},{-1,0},{0,1},{0,-1}};
 
         // On va vérifier toutes les cases entre le roi adverse et sa menace pour voir si une pièce peut s'interposer et donc protéger le roi
 

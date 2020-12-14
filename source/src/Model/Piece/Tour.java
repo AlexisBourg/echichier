@@ -28,12 +28,11 @@ public class Tour extends Piece {
     public void setListeDep(Plateau plateau) {
 
         listePosDep.clear();
-
-
         int tmpX = getCoordX(), tmpY = getCoordY();
         int[][] dep = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        for (int i = 0; 0 < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             deplacementPossible(plateau, tmpX + dep[i][0], tmpY + dep[i][1]);
+
         }
 
 
@@ -51,8 +50,6 @@ public class Tour extends Piece {
                 y += tmpY;
                 caseTmp = plateau.getCasse(x + tmpX, x + tmpY);
             }
-            return;
         }
-        return;
     }
 }

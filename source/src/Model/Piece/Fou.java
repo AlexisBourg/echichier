@@ -24,7 +24,7 @@ public class Fou extends Piece {
 
         int tmpX = getCoordX(), tmpY = getCoordY();
         int[][] dep ={{1,1},{-1,1},{1,-1},{-1,-1}};
-        for (int i = 0; 0 < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             deplacementPossible(plateau, tmpX+dep[i][0], tmpY+dep[i][1]);
         }
     }
