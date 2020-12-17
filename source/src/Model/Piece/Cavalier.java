@@ -21,11 +21,12 @@ public class Cavalier extends Piece {
         listePosDep.clear();
         int[][] dep ={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
         for (int i=0; i<8; i++) {
-            updateDeplacementValide(plateau, dep[i][0], dep[i][1]);
+            deplacementPossible(plateau, dep[i][0], dep[i][1]);
         }
     }
 
-    private void updateDeplacementValide(Plateau plateau, int dx, int dy) {
+    @Override
+    public void deplacementPossible(Plateau plateau, int dx, int dy) {
         int tmpX=getCoordX();
         int tmpY=getCoordY();
         Position caseTmp;

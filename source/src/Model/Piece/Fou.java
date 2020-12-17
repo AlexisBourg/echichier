@@ -29,7 +29,8 @@ public class Fou extends Piece {
         }
     }
 
-    private void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
+    @Override
+    public void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
         Position caseTmp;
         int x = getCoordX();
         int y = getCoordY();

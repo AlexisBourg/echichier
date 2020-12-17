@@ -35,11 +35,11 @@ public class Roi extends Piece {
         int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         for(int i=0; i<8; i++){
             caseTmp=plateau.getCasse(tmpX--,tmpY--);
-            deplacementPossible(plateau, caseTmp);
+            deplacementPossibleRoi(plateau, caseTmp);
         }
     }
 
-    private void deplacementPossible(Plateau plateau, Position caseTmp) {
+    public void deplacementPossibleRoi(Plateau plateau, Position caseTmp) {
         if (!plateau.isCaseNull(caseTmp)) {
             if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
                 listeProtecDep.add(caseTmp);

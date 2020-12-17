@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Piece {
+public abstract class Piece {
 
     //Atribut
     private int coordX;
@@ -114,8 +114,10 @@ public class Piece {
     }
 
     public void setListeDep(Plateau plateau) {
-
     }
+
+    public void deplacementPossible(Plateau plateau, int tmpX, int tmpY){}
+
     public List<Position> getListeDep() {
         return listePosDep;
     }
@@ -126,7 +128,4 @@ public class Piece {
     public List<Position> getListeProtecDep() {
         return listeProtecDep;
     }
-
-
-
 }

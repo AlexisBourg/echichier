@@ -28,25 +28,27 @@ public class Reine extends Piece {
             deplacementPossible(plateau, tmpX + dep[i][0],tmpY + dep[i][1]);
         }
     }
-        private void deplacementPossible (Plateau plateau,int tmpX, int tmpY){
-            Position caseTmp;
-            int x = getCoordX();
-            int y = getCoordY();
-            caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
-            while (!plateau.isCaseNull(caseTmp)) {
-                if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) { //
-                    listeProtecDep.add(caseTmp);
-                }
-                if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
-                    listePosDep.add(caseTmp);
-                    break;
-                }
-                else if (!caseTmp.isOccupe()) { //
-                    listePosDep.add(caseTmp);
-                    x += tmpX;
-                    y += tmpY;
-                    caseTmp = plateau.getCasse(x + tmpX, x + tmpY);
-                }
+
+    @Override
+    public void deplacementPossible(Plateau plateau,int tmpX, int tmpY){
+        Position caseTmp;
+        int x = getCoordX();
+        int y = getCoordY();
+        caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
+        while (!plateau.isCaseNull(caseTmp)) {
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) { //
+                listeProtecDep.add(caseTmp);
             }
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+                listePosDep.add(caseTmp);
+                break;
+            }
+            else if (!caseTmp.isOccupe()) { //
+                listePosDep.add(caseTmp);
+                x += tmpX;
+                y += tmpY;
+                caseTmp = plateau.getCasse(x + tmpX, x + tmpY);
+            }
+        }
     }
 }

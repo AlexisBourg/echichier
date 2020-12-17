@@ -13,10 +13,9 @@ import java.util.List;
 public class Parties {
     private final int ROI = 11;
     private Plateau echiquier;
-    private Joueur[] joueurs;
 
     public Parties(){
-        joueurs = new Joueur[2];
+        Joueur[] joueurs = new Joueur[2];
         joueurs[0] = new Joueur(1);
         joueurs[1] = new Joueur(2);
         echiquier = new Plateau(joueurs[0].getPieces(), joueurs[1].getPieces());
@@ -59,26 +58,29 @@ public class Parties {
         int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), // On récupère les coordonnées du Roi
                 yRoi = joueurAdverse.getPieces()[ROI].getCoordY();
         List<Position> menace= isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, 0); // on voit si une ou plusieurs pièces menance(nt) le roi adverse.
+        List<Position> DepRoiAdverse = joueurAdverse.getPieces()[ROI].getListeDep();
+        List<Position> MenacesDeLaMenace = isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0);
+
 
         if(menace.size()==1){ // S'i n'y a qu'une menace
             if(menace.get(0).getClass().getName().equals("Cavalier") && // Si la menace est un cavalier ET
-                    joueurAdverse.getPieces()[ROI].getListeDep().size()==0 && // Si le roi ne peut plus se déplacer ET
-                        isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0).size() == 0) // Si le cavalier n'est pas menacé
+                    DepRoiAdverse.size()==0 && // Si le roi ne peut plus se déplacer ET
+                    MenacesDeLaMenace.size() == 0) // Si le cavalier n'est pas menacé
                 return true;
             if(!menace.get(0).getClass().getName().equals("Cavalier")) { // Si la menace n'est pas un cavalier
-                if(joueurAdverse.getPieces()[ROI].getListeDep().size() == 0 && // Si le Roi ne peut plus de se déplacer ET
-                        (isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0).size() == 0 || // Si la menace n'est pas elle même menacée OU
+                if(DepRoiAdverse.size() == 0 && // Si le Roi ne peut plus de se déplacer ET
+                        (MenacesDeLaMenace.size() == 0 || // Si la menace n'est pas elle même menacée OU
                                 isPossibInterpo(joueurAdverse, menace.get(0).getX(), menace.get(0).getY(), echiquier))) // Si aucune pièce alliée au Roi ne peut s'interposer pour le protéger
                     return true;
-                if((joueurAdverse.getPieces()[ROI].getListeDep().size()==1 && // Si le Roi ne peut se déplacer qu'à un seul endroit
-                        joueurAdverse.getPieces()[ROI].getListeDep().contains(menace.get(0))) && // et que cet endroit est l'emplacement de sa seule menace ET
-                        (isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0).size()==1 && // Que sa menace n'est menacée que par lui
-                        isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0).contains(echiquier.getCasse(xRoi, yRoi))) && // ET
+                if((DepRoiAdverse.size()==1 && // Si le Roi ne peut se déplacer qu'à un seul endroit
+                        DepRoiAdverse.contains(menace.get(0))) && // et que cet endroit est l'emplacement de sa seule menace ET
+                        (MenacesDeLaMenace.size()==1 && // Que sa menace n'est menacée que par lui
+                                MenacesDeLaMenace.contains(echiquier.getCasse(xRoi, yRoi))) && // ET
                             isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 1).size()>0) // Que cette même menace est protégée, Echec et mat
                     return true;
             }
         }else if(menace.size()>1){ // S'il y a plusieurs menaces
-            return joueurAdverse.getPieces()[ROI].getListeDep().size() == 0; // Si le roi adverse ne peut plus se déplacer, ECHEC ET MAT
+            return DepRoiAdverse.size() == 0; // Si le roi adverse ne peut plus se déplacer, ECHEC ET MAT
         }
         return false; // Cas où il n'y a aucune menace
     }

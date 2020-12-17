@@ -35,10 +35,11 @@ public class Pion extends Piece {
         } else {
             tmpY++;
         }
-        deplacementDisponible(plateau, tmpX, tmpY);
+        deplacementPossible(plateau, tmpX, tmpY);
     }
 
-    private void deplacementDisponible(Plateau plateau, int tmpX, int tmpY) {
+    @Override
+    public void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
         //déplacement basique
         Position caseTmp;
         caseTmp = plateau.getCasse(tmpX, tmpY);
