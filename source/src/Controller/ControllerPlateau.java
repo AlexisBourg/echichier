@@ -21,6 +21,7 @@ public class ControllerPlateau{
     private Button selected = new Button();
     private String oldStyle;
 
+
     @FXML
     private ChessGrid grille= new ChessGrid();
 
@@ -48,12 +49,14 @@ public class ControllerPlateau{
 
     @FXML
     public void chargementPlateau(Plateau echiquier){
-        for(int x = 1; x<9; x++){
-            for(int y = 1; y<9; y++){
-                if(echiquier.getCasse(x-1, y-1).isOccupe()){
-                    //CssModifier.ChangeBackgroundImage(grille.getChildren().get(8*x-y)), echiquier.getCasse(x, y).getPiece().getImage());
-                    System.out.println(grille.getChildren().get((8*x-y)+1));//get(8*(x+1)-(8-y)));
+        for(int x = 0; x<8; x++){
+            for(int y = 0; y<8; y++){
+                if(echiquier.getCasse(x, y).isOccupe()){
+                    //CssModifier.ChangeBackgroundImage(grille.getChildren().get(8*(x+1)-(8-y)), echiquier.getCasse(x, y).getPiece().getImage());//8*x-y
+                    //System.out.println(grille.getChildren().get((8*x-y)+1));//get(8*(x+1)-(8-y)));
+                    System.out.println(grille.getChildren().get(8*(x+1)-(8-y)));
                 }
+
             }
         }
     }

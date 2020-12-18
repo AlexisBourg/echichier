@@ -128,4 +128,8 @@ public abstract class Piece {
     public List<Position> getListeProtecDep() {
         return listeProtecDep;
     }
+
+    public String toString(){
+        return "Type: "+getType().name();
+    }
 }

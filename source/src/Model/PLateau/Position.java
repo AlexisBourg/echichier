@@ -46,4 +46,8 @@ public class Position {
     public Piece getPiece() {
         return piecePresente;
     }
+
+    public String toString(){
+        return "X: "+getX()+"  Y: "+getY()+"  Piece : "+getPiece()+"\n";
+    }
 }

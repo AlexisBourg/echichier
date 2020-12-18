@@ -3,6 +3,7 @@ package Model;
 import Controller.ControllerPlateau;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
+import Model.Parties.PartieConsole;
 import Model.Parties.Parties;
 import Model.Piece.Couleur;
 import javafx.application.Application;
@@ -48,11 +49,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
-        Parties parties = new Parties();
+        PartieConsole parties = new PartieConsole();
 
            // System.out.println( parties.getClass());
 
-        parties.partieLocal();
+        parties.partie();
 
         primaryStage.setTitle("Echec");
         primaryStage.setScene(new Scene(root, 1000, 800));
