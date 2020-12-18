@@ -10,16 +10,20 @@ import java.util.List;
 public abstract class Piece {
 
     //Atribut
+    public static final int LIMIT_SUP = 7;
+    public static final int LIMIT_INF = 0;
     private int coordX;
     private int coordY;
     private String image;
     private Couleur couleur;
-    protected List<Position> listePosDep;
-    protected List<Position> listeProtecDep;
+    private List<Position> listePosDep;
+    private List<Position> listeProtecDep;
     private Type type;
 
     //Constructeur
     public Piece(int x, int y, Couleur couleur, Type type){
+        listePosDep = new LinkedList<>();
+        listeProtecDep = new LinkedList<>();
         coordX=x;
         coordY=y;
         this.couleur=couleur;
@@ -130,6 +134,6 @@ public abstract class Piece {
     }
 
     public String toString(){
-        return "Type: "+getType().name();
+        return "Type: "+getType().name() + "x : " + getCoordX() + " y: "+getCoordY();
     }
 }

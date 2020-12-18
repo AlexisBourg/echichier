@@ -42,10 +42,7 @@ public class Plateau {
     }
 
     public boolean isCaseNull(Position p){
-        if (p.getX()<0 || p.getX()>7 || p.getY()<0 || p.getY()>7 ){
-            return true;
-        }
-        return false;
+        return p.getX() < 0 || p.getX() > 7 || p.getY() < 0 || p.getY() > 7;
     }
 
     //  /!\ on doit verifier en amont que x et y ne correspondent pas à une casse null -> isCaseNull() doit rendre false

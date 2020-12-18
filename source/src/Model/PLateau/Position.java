@@ -5,7 +5,7 @@ import Model.Piece.Piece;
 public class Position {
     private int x;
     private int y;
-    private boolean Occupé=false;
+    private boolean Occupee=false;
     private Piece piecePresente;
 
     public Position(int y,int x, Piece piece){
@@ -30,17 +30,22 @@ public class Position {
         return y;
     }
 
-    public void setEstOccupe(boolean estOccupé) {
-        this.Occupé = estOccupé;
+    public void setEstOccupe(boolean estOccupee) {
+        this.Occupee = estOccupee;
     }
 
     public boolean isOccupe() {
-        return Occupé;
+        return Occupee;
     }
 
     public void setPiece(Piece piece) {
         this.piecePresente = piece;
-        Occupé = true;
+        Occupee = true;
+    }
+
+    public void unsetPiece(){
+        this.piecePresente = null;
+        Occupee = false;
     }
 
     public Piece getPiece() {

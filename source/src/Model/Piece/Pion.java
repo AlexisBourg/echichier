@@ -13,7 +13,6 @@ public class Pion extends Piece {
 
     public Pion(int x, int y, Couleur couleur){
         super(x, y, couleur, Type.PION);
-
     }
 
     //Methode
@@ -25,11 +24,10 @@ public class Pion extends Piece {
 
 
     public void setListeDep( Plateau plateau) {
-
-        listePosDep.clear();
+        getListeDep().clear();
         int tmpX = getCoordX();
         int tmpY = getCoordY();
-        Position caseTmp;
+
         if (getCouleur().equals(Couleur.BLANC)) {
             tmpY--;
         } else {
@@ -42,33 +40,44 @@ public class Pion extends Piece {
     public void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
         //déplacement basique
         Position caseTmp;
+        int tmpY2;
+
+        if(tmpX > LIMIT_SUP || tmpX < LIMIT_INF || tmpY > LIMIT_SUP || tmpY < LIMIT_INF)
+            return;
+
         caseTmp = plateau.getCasse(tmpX, tmpY);
-        if (plateau.isCaseNull(caseTmp) && !caseTmp.isOccupe()) {
-            listePosDep.add(plateau.getCasse(tmpX, tmpY));
+
+        if (!plateau.isCaseNull(caseTmp) && !caseTmp.isOccupe()) {
+            getListeDep().add(plateau.getCasse(tmpX, tmpY));
             if (isPremierDeplacement() && !plateau.getCasse(tmpX, tmpY).isOccupe()) {
-                int tmpY2 = tmpY;
-                if (getCouleur().equals(Couleur.BLANC)) {
-                    tmpY2++;
-                } else {
-                    tmpY2--;
-                }
-                listePosDep.add(plateau.getCasse(tmpX, tmpY2));
+                tmpY2 = this.getCouleur() == Couleur.BLANC ? tmpY-1 : tmpY+1;
+                if(!plateau.getCasse(tmpX, tmpY2).isOccupe())
+                    getListeDep().add(plateau.getCasse(tmpX, tmpY2));
+                premierDeplacement = false;
             }
         }
         //attaque
-        for (int i = -1; i < 1; i = i + 2){
-            attaque(plateau, tmpX, i);
+        if(this.getCouleur()==Couleur.NOIR){
+            attaque(plateau, tmpX-1, tmpY);
+            attaque(plateau, tmpX+1, tmpY);
+        }else{
+            attaque(plateau, tmpX-1, tmpY);
+            attaque(plateau, tmpX+1, tmpY);
         }
     }
 
     private void attaque(Plateau plateau, int tmpX, int tmpY) {
         Position caseTmp;
-        caseTmp= plateau.getCasse(tmpX, tmpY );
+
+        if(tmpX==-1 || tmpX==8)
+            return;
+
+        caseTmp= plateau.getCasse(tmpX, tmpY);
         if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
-            listePosDep.add(caseTmp);
+            getListeDep().add(caseTmp);
         }
         if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()==this.getCouleur()){
-            listePosDep.add(caseTmp);
+            getListeProtecDep().add(caseTmp);
         }
     }
 

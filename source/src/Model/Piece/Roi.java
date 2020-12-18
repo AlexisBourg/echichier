@@ -26,26 +26,30 @@ public class Roi extends Piece {
 
 
     public void setListeDep( Plateau plateau){
-
-        listePosDep.clear();
-
-        int tmpX=getCoordX();
-        int tmpY=getCoordY();
-        Position caseTmp;
         int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+        getListeDep().clear();
         for(int i=0; i<8; i++){
-            caseTmp=plateau.getCasse(tmpX--,tmpY--);
-            deplacementPossibleRoi(plateau, caseTmp);
+            deplacementPossibleRoi(plateau, dep[i][0], dep[i][1]);
         }
     }
 
-    public void deplacementPossibleRoi(Plateau plateau, Position caseTmp) {
+    public void deplacementPossibleRoi(Plateau plateau, int tmpX, int tmpY) {
+        Position caseTmp;
+        int x = getCoordX();
+        int y = getCoordY();
+
+        if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
+            return;
+
+        caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
+
         if (!plateau.isCaseNull(caseTmp)) {
             if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
-                listeProtecDep.add(caseTmp);
+                getListeProtecDep().add(caseTmp);
             }
             if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
+                getListeDep().add(caseTmp);
             }
         }
     }

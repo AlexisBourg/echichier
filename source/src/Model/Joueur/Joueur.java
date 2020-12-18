@@ -7,10 +7,13 @@ public class Joueur {
     private String nom;
     private String prenom;
     private Piece[] pieces;
+    private Piece[] piecesMortes;
+    private int nbPiecesMortes=0;
 
     public Joueur(int numJoueur){ // Constructeur pour partie local
         prenom = "Joueur";
         pieces = new Piece[16];
+        piecesMortes = new Piece[16];
 
         switch(numJoueur){
             case 1:
@@ -54,6 +57,15 @@ public class Joueur {
 
     public Piece[] getPieces(){
         return pieces;
+    }
+
+    public Piece[] getPiecesMortes(){
+        return piecesMortes;
+    }
+
+    public void addPieceMorte(Piece pieceMorte){
+        piecesMortes[nbPiecesMortes] = pieceMorte;
+        nbPiecesMortes+=1;
     }
 
     public Couleur getCouleur() { return couleur;}

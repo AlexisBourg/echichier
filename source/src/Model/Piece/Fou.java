@@ -19,13 +19,11 @@ public class Fou extends Piece {
     //Methode
 
     public void setListeDep(Plateau plateau) {
-
-        listePosDep.clear();
-
-        int tmpX = getCoordX(), tmpY = getCoordY();
         int[][] dep ={{1,1},{-1,1},{1,-1},{-1,-1}};
+
+        getListeDep().clear();
         for (int i = 0; i < 4; i++) {
-            deplacementPossible(plateau, tmpX+dep[i][0], tmpY+dep[i][1]);
+            deplacementPossible(plateau, dep[i][0], dep[i][1]);
         }
     }
 
@@ -34,19 +32,24 @@ public class Fou extends Piece {
         Position caseTmp;
         int x = getCoordX();
         int y = getCoordY();
+
+        if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
+            return;
+
         caseTmp = plateau.getCasse(x+tmpX, y+tmpY);
         while (!plateau.isCaseNull(caseTmp)) {
             if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
-                listeProtecDep.add(caseTmp);
+                getListeProtecDep().add(caseTmp);
+                break;
             }
             if (!caseTmp.isOccupe()) { //
-                listePosDep.add(caseTmp);
+                getListeDep().add(caseTmp);
                 x+=tmpX;
                 y+=tmpY;
                 caseTmp = plateau.getCasse(x+tmpX, x+tmpY);
             }
             else if(caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()){
-                listePosDep.add(caseTmp);
+                getListeDep().add(caseTmp);
                 break;
             }
         }

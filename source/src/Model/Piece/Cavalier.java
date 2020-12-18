@@ -18,27 +18,32 @@ public class Cavalier extends Piece {
 
     @Override
     public void setListeDep(Plateau plateau) {
-        listePosDep.clear();
         int[][] dep ={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
+
+        getListeDep().clear();
         for (int i=0; i<8; i++) {
             deplacementPossible(plateau, dep[i][0], dep[i][1]);
         }
     }
 
     @Override
-    public void deplacementPossible(Plateau plateau, int dx, int dy) {
+    public void deplacementPossible(Plateau plateau, int x, int y) {
         int tmpX=getCoordX();
         int tmpY=getCoordY();
         Position caseTmp;
-        caseTmp=plateau.getCasse(tmpX+dx,tmpY+dy);
-        if (!plateau.isCaseNull(caseTmp)) {
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                listePosDep.add(caseTmp);
-            }
-            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
-                listeProtecDep.add(caseTmp);
-            }
+
+        if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
+            return;
+
+        caseTmp=plateau.getCasse(tmpX+x,tmpY+y);
+
+        if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+            getListeDep().add(caseTmp);
         }
+        if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
+            getListeProtecDep().add(caseTmp);
+        }
+
     }
 
 }
