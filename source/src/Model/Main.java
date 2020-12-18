@@ -49,6 +49,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
         Parties parties = new Parties();
+
+           // System.out.println( parties.getClass());
+
         parties.partieLocal();
 
         primaryStage.setTitle("Echec");
