@@ -32,7 +32,6 @@ public class Fou extends Piece {
         Position caseTmp;
         int x = getCoordX();
         int y = getCoordY();
-
         if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
             return;
 
@@ -42,15 +41,17 @@ public class Fou extends Piece {
                 getListeProtecDep().add(caseTmp);
                 break;
             }
-            if (!caseTmp.isOccupe()) { //
+            if(caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()){
+                getListeDep().add(caseTmp);
+                break;
+            }
+            if (!caseTmp.isOccupe()) {
                 getListeDep().add(caseTmp);
                 x+=tmpX;
                 y+=tmpY;
-                caseTmp = plateau.getCasse(x+tmpX, x+tmpY);
-            }
-            else if(caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()){
-                getListeDep().add(caseTmp);
-                break;
+                if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
+                    break;
+                caseTmp = plateau.getCasse(x+tmpX, y+tmpY);
             }
         }
     }

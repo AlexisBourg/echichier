@@ -48,19 +48,21 @@ public class Tour extends Piece {
 
         caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
         while (!plateau.isCaseNull(caseTmp)) {
-            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) { //
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
                 getListeProtecDep().add(caseTmp);
                 break;
             }
-            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 getListeDep().add(caseTmp);
                 break;
             }
-            if (!caseTmp.isOccupe()) { //
+            if (!caseTmp.isOccupe()) {
                 getListeDep().add(caseTmp);
                 x += tmpX;
                 y += tmpY;
-                caseTmp = plateau.getCasse(x + tmpX, x + tmpY);
+                if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
+                    break;
+                caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
             }
         }
     }

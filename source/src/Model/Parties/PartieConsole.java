@@ -11,52 +11,40 @@ public class PartieConsole extends Parties {
 
     public PartieConsole(){
         super();
-        /*for(int i=0; i<8; i++){
-            for (int j=0; j<8; j++){
-                System.out.println("X : "+j+"  Y :"+i+"  "+super.getEchiquier().getCasse(j, i).toString());
-            }
-        }*/
     }
 
     public void partie(){
-        Piece pieceDéplacée;
         int i=0;
-        String caseDep, caseArr;
         HashMap<String, int[]> coordDeplacements = new HashMap<>();
         Piece pieceMorte;
-        int[] coordDepart= new int[2], coordArrive= new int[2];
 
         Joueur joueurCourant=super.getJoueur(0);
         Joueur joueurNonCourant=super.getJoueur(1);
 
-        while(true){ // !EchecEtMat.echecEtMat(joueurNonCourant, super.getEchiquier())
+        while(!EchecEtMat.echecEtMat(joueurNonCourant, super.getEchiquier())){
             System.out.println("Tour du joueur "+joueurCourant.getCouleur()+":\n");
-
-            //selectionne une case de depart
 
             coordDeplacements = infosDeplacement(super.getEchiquier(), joueurCourant);
             pieceMorte = traiterDeplacement(super.getEchiquier(), coordDeplacements, joueurCourant, joueurNonCourant);
 
-            if(pieceMorte!=null)
+            if(pieceMorte!=null) {
+                joueurNonCourant.enleverPiece(pieceMorte);
                 joueurNonCourant.addPieceMorte(pieceMorte);
-
-
-
-            //selectionne une case d'arrivé
-
-            //doDeplacement(echiquier,controller,joueur);
-            //if(pieceDéplacée.getListeDep().get
+            }
 
             i=(i+1)%2;
+
+            joueurCourant=super.getJoueur(i);
+            joueurNonCourant= (i == 1) ?  super.getJoueur(i-1) :  super.getJoueur(i+1);
         }
     }
 
-    public void determinerCoord(String chaine, int[] coord){
-        String[] tab = chaine.split("");
-        coord[0] = Integer.parseInt(tab[0]);
-        coord[1] = Integer.parseInt(tab[1]);
-    }
-
+    /**
+     * Cette méthode met en place la procédure pour proposer puis traiter la demande de déplacement d'une pièce appartenant au joueur courant.
+     * @param echiquier : plateau du jeu
+     * @param joueurCourant : joueur en train de jouer
+     * @return : retourne une map comportant les coordonnées de la case de départ et d'arrivée
+     */
     public HashMap<String, int[]> infosDeplacement(Plateau echiquier, Joueur joueurCourant){
         String caseDep, caseArr;
         int[] coordDepart = new int[2], coordArr = new int[2];
@@ -65,8 +53,7 @@ public class PartieConsole extends Parties {
         Scanner scan = new Scanner(System.in);
 
         System.out.println("joueur"+joueurCourant+": donnez une case de départ parmi cette liste:");
-        for (int i=0; i<joueurCourant.getPieces().length; i++)
-            System.out.print(joueurCourant.getPieces()[i].getCoordX()+""+joueurCourant.getPieces()[i].getCoordY()+", ");
+        listePiecesJoueur(joueurCourant);
 
         System.out.print("\n");
 
@@ -114,8 +101,35 @@ public class PartieConsole extends Parties {
         return donnees;
     }
 
+    /**
+     *  Cette méthode sépare la chaîne composée de deux chiffres en deux. Puis, elle traduit ces caractères en entiers.
+     * @param chaine : message comportant une case sélectionnée par le joueur courant
+     * @param coord : tableau qui va recueillir les coordonnées extraites du message
+     */
+    public void determinerCoord(String chaine, int[] coord){
+        String[] tab = chaine.split("");
+        coord[0] = Integer.parseInt(tab[0]);
+        coord[1] = Integer.parseInt(tab[1]);
+    }
+
+    /**
+     *
+     * @param a : coordonnée
+     * @return : le fait que la coordonnée données est extérieure ou non au plateau
+     */
     public boolean coordNonCoherente(int a){
         return a > 8 || a < 0;
+    }
+
+    /**
+     *  Cette méthode affiche les pièces du joueur courant qui sont encore en vie et qui sont susceptibles de pouvoir se déplacer
+     * @param joueurCourant : joueur en train de jouer
+     */
+    public void listePiecesJoueur(Joueur joueurCourant){
+        for (int i=0; i<joueurCourant.getPieces().length; i++) {
+            if(joueurCourant.getPieces()[i]!=null)
+                System.out.print(joueurCourant.getPieces()[i].getCoordX() + "" + joueurCourant.getPieces()[i].getCoordY() + ", ");
+        }
     }
 
 
@@ -136,6 +150,14 @@ public class PartieConsole extends Parties {
         return false;
     }
 
+    /**
+     *  Cette méthode affecte le plateau en fonction des coordonnées demandées par je joueur courant
+     * @param plateau : plateau du jeu
+     * @param donnees : map qui contient les coordonnées des cases de départ et d'arrivée choisies par le joueur
+     * @param joueurCourant : joueur en train de jouer
+     * @param joueurAdverse : joueur qui attend que l'autre joue
+     * @return : la pièce qui a été mangée durant le déplacement ou null sinon
+     */
     public Piece traiterDeplacement(Plateau plateau, HashMap<String, int[]> donnees, Joueur joueurCourant, Joueur joueurAdverse){
         Piece pieceDeplacee, pieceMorte;
 
@@ -145,7 +167,8 @@ public class PartieConsole extends Parties {
         pieceMorte = null;
         pieceDeplacee = plateau.getCasse(depart[0], depart[1]).getPiece();
 
-        if(plateau.getCasse(arrivee[0], arrivee[1]).isOccupe()) {
+        if(plateau.getCasse(arrivee[0], arrivee[1]).isOccupe()) { // Si la case d'arrivée est occupée, pieceMorte n'est plus null et prend la valeur de cette dernière
+            // pieceMorte ne peut pas être une pièce alliée à celle qui se déplace (cette possibilité est éliminée dans setListeDep de la pièce déplacée)
             pieceMorte = plateau.getCasse(arrivee[0], arrivee[1]).getPiece();
         }
 

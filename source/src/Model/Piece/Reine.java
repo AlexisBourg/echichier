@@ -32,25 +32,28 @@ public class Reine extends Piece {
         Position caseTmp;
         int x = getCoordX();
         int y = getCoordY();
-
+        System.out.println("x ::  "+x+"   y ::  "+y);
+        System.out.println("tmpX ::  "+tmpX+"   tmpY ::   "+tmpY);
         if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
             return;
 
         caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
         while (!plateau.isCaseNull(caseTmp)) {
-            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) { //
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
                 getListeProtecDep().add(caseTmp);
                 break;
             }
-            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) { //
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
                 getListeDep().add(caseTmp);
                 break;
             }
-            else if (!caseTmp.isOccupe()) { //
+            if(!caseTmp.isOccupe()) {
                 getListeDep().add(caseTmp);
                 x += tmpX;
                 y += tmpY;
-                caseTmp = plateau.getCasse(x + tmpX, x + tmpY);
+                if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
+                    return;
+                caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
             }
         }
     }
