@@ -28,7 +28,4 @@ public class Parties {
 
     public Joueur getJoueur(int num){return joueurs[num];}
 
-
-
-
 }

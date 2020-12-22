@@ -3,8 +3,6 @@ package Model.Piece;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
-import java.util.List;
-
 public class Pion extends Piece {
     //Atttribue
     private boolean premierDeplacement=true;
@@ -47,7 +45,7 @@ public class Pion extends Piece {
 
         caseTmp = plateau.getCasse(tmpX, tmpY);
 
-        if (!plateau.isCaseNull(caseTmp) && !caseTmp.isOccupe()) {
+        if (plateau.isCaseNull(caseTmp) && !caseTmp.isOccupe()) {
             getListeDep().add(plateau.getCasse(tmpX, tmpY));
             if (isPremierDeplacement() && !plateau.getCasse(tmpX, tmpY).isOccupe()) {
                 tmpY2 = this.getCouleur() == Couleur.BLANC ? tmpY-1 : tmpY+1;

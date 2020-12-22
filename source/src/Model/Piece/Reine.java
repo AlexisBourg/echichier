@@ -3,8 +3,6 @@ package Model.Piece;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
-import java.util.List;
-
 public class Reine extends Piece {
 
 
@@ -38,7 +36,7 @@ public class Reine extends Piece {
             return;
 
         caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
-        while (!plateau.isCaseNull(caseTmp)) {
+        while (plateau.isCaseNull(caseTmp)) {
             if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
                 getListeProtecDep().add(caseTmp);
                 break;

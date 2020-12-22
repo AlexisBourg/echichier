@@ -42,12 +42,28 @@ public class Plateau {
     }
 
     public boolean isCaseNull(Position p){
-        return p.getX() < 0 || p.getX() > 7 || p.getY() < 0 || p.getY() > 7;
+        return p.getX() >= 0 && p.getX() <= 7 && p.getY() >= 0 && p.getY() <= 7;
+    }
+
+    public boolean isCaseSansPiece(Position p){
+        return p.getPiece() == null;
     }
 
     //  /!\ on doit verifier en amont que x et y ne correspondent pas à une casse null -> isCaseNull() doit rendre false
     public Position getCasse(int x, int y){
         return plateauDejeu[y][x];
+    }
+
+    @Override
+    public String toString(){
+        String message="";
+
+        for(int i=0; i<8; i++){
+            for (int j=0; j<8; j++)
+                message+= plateauDejeu[i][j].toString();
+        }
+
+        return message;
     }
 
 

@@ -4,7 +4,6 @@ import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 //import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
 
 public class Roi extends Piece {
 
@@ -44,7 +43,7 @@ public class Roi extends Piece {
 
         caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
 
-        if (!plateau.isCaseNull(caseTmp)) {
+        if (plateau.isCaseNull(caseTmp)) {
             if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
                 getListeProtecDep().add(caseTmp);
             }

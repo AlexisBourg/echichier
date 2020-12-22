@@ -26,7 +26,7 @@ public class ControllerPlateau{
     private ChessGrid grille= new ChessGrid();
 
     @FXML
-    public void initialize(){ System.out.println(grille.getChildren());}
+    public void initialize(){}
 
     @FXML
     public String caseSelected(MouseEvent mouseEvent) {

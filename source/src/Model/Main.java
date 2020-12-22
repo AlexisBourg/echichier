@@ -44,20 +44,21 @@ public class Main extends Application {
         }
 
         return true;
-    } */
+
+     */
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
         PartieConsole parties = new PartieConsole();
 
-           // System.out.println( parties.getClass());
+        // System.out.println( parties.getClass());
 
         parties.partie();
 
-        primaryStage.setTitle("Echec");
+       /* primaryStage.setTitle("Echec");
         primaryStage.setScene(new Scene(root, 1000, 800));
-        primaryStage.show();
+        primaryStage.show();*/
     }
 
 
@@ -65,3 +66,6 @@ public class Main extends Application {
         launch(args);
     }
 }
+
+
+

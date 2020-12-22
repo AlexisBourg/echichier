@@ -25,10 +25,10 @@ public class EchecEtMat {
                 yRoi = joueurAdverse.getPieces()[ROI].getCoordY();
         List<Position> menace= isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, 0); // on voit si une ou plusieurs pièces menance(nt) le roi adverse.
         List<Position> DepRoiAdverse = joueurAdverse.getPieces()[ROI].getListeDep(); // Liste de déplacements possibles pour le roi adverse
-        List<Position> MenacesDeLaMenace = isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0);
-
+        List<Position> MenacesDeLaMenace;
 
         if(menace.size()==1){ // S'i n'y a qu'une menace
+            MenacesDeLaMenace = isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0);
             if(menaceEstUnCavalier(menace) && // Si la menace est un cavalier ET
                     roiAdverseBloque(DepRoiAdverse) && // Si le roi ne peut plus se déplacer ET
                     MenacesDeLaMenace.size() == 0) // Si le cavalier n'est pas menacé
@@ -78,44 +78,46 @@ public class EchecEtMat {
 
         for(int i=0; i<8; i++) {
             // Vérification des lignes et colonnes communes au roi adverse. Si une pièce qui s'y trouve possède la case de la pièce ciblée dans sa liste de déplacement, on ajoute la pièce à la liste des menaces
-            depCommun(x+dep[i][0], y+dep[i][1], echiquier, liste, option);
+            depCommun(x, y, dep[i][0], dep[i][1], echiquier, liste, option);
+            System.out.println("appel de depcommmun");
         }
 
         // Vérification des emplacements cavaliers. Si ces pièces contiennent un cavalier, on ajoute la pièce à la liste des menaces
         for (int i=0;i<8; i++){
-            menaceCavalier(x+depC[i][0],x+depC[i][1], echiquier, liste, option);
+            menaceCavalier(x, y, depC[i][0], depC[i][1], echiquier, liste, option);
         }
         return liste;
     }
 
-    private static void depCommun(int x, int y, Plateau echiquier, List<Position> liste, int option) {
-        int tmpx=x;
-        int tmpy=y;
-        if(x+tmpx > LIMIT_SUP || x+tmpx < LIMIT_INF || y+tmpy > LIMIT_SUP || y+tmpy < LIMIT_INF)
+    private static void depCommun(int x, int y, int depX, int depY, Plateau echiquier, List<Position> liste, int option) {
+        int tmpx=x+depX;
+        int tmpy=y+depY;
+        //System.out.println(echiquier.toString());
+
+        if(tmpx > LIMIT_SUP || tmpx < LIMIT_INF || tmpy > LIMIT_SUP || tmpy < LIMIT_INF || echiquier.isCaseSansPiece(echiquier.getCasse(tmpx, tmpy)))
             return;
+
         for (int i=0; i<8;i++){
-            if(option==0)
-                if (echiquier.getCasse(tmpx+x, tmpy+y).getPiece().getListeDep().contains(echiquier.getCasse(x, y))) { // DROITE
-                    liste.add(echiquier.getCasse(tmpx + x, tmpy+y));
-                    tmpx+=x;
-                    tmpy+=y;
-                    if(x+tmpx > LIMIT_SUP || x+tmpx < LIMIT_INF || y+tmpy > LIMIT_SUP || y+tmpy < LIMIT_INF)
-                        return;
+            if(option==0) {
+                if (echiquier.getCasse(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCasse(x, y))) { // DROITE
+                    liste.add(echiquier.getCasse(tmpx , tmpy ));
+                    break;
                 }
-                else
-                if (echiquier.getCasse(tmpx+x, tmpy+y).getPiece().getListeProtecDep().contains(echiquier.getCasse(x, y))) { // DROITE
-                    liste.add(echiquier.getCasse(tmpx + x, tmpy+y));
-                    tmpx+=x;
-                    tmpy+=y;
-                    if(x+tmpx > LIMIT_SUP || x+tmpx < LIMIT_INF || y+tmpy > LIMIT_SUP || y+tmpy < LIMIT_INF)
-                        return;
+            }
+            else
+                if (echiquier.getCasse(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCasse(x, y))) { // DROITE
+                    liste.add(echiquier.getCasse(tmpx, tmpy));
+                    break;
                 }
-            if(x+tmpx > LIMIT_SUP || x+tmpx < LIMIT_INF || y+tmpy > LIMIT_SUP || y+tmpy < LIMIT_INF)
+
+            tmpx += depX;
+            tmpy += depY;
+            if (tmpx > LIMIT_SUP || tmpx < LIMIT_INF || tmpy > LIMIT_SUP || tmpy < LIMIT_INF || echiquier.isCaseSansPiece(echiquier.getCasse(tmpx, tmpy)))
                 return;
         }
     }
 
-    private static void menaceCavalier(int x, int y, Plateau echiquier, List<Position> liste, int option) {
+    private static void menaceCavalier(int x, int y, int tmpX, int tmpY, Plateau echiquier, List<Position> liste, int option) {
         if(option==0)
             if(echiquier.getCasse(x, y).getPiece().getListeDep().contains(echiquier.getCasse(x, y))){
                 liste.add(echiquier.getCasse(x, y));
