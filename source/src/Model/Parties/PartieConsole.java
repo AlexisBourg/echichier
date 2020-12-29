@@ -21,7 +21,7 @@ public class PartieConsole extends Parties {
         Joueur joueurCourant=super.getJoueur(0);
         Joueur joueurNonCourant=super.getJoueur(1);
 
-        while(!EchecEtMat.echecEtMat(joueurNonCourant, super.getEchiquier())){
+        while(true){
             System.out.println("Tour du joueur "+joueurCourant.getCouleur()+":\n");
 
             coordDeplacements = infosDeplacement(super.getEchiquier(), joueurCourant);
@@ -31,6 +31,13 @@ public class PartieConsole extends Parties {
                 joueurNonCourant.enleverPiece(pieceMorte);
                 joueurNonCourant.addPieceMorte(pieceMorte);
             }
+
+            if (EchecEtMat.echec(joueurNonCourant, super.getEchiquier()) && EchecEtMat.echecEtMat(joueurNonCourant, super.getEchiquier())){
+                System.out.println("ECHEC ET MATTTTT");
+                break;
+            }
+            else if(EchecEtMat.echec(joueurNonCourant, super.getEchiquier()))
+                System.out.println("ECHEC");
 
             i=(i+1)%2;
 
@@ -66,16 +73,16 @@ public class PartieConsole extends Parties {
             determinerCoord(caseDep, coordDepart);
         }
 
-        echiquier.getCasse(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier);
-        list = echiquier.getCasse(coordDepart[0], coordDepart[1]).getPiece().getListeDep();
+        echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier);
+        list = echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().getListeDep();
 
         while (list.size()==0){
             System.out.println("Cette case ne peut se déplacer! recommencez");
             System.out.println("joueur"+joueurCourant+": donnez une case de départ.");
             caseDep = scan.next();
             determinerCoord(caseDep, coordDepart);
-            echiquier.getCasse(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier);
-            list = echiquier.getCasse(coordDepart[0], coordDepart[1]).getPiece().getListeDep();
+            echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier);
+            list = echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().getListeDep();
         }
 
         donnees.put("depart", coordDepart);
@@ -87,7 +94,7 @@ public class PartieConsole extends Parties {
         caseArr = scan.next();
         determinerCoord(caseArr, coordArr);
 
-        while(!list.contains(echiquier.getCasse(coordArr[0], coordArr[1]))){
+        while(!list.contains(echiquier.getCase(coordArr[0], coordArr[1]))){
             System.out.println("Position non présente dans la liste, recommencez.");
             System.out.println("joueur"+joueurCourant+": donnez une case d'arrivée:");
             for(Position courante: list)
@@ -142,8 +149,8 @@ public class PartieConsole extends Parties {
      */
     public boolean isPieceSelecDansListePiecesJoueur(Joueur joueurCourant, Plateau echiquier, int[] coordDepart){
         for (int i=0; i<joueurCourant.getPieces().length; i++){
-            if(echiquier.getCasse(coordDepart[0], coordDepart[1]).getPiece()!=null) {
-                if (echiquier.getCasse(coordDepart[0], coordDepart[1]).getPiece().equals(joueurCourant.getPieces()[i]))
+            if(echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece()!=null) {
+                if (echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().equals(joueurCourant.getPieces()[i]))
                     return true;
             }
         }
@@ -165,15 +172,15 @@ public class PartieConsole extends Parties {
         int[] arrivee =  donnees.get("arrivee");
 
         pieceMorte = null;
-        pieceDeplacee = plateau.getCasse(depart[0], depart[1]).getPiece();
+        pieceDeplacee = plateau.getCase(depart[0], depart[1]).getPiece();
 
-        if(plateau.getCasse(arrivee[0], arrivee[1]).isOccupe()) { // Si la case d'arrivée est occupée, pieceMorte n'est plus null et prend la valeur de cette dernière
+        if(plateau.getCase(arrivee[0], arrivee[1]).isOccupe()) { // Si la case d'arrivée est occupée, pieceMorte n'est plus null et prend la valeur de cette dernière
             // pieceMorte ne peut pas être une pièce alliée à celle qui se déplace (cette possibilité est éliminée dans setListeDep de la pièce déplacée)
-            pieceMorte = plateau.getCasse(arrivee[0], arrivee[1]).getPiece();
+            pieceMorte = plateau.getCase(arrivee[0], arrivee[1]).getPiece();
         }
 
-        plateau.getCasse(arrivee[0], arrivee[1]).setPiece(plateau.getCasse(depart[0], depart[1]).getPiece());
-        plateau.getCasse(depart[0], depart[1]).unsetPiece();
+        plateau.getCase(arrivee[0], arrivee[1]).setPiece(plateau.getCase(depart[0], depart[1]).getPiece());
+        plateau.getCase(depart[0], depart[1]).unsetPiece();
 
         pieceDeplacee.setCoordX(arrivee[0]);
         pieceDeplacee.setCoordY(arrivee[1]);

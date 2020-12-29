@@ -41,7 +41,7 @@ public class Roi extends Piece {
         if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
             return;
 
-        caseTmp = plateau.getCasse(x + tmpX, y + tmpY);
+        caseTmp = plateau.getCase(x + tmpX, y + tmpY);
 
         if (plateau.isCaseNull(caseTmp)) {
             if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {

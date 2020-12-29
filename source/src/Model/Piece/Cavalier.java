@@ -35,7 +35,7 @@ public class Cavalier extends Piece {
         if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
             return;
 
-        caseTmp=plateau.getCasse(tmpX+x,tmpY+y);
+        caseTmp=plateau.getCase(tmpX+x,tmpY+y);
 
         if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
             getListeDep().add(caseTmp);

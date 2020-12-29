@@ -43,14 +43,14 @@ public class Pion extends Piece {
         if(tmpX > LIMIT_SUP || tmpX < LIMIT_INF || tmpY > LIMIT_SUP || tmpY < LIMIT_INF)
             return;
 
-        caseTmp = plateau.getCasse(tmpX, tmpY);
+        caseTmp = plateau.getCase(tmpX, tmpY);
 
         if (plateau.isCaseNull(caseTmp) && !caseTmp.isOccupe()) {
-            getListeDep().add(plateau.getCasse(tmpX, tmpY));
-            if (isPremierDeplacement() && !plateau.getCasse(tmpX, tmpY).isOccupe()) {
+            getListeDep().add(plateau.getCase(tmpX, tmpY));
+            if (isPremierDeplacement() && !plateau.getCase(tmpX, tmpY).isOccupe()) {
                 tmpY2 = this.getCouleur() == Couleur.BLANC ? tmpY-1 : tmpY+1;
-                if(!plateau.getCasse(tmpX, tmpY2).isOccupe())
-                    getListeDep().add(plateau.getCasse(tmpX, tmpY2));
+                if(!plateau.getCase(tmpX, tmpY2).isOccupe())
+                    getListeDep().add(plateau.getCase(tmpX, tmpY2));
                 premierDeplacement = false;
             }
         }
@@ -70,7 +70,7 @@ public class Pion extends Piece {
         if(tmpX==-1 || tmpX==8)
             return;
 
-        caseTmp= plateau.getCasse(tmpX, tmpY);
+        caseTmp= plateau.getCase(tmpX, tmpY);
         if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
             getListeDep().add(caseTmp);
         }

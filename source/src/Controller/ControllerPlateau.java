@@ -51,8 +51,8 @@ public class ControllerPlateau{
     public void chargementPlateau(Plateau echiquier){
         for(int x = 0; x<8; x++){
             for(int y = 0; y<8; y++){
-                if(echiquier.getCasse(x, y).isOccupe()){
-                    //CssModifier.ChangeBackgroundImage(grille.getChildren().get(8*(x+1)-(8-y)), echiquier.getCasse(x, y).getPiece().getImage());//8*x-y
+                if(echiquier.getCase(x, y).isOccupe()){
+                    //CssModifier.ChangeBackgroundImage(grille.getChildren().get(8*(x+1)-(8-y)), echiquier.getCase(x, y).getPiece().getImage());//8*x-y
                     //System.out.println(grille.getChildren().get((8*x-y)+1));//get(8*(x+1)-(8-y)));
                     System.out.println(grille.getChildren().get(8*(x+1)-(8-y)));
                 }
