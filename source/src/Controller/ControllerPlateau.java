@@ -1,6 +1,9 @@
 package Controller;
 
+import Model.Joueur.Joueur;
+import Model.Parties.PartieGraph;
 import Model.Parties.Parties;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -14,50 +17,44 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import res.CssModifier;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 
 
 public class ControllerPlateau{
-    private boolean firstSelected = false;
-    private Button selected = new Button();
-    private String oldStyle;
+    PartieGraph partie;
+
+    @FXML
+    private ChessGrid grille;
+
+    public ControllerPlateau(PartieGraph partie){
+        this.partie = partie;
+    }
+
 
 
     @FXML
-    private ChessGrid grille= new ChessGrid();
-
-    @FXML
-    public void initialize(){}
-
-    @FXML
-    public String caseSelected(MouseEvent mouseEvent) {
-        String xy;
-        if (mouseEvent==null){return "null"; }
-        if (firstSelected) {
-            selected = (Button) mouseEvent.getSource();
-            oldStyle = selected.getStyle();
-            selected.setStyle("-fx-background-color: gray;");
-            firstSelected = true;
-            return (String) selected.getId();
-        } else {
-            selected.setStyle(oldStyle);
-            selected = (Button) mouseEvent.getSource();
-            oldStyle = selected.getStyle();
-            selected.setStyle("-fx-background-color: gray;");
-            return "null";
+    public void chargementPlateau(){
+        Plateau echiquier = partie.getEchiquier();
+        for(int y = 0; y<8; y++){
+            for(int x = 0; x<8; x++){
+                grille.getChildren().get((8*(y+1)-(8-x))+1).setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        montrerDeplacementDispo(mouseEvent.getSource());
+                    }
+                });
+                if(echiquier.getCase(x, y).isOccupe())
+                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8*(y+1)-(8-x))+1), echiquier.getCase(x, y).getPiece().getImage());
+            }
         }
     }
 
-    @FXML
-    public void chargementPlateau(Plateau echiquier){
-        for(int x = 0; x<8; x++){
-            for(int y = 0; y<8; y++){
-                if(echiquier.getCase(x, y).isOccupe()){
-                    //CssModifier.ChangeBackgroundImage(grille.getChildren().get(8*(x+1)-(8-y)), echiquier.getCase(x, y).getPiece().getImage());//8*x-y
-                    //System.out.println(grille.getChildren().get((8*x-y)+1));//get(8*(x+1)-(8-y)));
-                    System.out.println(grille.getChildren().get(8*(x+1)-(8-y)));
-                }
-
-            }
+    public void montrerDeplacementDispo(Object source){
+        LinkedList<Integer> bonjour = partie.getDeplacements(1, 0);
+        for (Integer i: bonjour){
+            System.out.println(i);
+            CssModifier.ChangeBackgroundColor(grille.getChildren().get(i), "red");
         }
     }
 }

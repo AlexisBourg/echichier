@@ -10,6 +10,7 @@ public class CssModifier {
 
     public static void ChangeBackgroundImage(Node n, String url){
         n.setStyle("-fx-background-image: url(\""+url+"\");");
+        //n.setStyle("-fx-background-color: blue;");
     }
 
     public static void ChangeBackgroundColor(Node n, String color){

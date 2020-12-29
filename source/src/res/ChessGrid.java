@@ -1,7 +1,11 @@
 package res;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -26,7 +30,7 @@ public class ChessGrid extends GridPane {
 
         this.setGridLinesVisible(true);
 
-        for(int i=0; i<64; i++){
+        for(int i=1; i<65; i++){
             Button bouton = new Button();
             if(i<10)
                 bouton.setId("0"+i);

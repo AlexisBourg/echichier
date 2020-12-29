@@ -10,7 +10,7 @@
 
 
 <?import res.ChessGrid?>
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerPlateau" stylesheets="@style.css">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@style.css">
    <left>
        <Label id="LabelGauche" BorderPane.alignment="CENTER">Label</Label>
    </left>
