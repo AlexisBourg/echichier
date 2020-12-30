@@ -1,5 +1,6 @@
 package Model.Parties;
 
+import Model.Joueur.InterfaceJoueur;
 import Model.Joueur.Joueur;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
@@ -7,7 +8,7 @@ import Model.Piece.Piece;
 
 import java.util.*;
 
-public class PartieConsole extends Parties {
+public class PartieConsole extends Parties implements FactoryPartie{
 
     public PartieConsole(){
         super();
@@ -18,12 +19,11 @@ public class PartieConsole extends Parties {
         HashMap<String, int[]> coordDeplacements = new HashMap<>();
         Piece pieceMorte;
 
-        Joueur joueurCourant=super.getJoueur(0);
-        Joueur joueurNonCourant=super.getJoueur(1);
+        InterfaceJoueur joueurCourant=super.getJoueur(0);
+        InterfaceJoueur joueurNonCourant=super.getJoueur(1);
 
         while(true){
             System.out.println("Tour du joueur "+joueurCourant.getCouleur()+":\n");
-
             coordDeplacements = infosDeplacement(super.getEchiquier(), joueurCourant);
             pieceMorte = traiterDeplacement(super.getEchiquier(), coordDeplacements, joueurCourant, joueurNonCourant);
 
@@ -52,7 +52,7 @@ public class PartieConsole extends Parties {
      * @param joueurCourant : joueur en train de jouer
      * @return : retourne une map comportant les coordonnées de la case de départ et d'arrivée
      */
-    public HashMap<String, int[]> infosDeplacement(Plateau echiquier, Joueur joueurCourant){
+    public HashMap<String, int[]> infosDeplacement(Plateau echiquier, InterfaceJoueur joueurCourant){
         String caseDep, caseArr;
         int[] coordDepart = new int[2], coordArr = new int[2];
         List<Position> list = new LinkedList<>();
@@ -132,7 +132,7 @@ public class PartieConsole extends Parties {
      *  Cette méthode affiche les pièces du joueur courant qui sont encore en vie et qui sont susceptibles de pouvoir se déplacer
      * @param joueurCourant : joueur en train de jouer
      */
-    public void listePiecesJoueur(Joueur joueurCourant){
+    public void listePiecesJoueur(InterfaceJoueur joueurCourant){
         for (int i=0; i<joueurCourant.getPieces().length; i++) {
             if(joueurCourant.getPieces()[i]!=null)
                 System.out.print(joueurCourant.getPieces()[i].getCoordX() + "" + joueurCourant.getPieces()[i].getCoordY() + ", ");
@@ -147,7 +147,7 @@ public class PartieConsole extends Parties {
      * @param coordDepart coordonnées de la case sélectionnée par le joueur
      * @return le fait que la case sélectionnée contienne une pièce que possède le joueur courant.
      */
-    public boolean isPieceSelecDansListePiecesJoueur(Joueur joueurCourant, Plateau echiquier, int[] coordDepart){
+    public boolean isPieceSelecDansListePiecesJoueur(InterfaceJoueur joueurCourant, Plateau echiquier, int[] coordDepart){
         for (int i=0; i<joueurCourant.getPieces().length; i++){
             if(echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece()!=null) {
                 if (echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().equals(joueurCourant.getPieces()[i]))
@@ -165,7 +165,7 @@ public class PartieConsole extends Parties {
      * @param joueurAdverse : joueur qui attend que l'autre joue
      * @return : la pièce qui a été mangée durant le déplacement ou null sinon
      */
-    public Piece traiterDeplacement(Plateau plateau, HashMap<String, int[]> donnees, Joueur joueurCourant, Joueur joueurAdverse){
+    public Piece traiterDeplacement(Plateau plateau, HashMap<String, int[]> donnees, InterfaceJoueur joueurCourant, InterfaceJoueur joueurAdverse){
         Piece pieceDeplacee, pieceMorte;
 
         int[] depart =  donnees.get("depart");

@@ -1,5 +1,5 @@
 package Model.Parties;
 
-public interface PartieFactory {
-    Parties creerPartie();
+public interface FactoryPartie{
+    public void partie();
 }

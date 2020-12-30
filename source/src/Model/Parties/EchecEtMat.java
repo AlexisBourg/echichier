@@ -1,5 +1,6 @@
 package Model.Parties;
 
+import Model.Joueur.InterfaceJoueur;
 import Model.Joueur.Joueur;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
@@ -20,7 +21,7 @@ public class EchecEtMat {
      * @param echiquier : plateau du jeu
      * @return : le fait que le roi adverse soit en situation d'échec ou non
      */
-    public static boolean echec(Joueur joueurAdverse, Plateau echiquier){
+    public static boolean echec(InterfaceJoueur joueurAdverse, Plateau echiquier){
         int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), // On récupère les coordonnées du Roi
                 yRoi = joueurAdverse.getPieces()[ROI].getCoordY();
         List<Position> menace= isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, 0); // on voit si une ou plusieurs pièces menance(nt) le roi adverse.
@@ -34,7 +35,7 @@ public class EchecEtMat {
      * @param echiquier : plateau de jeu
      * @return : le fait que la partie soit terminée ou non
      */
-    public static boolean echecEtMat(Joueur joueurAdverse, Plateau echiquier){
+    public static boolean echecEtMat(InterfaceJoueur joueurAdverse, Plateau echiquier){
         int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), // On récupère les coordonnées du Roi
                 yRoi = joueurAdverse.getPieces()[ROI].getCoordY();
         List<Position> menace= isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, 0); // on voit si une ou plusieurs pièces menance(nt) le roi adverse.
@@ -150,7 +151,7 @@ public class EchecEtMat {
      * @param echiquier : plateau du jeu
      * @return : le fait qu'une pièce puisse s'interposer entre le roi et la menace
      */
-    public static boolean isPossibInterpo(Joueur joueurAdverse, int xMen, int yMen, Plateau echiquier) {
+    public static boolean isPossibInterpo(InterfaceJoueur joueurAdverse, int xMen, int yMen, Plateau echiquier) {
         int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), yRoi = joueurAdverse.getPieces()[ROI].getCoordY(), // On récupère les coordonnées du roi adverse.
                 x = xRoi, y = yRoi;
         List<Position> pieceDispo;

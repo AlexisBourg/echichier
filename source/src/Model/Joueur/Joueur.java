@@ -2,7 +2,7 @@ package Model.Joueur;
 
 import Model.Piece.*;
 
-public class Joueur {
+public class Joueur implements InterfaceJoueur{
     private Couleur couleur;
     private String nom;
     private String prenom;

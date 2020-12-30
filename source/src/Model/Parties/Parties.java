@@ -1,7 +1,9 @@
 package Model.Parties;
 
 import Controller.ControllerPlateau;
+import Model.Joueur.IA;
 import Model.Joueur.Joueur;
+import Model.Joueur.InterfaceJoueur;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Couleur;
@@ -12,7 +14,7 @@ import java.util.List;
 
 public class Parties {
     private final int ROI = 11;
-    private  Joueur[] joueurs;
+    private  InterfaceJoueur[] joueurs;
     private Plateau echiquier;
 
     public Parties(){
@@ -22,10 +24,15 @@ public class Parties {
         echiquier = new Plateau(joueurs[0].getPieces(), joueurs[1].getPieces());
     }
 
+
+
     public Plateau getEchiquier(){
         return echiquier;
     }
 
-    public Joueur getJoueur(int num){return joueurs[num];}
+    public Joueur getJoueur(int num){return (Joueur) joueurs[num];}
 
+    public void setJoueurs(int i,InterfaceJoueur joueurs) {
+        this.joueurs[i] = joueurs;
+    }
 }
