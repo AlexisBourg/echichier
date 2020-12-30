@@ -28,30 +28,21 @@ public class ChessGrid extends GridPane {
         ColumnConstraints cc = new ColumnConstraints();
         cc.setPercentWidth(12.5);
 
-        this.setGridLinesVisible(true);
+        for(y=0; y<8; y++){
+            for (x=0; x<8; x++){
+                Button bouton = new Button();
+                bouton.setId(x+""+y);
 
-        for(int i=1; i<65; i++){
-            Button bouton = new Button();
-            if(i<10)
-                bouton.setId("0"+i);
-            else
-                bouton.setId(""+i);
+                bouton.setPrefWidth(100);
+                bouton.setPrefHeight(100);
 
-            bouton.setPrefHeight(100);
-            bouton.setPrefWidth(100);
+                if((x+y)%2==0)
+                    bouton.getStyleClass().add("white");
+                else
+                    bouton.getStyleClass().add("black");
 
-            if((x+y)%2==0)
-                bouton.getStyleClass().add("white");
-            else
-                bouton.getStyleClass().add("black");
-
-            this.add(bouton, x, y);
-            x+=1;
-            if(x==8){
-                y+=1;
-                x=0;
+                this.add(bouton, x, y);
             }
-
         }
     }
 }

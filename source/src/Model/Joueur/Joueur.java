@@ -68,13 +68,6 @@ public class Joueur implements InterfaceJoueur{
         nbPiecesMortes+=1;
     }
 
-    public void enleverPiece(Piece piece){
-        for (int i=0; i<16; i++){
-            if (pieces[i].equals(piece))
-                pieces[i] = null;
-        }
-    }
-
     public Couleur getCouleur() { return couleur;}
 
     public String getPrenom(){return prenom;}
