@@ -28,7 +28,6 @@ public class PartieConsole extends Parties {
             pieceMorte = traiterDeplacement(super.getEchiquier(), coordDeplacements, joueurCourant, joueurNonCourant);
 
             if(pieceMorte!=null) {
-                joueurNonCourant.enleverPiece(pieceMorte);
                 joueurNonCourant.addPieceMorte(pieceMorte);
             }
 

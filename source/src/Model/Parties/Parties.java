@@ -17,8 +17,8 @@ public class Parties {
 
     public Parties(){
         joueurs = new Joueur[2];
-        joueurs[0] = new Joueur(1);
-        joueurs[1] = new Joueur(2);
+        joueurs[0] = new Joueur(1); // BLANC
+        joueurs[1] = new Joueur(2); // NOIR
         echiquier = new Plateau(joueurs[0].getPieces(), joueurs[1].getPieces());
     }
 

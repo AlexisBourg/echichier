@@ -30,8 +30,6 @@ public class Reine extends Piece {
         Position caseTmp;
         int x = getCoordX();
         int y = getCoordY();
-        System.out.println("x ::  "+x+"   y ::  "+y);
-        System.out.println("tmpX ::  "+tmpX+"   tmpY ::   "+tmpY);
         if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
             return;
 
