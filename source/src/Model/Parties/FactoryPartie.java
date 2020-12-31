@@ -1,5 +1,5 @@
 package Model.Parties;
 
 public interface FactoryPartie{
-    public void partie();
+    //public void partie();
 }

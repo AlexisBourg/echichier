@@ -1,25 +1,14 @@
 package Model;
 
-import Controller.ControllerPlateau;
-import Model.PLateau.Plateau;
-import Model.PLateau.Position;
-import Model.Parties.PartieConsole;
+import Controller.ControllerPartisPvE;
+import Controller.ControllerPartisPvP;
 import Model.Parties.PartieGraph;
-import Model.Parties.Parties;
-import Model.Piece.Couleur;
+import Model.Parties.PartiePvE;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.net.URL;
 
 public class Main extends Application {
 
@@ -27,8 +16,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
         FXMLLoader load = new FXMLLoader(getClass().getResource("../res/new.fxml"));
-        PartieGraph partie = new PartieGraph();
-        ControllerPlateau controller = new ControllerPlateau(partie);
+        //PartieGraph partie = new PartieGraph();
+        PartiePvE partie = new PartiePvE();
+        //ControllerPartisPvP controller = new ControllerPartisPvP(partie);
+        ControllerPartisPvE controller = new ControllerPartisPvE(partie);
         load.setController(controller);
 
         Parent root = load.load();

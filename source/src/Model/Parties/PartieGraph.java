@@ -1,17 +1,15 @@
 package Model.Parties;
 
-import Controller.ControllerPlateau;
+import Model.Joueur.InterfaceJoueur;
 import Model.Joueur.Joueur;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Piece;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 public class PartieGraph extends Parties{
-    private int indexJoueurCourant;
+    protected int indexJoueurCourant;
 
     public PartieGraph(){
         super();
@@ -55,7 +53,7 @@ public class PartieGraph extends Parties{
      * @param joueurCourant : joueur en train de jouer
      * @return : si la case ciblée est libre et si elle contient ou non une pièce appartenant au joueur
      */
-    public boolean verifCase(int x, int y, Joueur joueurCourant){
+    public boolean verifCase(int x, int y, InterfaceJoueur joueurCourant){
         if (isCaseSansPiece(x, y))
             return false;
 
@@ -69,6 +67,8 @@ public class PartieGraph extends Parties{
     public Joueur getJoueurNonCourant(){
         return getJoueur((indexJoueurCourant+1)%2);
     }
+
+    public int getIndexJoueurCourant() { return indexJoueurCourant; }
 
     /**
      * change le joueur courant
@@ -100,11 +100,11 @@ public class PartieGraph extends Parties{
         return (getEchiquier().isCaseSansPiece(getEchiquier().getCase(x, y)));
     }
 
-    public boolean isPieceSelecAppartientAuJoueurAdverse(int x, int y, Joueur joueurCourant){
+    public boolean isPieceSelecAppartientAuJoueurAdverse(int x, int y, InterfaceJoueur joueurCourant){
         return (getEchiquier().getCase(x, y).getPiece().getCouleur()!=joueurCourant.getCouleur());
     }
 
-    public boolean isPieceSelecAppartientAuJoueurCourant(int x, int y, Joueur joueurCourant){
+    public boolean isPieceSelecAppartientAuJoueurCourant(int x, int y, InterfaceJoueur joueurCourant){
         return (getEchiquier().getCase(x, y).getPiece().getCouleur()==joueurCourant.getCouleur());
     }
 
