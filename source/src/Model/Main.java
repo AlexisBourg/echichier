@@ -1,6 +1,7 @@
 package Model;
 
-import Controller.ControllerPlateau;
+import Controller.ControllerMenu;
+import Controller.ControllerPartiesPvP;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Parties.PartieConsole;
@@ -25,16 +26,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //Parent root = FXMLLoader.load(getClass().getResource("../res/new.fxml"));
-        FXMLLoader load = new FXMLLoader(getClass().getResource("../res/new.fxml"));
-        PartieGraph partie = new PartieGraph();
-        ControllerPlateau controller = new ControllerPlateau(partie);
+        FXMLLoader load = new FXMLLoader(getClass().getResource("../res/menuPrincipal.fxml"));
+        //PartieGraph partie = new PartieGraph();
+        //ControllerPartiesPvP controller = new ControllerPartiesPvP(partie);
+        //load.setController(controller);
+
+        ControllerMenu controller = new ControllerMenu();
         load.setController(controller);
 
         Parent root = load.load();
-        controller.chargementPlateau();
+        //controller.chargementPlateau();
         //PartieConsole parties = new PartieConsole();
         //parties.partie();
+
 
         primaryStage.setTitle("Echec");
         primaryStage.setScene(new Scene(root, 1000, 800));

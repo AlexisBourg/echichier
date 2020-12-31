@@ -1,14 +1,11 @@
 package Model.Parties;
 
-import Controller.ControllerPlateau;
 import Model.Joueur.Joueur;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Piece;
 
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 public class PartieGraph extends Parties{
     private int indexJoueurCourant;

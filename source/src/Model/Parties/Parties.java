@@ -1,6 +1,6 @@
 package Model.Parties;
 
-import Controller.ControllerPlateau;
+import Controller.ControllerPartiesPvP;
 import Model.Joueur.IA;
 import Model.Joueur.Joueur;
 import Model.Joueur.InterfaceJoueur;
