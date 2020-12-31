@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import res.CssModifier;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.Map.Entry;
 
 
@@ -53,7 +50,6 @@ public class ControllerPartiesPvP {
                             case 2:
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
-                                    partie.ChangementJoueurCourant();
                                 }
                                 cliqueUnPasse = false;
                                 break;
@@ -153,7 +149,9 @@ public class ControllerPartiesPvP {
             changementsPlateau(); // Le plateau effectue les changements de position
             CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partie.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
             // Pour arriver sur la case d'arrivée
+            partie.ChangementJoueurCourant();
         }
+
     }
 
     /**

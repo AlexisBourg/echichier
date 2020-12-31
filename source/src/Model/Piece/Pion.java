@@ -14,6 +14,11 @@ public class Pion extends Piece {
     }
 
     //Methode
+
+    public boolean getPremierDeplacement(){
+        return this.premierDeplacement;
+    }
+
     public void setPremierDeplacement(){this.premierDeplacement = false;}
 
     public boolean isPremierDeplacement() {
@@ -51,7 +56,6 @@ public class Pion extends Piece {
                 tmpY2 = this.getCouleur() == Couleur.BLANC ? tmpY-1 : tmpY+1;
                 if(!plateau.getCase(tmpX, tmpY2).isOccupe())
                     getListeDep().add(plateau.getCase(tmpX, tmpY2));
-                premierDeplacement = false;
             }
         }
         //attaque
