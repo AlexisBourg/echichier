@@ -5,6 +5,7 @@ import Model.Joueur.Joueur;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Piece;
+import Model.Piece.Pion;
 
 import java.util.*;
 
@@ -183,6 +184,9 @@ public class PartieConsole extends Parties implements FactoryPartie{
 
         pieceDeplacee.setCoordX(arrivee[0]);
         pieceDeplacee.setCoordY(arrivee[1]);
+
+        if (pieceDeplacee instanceof Pion && ((Pion) pieceDeplacee).getPremierDeplacement())
+            ((Pion) pieceDeplacee).setPremierDeplacement();
 
         return pieceMorte;
     }

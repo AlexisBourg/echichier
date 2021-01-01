@@ -8,14 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import res.CssModifier;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
 import java.util.Map.Entry;
 
 
-public class ControllerPartisPvP {
+public class ControllerPartiesPvP {
+
     private PartieGraph partie;
     private HashMap<Integer, int[]> listeDeplacements;
     private boolean cliqueUnPasse = false;
@@ -27,7 +25,9 @@ public class ControllerPartisPvP {
     @FXML
     private ChessGrid grille;
 
-    public ControllerPartisPvP(PartieGraph partie) {
+
+    public ControllerPartiesPvP(PartieGraph partie){
+
         this.partie = partie;
         listeDeplacements = new HashMap<>();
     }
@@ -53,7 +53,6 @@ public class ControllerPartisPvP {
                             case 2:
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
-                                    partie.ChangementJoueurCourant();
                                 }
                                 cliqueUnPasse = false;
                                 break;
@@ -151,13 +150,10 @@ public class ControllerPartisPvP {
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
             finDeDéplacement();
-            /*retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
-            restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
-            CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..
-            changementsPlateau(); // Le plateau effectue les changements de position
-            CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partie.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
-            // Pour arriver sur la case d'arrivée*/
+            partie.ChangementJoueurCourant();
+
         }
+
     }
 
     /**

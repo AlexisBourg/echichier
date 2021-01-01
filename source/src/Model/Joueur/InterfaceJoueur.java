@@ -8,7 +8,7 @@ public interface InterfaceJoueur {
 
     public Piece[] getPieces();
 
-    //public void enleverPiece(Piece piece);
+   //public void enleverPiece(Piece piece);
 
     public Couleur getCouleur();
 
