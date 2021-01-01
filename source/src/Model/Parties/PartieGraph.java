@@ -89,7 +89,10 @@ public class PartieGraph extends Parties{
      */
     public HashMap<Integer, int[]> getDeplacements(int x, int y){
         HashMap<Integer, int[]> liste = new HashMap<>();
-
+        if (getEchiquier().getCase(x, y).getPiece()==null){
+            System.out.println(x);
+            System.out.println(y);
+        }
         getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier());
 
         for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
@@ -120,6 +123,13 @@ public class PartieGraph extends Parties{
         Piece pieceMorte = deplacerPiece(depart, arrivee);
         if(pieceMorte!=null) {
             getJoueur((indexJoueurCourant + 1) % 2).addPieceMorte(pieceMorte);
+        }
+    }
+
+    public void actualiserPlateauIA(int[] depart, int[] arrivee){
+        Piece pieceMorte = deplacerPiece(depart, arrivee);
+        if(pieceMorte!=null) {
+            getIA().addPieceMorte(pieceMorte);
         }
     }
 

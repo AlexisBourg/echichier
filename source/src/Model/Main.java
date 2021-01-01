@@ -1,15 +1,8 @@
 package Model;
 
 
-import Controller.ControllerPartisPvE;
 import Controller.ControllerMenu;
-import Controller.ControllerPartiesPvP;
-import Model.PLateau.Plateau;
-import Model.PLateau.Position;
-import Model.Parties.PartieConsole;
 
-import Model.Parties.PartieGraph;
-import Model.Parties.PartiePvE;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
