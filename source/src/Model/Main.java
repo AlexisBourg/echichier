@@ -1,6 +1,5 @@
 package Model;
 
-
 import Controller.ControllerMenu;
 
 import javafx.application.Application;

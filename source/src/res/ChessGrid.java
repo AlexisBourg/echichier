@@ -36,6 +36,8 @@ public class ChessGrid extends GridPane {
                 bouton.setPrefWidth(100);
                 bouton.setPrefHeight(100);
 
+                bouton.setStyle("-fx-background-size: cover;");
+
                 if((x+y)%2==0)
                     bouton.getStyleClass().add("white");
                 else

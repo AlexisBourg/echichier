@@ -28,7 +28,8 @@ public class ControllerPartiesPvE {
     @FXML
     private ChessGrid grille;
 
-    public ControllerPartiesPvE(PartiePvE partie) {
+
+    public ControllerPartiesPvE(PartiePvE partie){
         this.partie = partie;
         listeDeplacements = new HashMap<>();
     }
