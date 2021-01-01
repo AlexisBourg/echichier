@@ -1,11 +1,6 @@
-LabelGauche{
-    -fx-border-width: 1;
-    -fx-border-color: red;
-}
-
-LabelDroit{
-    -fx-border-width: 1;
-    -fx-border-color: red;
+BorderPane{
+    -fx-padding: 20;
+    -fx-padding-right: 50%;
 }
 
 #gridPrincipale{
@@ -13,6 +8,7 @@ LabelDroit{
     -fx-max-width: 800;
     -fx-min-height: 300;
     -fx-min-width: 300;
+    -fx-margin-right: 30;
     -fx-grid-lines-visible: true;
     -fx-alignment: CENTER;
 }
@@ -25,5 +21,15 @@ LabelDroit{
     -fx-background-color: white;
 }
 
+BoxCoups{
+    -fx-background-color: red;
+    -fx-border-color: yellow;
+}
 
+VBox{
+    -fx-background-color: green;
+}
 
+HBox{
+    -fx-background-color: yellow;
+}

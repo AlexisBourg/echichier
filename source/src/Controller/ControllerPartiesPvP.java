@@ -1,7 +1,10 @@
 package Controller;
 
 import Model.Parties.PartieGraph;
+import Model.Piece.Piece;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import res.BoxCoups;
 import res.ChessGrid;
 import Model.PLateau.Plateau;
 import javafx.fxml.FXML;
@@ -21,13 +24,15 @@ public class ControllerPartiesPvP {
     private int[] caseDepartPlateau;
     private int caseArriveeGrille;
     private int[] caseArriveePlateau;
+    private Piece pieceMangee;
 
     @FXML
     private ChessGrid grille;
 
+    @FXML
+    private BoxCoups listeCoups;
 
     public ControllerPartiesPvP(PartieGraph partie){
-
         this.partie = partie;
         listeDeplacements = new HashMap<>();
     }
@@ -59,8 +64,10 @@ public class ControllerPartiesPvP {
                         }
                     }
                 });
-                if (echiquier.getCase(x, y).isOccupe())
+                if (echiquier.getCase(x, y).isOccupe()){
                     CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                    //CssModifier.test((Button)grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                }
             }
         }
     }
@@ -149,9 +156,9 @@ public class ControllerPartiesPvP {
 
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
-            finDeDéplacement();
+            finDeDeplacement();
+            partie.StockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partie.getJoueurCourant(), partie.getJoueurNonCourant());
             partie.ChangementJoueurCourant();
-
         }
 
     }
@@ -182,8 +189,8 @@ public class ControllerPartiesPvP {
         }
     }
 
-    public void changementsPlateau() {
-        partie.actualiserPlateau(caseDepartPlateau, caseArriveePlateau);
+    public Piece changementsPlateau() {
+        return partie.actualiserPlateau(caseDepartPlateau, caseArriveePlateau);
     }
 
     /**
@@ -203,12 +210,14 @@ public class ControllerPartiesPvP {
         return partie.getEchiquier().getCase(x, y).getPiece().getImage();
     }
 
-    public void finDeDéplacement() {
+    public void finDeDeplacement(){
+        Piece pieceMangee=null;
         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
         restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
         CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..
-        changementsPlateau(); // Le plateau effectue les changements de position
+        pieceMangee = changementsPlateau(); // Le plateau effectue les changements de position
         CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partie.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
         // Pour arriver sur la case d'arrivée
+        this.pieceMangee = pieceMangee;
     }
 }

@@ -39,7 +39,7 @@ public class ControllerMenu {
         boutonLocalPvp.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/new.fxml"));
+                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
                 PartieGraph partie = new PartieGraph();
                 ControllerPartiesPvP controller = new ControllerPartiesPvP(partie);
                 load.setController(controller);

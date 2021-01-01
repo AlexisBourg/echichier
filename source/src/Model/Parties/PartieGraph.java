@@ -116,11 +116,12 @@ public class PartieGraph extends Parties{
      * @param depart : coordonnées plateau de la case de départ
      * @param arrivee : coordonnées plateau de la case d'arrivée
      */
-    public void actualiserPlateau(int[] depart, int[] arrivee){
+    public Piece actualiserPlateau(int[] depart, int[] arrivee){
         Piece pieceMorte = deplacerPiece(depart, arrivee);
         if(pieceMorte!=null) {
             getJoueur((indexJoueurCourant + 1) % 2).addPieceMorte(pieceMorte);
         }
+        return pieceMorte;
     }
 
     /** Cette méthode déplace la pièce dont les coordonnées sont données
@@ -151,5 +152,29 @@ public class PartieGraph extends Parties{
             ((Pion) pieceDeplacee).setPremierDeplacement();
 
         return pieceMorte;
+    }
+
+    public void StockerCoup(int[] depart, int[] arrivee, Piece pieceMangee, Joueur joueurCourant, Joueur joueurNonCourant){
+        super.getListeCoup().add(new Coup(depart, arrivee, pieceMangee, joueurCourant, joueurNonCourant));
+    }
+
+    public void CoupEnArriere(int indexCourant){
+        Coup coupArriere = this.getListeCoup().get(indexCourant-1);
+
+        Piece pieceMorte = deplacerPiece(coupArriere.getArrivee(), coupArriere.getDepart()); // Déplacement dans l'ordre inverse
+
+        // Si le coup précédent a vu une pièce se faire manger
+        if (!coupArriere.isPieceMangeeNull()){
+            this.getJoueurNonCourant().removePieceMorte(); // On enlève la pièce morte de la liste du joueur qui l'a perdu
+            getEchiquier().getCase(coupArriere.getArrivee()[0], coupArriere.getArrivee()[1]).setPiece(coupArriere.getPieceMangee()); // On replace la pièce mangée là où elle été avant le tour
+        }
+        else
+            getEchiquier().getCase(coupArriere.getArrivee()[0], coupArriere.getArrivee()[1]).unsetPiece(); // On actualise la case pour que la pièce qui est revenue en arrière puisse y revenir.
+    }
+
+    public void CoupEnAvant(int indexCourant){
+        Coup coupAvant = this.getListeCoup().get(indexCourant+1);
+
+        Piece pieceMorte = deplacerPiece(coupAvant.getDepart(), coupAvant.getArrivee());
     }
 }

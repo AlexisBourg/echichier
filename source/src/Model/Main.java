@@ -1,7 +1,7 @@
 package Model;
 
 
-import Controller.ControllerPartisPvE;
+import Controller.ControllerPartiesPvE;
 import Controller.ControllerMenu;
 import Controller.ControllerPartiesPvP;
 import Model.PLateau.Plateau;

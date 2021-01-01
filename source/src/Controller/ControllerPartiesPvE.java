@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class ControllerPartisPvE {
+public class ControllerPartiesPvE {
     private PartiePvE partie;
     private HashMap<Integer, int[]> listeDeplacements;
     private boolean cliqueUnPasse = false;
@@ -31,7 +31,7 @@ public class ControllerPartisPvE {
     @FXML
     private ChessGrid grille;
 
-    public ControllerPartisPvE(PartiePvE partie){
+    public ControllerPartiesPvE(PartiePvE partie){
         this.partie = partie;
         listeDeplacements = new HashMap<>();
     }
