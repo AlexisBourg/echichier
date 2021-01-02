@@ -43,10 +43,22 @@ public class IA implements InterfaceJoueur{
         return piecesMortes;
     }
 
+    public boolean estPieceMorte(Piece piece){
+
+        for (int i=0; i<nbPiecesMortes;i++){
+            if (piecesMortes[i].equals(piece)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void addPieceMorte(Piece pieceMorte){
         piecesMortes[nbPiecesMortes] = pieceMorte;
         nbPiecesMortes+=1;
     }
+
+
 
     public void enleverPiece(Piece piece){
         for (int i=0; i<16; i++){

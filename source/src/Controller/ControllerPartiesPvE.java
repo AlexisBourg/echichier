@@ -3,6 +3,7 @@ package Controller;
 import Model.Joueur.IA;
 import Model.PLateau.Plateau;
 import Model.Parties.PartiePvE;
+import Model.Piece.Couleur;
 import Model.Piece.Piece;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -251,24 +252,31 @@ public class ControllerPartiesPvE {
     public void deplacementIA(IA ia) {
 
         int noPiece = genererInt(ia.getPieces().length);
-
+        boolean pieceMorte=true;
         Piece pieceSelectione = ia.getPieces()[noPiece];
         pieceSelectione.setListeDep(partie.getEchiquier());
 
-
-
-        while (ia.getPieces()[noPiece].getListeDep().isEmpty()) {   //verifie que la piece selectionné puisse se deplacer
+        while (pieceSelectione.getCouleur()!= Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || pieceMorte || partie.isCaseSansPiece(pieceSelectione.getCoordX(),pieceSelectione.getCoordY())) {   //verifie que la piece selectionné puisse se deplacer
+            pieceMorte=true;
             noPiece = genererInt(ia.getPieces().length);
             pieceSelectione = ia.getPieces()[noPiece];
-            pieceSelectione.setListeDep(partie.getEchiquier());
-        }
 
+            System.out.println(pieceSelectione);
+
+            if (!ia.estPieceMorte(pieceSelectione)){
+                pieceMorte=false;
+                System.out.println("test piece pas morte");
+                pieceSelectione.setListeDep(partie.getEchiquier());
+                //TODO /!\ trouver pourquoi peut faire une boucle infinie
+            }
+        }
+        System.out.println("test2");
         caseDepartPlateau = attributionCoord(pieceSelectione);
         caseDepartGrille = partie.getNumCaseGrille(caseDepartPlateau);
 
-
         caseArriveePlateau = choisirDeplacementPiece(caseDepartPlateau);
         caseArriveeGrille = partie.getNumCaseGrille(caseArriveePlateau);
+
         finDeDéplacement();
     }
 

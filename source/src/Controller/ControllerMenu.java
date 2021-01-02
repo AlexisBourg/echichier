@@ -33,8 +33,8 @@ public class ControllerMenu {
 
     @FXML
     public void initialize(){
-        comportementBoutonPVP();
         comportementBoutonPVE();
+        comportementBoutonPVP();
     }
 
     public void comportementBoutonPVP() {
@@ -69,7 +69,7 @@ public class ControllerMenu {
             boutonLocalPve.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    FXMLLoader load = new FXMLLoader(getClass().getResource("../res/new.fxml"));
+                    FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
                     PartiePvE partie= new PartiePvE();
                     ControllerPartiesPvE controller = new ControllerPartiesPvE(partie);
                     load.setController(controller);
