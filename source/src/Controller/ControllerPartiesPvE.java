@@ -55,10 +55,9 @@ public class ControllerPartiesPvE {
 
                             case 2:
                                 if (cliqueUnPasse) {
-
-
                                     TraitementCliqueDeux(mouseEvent.getSource());
                                     partie.ChangementJoueurCourant();
+
 
 
                                     ia = partie.getIA();
@@ -69,7 +68,6 @@ public class ControllerPartiesPvE {
                                 break;
                         }
                     }
-                    //}
                 });
                 if (echiquier.getCase(x, y).isOccupe())
                     CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
@@ -249,34 +247,35 @@ public class ControllerPartiesPvE {
      * --------------------------------------GESTION DE L'IA------------------------------------------
      **/
 
-    public void deplacementIA(IA ia) {
-
+    public void deplacementIA(IA ia){
         int noPiece = genererInt(ia.getPieces().length);
         boolean pieceMorte=true;
         Piece pieceSelectione = ia.getPieces()[noPiece];
         pieceSelectione.setListeDep(partie.getEchiquier());
+        System.out.println("-------------------------------------------------------------");
 
         while (pieceSelectione.getCouleur()!= Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || pieceMorte || partie.isCaseSansPiece(pieceSelectione.getCoordX(),pieceSelectione.getCoordY())) {   //verifie que la piece selectionné puisse se deplacer
-            pieceMorte=true;
             noPiece = genererInt(ia.getPieces().length);
             pieceSelectione = ia.getPieces()[noPiece];
 
-            System.out.println(pieceSelectione);
 
             if (!ia.estPieceMorte(pieceSelectione)){
                 pieceMorte=false;
-                System.out.println("test piece pas morte");
+                //System.out.println("test piece pas morte");
                 pieceSelectione.setListeDep(partie.getEchiquier());
                 //TODO /!\ trouver pourquoi peut faire une boucle infinie
             }
         }
-        System.out.println("test2");
+
+        System.out.println("la piece selectionné est : "+ pieceSelectione +" la couleur est : "+pieceSelectione.getCouleur());
+
         caseDepartPlateau = attributionCoord(pieceSelectione);
         caseDepartGrille = partie.getNumCaseGrille(caseDepartPlateau);
 
         caseArriveePlateau = choisirDeplacementPiece(caseDepartPlateau);
         caseArriveeGrille = partie.getNumCaseGrille(caseArriveePlateau);
 
+        System.out.println("la piece selectionne se deplace vers : x"+ caseArriveePlateau[0]+" y:"+caseArriveePlateau[1]);
         finDeDéplacement();
     }
 

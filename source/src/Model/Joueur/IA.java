@@ -6,6 +6,7 @@ public class IA implements InterfaceJoueur{
     private Couleur couleur=Couleur.NOIR;
     private Piece[] pieces;
     private Piece[] piecesMortes;
+    private Piece[] piecesVivantes;
     private int nbPiecesMortes=0;
 
     public IA(){
@@ -65,6 +66,7 @@ public class IA implements InterfaceJoueur{
             if (pieces[i].equals(piece))
                 pieces[i] = null;
         }
+        System.out.println(piecesVivantes);
     }
 
     public Couleur getCouleur() { return couleur;}
