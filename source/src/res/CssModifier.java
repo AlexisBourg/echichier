@@ -19,8 +19,4 @@ public class CssModifier {
         n.setStyle("-fx-background-color: "+color+";");
     }
 
-    /*public static void test(Button n, String url){
-        ImageView a = new ImageView(new Image(CssModifier.class.getResourceAsStream("ImagesPieces/reineB.png")));
-        n.setGraphic(a);
-    }*/
 }

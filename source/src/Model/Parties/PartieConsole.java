@@ -25,7 +25,7 @@ public class PartieConsole extends Parties implements FactoryPartie{
         while(true){
             System.out.println("Tour du joueur "+joueurCourant.getCouleur()+":\n");
             coordDeplacements = infosDeplacement(super.getEchiquier(), joueurCourant);
-            pieceMorte = traiterDeplacement(super.getEchiquier(), coordDeplacements, joueurCourant, joueurNonCourant);
+            pieceMorte = traiterDeplacement(super.getEchiquier(), coordDeplacements);
 
             if(pieceMorte!=null) {
                 joueurNonCourant.addPieceMorte(pieceMorte);
@@ -160,11 +160,9 @@ public class PartieConsole extends Parties implements FactoryPartie{
      *  Cette méthode affecte le plateau en fonction des coordonnées demandées par je joueur courant
      * @param plateau : plateau du jeu
      * @param donnees : map qui contient les coordonnées des cases de départ et d'arrivée choisies par le joueur
-     * @param joueurCourant : joueur en train de jouer
-     * @param joueurAdverse : joueur qui attend que l'autre joue
      * @return : la pièce qui a été mangée durant le déplacement ou null sinon
      */
-    public Piece traiterDeplacement(Plateau plateau, HashMap<String, int[]> donnees, InterfaceJoueur joueurCourant, InterfaceJoueur joueurAdverse){
+    public Piece traiterDeplacement(Plateau plateau, HashMap<String, int[]> donnees){
         Piece pieceDeplacee, pieceMorte;
 
         int[] depart =  donnees.get("depart");

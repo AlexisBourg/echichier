@@ -11,6 +11,4 @@ public interface InterfaceJoueur {
     public Couleur getCouleur();
 
     public void addPieceMorte(Piece pieceMorte);
-
-    //public void enleverPiece(Piece piece);
 }

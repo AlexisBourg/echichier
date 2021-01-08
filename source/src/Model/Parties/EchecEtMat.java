@@ -66,12 +66,12 @@ public class EchecEtMat {
         return false; // Cas où il n'y a aucune menace
     }
 
-    public static boolean roiAdverseBloque(List<Position> DepRoiAdverse){
-        return (DepRoiAdverse.size()==0);
+    public static boolean roiAdverseBloque(List<Position> depRoiAdverse){
+        return (depRoiAdverse.size()==0);
     }
 
-    public static boolean roiAdverseAUnSeulDeplacementPossible(List<Position> DepRoiAdverse){
-        return (DepRoiAdverse.size()==1);
+    public static boolean roiAdverseAUnSeulDeplacementPossible(List<Position> depRoiAdverse){
+        return (depRoiAdverse.size()==1);
     }
 
     public static boolean menaceEstUnCavalier(List<Position> menace){
