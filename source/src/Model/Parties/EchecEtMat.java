@@ -94,7 +94,6 @@ public class EchecEtMat {
         for(int i=0; i<8; i++) {
             // Vérification des lignes et colonnes communes au roi adverse. Si une pièce qui s'y trouve possède la case de la pièce ciblée dans sa liste de déplacement, on ajoute la pièce à la liste des menaces
             depCommun(x, y, dep[i][0], dep[i][1], echiquier, liste, option);
-            System.out.println("appel de depcommmun");
         }
 
         // Vérification des emplacements cavaliers. Si ces pièces contiennent un cavalier, on ajoute la pièce à la liste des menaces
@@ -114,16 +113,19 @@ public class EchecEtMat {
 
         for (int i=0; i<8;i++){
             if(option==0) {
+                //echiquier.getCase(tmpx, tmpx).getPiece().setListeDep(echiquier);
                 if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) { // DROITE
                     liste.add(echiquier.getCase(tmpx , tmpy ));
                     break;
                 }
             }
-            else
+            else {
+                echiquier.getCase(tmpx, tmpy).getPiece().setListeProtecDep(echiquier);
                 if (echiquier.getCase(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) { // DROITE
                     liste.add(echiquier.getCase(tmpx, tmpy));
                     break;
                 }
+            }
 
             tmpx += depX;
             tmpy += depY;
@@ -132,15 +134,28 @@ public class EchecEtMat {
         }
     }
 
-    private static void menaceCavalier(int x, int y, int tmpX, int tmpY, Plateau echiquier, List<Position> liste, int option) {
-        if(option==0)
-            if(echiquier.getCase(x, y).getPiece().getListeDep().contains(echiquier.getCase(x, y))){
+    private static void menaceCavalier(int x, int y, int depX, int depY, Plateau echiquier, List<Position> liste, int option) {
+        int tmpX=x+depX;
+        int tmpY=y+depY;
+
+        if (tmpX > LIMIT_SUP || tmpX < LIMIT_INF || tmpY > LIMIT_SUP || tmpY < LIMIT_INF || echiquier.isCaseSansPiece(echiquier.getCase(tmpX, tmpY)))
+            return;
+        // x et y représente la case qui est peut être menacée
+        // tmpX et tmpY représente la case qui peut être menace l'autre
+        if(option==0){
+            echiquier.getCase(tmpX, tmpY).getPiece().setListeDep(echiquier);
+            if(echiquier.getCase(tmpX, tmpY).getPiece().getListeDep().contains(echiquier.getCase(x, y))){
+                System.out.println("cava         x:"+(tmpX)+"  y:  "+(tmpY));
                 liste.add(echiquier.getCase(x, y));
             }
-            else
-            if(echiquier.getCase(x, y).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))){
+        }
+        else{
+            echiquier.getCase(tmpX, tmpY).getPiece().setListeProtecDep(echiquier);;
+            if(echiquier.getCase(tmpX, tmpY).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))){
                 liste.add(echiquier.getCase(x, y));
             }
+        }
+
     }
 
     /**

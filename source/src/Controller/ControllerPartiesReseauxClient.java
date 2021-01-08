@@ -43,20 +43,20 @@ public class ControllerPartiesReseauxClient {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         switch (NumeroClique(mouseEvent.getSource())) {
-                            case 1 -> {
+                            case 1:
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
                                 }
                                 TraitementCliqueUn(mouseEvent.getSource());
                                 cliqueUnPasse = true;
-                            }
-                            case 2 -> {
+                            break;
+                            case 2:
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
                                 }
                                 cliqueUnPasse = false;
-                            }
+                            break;
                         }
                     }
                 });
