@@ -220,4 +220,6 @@ public class ControllerPartiesPvP {
         // Pour arriver sur la case d'arrivée
         this.pieceMangee = pieceMangee;
     }
+
+
 }

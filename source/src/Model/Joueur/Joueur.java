@@ -5,9 +5,9 @@ import Model.Piece.*;
 public class Joueur implements InterfaceJoueur{
     private Couleur couleur;
     private String nom;
-    private String prenom;
-    private Piece[] pieces;
-    private Piece[] piecesMortes;
+    private final String prenom;
+    private final Piece[] pieces;
+    private final Piece[] piecesMortes;
     private int nbPiecesMortes=0;
 
     public Joueur(int numJoueur){ // Constructeur pour partie local
@@ -15,15 +15,15 @@ public class Joueur implements InterfaceJoueur{
         pieces = new Piece[16];
         piecesMortes = new Piece[16];
 
-        switch(numJoueur){
-            case 1:
+        switch (numJoueur) {
+            case 1 -> {
                 couleur = Couleur.BLANC;
                 nom = " 1";
-                break;
-            case 2:
+            }
+            case 2 -> {
                 couleur = Couleur.NOIR;
                 nom = " 2";
-                break;
+            }
         }
         initPieces();
     }

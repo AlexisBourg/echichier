@@ -8,9 +8,9 @@ public interface InterfaceJoueur {
 
     public Piece[] getPieces();
 
-   //public void enleverPiece(Piece piece);
-
     public Couleur getCouleur();
 
     public void addPieceMorte(Piece pieceMorte);
+
+    //public void enleverPiece(Piece piece);
 }

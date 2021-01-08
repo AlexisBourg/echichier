@@ -59,13 +59,13 @@ public class Pion extends Piece {
             }
         }
         //attaque
-        if(this.getCouleur()==Couleur.NOIR){
+        /*if(this.getCouleur()==Couleur.NOIR){
             attaque(plateau, tmpX-1, tmpY);
             attaque(plateau, tmpX+1, tmpY);
-        }else{
+        }else{*/
             attaque(plateau, tmpX-1, tmpY);
             attaque(plateau, tmpX+1, tmpY);
-        }
+        //}
     }
 
     private void attaque(Plateau plateau, int tmpX, int tmpY) {

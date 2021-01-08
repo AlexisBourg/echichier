@@ -3,7 +3,7 @@ package Model.Piece;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
-import java.util.Collection;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,9 +15,9 @@ public abstract class Piece {
     private int coordX;
     private int coordY;
     private String image;
-    private Couleur couleur;
-    private List<Position> listePosDep;
-    private List<Position> listeProtecDep;
+    private final Couleur couleur;
+    private final List<Position> listePosDep;
+    private final List<Position> listeProtecDep;
     private Type type;
 
     //Constructeur

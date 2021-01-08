@@ -65,31 +65,31 @@ public class ControllerMenu {
         });
     }
 
-        public void comportementBoutonPVE(){
-            boutonLocalPve.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                    PartiePvE partie= new PartiePvE();
-                    ControllerPartiesPvE controller = new ControllerPartiesPvE(partie);
-                    load.setController(controller);
+    public void comportementBoutonPVE(){
+        boutonLocalPve.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
+                PartiePvE partie= new PartiePvE();
+                ControllerPartiesPvE controller = new ControllerPartiesPvE(partie);
+                load.setController(controller);
 
-                    Parent root = null;
-                    try {
-                        root = load.load();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        return;
-                    }
-
-                    controller.chargementPlateau();
-
-                    Stage primaryStage = new Stage();
-
-                    primaryStage.setTitle("Partie local PVE");
-                    primaryStage.setScene(new Scene(root, 1000, 800));
-                    primaryStage.show();
+                Parent root = null;
+                try {
+                    root = load.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
                 }
-            });
+
+                controller.chargementPlateau();
+
+                Stage primaryStage = new Stage();
+
+                primaryStage.setTitle("Partie local PVE");
+                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.show();
+            }
+        });
     }
 }

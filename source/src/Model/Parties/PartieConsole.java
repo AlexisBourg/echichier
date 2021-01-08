@@ -1,7 +1,6 @@
 package Model.Parties;
 
 import Model.Joueur.InterfaceJoueur;
-import Model.Joueur.Joueur;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Piece;

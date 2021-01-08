@@ -2,10 +2,12 @@ package Model.Joueur;
 
 import Model.Piece.*;
 
+import java.util.Arrays;
+
 public class IA implements InterfaceJoueur{
-    private Couleur couleur=Couleur.NOIR;
-    private Piece[] pieces;
-    private Piece[] piecesMortes;
+    private final Couleur couleur=Couleur.NOIR;
+    private final Piece[] pieces;
+    private final Piece[] piecesMortes;
     private Piece[] piecesVivantes;
     private int nbPiecesMortes=0;
 
@@ -66,7 +68,7 @@ public class IA implements InterfaceJoueur{
             if (pieces[i].equals(piece))
                 pieces[i] = null;
         }
-        System.out.println(piecesVivantes);
+        System.out.println(Arrays.toString(piecesVivantes));
     }
 
     public Couleur getCouleur() { return couleur;}

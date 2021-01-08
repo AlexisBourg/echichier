@@ -1,2 +1,10 @@
-package Model.Parties;public class PartieReseau {
+package Model.Parties;
+
+public class PartieReseau {
+
+    public PartieReseau(){
+        super();
+
+    }
+
 }

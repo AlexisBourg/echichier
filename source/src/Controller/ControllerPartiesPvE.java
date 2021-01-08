@@ -17,7 +17,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class ControllerPartiesPvE {
-    private PartiePvE partie;
+    private final PartiePvE partie;
     private HashMap<Integer, int[]> listeDeplacements;
     private boolean cliqueUnPasse = false;
     private int caseDepartGrille;
@@ -44,20 +44,18 @@ public class ControllerPartiesPvE {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         switch (NumeroClique(mouseEvent.getSource())) {
-                            case 1:
+                            case 1 -> {
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
                                 }
                                 TraitementCliqueUn(mouseEvent.getSource());
                                 cliqueUnPasse = true;
-                                break;
-
-                            case 2:
+                            }
+                            case 2 -> {
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
                                     partie.ChangementJoueurCourant();
-
 
 
                                     ia = partie.getIA();
@@ -65,7 +63,7 @@ public class ControllerPartiesPvE {
                                     partie.ChangementJoueurCourant();
                                 }
                                 cliqueUnPasse = false;
-                                break;
+                            }
                         }
                     }
                 });
@@ -173,7 +171,7 @@ public class ControllerPartiesPvE {
 
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
-            finDeDéplacement();
+            finDeDeplacement();
         }
     }
 
@@ -229,7 +227,7 @@ public class ControllerPartiesPvE {
         return partie.getEchiquier().getCase(x, y).getPiece().getImage();
     }
 
-    public void finDeDéplacement() {
+    public void finDeDeplacement() {
         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
         restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
         CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..
@@ -276,7 +274,7 @@ public class ControllerPartiesPvE {
         caseArriveeGrille = partie.getNumCaseGrille(caseArriveePlateau);
 
         System.out.println("la piece selectionne se deplace vers : x"+ caseArriveePlateau[0]+" y:"+caseArriveePlateau[1]);
-        finDeDéplacement();
+        finDeDeplacement();
     }
 
     private int[] attributionCoord(Piece piece) {

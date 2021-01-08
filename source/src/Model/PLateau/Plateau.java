@@ -5,13 +5,12 @@ import Model.Piece.*;
 public class Plateau {
 
 
-    private Position plateauDejeu[][];
+    private Position[][] plateauDejeu = new Position[8][8];
 
     /**
      * un plateau est composé de position (casse) et initialisé avec les piece blanche en bas et les noire en haut
      */
     public Plateau(Piece[] piecesBlanc, Piece[] piecesNoir){
-        plateauDejeu = new Position[8][8];
         int yb=7, yn=0, i=0;
 
         for (int x=0;x<8;x++) {
@@ -56,14 +55,14 @@ public class Plateau {
 
     @Override
     public String toString(){
-        String message="";
+        StringBuilder message= new StringBuilder();
 
         for(int i=0; i<8; i++){
             for (int j=0; j<8; j++)
-                message+= plateauDejeu[i][j].toString();
+                message.append(plateauDejeu[i][j].toString());
         }
 
-        return message;
+        return message.toString();
     }
 
 

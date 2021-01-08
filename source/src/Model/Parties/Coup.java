@@ -4,11 +4,11 @@ import Model.Joueur.Joueur;
 import Model.Piece.Piece;
 
 public class Coup {
-    private int[] depart;
-    private int[] arrivee;
-    private Piece pieceMangee;
-    private Joueur joueurCourant;
-    private Joueur joueurNonCourant;
+    private final int[] depart;
+    private final int[] arrivee;
+    private final Piece pieceMangee;
+    private final Joueur joueurCourant;
+    private final Joueur joueurNonCourant;
     // trait représenté par la couleur du joueur courant.
 
     public Coup(int[] depart, int[] arrivee, Piece pieceMangee, Joueur joueurCourant, Joueur joueurNonCourant){
