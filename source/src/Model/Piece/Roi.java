@@ -45,28 +45,37 @@ public class Roi extends Piece {
             return;
 
         caseTmp = plateau.getCase(x + tmpX, y + tmpY);
-        //System.out.println("x: "+(x+tmpX)+"   y:  "+(y+tmpY));
         int a = nombreDePiecesMenacantLaCase(plateau, x+tmpX, y+tmpY);
+        System.out.println("                     case menacée     x: "+(x+tmpX)+"   y:  "+(y+tmpY)+"nb de menaces:  "+a);
 
-        if (plateau.isCaseNull(caseTmp)) {
-            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur() && nombreDePiecesMenacantLaCase(plateau, x+tmpX, y+tmpY)==0) {
+
+        if (a == 0) {
+            if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() == this.getCouleur()) {
                 getListeProtecDep().add(caseTmp);
             }
-            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur() && nombreDePiecesMenacantLaCase(plateau, x+tmpX, y+tmpY)==0) {
+            if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
+                //System.out.println(caseTmp.toString() + "  menace ajoutée");
                 getListeDep().add(caseTmp);
             }
         }
+
     }
 
     public int nombreDePiecesMenacantLaCase(Plateau plateau, int x, int y){
         int nbMenaces=0;
         List<Position> piecesMenacantLaCase = EchecEtMat.isPieceMenaOrProtecParAutre(x, y, plateau, 0);
         for (Position menace: piecesMenacantLaCase) {
-            System.out.println(menace.toString());
+            //System.out.println("menace  :  "+menace.toString());
             if (menace.getPiece().getCouleur()!=this.getCouleur())
                 nbMenaces+=1;
         }
-        System.out.println(nbMenaces+"   nb de menaces sur x: "+x+"  y: "+y);
+        piecesMenacantLaCase = EchecEtMat.isPieceMenaOrProtecParAutre(x, y, plateau, 1);
+        for (Position menace: piecesMenacantLaCase) {
+            //System.out.println("menace  :  "+menace.toString());
+            if (menace.getPiece().getCouleur()!=this.getCouleur())
+                nbMenaces+=1;
+        }
+        //System.out.println(nbMenaces+"   nb de menaces sur x: "+x+"  y: "+y);
         return nbMenaces;
     }
 }

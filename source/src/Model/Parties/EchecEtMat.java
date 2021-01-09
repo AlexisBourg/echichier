@@ -6,6 +6,7 @@ import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Cavalier;
 import Model.Piece.Piece;
+import Model.Piece.Roi;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -93,43 +94,75 @@ public class EchecEtMat {
 
         for(int i=0; i<8; i++) {
             // Vérification des lignes et colonnes communes au roi adverse. Si une pièce qui s'y trouve possède la case de la pièce ciblée dans sa liste de déplacement, on ajoute la pièce à la liste des menaces
+          // System.out.println("case potentiellement menacée par autre :   x:  "+x+"    y:    "+y );
             depCommun(x, y, dep[i][0], dep[i][1], echiquier, liste, option);
         }
 
+
         // Vérification des emplacements cavaliers. Si ces pièces contiennent un cavalier, on ajoute la pièce à la liste des menaces
         for (int i=0;i<8; i++){
+            //System.out.println("case potentiellement menacée par cavalier :   x:  "+x+"    y:    "+y );
             menaceCavalier(x, y, depC[i][0], depC[i][1], echiquier, liste, option);
         }
+
         return liste;
     }
 
+    /**
+     *
+     * @param x : colonne de la case potentiellement menacée
+     * @param y : ligne de la case potentiellement menacée
+     * @param depX : direction vers laquelle une menace pourrait se trouver
+     * @param depY : direction vers laquelle une menace pourrait se trouver
+     * @param echiquier plateau du jeu contenant toutes les pièces
+     * @param liste : liste qui contiendra l'ensemble des positions qui contiennent une pièce qui menace la position donnée
+     * @param option : option qui permet de savoir si on détermine une menace ou une pièce qui protège une position
+     */
     private static void depCommun(int x, int y, int depX, int depY, Plateau echiquier, List<Position> liste, int option) {
         int tmpx=x+depX;
         int tmpy=y+depY;
-        //System.out.println(echiquier.toString());
 
-        if(tmpx > LIMIT_SUP || tmpx < LIMIT_INF || tmpy > LIMIT_SUP || tmpy < LIMIT_INF || echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy)))
+        //System.out.println("depx:  "+depX+"    depY:  "+depY+"    case début   x: "+tmpx+"   y: "+tmpy);
+
+        if(tmpx > LIMIT_SUP || tmpx < LIMIT_INF || tmpy > LIMIT_SUP || tmpy < LIMIT_INF)
             return;
 
         for (int i=0; i<8;i++){
             if(option==0) {
-                //echiquier.getCase(tmpx, tmpx).getPiece().setListeDep(echiquier);
-                if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) { // DROITE
-                    liste.add(echiquier.getCase(tmpx , tmpy ));
-                    break;
+                if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))){
+                    if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
+                        //System.out.println("        " + echiquier.getCase(tmpx, tmpy).toString() + "preparation liste dep");
+                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier);
+                        if (tmpx==2 && tmpy==7){
+                            for (Position e: echiquier.getCase(tmpx, tmpy).getPiece().getListeDep()) {
+                                System.out.println(e.toString());
+                            }
+                        }
+
+                    }
+
+                    if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) { // DROITE
+                        //System.out.println("menace autre   x:"+(tmpx)+"  y:  "+(tmpy));
+                        liste.add(echiquier.getCase(tmpx, tmpy));
+                        break;
+                    }
                 }
             }
             else {
-                echiquier.getCase(tmpx, tmpy).getPiece().setListeProtecDep(echiquier);
-                if (echiquier.getCase(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) { // DROITE
-                    liste.add(echiquier.getCase(tmpx, tmpy));
-                    break;
+                if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))) {
+                    if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
+                        echiquier.getCase(tmpx, tmpy).getPiece().setListeProtecDep(echiquier);
+                        if (echiquier.getCase(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) { // DROITE
+                            liste.add(echiquier.getCase(tmpx, tmpy));
+                            break;
+                        }
+                    }
                 }
             }
-
+            //System.out.println("x: "+tmpx+"   tmpy: "+tmpy);
             tmpx += depX;
             tmpy += depY;
-            if (tmpx > LIMIT_SUP || tmpx < LIMIT_INF || tmpy > LIMIT_SUP || tmpy < LIMIT_INF || echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy)))
+            if (tmpx > LIMIT_SUP || tmpx < LIMIT_INF || tmpy > LIMIT_SUP || tmpy < LIMIT_INF)
                 return;
         }
     }
@@ -143,16 +176,18 @@ public class EchecEtMat {
         // x et y représente la case qui est peut être menacée
         // tmpX et tmpY représente la case qui peut être menace l'autre
         if(option==0){
-            echiquier.getCase(tmpX, tmpY).getPiece().setListeDep(echiquier);
+            if (!(echiquier.getCase(tmpX, tmpY).getPiece() instanceof Roi))
+                echiquier.getCase(tmpX, tmpY).getPiece().setListeDep(echiquier);
+
             if(echiquier.getCase(tmpX, tmpY).getPiece().getListeDep().contains(echiquier.getCase(x, y))){
-                System.out.println("cava         x:"+(tmpX)+"  y:  "+(tmpY));
-                liste.add(echiquier.getCase(x, y));
+                //System.out.println("menace cava   x:"+(tmpX)+"  y:  "+(tmpY));
+                liste.add(echiquier.getCase(tmpX, tmpY));
             }
         }
         else{
             echiquier.getCase(tmpX, tmpY).getPiece().setListeProtecDep(echiquier);;
             if(echiquier.getCase(tmpX, tmpY).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))){
-                liste.add(echiquier.getCase(x, y));
+                liste.add(echiquier.getCase(tmpX, tmpY));
             }
         }
 
