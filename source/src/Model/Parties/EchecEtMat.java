@@ -6,6 +6,7 @@ import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Cavalier;
 import Model.Piece.Piece;
+import Model.Piece.Pion;
 import Model.Piece.Roi;
 
 import java.util.LinkedList;
@@ -130,18 +131,12 @@ public class EchecEtMat {
         for (int i=0; i<8;i++){
             if(option==0) {
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))){
-                    if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
+                    if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi) && !(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Pion)) {
                         //System.out.println("        " + echiquier.getCase(tmpx, tmpy).toString() + "preparation liste dep");
                         echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier);
-                        if (tmpx==2 && tmpy==7){
-                            for (Position e: echiquier.getCase(tmpx, tmpy).getPiece().getListeDep()) {
-                                System.out.println(e.toString());
-                            }
-                        }
-
                     }
 
-                    if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) { // DROITE
+                    if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y)) && !(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Pion)) { // DROITE
                         //System.out.println("menace autre   x:"+(tmpx)+"  y:  "+(tmpy));
                         liste.add(echiquier.getCase(tmpx, tmpy));
                         break;
@@ -152,6 +147,7 @@ public class EchecEtMat {
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))) {
                     if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
                         echiquier.getCase(tmpx, tmpy).getPiece().setListeProtecDep(echiquier);
+
                         if (echiquier.getCase(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) { // DROITE
                             liste.add(echiquier.getCase(tmpx, tmpy));
                             break;
@@ -185,7 +181,7 @@ public class EchecEtMat {
             }
         }
         else{
-            echiquier.getCase(tmpX, tmpY).getPiece().setListeProtecDep(echiquier);;
+            echiquier.getCase(tmpX, tmpY).getPiece().setListeProtecDep(echiquier);
             if(echiquier.getCase(tmpX, tmpY).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))){
                 liste.add(echiquier.getCase(tmpX, tmpY));
             }

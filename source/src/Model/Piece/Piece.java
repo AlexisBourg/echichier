@@ -135,6 +135,6 @@ public abstract class Piece {
 
     @Override
     public String toString(){
-        return "Type: "+getType().name() + "x : " + getCoordX() + " y: "+getCoordY();
+        return "Type: "+getType().name()+"  Couleur: "+getCouleur() + "  x : " + getCoordX() + " y: "+getCoordY();
     }
 }
