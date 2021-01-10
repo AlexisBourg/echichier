@@ -10,6 +10,11 @@ import res.BoxCoups;
 import res.ChessGrid;
 import res.CssModifier;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,16 +27,32 @@ public class ControllerPartiesReseauxClient {
     private int caseArriveeGrille;
     private int[] caseArriveePlateau;
     private Piece pieceMangee;
-
+    private Socket serverSocket;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
+    private boolean PremierDeplacementServerEffectuer = false;
     @FXML
     private ChessGrid grille;
 
     @FXML
     private BoxCoups listeCoups;
 
-    public ControllerPartiesReseauxClient(PartieGraph partie){
+    public ControllerPartiesReseauxClient(PartieGraph partie, InetAddress addr,int port){
         this.partie = partie;
         listeDeplacements = new HashMap<>();
+        try{
+            serverSocket = new Socket(addr,port);
+        } catch (IOException e) {
+            System.out.println("Impossible de se connecter au server");
+        }
+        try {
+            out = new ObjectOutputStream(serverSocket.getOutputStream());  //sortie pour envoyer
+            out.flush();//pour envoyer des info au client necessaire à une bonne connexion
+            in = new ObjectInputStream(serverSocket.getInputStream());
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -39,9 +60,8 @@ public class ControllerPartiesReseauxClient {
         Plateau echiquier = partie.getEchiquier();
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
-                    @Override
-                    public void handle(MouseEvent mouseEvent) {
+                grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
+                    if (PremierDeplacementServerEffectuer) {
                         switch (NumeroClique(mouseEvent.getSource())) {
                             case 1 -> {
                                 if (!listeDeplacements.isEmpty()) {
@@ -54,9 +74,27 @@ public class ControllerPartiesReseauxClient {
                             case 2 -> {
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
+                                    try {
+                                        in = new ObjectInputStream(serverSocket.getInputStream());
+                                        out = new ObjectOutputStream(serverSocket.getOutputStream());
+                                        partie.ChangementJoueurCourant();
+                                        out.writeObject(partie);
+
+                                        partie = (PartieGraph) in.readObject();
+
+                                    } catch (IOException | ClassNotFoundException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                                 cliqueUnPasse = false;
                             }
+                        }
+                    } else {
+                        try {
+                            partie = (PartieGraph) in.readObject();
+                            PremierDeplacementServerEffectuer = true;
+                        } catch (ClassNotFoundException | IOException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
@@ -207,7 +245,7 @@ public class ControllerPartiesReseauxClient {
     }
 
     public void finDeDeplacement(){
-        Piece pieceMangee=null;
+        Piece pieceMangee;
         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
         restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
         CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..
@@ -216,5 +254,8 @@ public class ControllerPartiesReseauxClient {
         // Pour arriver sur la case d'arrivée
         this.pieceMangee = pieceMangee;
     }
+
+    /**--------------------------partie reseau-------------------*/
+
 
 }

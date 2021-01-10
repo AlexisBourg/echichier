@@ -38,7 +38,7 @@ public class ControllerMenu {
     }
 
     public void comportementBoutonPVP() {
-        boutonLocalPvp.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        boutonLocalPvp.setOnMouseClicked(new EventHandler<>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
@@ -46,7 +46,7 @@ public class ControllerMenu {
                 ControllerPartiesPvP controller = new ControllerPartiesPvP(partie);
                 load.setController(controller);
 
-                Parent root = null;
+                Parent root;
                 try {
                     root = load.load();
                 } catch (IOException e) {
@@ -66,15 +66,15 @@ public class ControllerMenu {
     }
 
     public void comportementBoutonPVE(){
-        boutonLocalPve.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        boutonLocalPve.setOnMouseClicked(new EventHandler<>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartiePvE partie= new PartiePvE();
+                PartiePvE partie = new PartiePvE();
                 ControllerPartiesPvE controller = new ControllerPartiesPvE(partie);
                 load.setController(controller);
 
-                Parent root = null;
+                Parent root;
                 try {
                     root = load.load();
                 } catch (IOException e) {

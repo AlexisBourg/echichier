@@ -127,11 +127,12 @@ public class PartieGraph extends Parties{
         return pieceMorte;
     }
 
-    public void actualiserPlateauIA(int[] depart, int[] arrivee){
+    public Piece actualiserPlateauIA(int[] depart, int[] arrivee){
         Piece pieceMorte = deplacerPiece(depart, arrivee);
         if(pieceMorte!=null) {
             getIA().addPieceMorte(pieceMorte);
         }
+        return pieceMorte;
     }
 
     /** Cette méthode déplace la pièce dont les coordonnées sont données

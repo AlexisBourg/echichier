@@ -13,7 +13,7 @@ import java.util.LinkedList;
 public class Parties {
     private final int ROI = 11;
     private final InterfaceJoueur[] joueurs;
-    private final Plateau echiquier;
+    private Plateau echiquier;
     private final LinkedList<Coup> listeCoup;
 
     public Parties(){
