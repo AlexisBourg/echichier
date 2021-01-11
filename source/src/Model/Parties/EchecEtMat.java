@@ -23,11 +23,10 @@ public class EchecEtMat {
      * @param echiquier : plateau du jeu
      * @return : le fait que le roi adverse soit en situation d'échec ou non
      */
-    public static boolean echec(InterfaceJoueur joueurAdverse, Plateau echiquier){
+    public static List<Position> echec(InterfaceJoueur joueurAdverse, Plateau echiquier){
         int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), // On récupère les coordonnées du Roi
                 yRoi = joueurAdverse.getPieces()[ROI].getCoordY();
-        List<Position> menace= isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, 0); // on voit si une ou plusieurs pièces menance(nt) le roi adverse.
-        return (menace.size()>0);
+        return isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, 0); // Si le roi est menacé, échec sinon rien
     }
 
 
@@ -35,12 +34,12 @@ public class EchecEtMat {
      *
      * @param joueurAdverse : joueur qui n'a pas joué ce tour-ci
      * @param echiquier : plateau de jeu
+     * @param menace : liste des menaces du roi adverse
      * @return : le fait que la partie soit terminée ou non
      */
-    public static boolean echecEtMat(InterfaceJoueur joueurAdverse, Plateau echiquier){
+    public static boolean echecEtMat(InterfaceJoueur joueurAdverse, Plateau echiquier, List<Position> menace){
         int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), // On récupère les coordonnées du Roi
                 yRoi = joueurAdverse.getPieces()[ROI].getCoordY();
-        List<Position> menace= isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, 0); // on voit si une ou plusieurs pièces menance(nt) le roi adverse.
         List<Position> DepRoiAdverse = joueurAdverse.getPieces()[ROI].getListeDep(); // Liste de déplacements possibles pour le roi adverse
         List<Position> MenacesDeLaMenace;
 
@@ -53,7 +52,7 @@ public class EchecEtMat {
             if(!menaceEstUnCavalier(menace)) { // Si la menace n'est pas un cavalier
                 if(roiAdverseBloque(DepRoiAdverse) && // Si le Roi ne peut plus de se déplacer ET
                         (MenacesDeLaMenace.size() == 0 || // Si la menace n'est pas elle même menacée OU
-                                isPossibInterpo(joueurAdverse, menace.get(0).getX(), menace.get(0).getY(), echiquier))) // Si aucune pièce alliée au Roi ne peut s'interposer pour le protéger
+                                !isPossibInterpo(joueurAdverse, menace.get(0).getX(), menace.get(0).getY(), echiquier))) // Si aucune pièce alliée au Roi ne peut s'interposer pour le protéger
                     return true;
                 // Que cette même menace est protégée, Echec et mat
                 return (roiAdverseAUnSeulDeplacementPossible(DepRoiAdverse) && // Si le Roi ne peut se déplacer qu'à un seul endroit

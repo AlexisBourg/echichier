@@ -31,12 +31,12 @@ public class PartieConsole extends Parties implements FactoryPartie{
                 joueurNonCourant.addPieceMorte(pieceMorte);
             }
 
-            if (EchecEtMat.echec(joueurNonCourant, super.getEchiquier()) && EchecEtMat.echecEtMat(joueurNonCourant, super.getEchiquier())){
+           /* if (EchecEtMat.echec(joueurNonCourant, super.getEchiquier()) && EchecEtMat.echecEtMat(joueurNonCourant, super.getEchiquier())){
                 System.out.println("ECHEC ET MATTTTT");
                 break;
             }
             else if(EchecEtMat.echec(joueurNonCourant, super.getEchiquier()))
-                System.out.println("ECHEC");
+                System.out.println("ECHEC");*/
 
             i=(i+1)%2;
 

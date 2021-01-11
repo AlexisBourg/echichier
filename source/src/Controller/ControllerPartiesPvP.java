@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.PLateau.Position;
 import Model.Parties.PartieGraph;
 import Model.Piece.Piece;
 import javafx.event.EventHandler;
@@ -12,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import res.CssModifier;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 
@@ -25,6 +27,8 @@ public class ControllerPartiesPvP {
     private int caseArriveeGrille;
     private int[] caseArriveePlateau;
     private Piece pieceMangee;
+    private boolean echec;
+    private List<Position> menace;
 
     @FXML
     private ChessGrid grille;
@@ -35,6 +39,7 @@ public class ControllerPartiesPvP {
     public ControllerPartiesPvP(PartieGraph partie){
         this.partie = partie;
         listeDeplacements = new HashMap<>();
+        echec = false;
     }
 
     @FXML
@@ -45,9 +50,10 @@ public class ControllerPartiesPvP {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        switch (NumeroClique(mouseEvent.getSource())) {
+                        switch (numeroClique(mouseEvent.getSource())) {
                             case 1:
-                                if (!listeDeplacements.isEmpty()) {
+                                System.out.println("1111111111111");
+                                if (!listeDeplacements.isEmpty()) { // Si le clique 1 avait déjà été enclenché
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
                                 }
@@ -56,6 +62,7 @@ public class ControllerPartiesPvP {
                                 break;
 
                             case 2:
+                                System.out.println("2222222222222");
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
                                 }
@@ -76,7 +83,7 @@ public class ControllerPartiesPvP {
      * @param source bouton qui a reçcu le clique
      * @return : le numéro du clique (1 si le joueur a sélectionné une pièce de son jeu qu'il veut déplacer, 2 s'il indique où déplacer la pièce de son jeu)
      */
-    public int NumeroClique(Object source) {
+    public int numeroClique(Object source) {
         int[] coord = decompositionIdBouton(source);
         return partie.numClique(coord[0], coord[1]);
     }
@@ -108,7 +115,7 @@ public class ControllerPartiesPvP {
      * Cette méthode récupère les liste des déplacements possibles avec la pièce sélectionnée.
      */
     public void montrerDeplacementDispo() {
-        HashMap<Integer, int[]> listeDeplacements = partie.getDeplacements(caseDepartPlateau[0], caseDepartPlateau[1]);
+        HashMap<Integer, int[]> listeDeplacements = (!this.echec) ? partie.getDeplacements(caseDepartPlateau[0], caseDepartPlateau[1]) : partie.getDeplacementsEchec(caseDepartPlateau[0], caseDepartPlateau[1], menace);
         int coordGrille;
         int[] coordPlateau;
 
@@ -156,11 +163,29 @@ public class ControllerPartiesPvP {
 
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
-            finDeDeplacement();
+            if (roiSelectionne() && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
+                roque();
+            else
+                finDeDeplacement();
+
+            menace = partie.echec();
+            if (menace.size()>0){
+                System.out.println("ECHEEEC");
+                this.echec = true;
+                if (partie.echecEtMat(menace))
+                    System.out.println("EchecEtMAAAAAAAAAAAAAAAT");
+            }
+            else
+                this.echec = false;
+
             partie.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partie.getJoueurCourant(), partie.getJoueurNonCourant());
             partie.ChangementJoueurCourant();
         }
 
+    }
+
+    public boolean roiSelectionne(){
+        return partie.isRoiSelectionne(caseDepartPlateau);
     }
 
     /**
@@ -191,6 +216,31 @@ public class ControllerPartiesPvP {
 
     public Piece changementsPlateau() {
         return partie.actualiserPlateau(caseDepartPlateau, caseArriveePlateau);
+    }
+
+    public void changementsPlateauRoque() { // Déplace la bonne tour par rapport au déplacement fait par le Roi
+        partie.roqueTour(caseArriveePlateau);
+    }
+
+    public void roque(){
+        int xTour;
+        retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
+        restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..
+        pieceMangee = changementsPlateau(); // Le plateau effectue les changements de position
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partie.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
+        // Pour arriver sur la case d'arrivée
+
+        xTour = (caseArriveePlateau[0]==2) ? 0 : 7;
+
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(partie.getNumCaseGrille(new int[]{xTour, caseArriveePlateau[1]})), ""); // La pièce de la case de départ disparaît..
+        changementsPlateauRoque(); // Le plateau effectue les changements de position
+        if (caseArriveePlateau[0]==2)
+            CssModifier.ChangeBackgroundImage(grille.getChildren().get(partie.getNumCaseGrille(new int[]{caseArriveePlateau[0]+1, caseArriveePlateau[1]})), partie.getEchiquier().getCase(caseArriveePlateau[0]+1, caseArriveePlateau[1]).getPiece().getImage());
+        else
+            CssModifier.ChangeBackgroundImage(grille.getChildren().get(partie.getNumCaseGrille(new int[]{caseArriveePlateau[0]-1, caseArriveePlateau[1]})), partie.getEchiquier().getCase(caseArriveePlateau[0]-1,  caseArriveePlateau[1]).getPiece().getImage());
+
+        // Pour arriver sur la case d'arrivée
     }
 
     /**

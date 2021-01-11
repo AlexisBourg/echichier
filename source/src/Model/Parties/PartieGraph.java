@@ -8,8 +8,10 @@ import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 import Model.Piece.Piece;
 import Model.Piece.Pion;
+import Model.Piece.Roi;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class PartieGraph extends Parties{
     protected int indexJoueurCourant;
@@ -89,10 +91,7 @@ public class PartieGraph extends Parties{
      */
     public HashMap<Integer, int[]> getDeplacements(int x, int y){
         HashMap<Integer, int[]> liste = new HashMap<>();
-        if (getEchiquier().getCase(x, y).getPiece()==null){
-            System.out.println(x);
-            System.out.println(y);
-        }
+
         getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier());
 
         for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
@@ -100,6 +99,30 @@ public class PartieGraph extends Parties{
         }
 
         return liste;
+    }
+
+    public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
+        HashMap<Integer, int[]> liste = new HashMap<>();
+
+        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier());
+
+        if (!(getEchiquier().getCase(x, y).getPiece() instanceof Roi))
+            affinageDeplacements(getEchiquier().getCase(x, y).getPiece().getListeDep(), menace);
+
+        for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
+            liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
+        }
+
+        return liste;
+    }
+
+    public void affinageDeplacements(List<Position> listeDep, List<Position> menace) {
+        for (Position p : listeDep){ // Pour chaque déplacement possible pour la pièce
+            for (Position m : menace){ // Pour chaque menace directe du roi
+                if (!m.getPiece().getListeDep().contains(p)) // Si la position possible pour la pièce ne peut pas protéger le roi
+                    listeDep.remove(p); // On l'enlève de la liste de ses déplacements
+            }
+        }
     }
 
     public boolean isCaseSansPiece(int x, int y){
@@ -125,6 +148,21 @@ public class PartieGraph extends Parties{
             getJoueur((indexJoueurCourant + 1) % 2).addPieceMorte(pieceMorte);
         }
         return pieceMorte;
+    }
+
+    public void roqueTour(int[] arriveeRoi){
+        int x = arriveeRoi[0];
+        int[] arr, dep;
+        if (x==2){
+            arr= new int[]{3, arriveeRoi[1]};
+            dep= new int[]{0, arriveeRoi[1]};
+            Piece pieceMorte = deplacerPiece(dep, arr);
+        }
+        else{
+            arr= new int[]{5, arriveeRoi[1]};
+            dep= new int[]{7, arriveeRoi[1]};
+            Piece pieceMorte = deplacerPiece(dep, arr);
+        }
     }
 
     public void actualiserPlateauIA(int[] depart, int[] arrivee){
@@ -159,7 +197,11 @@ public class PartieGraph extends Parties{
         pieceDeplacee.setCoordY(arrivee[1]);
 
         if (pieceDeplacee instanceof Pion && ((Pion) pieceDeplacee).getPremierDeplacement())
-            ((Pion) pieceDeplacee).setPremierDeplacement();
+            ((Pion)pieceDeplacee).setPremierDeplacement();
+        if (pieceDeplacee instanceof Roi && ((Roi) pieceDeplacee).getPremierDeplacement()){
+            ((Roi)pieceDeplacee).setPremierDeplacement();
+            System.out.println("ECHOOOOO");
+        }
 
         return pieceMorte;
     }
@@ -186,5 +228,17 @@ public class PartieGraph extends Parties{
         Coup coupAvant = this.getListeCoup().get(indexCourant+1);
 
         Piece pieceMorte = deplacerPiece(coupAvant.getDepart(), coupAvant.getArrivee());
+    }
+
+    public boolean isRoiSelectionne(int[] caseDepartPlateau) {
+        return (this.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece() instanceof Roi);
+    }
+
+    public List<Position> echec(){
+        return EchecEtMat.echec(getJoueurNonCourant(), this.getEchiquier());
+    }
+
+    public boolean echecEtMat(List<Position> menace){
+        return EchecEtMat.echecEtMat(getJoueurNonCourant(), this.getEchiquier(), menace);
     }
 }
