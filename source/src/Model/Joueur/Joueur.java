@@ -16,14 +16,14 @@ public class Joueur implements InterfaceJoueur{
         piecesMortes = new Piece[16];
 
         switch (numJoueur) {
-            case 1 -> {
+            case 1 :
                 couleur = Couleur.BLANC;
                 nom = " 1";
-            }
-            case 2 -> {
+            break;
+            case 2 :
                 couleur = Couleur.NOIR;
                 nom = " 2";
-            }
+            break;
         }
         initPieces();
     }

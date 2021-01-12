@@ -63,15 +63,15 @@ public class ControllerPartiesReseauxClient {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
                     if (PremierDeplacementServerEffectuer) {
                         switch (NumeroClique(mouseEvent.getSource())) {
-                            case 1 -> {
+                            case 1:
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
                                 }
                                 TraitementCliqueUn(mouseEvent.getSource());
                                 cliqueUnPasse = true;
-                            }
-                            case 2 -> {
+                            break;
+                            case 2:
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
                                     try {
@@ -87,7 +87,7 @@ public class ControllerPartiesReseauxClient {
                                     }
                                 }
                                 cliqueUnPasse = false;
-                            }
+                            break;
                         }
                     } else {
                         try {
@@ -191,7 +191,7 @@ public class ControllerPartiesReseauxClient {
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
             finDeDeplacement();
-            partie.StockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partie.getJoueurCourant(), partie.getJoueurNonCourant());
+            partie.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partie.getJoueurCourant(), partie.getJoueurNonCourant());
             partie.ChangementJoueurCourant();
         }
 

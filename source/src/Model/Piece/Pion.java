@@ -31,11 +31,7 @@ public class Pion extends Piece {
         int tmpX = getCoordX();
         int tmpY = getCoordY();
 
-        if (getCouleur().equals(Couleur.BLANC)) {
-            tmpY--;
-        } else {
-            tmpY++;
-        }
+        tmpY = this.getCouleur() == Couleur.BLANC ? tmpY-1 : tmpY+1;
         deplacementPossible(plateau, tmpX, tmpY);
     }
 
@@ -43,7 +39,6 @@ public class Pion extends Piece {
     public void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
         //déplacement basique
         Position caseTmp;
-        int tmpY2;
 
         if(tmpX > LIMIT_SUP || tmpX < LIMIT_INF || tmpY > LIMIT_SUP || tmpY < LIMIT_INF)
             return;
@@ -53,32 +48,27 @@ public class Pion extends Piece {
         if (plateau.isCaseNull(caseTmp) && !caseTmp.isOccupe()) {
             getListeDep().add(plateau.getCase(tmpX, tmpY));
             if (isPremierDeplacement() && !plateau.getCase(tmpX, tmpY).isOccupe()) {
-                tmpY2 = this.getCouleur() == Couleur.BLANC ? tmpY-1 : tmpY+1;
-                if(!plateau.getCase(tmpX, tmpY2).isOccupe())
-                    getListeDep().add(plateau.getCase(tmpX, tmpY2));
+                if (this.getCouleur()==Couleur.BLANC)
+                    getListeDep().add(plateau.getCase(tmpX, tmpY-1));
+                else
+                    getListeDep().add(plateau.getCase(tmpX, tmpY+1));
             }
         }
-        //attaque
-        /*if(this.getCouleur()==Couleur.NOIR){
-            attaque(plateau, tmpX-1, tmpY);
-            attaque(plateau, tmpX+1, tmpY);
-        }else{*/
-            attaque(plateau, tmpX-1, tmpY);
-            attaque(plateau, tmpX+1, tmpY);
-        //}
+        attaque(plateau, tmpX-1, tmpY);
+        attaque(plateau, tmpX+1, tmpY);
     }
 
     private void attaque(Plateau plateau, int tmpX, int tmpY) {
         Position caseTmp;
 
-        if(tmpX==-1 || tmpX==8)
+        if(tmpX<LIMIT_INF || tmpX>LIMIT_SUP)
             return;
 
         caseTmp= plateau.getCase(tmpX, tmpY);
         if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()!=this.getCouleur()){
             getListeDep().add(caseTmp);
         }
-        if (caseTmp.isOccupe() && caseTmp.getPiece().getCouleur()==this.getCouleur()){
+        if (!caseTmp.isOccupe() || caseTmp.getPiece().getCouleur() == this.getCouleur()){
             getListeProtecDep().add(caseTmp);
         }
     }

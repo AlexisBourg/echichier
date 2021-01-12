@@ -10,7 +10,7 @@ import res.BoxCoups;
 import res.ChessGrid;
 import res.CssModifier;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,39 +27,24 @@ public class ControllerPartiesReseauServeur {
     private int[] caseArriveePlateau;
     private Piece pieceMangee;
     private ServerSocket serverSocket = null;
-    private Socket clientSocket;
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
-
+    private Socket socket;
     @FXML
     private ChessGrid grille;
 
     @FXML
     private BoxCoups listeCoups;
 
-    public ControllerPartiesReseauServeur(PartieGraph partie) {
-        int port=-1;
+    public ControllerPartiesReseauServeur(PartieGraph partie, int port) {
         try {
-            serverSocket = new ServerSocket(0,1);
-            port=serverSocket.getLocalPort();
+            serverSocket = new ServerSocket(port);
         } catch (IOException e) {
             System.err.println("Impossible d'écouter sur le port: " + port);
         }
         try {
-            clientSocket.setSoTimeout(20000); //TODO à decommenter dans la version final
-            clientSocket = serverSocket.accept();
-
-        } catch (IOException e) {
-            System.out.println("TimeOut: aucune connection");
-        }
-        try {
-            out = new ObjectOutputStream(clientSocket.getOutputStream() );  //sortie pour envoyer
-            out.flush();//pour envoyer des info au client necessaire à une bonne connexion
-            in = new ObjectInputStream(clientSocket.getInputStream());
+            socket = serverSocket.accept();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         this.partie = partie;
         listeDeplacements = new HashMap<>();
     }
@@ -69,35 +54,30 @@ public class ControllerPartiesReseauServeur {
         Plateau echiquier = partie.getEchiquier();
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
-                grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
-                    switch (NumeroClique(mouseEvent.getSource())) {
-                        case 1 -> {
-                            if (!listeDeplacements.isEmpty()) {
-                                retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
-                                restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
-                            }
-                            TraitementCliqueUn(mouseEvent.getSource());
-                            cliqueUnPasse = true;
-                        }
-                        case 2 -> {
-                            if (cliqueUnPasse) {
-                                TraitementCliqueDeux(mouseEvent.getSource());
-                                try {
-                                    in = new ObjectInputStream(clientSocket.getInputStream());
-                                    out = new ObjectOutputStream(clientSocket.getOutputStream());
-                                    partie.ChangementJoueurCourant();
-                                    out.writeObject(partie);
-                                    try {
-                                        partie =(PartieGraph) in.readObject();
-                                    } catch (ClassNotFoundException e) {
-                                        e.printStackTrace();
-                                    }
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent mouseEvent) {
+                        switch (NumeroClique(mouseEvent.getSource())) {
+                            case 1 -> {
+                                if (!listeDeplacements.isEmpty()) {
+                                    retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
+                                    restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
                                 }
+                                TraitementCliqueUn(mouseEvent.getSource());
+                                cliqueUnPasse = true;
                             }
+                            case 2 -> {
+                                if (cliqueUnPasse) {
+                                    TraitementCliqueDeux(mouseEvent.getSource());
 
-                            cliqueUnPasse = false;
+
+                                    //evois de data au client
+
+
+                                    //attend un reception client et la traite
+                                }
+                                cliqueUnPasse = false;
+                            }
                         }
                     }
                 });
@@ -105,7 +85,6 @@ public class ControllerPartiesReseauServeur {
                     CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
                     //CssModifier.test((Button)grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
                 }
-
             }
         }
     }
@@ -248,7 +227,7 @@ public class ControllerPartiesReseauServeur {
     }
 
     public void finDeDeplacement() {
-        Piece pieceMangee;
+        Piece pieceMangee = null;
         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
         restaurationImageDeplacementPossible(); // Les cases qui contenaient des pièces les retrouves
         CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..
@@ -259,7 +238,7 @@ public class ControllerPartiesReseauServeur {
     }
 
     /**
-     * -----------------------------Partie Reseau------------------------------
+     * -----------------------------------------------------------
      */
 
     public InetAddress getLocalAdresse() {
@@ -298,11 +277,4 @@ public class ControllerPartiesReseauServeur {
             return null;
         }
 
-            public void fermerSocket(){
-                try {
-                    clientSocket.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
 }

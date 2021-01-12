@@ -165,7 +165,7 @@ public class PartieGraph extends Parties{
         return pieceMorte;
     }
 
-    public void StockerCoup(int[] depart, int[] arrivee, Piece pieceMangee, Joueur joueurCourant, Joueur joueurNonCourant){
+    public void stockerCoup(int[] depart, int[] arrivee, Piece pieceMangee, Joueur joueurCourant, Joueur joueurNonCourant){
         super.getListeCoup().add(new Coup(depart, arrivee, pieceMangee, joueurCourant, joueurNonCourant));
     }
 

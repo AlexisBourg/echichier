@@ -133,7 +133,8 @@ public abstract class Piece {
         return listeProtecDep;
     }
 
+    @Override
     public String toString(){
-        return "Type: "+getType().name() + "x : " + getCoordX() + " y: "+getCoordY();
+        return "Type: "+getType().name()+"  Couleur: "+getCouleur() + "  x : " + getCoordX() + " y: "+getCoordY();
     }
 }
