@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class ControllerPartiesPvE {
+public class ControllerPartiesPvE extends ControllerPartie{
     private final PartiePvE partie;
     private HashMap<Integer, int[]> listeDeplacements;
     private boolean cliqueUnPasse = false;

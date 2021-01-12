@@ -48,10 +48,12 @@ public class Pion extends Piece {
         if (plateau.isCaseNull(caseTmp) && !caseTmp.isOccupe()) {
             getListeDep().add(plateau.getCase(tmpX, tmpY));
             if (isPremierDeplacement() && !plateau.getCase(tmpX, tmpY).isOccupe()) {
-                if (this.getCouleur()==Couleur.BLANC)
+                if (this.getCouleur()==Couleur.BLANC && !plateau.getCase(tmpX, tmpY-1).isOccupe())
                     getListeDep().add(plateau.getCase(tmpX, tmpY-1));
-                else
-                    getListeDep().add(plateau.getCase(tmpX, tmpY+1));
+                else {
+                    if (!plateau.getCase(tmpX, tmpY + 1).isOccupe())
+                        getListeDep().add(plateau.getCase(tmpX, tmpY + 1));
+                }
             }
         }
         attaque(plateau, tmpX-1, tmpY);

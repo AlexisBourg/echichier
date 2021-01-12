@@ -10,7 +10,7 @@ import Model.PLateau.Plateau;
 
 import java.util.LinkedList;
 
-public class Parties {
+public abstract class Parties {
     private final int ROI = 12;
     private final InterfaceJoueur[] joueurs;
     private Plateau echiquier;

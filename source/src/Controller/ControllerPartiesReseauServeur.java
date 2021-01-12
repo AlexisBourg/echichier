@@ -11,6 +11,8 @@ import res.ChessGrid;
 import res.CssModifier;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,27 +29,49 @@ public class ControllerPartiesReseauServeur {
     private int[] caseArriveePlateau;
     private Piece pieceMangee;
     private ServerSocket serverSocket = null;
-    private Socket socket;
+
+    private Socket clientSocket;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
+    private int port=-1;
+
+
     @FXML
     private ChessGrid grille;
 
     @FXML
     private BoxCoups listeCoups;
 
-    public ControllerPartiesReseauServeur(PartieGraph partie, int port) {
+    public ControllerPartiesReseauServeur(PartieGraph partie) {
         try {
-            serverSocket = new ServerSocket(port);
+            serverSocket = new ServerSocket(0, 1);
+            port = serverSocket.getLocalPort();
         } catch (IOException e) {
             System.err.println("Impossible d'écouter sur le port: " + port);
         }
+    }
+
+    public void CommencerPartie(){
         try {
-            socket = serverSocket.accept();
+
+            clientSocket = serverSocket.accept();
+            //clientSocket.setSoTimeout(20000); //TODO à decommenter dans la version final
+
+        } catch (IOException e) {
+            System.out.println("TimeOut: aucune connection");
+        }
+        try {
+            out = new ObjectOutputStream(clientSocket.getOutputStream() );  //sortie pour envoyer
+            out.flush();//pour envoyer des info au client necessaire à une bonne connexion
+            in = new ObjectInputStream(clientSocket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         this.partie = partie;
         listeDeplacements = new HashMap<>();
     }
+
 
     @FXML
     public void chargementPlateau() {
@@ -69,12 +93,19 @@ public class ControllerPartiesReseauServeur {
                             case 2 -> {
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
-
-
-                                    //evois de data au client
-
-
-                                    //attend un reception client et la traite
+                                    try {
+                                        in = new ObjectInputStream(clientSocket.getInputStream());
+                                        out = new ObjectOutputStream(clientSocket.getOutputStream());
+                                        partie.ChangementJoueurCourant();
+                                        out.writeObject(partie);
+                                        try {
+                                            partie =(PartieGraph) in.readObject();
+                                        } catch (ClassNotFoundException e) {
+                                            e.printStackTrace();
+                                        }
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                                 cliqueUnPasse = false;
                             }
@@ -277,4 +308,7 @@ public class ControllerPartiesReseauServeur {
             return null;
         }
 
+    public int getPort() {
+        return port;
+    }
 }

@@ -14,8 +14,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.LinkedList;
 import java.util.List;
+
 
 public class ControllerMenu {
     @FXML
@@ -31,6 +33,8 @@ public class ControllerMenu {
     private Button boutonEnLigne;
 
     private LinkedList<Button> premiersBoutons;
+    private int port;
+    private InetAddress addr;
 
     public ControllerMenu(){
 
@@ -126,14 +130,62 @@ public class ControllerMenu {
         heberger.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("Héberger partie !");
+                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
+                PartieGraph partie = new PartieGraph();
+                ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
+                try {
+                    System.out.println(controller.getPublicAdresse());
+                    System.out.println(controller.getPort());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                controller.CommencerPartie();
+
+                load.setController(controller);
+
+                Parent root;
+                try {
+                    root = load.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+
+                controller.chargementPlateau();
+
+                Stage primaryStage = new Stage();
+
+                primaryStage.setTitle("Partie Online (Server)");
+                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.show();
             }
         });
 
         rejoindre.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println("Rejoindre partie !");
+                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
+                PartieGraph partie = new PartieGraph();
+                ControllerPartiesReseauxClient controller = new ControllerPartiesReseauxClient(partie,addr,port);
+
+                load.setController(controller);
+
+                Parent root;
+                try {
+                    root = load.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return;
+                }
+
+                controller.chargementPlateau();
+
+                Stage primaryStage = new Stage();
+
+                primaryStage.setTitle("Partie Online (Server)");
+                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.show();
+
             }
         });
 

@@ -150,9 +150,9 @@ public class PartieGraph extends Parties{
         return pieceMorte;
     }
 
-<<<<<<< HEAD
-    public Piece actualiserPlateauIA(int[] depart, int[] arrivee){
-=======
+
+
+
     public void roqueTour(int[] arriveeRoi){
         int x = arriveeRoi[0];
         int[] arr, dep;
@@ -168,8 +168,8 @@ public class PartieGraph extends Parties{
         }
     }
 
-    public void actualiserPlateauIA(int[] depart, int[] arrivee){
->>>>>>> 85c655faaf1e8b4f9da5161925bae190c5f00284
+    public Piece actualiserPlateauIA(int[] depart, int[] arrivee){
+
         Piece pieceMorte = deplacerPiece(depart, arrivee);
         if(pieceMorte!=null) {
             getIA().addPieceMorte(pieceMorte);
