@@ -5,4 +5,5 @@
 
 Button{
     -fx-font-size: 20;
+    -fx-margin-bottom: 30;
 }

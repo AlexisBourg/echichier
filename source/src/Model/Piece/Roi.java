@@ -22,6 +22,8 @@ public class Roi extends Piece {
     //Methode
     public void setPremierDeplacement(){this.premierDeplacement = false;}
 
+    public boolean getPremierDeplacement(){ return this.premierDeplacement;}
+
     public boolean isPremierDeplacement() {
         return premierDeplacement;
     }
@@ -98,8 +100,13 @@ public class Roi extends Piece {
 
         yTour = this.getCouleur()==Couleur.BLANC ? 7 : 0;
 
+        if (!this.premierDeplacement)
+            return roqueDispo;
 
         for (int i=0; i<2; i++){
+            if (plateau.getCase(xTour, yTour).isOccupe() && !(plateau.getCase(xTour, yTour).getPiece() instanceof Tour) || !plateau.getCase(xTour, yTour).isOccupe())
+                continue;
+
             if (plateau.getCase(xTour, yTour).getPiece().getCouleur()==this.getCouleur() && plateau.getCase(xTour, yTour).getPiece() instanceof Tour){
                 for (int j=0; j<3; j++){
                     if (xTour==0){ // Si la tour est à gauche

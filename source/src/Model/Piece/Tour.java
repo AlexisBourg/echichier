@@ -4,8 +4,6 @@ import Model.PLateau.Plateau;
 import Model.PLateau.Position;
 
 public class Tour extends Piece {
-    //Attribue
-    private boolean premierDeplacement = true;
 
     //Constructeur
     public Tour(int x, int y, Couleur couleur) {
@@ -14,15 +12,6 @@ public class Tour extends Piece {
 
 
     //Methode
-    public void setPremierDeplacement() {
-        this.premierDeplacement = false;
-    }
-
-    public boolean isPremierDeplacement() {
-        return premierDeplacement;
-    }
-
-
     public void setListeDep(Plateau plateau) {
 
         getListeDep().clear();

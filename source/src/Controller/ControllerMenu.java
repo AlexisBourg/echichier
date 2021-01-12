@@ -5,6 +5,7 @@ import Model.Parties.PartiePvE;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,6 +14,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ControllerMenu {
     @FXML
@@ -27,14 +30,21 @@ public class ControllerMenu {
     @FXML
     private Button boutonEnLigne;
 
+    private LinkedList<Button> premiersBoutons;
+
     public ControllerMenu(){
 
     }
 
     @FXML
     public void initialize(){
+        premiersBoutons = new LinkedList<>();
         comportementBoutonPVE();
         comportementBoutonPVP();
+        comportementBoutonOnline();
+        premiersBoutons.add(boutonLocalPvp);
+        premiersBoutons.add(boutonLocalPve);
+        premiersBoutons.add(boutonEnLigne);
     }
 
     public void comportementBoutonPVP() {
@@ -91,5 +101,58 @@ public class ControllerMenu {
                 primaryStage.show();
             }
         });
+    }
+
+    public void comportementBoutonOnline(){
+        boutonEnLigne.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                menuOnline();
+            }
+        });
+    }
+
+    public void menuOnline(){
+        Button heberger, rejoindre, retourMenu;
+        heberger = new Button("Héberger partie");
+        rejoindre = new Button("Rejoindre partie");
+        retourMenu = new Button("Retour menu");
+
+        heberger.setId("boutonLocalPvp");
+        rejoindre.setId("boutonLocalPve");
+        retourMenu.setId("boutonEnLigne");
+        retourMenu.setPrefWidth(170);
+
+        heberger.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("Héberger partie !");
+            }
+        });
+
+        rejoindre.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("Rejoindre partie !");
+            }
+        });
+
+        retourMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                page.getChildren().remove(0, 3);
+                page.getChildren().add(premiersBoutons.get(0));
+                page.getChildren().add(premiersBoutons.get(1));
+                page.getChildren().add(premiersBoutons.get(2));
+            }
+        });
+
+        page.getChildren().remove(0, 3);
+        page.getChildren().add(heberger);
+        page.getChildren().add(rejoindre);
+        page.getChildren().add(retourMenu);
+        VBox.setMargin(heberger, new Insets(-50, 0, 30, 0));
+        VBox.setMargin(rejoindre, new Insets(0, 0, 30, 0));
+
     }
 }
