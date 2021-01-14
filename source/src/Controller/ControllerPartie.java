@@ -59,29 +59,7 @@ public abstract class ControllerPartie {
 
         }
     }
-    /**
-     * @param source bouton qui a reçcu le clique
-     * @return : le numéro du clique (1 si le joueur a sélectionné une pièce de son jeu qu'il veut déplacer, 2 s'il indique où déplacer la pièce de son jeu)
-     */
-    public int NumeroClique(Parties parties,Object source) {
-        int[] coord = decompositionIdBouton(source);
-        return numClique(coord[0], coord[1], parties);
-    }
 
-    /**
-     * @param x : coordonnée x du bouton cliqué (coordonnée plateau)
-     * @param y : coordonnée y du bouton cliqué (coordonnée plateau)
-     * @return : le numéro du clic en fonction des propriétés du bouton cliqué
-     */
-    public int numClique(int x, int y, Parties parties) {
-        if (!parties.isCaseSansPiece(x, y) && parties.isCaseSansPiece(x, y))
-        {   System.out.println("oui1");
-            return 1;
-        }
-        System.out.println(parties.isCaseSansPiece(x, y));
-        System.out.println("oui2");
-        return 2;
-    }
 
     /**
      * @param source : bouton cliqué
@@ -97,6 +75,29 @@ public abstract class ControllerPartie {
         return tabCoord;
     }
 
+    /**
+     * @param source bouton qui a reçcu le clique
+     * @return : le numéro du clique (1 si le joueur a sélectionné une pièce de son jeu qu'il veut déplacer, 2 s'il indique où déplacer la pièce de son jeu)
+     */
+    public int NumeroClique(Parties parties,Object source) {
+        int[] coord = decompositionIdBouton(source);
+        return numClique(coord[0], coord[1], parties);
+    }
+
+    /**
+     * @param x : coordonnée x du bouton cliqué (coordonnée plateau)
+     * @param y : coordonnée y du bouton cliqué (coordonnée plateau)
+     * @return : le numéro du clic en fonction des propriétés du bouton cliqué
+     */
+    public int numClique(int x, int y, Parties parties) {
+        if (!parties.isCaseSansPiece(x, y) && parties.isPieceSelecAppartientAuJoueurCourant(x, y, parties.getJoueur(parties.getIndexJoueurCourant()))){
+            System.out.println("oui1");
+            return 1;
+        }
+        System.out.println(parties.isCaseSansPiece(x, y));
+        System.out.println("oui2");
+        return 2;
+    }
 
     public void restaurationImageDeplacementPossible(Parties parties) {
         int x, y, coordGrille;

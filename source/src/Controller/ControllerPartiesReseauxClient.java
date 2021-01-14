@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.PLateau.Plateau;
-import Model.Parties.PartiePvp;
+import Model.Parties.PartiePvP;
 import javafx.fxml.FXML;
 import res.CssModifier;
 
@@ -13,14 +13,14 @@ import java.net.Socket;
 
 public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
 
-    private PartiePvp partie;
+    private PartiePvP partie;
     private Socket serverSocket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private boolean PremierDeplacementServerEffectuer = false;
 
 
-    public ControllerPartiesReseauxClient(PartiePvp partie, InetAddress addr, int port){
+    public ControllerPartiesReseauxClient(PartiePvP partie, InetAddress addr, int port){
         super();
         this.partie = partie;
         try{
@@ -63,7 +63,7 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                                         partie.ChangementJoueurCourant();
                                         out.writeObject(partie);
 
-                                        partie = (PartiePvp) in.readObject();
+                                        partie = (PartiePvP) in.readObject();
 
                                     } catch (IOException | ClassNotFoundException e) {
                                         e.printStackTrace();
@@ -74,7 +74,7 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                         }
                     } else {
                         try {
-                            partie = (PartiePvp) in.readObject();
+                            partie = (PartiePvP) in.readObject();
                             PremierDeplacementServerEffectuer = true;
                         } catch (ClassNotFoundException | IOException e) {
                             e.printStackTrace();

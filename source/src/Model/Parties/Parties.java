@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public abstract class Parties implements PartiesInterface {
-    protected int indexJoueurCourant = 0;;
+    protected int indexJoueurCourant = 0;
     private final int ROI = 12;
     private final InterfaceJoueur[] joueurs;
     private Plateau echiquier;

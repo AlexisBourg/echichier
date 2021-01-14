@@ -3,7 +3,7 @@ package Model.Parties;
 import Model.Joueur.IA;
 import Model.Joueur.Joueur;
 
-public class PartiePvE extends PartiePvp {
+public class PartiePvE extends PartiePvP {
 
     public PartiePvE() {
         super();

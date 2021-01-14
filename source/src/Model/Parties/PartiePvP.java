@@ -13,10 +13,10 @@ import Model.Piece.Roi;
 import java.util.HashMap;
 import java.util.List;
 
-public class PartiePvp extends Parties{
+public class PartiePvP extends Parties{
 
 
-    public PartiePvp(){
+    public PartiePvP(){
         super();
     }
 

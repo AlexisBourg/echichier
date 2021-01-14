@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Parties.PartiePvp;
+import Model.Parties.PartiePvP;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,7 +57,7 @@ public class ControllerMenuOnline {
             public void handle(MouseEvent mouseEvent) {
 
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartiePvp partie = new PartiePvp();
+                PartiePvP partie = new PartiePvP();
                 ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
                 try {
                     System.out.println(controller.getPublicAdresse());
@@ -95,7 +95,7 @@ public class ControllerMenuOnline {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartiePvp partie = new PartiePvp();
+                PartiePvP partie = new PartiePvP();
                 ControllerPartiesReseauxClient controller = null;
                 try {
                     controller = new ControllerPartiesReseauxClient(partie, InetAddress.getByName(ecrirAdresse.getText()),Integer.parseInt(ecrirPort.getText()));

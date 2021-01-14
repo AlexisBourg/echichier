@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.PLateau.Position;
-import Model.Parties.PartiePvp;
+import Model.Parties.PartiePvP;
 import Model.Piece.Piece;
 import javafx.event.EventHandler;
 import Model.PLateau.Plateau;
@@ -16,10 +16,10 @@ import java.util.Map;
 
 public class ControllerPartiesPvP  extends ControllerPartie{
 
-    private PartiePvp partiesPvP;
+    private PartiePvP partiesPvP;
     private List<Position> menace;
 
-    public ControllerPartiesPvP(PartiePvp partie){
+    public ControllerPartiesPvP(PartiePvP partie){
         super();
         partiesPvP= partie;
     }

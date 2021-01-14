@@ -1,7 +1,7 @@
 package Controller;
 
 import Model.PLateau.Plateau;
-import Model.Parties.PartiePvp;
+import Model.Parties.PartiePvP;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
 
-    private PartiePvp partie;
+    private PartiePvP partie;
     private ServerSocket serverSocket = null;
     private Socket clientSocket;
     private ObjectInputStream in;
@@ -29,7 +29,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
 
 
 
-    public ControllerPartiesReseauServeur(PartiePvp partie) {
+    public ControllerPartiesReseauServeur(PartiePvP partie) {
         super();
         this.partie=partie;
         try {
@@ -90,7 +90,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
                                         partie.ChangementJoueurCourant();
                                         out.writeObject(partie);
                                         try {
-                                            partie =(PartiePvp) in.readObject();
+                                            partie =(PartiePvP) in.readObject();
                                         } catch (ClassNotFoundException e) {
                                             e.printStackTrace();
                                         }
