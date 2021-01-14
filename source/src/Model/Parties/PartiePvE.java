@@ -2,9 +2,8 @@ package Model.Parties;
 
 import Model.Joueur.IA;
 import Model.Joueur.Joueur;
-import Model.Piece.Piece;
 
-public class PartiePvE extends PartieGraph {
+public class PartiePvE extends PartiePvp {
 
     public PartiePvE() {
         super();

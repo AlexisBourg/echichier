@@ -1,13 +1,11 @@
 package Controller;
 
 import Model.PLateau.Plateau;
-import Model.Parties.PartieGraph;
-import Model.Piece.Piece;
+import Model.Parties.PartiePvp;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import res.BoxCoups;
-import res.ChessGrid;
 import res.CssModifier;
 
 import java.io.IOException;
@@ -15,12 +13,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
 
-    private PartieGraph partie;
+    private PartiePvp partie;
     private ServerSocket serverSocket = null;
     private Socket clientSocket;
     private ObjectInputStream in;
@@ -32,7 +29,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
 
 
 
-    public ControllerPartiesReseauServeur(PartieGraph partie) {
+    public ControllerPartiesReseauServeur(PartiePvp partie) {
         super();
         this.partie=partie;
         try {
@@ -93,7 +90,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
                                         partie.ChangementJoueurCourant();
                                         out.writeObject(partie);
                                         try {
-                                            partie =(PartieGraph) in.readObject();
+                                            partie =(PartiePvp) in.readObject();
                                         } catch (ClassNotFoundException e) {
                                             e.printStackTrace();
                                         }

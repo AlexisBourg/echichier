@@ -1,12 +1,9 @@
 package Controller;
 
 import Model.PLateau.Position;
-import Model.Parties.PartieGraph;
+import Model.Parties.PartiePvp;
 import Model.Piece.Piece;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import res.BoxCoups;
-import res.ChessGrid;
 import Model.PLateau.Plateau;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
@@ -15,15 +12,14 @@ import res.CssModifier;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 
 public class ControllerPartiesPvP  extends ControllerPartie{
 
-    private PartieGraph partiesPvP;
+    private PartiePvp partiesPvP;
     private List<Position> menace;
 
-    public ControllerPartiesPvP(PartieGraph partie){
+    public ControllerPartiesPvP(PartiePvp partie){
         super();
         partiesPvP= partie;
     }

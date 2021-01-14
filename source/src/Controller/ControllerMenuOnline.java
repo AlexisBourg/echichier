@@ -1,16 +1,14 @@
 package Controller;
 
-import Model.Parties.PartieGraph;
+import Model.Parties.PartiePvp;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -59,7 +57,7 @@ public class ControllerMenuOnline {
             public void handle(MouseEvent mouseEvent) {
 
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartieGraph partie = new PartieGraph();
+                PartiePvp partie = new PartiePvp();
                 ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
                 try {
                     System.out.println(controller.getPublicAdresse());
@@ -97,7 +95,7 @@ public class ControllerMenuOnline {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartieGraph partie = new PartieGraph();
+                PartiePvp partie = new PartiePvp();
                 ControllerPartiesReseauxClient controller = null;
                 try {
                     controller = new ControllerPartiesReseauxClient(partie, InetAddress.getByName(ecrirAdresse.getText()),Integer.parseInt(ecrirPort.getText()));

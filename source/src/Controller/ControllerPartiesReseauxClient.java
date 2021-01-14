@@ -1,13 +1,8 @@
 package Controller;
 
 import Model.PLateau.Plateau;
-import Model.Parties.PartieGraph;
-import Model.Piece.Piece;
-import javafx.event.EventHandler;
+import Model.Parties.PartiePvp;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import res.BoxCoups;
-import res.ChessGrid;
 import res.CssModifier;
 
 import java.io.IOException;
@@ -15,19 +10,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
 
-    private PartieGraph partie;
+    private PartiePvp partie;
     private Socket serverSocket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private boolean PremierDeplacementServerEffectuer = false;
 
 
-    public ControllerPartiesReseauxClient(PartieGraph partie, InetAddress addr,int port){
+    public ControllerPartiesReseauxClient(PartiePvp partie, InetAddress addr, int port){
         super();
         this.partie = partie;
         try{
@@ -70,7 +63,7 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                                         partie.ChangementJoueurCourant();
                                         out.writeObject(partie);
 
-                                        partie = (PartieGraph) in.readObject();
+                                        partie = (PartiePvp) in.readObject();
 
                                     } catch (IOException | ClassNotFoundException e) {
                                         e.printStackTrace();
@@ -81,7 +74,7 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                         }
                     } else {
                         try {
-                            partie = (PartieGraph) in.readObject();
+                            partie = (PartiePvp) in.readObject();
                             PremierDeplacementServerEffectuer = true;
                         } catch (ClassNotFoundException | IOException e) {
                             e.printStackTrace();

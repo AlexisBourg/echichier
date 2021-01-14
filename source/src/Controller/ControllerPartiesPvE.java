@@ -2,21 +2,13 @@ package Controller;
 
 import Model.Joueur.IA;
 import Model.PLateau.Plateau;
-import Model.Parties.PartieGraph;
 import Model.Parties.PartiePvE;
-import Model.Parties.Parties;
 import Model.Piece.Couleur;
 import Model.Piece.Piece;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
-import res.ChessGrid;
 import res.CssModifier;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class ControllerPartiesPvE extends ControllerPartiesPvP{
 

@@ -13,15 +13,14 @@ import Model.Piece.Roi;
 import java.util.HashMap;
 import java.util.List;
 
-public class PartieGraph extends Parties{
+public class PartiePvp extends Parties{
 
 
-    public PartieGraph(){
+    public PartiePvp(){
         super();
     }
 
     /**
-     *
      * @param tabCoord : coordonnées plateau
      * @return : l'url de l'image de la case pointée
      */

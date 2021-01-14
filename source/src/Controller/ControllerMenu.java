@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.Parties.PartieGraph;
+import Model.Parties.PartiePvp;
 import Model.Parties.PartiePvE;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.LinkedList;
-import java.util.List;
 
 
 public class ControllerMenu {
@@ -59,7 +58,7 @@ public class ControllerMenu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartieGraph partie = new PartieGraph();
+                PartiePvp partie = new PartiePvp();
                 ControllerPartiesPvP controller = new ControllerPartiesPvP(partie);
                 load.setController(controller);
 
@@ -152,7 +151,7 @@ public class ControllerMenu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartieGraph partie = new PartieGraph();
+                PartiePvp partie = new PartiePvp();
                 ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
                 try {
                     System.out.println(controller.getPublicAdresse());
@@ -186,7 +185,7 @@ public class ControllerMenu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartieGraph partie = new PartieGraph();
+                PartiePvp partie = new PartiePvp();
                 ControllerPartiesReseauxClient controller = new ControllerPartiesReseauxClient(partie,addr,port);
 
                 load.setController(controller);

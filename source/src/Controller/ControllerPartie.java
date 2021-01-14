@@ -1,10 +1,7 @@
 package Controller;
 
 
-import Model.Parties.PartieGraph;
-import Model.Parties.PartiePvE;
 import Model.Parties.Parties;
-import Model.Parties.PartiesInterface;
 import Model.Piece.Piece;
 import javafx.fxml.FXML;
 import res.BoxCoups;
@@ -35,9 +32,6 @@ public abstract class ControllerPartie {
     public ControllerPartie(){
         listeDeplacements = new HashMap<>();
     }
-
-
-
 
 
     /**
@@ -75,14 +69,17 @@ public abstract class ControllerPartie {
     }
 
     /**
-     *
      * @param x : coordonnée x du bouton cliqué (coordonnée plateau)
      * @param y : coordonnée y du bouton cliqué (coordonnée plateau)
      * @return : le numéro du clic en fonction des propriétés du bouton cliqué
      */
-    public int numClique(int x, int y, Parties parties){
+    public int numClique(int x, int y, Parties parties) {
         if (!parties.isCaseSansPiece(x, y) && parties.isCaseSansPiece(x, y))
+        {   System.out.println("oui1");
             return 1;
+        }
+        System.out.println(parties.isCaseSansPiece(x, y));
+        System.out.println("oui2");
         return 2;
     }
 
