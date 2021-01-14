@@ -58,8 +58,7 @@ public class ControllerMenu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartiePvP partie = new PartiePvP();
-                ControllerPartiesPvP controller = new ControllerPartiesPvP(partie);
+                ControllerPartiesPvP controller = new ControllerPartiesPvP();
                 load.setController(controller);
 
 
@@ -86,8 +85,7 @@ public class ControllerMenu {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartiePvE partie = new PartiePvE();
-                ControllerPartiesPvE controller = new ControllerPartiesPvE(partie);
+                ControllerPartiesPvE controller = new ControllerPartiesPvE();
                 load.setController(controller);
 
 

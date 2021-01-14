@@ -1,9 +1,5 @@
 package Model.Parties;
 
-
-import Controller.ControllerPartiesPvP;
-
-import Model.Joueur.IA;
 import Model.Joueur.Joueur;
 import Model.Joueur.InterfaceJoueur;
 import Model.PLateau.Plateau;
@@ -14,11 +10,12 @@ import Model.Piece.Roi;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
-public abstract class Parties implements PartiesInterface {
+public abstract class Parties{
     protected int indexJoueurCourant = 0;
     private final int ROI = 12;
-    private final InterfaceJoueur[] joueurs;
+    protected final InterfaceJoueur[] joueurs;
     private Plateau echiquier;
     private final LinkedList<Coup> listeCoup;
 
@@ -38,7 +35,6 @@ public abstract class Parties implements PartiesInterface {
 
     public int getIndexJoueurCourant() { return indexJoueurCourant; }
 
-    public IA getIA(){return (IA) joueurs[1];}
 
     public LinkedList<Coup> getListeCoup(){
         return listeCoup;
@@ -123,14 +119,7 @@ public abstract class Parties implements PartiesInterface {
         return pieceMorte;
     }
 
-    public Piece actualiserPlateauIA(int[] depart, int[] arrivee){
 
-        Piece pieceMorte = deplacerPiece(depart, arrivee);
-        if(pieceMorte!=null) {
-            getIA().addPieceMorte(pieceMorte);
-        }
-        return pieceMorte;
-    }
 
     public void stockerCoup(int[] depart, int[] arrivee, Piece pieceMangee, Joueur joueurCourant, Joueur joueurNonCourant){
         getListeCoup().add(new Coup(depart, arrivee, pieceMangee, joueurCourant, joueurNonCourant));
@@ -190,12 +179,61 @@ public abstract class Parties implements PartiesInterface {
         return pieceMorte;
     }
 
+    public void roqueTour(int[] arriveeRoi){
+        int x = arriveeRoi[0];
+        int[] arr, dep;
+        if (x==2){
+            arr= new int[]{3, arriveeRoi[1]};
+            dep= new int[]{0, arriveeRoi[1]};
+            Piece pieceMorte = deplacerPiece(dep, arr);
+        }
+        else{
+            arr= new int[]{5, arriveeRoi[1]};
+            dep= new int[]{7, arriveeRoi[1]};
+            Piece pieceMorte = deplacerPiece(dep, arr);
+        }
+    }
 
+    public List<Position> echec(){
+        return EchecEtMat.echec(getJoueurNonCourant(), this.getEchiquier());
+    }
+
+    public boolean echecEtMat(List<Position> menace){
+        return EchecEtMat.echecEtMat(getJoueurNonCourant(), this.getEchiquier(), menace);
+    }
 
     /**
      * change le joueur courant
      */
     public void ChangementJoueurCourant(){
         indexJoueurCourant = (indexJoueurCourant+1)%2;
+    }
+
+    public boolean isRoiSelectionne(int[] caseDepartPlateau) {
+        return (this.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece() instanceof Roi);
+    }
+
+    public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
+        HashMap<Integer, int[]> liste = new HashMap<>();
+
+        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier());
+
+        if (!(getEchiquier().getCase(x, y).getPiece() instanceof Roi))
+            affinageDeplacements(getEchiquier().getCase(x, y).getPiece().getListeDep(), menace);
+
+        for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
+            liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
+        }
+
+        return liste;
+    }
+
+    public void affinageDeplacements(List<Position> listeDep, List<Position> menace) {
+        for (Position p : listeDep){ // Pour chaque déplacement possible pour la pièce
+            for (Position m : menace){ // Pour chaque menace directe du roi
+                if (!m.getPiece().getListeDep().contains(p)) // Si la position possible pour la pièce ne peut pas protéger le roi
+                    listeDep.remove(p); // On l'enlève de la liste de ses déplacements
+            }
+        }
     }
 }

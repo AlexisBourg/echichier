@@ -10,9 +10,7 @@ import java.util.*;
 
 public class PartieConsole extends Parties {
 
-    public PartieConsole(){
-        super();
-    }
+    public PartieConsole(){ super(); }
 
     public void partie(){
         int i=0;
