@@ -55,7 +55,8 @@ public class ControllerPartiesReseauServeur {
         try {
 
             clientSocket = serverSocket.accept();
-            //clientSocket.setSoTimeout(20000); //TODO à decommenter dans la version final
+            System.out.println("2");
+            clientSocket.setSoTimeout(2); //TODO à decommenter dans la version final
 
         } catch (IOException e) {
             System.out.println("TimeOut: aucune connection");
@@ -269,7 +270,7 @@ public class ControllerPartiesReseauServeur {
     }
 
     /**
-     * -----------------------------------------------------------
+     * -----------------------------partie reseau------------------------------
      */
 
     public InetAddress getLocalAdresse() {
