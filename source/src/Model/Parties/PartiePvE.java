@@ -3,7 +3,7 @@ package Model.Parties;
 import Model.Joueur.IA;
 import Model.Joueur.Joueur;
 
-public class PartiePvE extends PartieGraph implements FactoryPartie {
+public class PartiePvE extends PartieGraph {
 
     public PartiePvE() {
         super();

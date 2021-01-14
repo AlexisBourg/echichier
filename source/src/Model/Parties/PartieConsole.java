@@ -8,7 +8,7 @@ import Model.Piece.Pion;
 
 import java.util.*;
 
-public class PartieConsole extends Parties implements FactoryPartie{
+public class PartieConsole extends Parties {
 
     public PartieConsole(){
         super();
