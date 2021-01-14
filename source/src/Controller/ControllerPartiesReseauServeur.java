@@ -49,6 +49,7 @@ public class ControllerPartiesReseauServeur {
         } catch (IOException e) {
             System.err.println("Impossible d'écouter sur le port: " + port);
         }
+        System.out.println("test");
     }
 
     public void CommencerPartie(){
@@ -56,7 +57,7 @@ public class ControllerPartiesReseauServeur {
 
             clientSocket = serverSocket.accept();
             System.out.println("2");
-            clientSocket.setSoTimeout(2); //TODO à decommenter dans la version final
+            clientSocket.setSoTimeout(20000); //TODO à decommenter dans la version final
 
         } catch (IOException e) {
             System.out.println("TimeOut: aucune connection");

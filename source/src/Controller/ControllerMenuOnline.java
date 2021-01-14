@@ -128,8 +128,8 @@ public class ControllerMenuOnline {
     }
 
     public void comportementBoutonRetourMenu() {
-        /*
-        Stage stage = (Stage) retourMenu.getScene().getWindow();
+
+        /*Stage stage = (Stage) retourMenu.getScene().getWindow();
         if(!stage.equals(null)) {
             stage.close();
         }*/
