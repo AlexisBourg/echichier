@@ -23,7 +23,7 @@ public abstract class ControllerPartie {
     protected int[] caseArriveePlateau;
     protected Piece pieceMangee;
     protected boolean echec =false;
-    private List<Position> menace;
+    protected List<Position> menace;
 
 
     @FXML
@@ -215,4 +215,5 @@ public abstract class ControllerPartie {
 
         // Pour arriver sur la case d'arrivée
     }
+
 }

@@ -19,6 +19,7 @@ public class Reine extends Piece {
         int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
         getListeDep().clear();
+        getListeProtecDep().clear();
 
         for (int i = 0; i< 8; i++) {
             deplacementPossible(plateau, dep[i][0], dep[i][1]);

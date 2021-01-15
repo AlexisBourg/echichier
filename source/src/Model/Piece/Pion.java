@@ -28,6 +28,8 @@ public class Pion extends Piece {
 
     public void setListeDep( Plateau plateau) {
         getListeDep().clear();
+        getListeProtecDep().clear();
+
         int tmpX = getCoordX();
         int tmpY = getCoordY();
 

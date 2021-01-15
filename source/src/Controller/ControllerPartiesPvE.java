@@ -2,14 +2,12 @@ package Controller;
 
 import Model.Joueur.IA;
 import Model.PLateau.Plateau;
-import Model.PLateau.Position;
 import Model.Parties.PartiePvE;
 import Model.Piece.Couleur;
 import Model.Piece.Piece;
 import javafx.fxml.FXML;
 import res.CssModifier;
 
-import java.util.List;
 import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {
@@ -36,6 +34,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
                             }
                             TraitementCliqueUn(mouseEvent.getSource(), partieActuel);
                             cliqueUnPasse = true;
+                            break;
                         }
                         case 2 -> {
                             if (cliqueUnPasse) {
@@ -47,8 +46,11 @@ public class ControllerPartiesPvE extends ControllerPartie {
                                 ia = partieActuel.getIA();
                                 deplacementIA(ia);
                                 partieActuel.ChangementJoueurCourant();
-                                System.out.println("joueuer courant"+partieActuel.getIndexJoueurCourant());                            }
+                                System.out.println("joueuer courant" + partieActuel.getIndexJoueurCourant());
+                            }
                             cliqueUnPasse = false;
+
+                            break;
                         }
                     }
                 });

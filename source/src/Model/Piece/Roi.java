@@ -33,6 +33,8 @@ public class Roi extends Piece {
         int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
         getListeDep().clear();
+        getListeProtecDep().clear();
+
         for(int i=0; i<8; i++){
             deplacementPossibleRoi(plateau, dep[i][0], dep[i][1]);
         }
@@ -62,7 +64,6 @@ public class Roi extends Piece {
 
         caseTmp = plateau.getCase(x + tmpX, y + tmpY);
         int a = nombreDePiecesMenacantLaCase(plateau, x+tmpX, y+tmpY); // Pieces qui menacent la case accesible par le roi
-        //System.out.println("                     case menacée     x: "+(x+tmpX)+"   y:  "+(y+tmpY)+"nb de menaces:  "+a);
 
 
         if (a == 0) { // Si aucune pièce ne menace la case, cette dernière est ajoutée à la liste de déplacement
@@ -70,7 +71,6 @@ public class Roi extends Piece {
                 getListeProtecDep().add(caseTmp);
             }
             if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
-                //System.out.println(caseTmp.toString() + "  menace ajoutée");
                 getListeDep().add(caseTmp);
             }
         }
@@ -78,19 +78,16 @@ public class Roi extends Piece {
 
     public int nombreDePiecesMenacantLaCase(Plateau plateau, int x, int y){
         int nbMenaces=0;
-        List<Position> piecesMenacantLaCase = EchecEtMat.isPieceMenaOrProtecParAutre(x, y, plateau, 0);
+        List<Position> piecesMenacantLaCase = EchecEtMat.isPieceMenaOrProtecParAutre(x, y, plateau, 2);
         for (Position menace: piecesMenacantLaCase) {
-            //System.out.println("menace  :  "+menace.toString());
             if (menace.getPiece().getCouleur()!=this.getCouleur())
                 nbMenaces+=1;
         }
         piecesMenacantLaCase = EchecEtMat.isPieceMenaOrProtecParAutre(x, y, plateau, 1);
         for (Position menace: piecesMenacantLaCase) {
-            //System.out.println("menace  :  "+menace.toString());
             if (menace.getPiece().getCouleur()!=this.getCouleur())
                 nbMenaces+=1;
         }
-        //System.out.println(nbMenaces+"   nb de menaces sur x: "+x+"  y: "+y);
         return nbMenaces;
     }
 
@@ -141,7 +138,6 @@ public class Roi extends Piece {
                     }
                 }
             }
-            //System.out.println("passé à 7");
             xTour=7;
         }
         return roqueDispo;

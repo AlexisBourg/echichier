@@ -16,8 +16,8 @@ public abstract class Piece {
     private int coordY;
     private String image;
     private final Couleur couleur;
-    private final List<Position> listePosDep;
-    private final List<Position> listeProtecDep;
+    private List<Position> listePosDep;
+    private List<Position> listeProtecDep;
     private Type type;
 
     //Constructeur
@@ -120,6 +120,10 @@ public abstract class Piece {
     public void setListeDep(Plateau plateau) {
     }
 
+    public void actualiserListeDep(List<Position> liste){
+        this.listePosDep = liste;
+    }
+
     public void deplacementPossible(Plateau plateau, int tmpX, int tmpY){}
 
     public List<Position> getListeDep() {
@@ -127,8 +131,8 @@ public abstract class Piece {
     }
 
     public void setListeProtecDep(Plateau plateau) {
-
     }
+
     public List<Position> getListeProtecDep() {
         return listeProtecDep;
     }

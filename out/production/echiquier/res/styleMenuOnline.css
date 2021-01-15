@@ -1,0 +1,10 @@
+#white{
+    -fx-background-color: white;
+    -fx-background-size: cover;
+}
+
+#gridPane{
+    -fx-background-image: url("AutreImage/fondMenuPrincipal.jpg");
+    -fx-background-size: cover;
+}
+

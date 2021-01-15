@@ -20,6 +20,8 @@ public class Fou extends Piece {
         int[][] dep ={{1,1},{-1,1},{1,-1},{-1,-1}};
 
         getListeDep().clear();
+        getListeProtecDep().clear();
+
         for (int i = 0; i < 4; i++) {
             deplacementPossible(plateau, dep[i][0], dep[i][1]);
         }
