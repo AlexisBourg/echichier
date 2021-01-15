@@ -74,13 +74,9 @@ public class ControllerPartiesPvP extends ControllerPartie{
             else
                 finDeDeplacement();
 
-            List<Position> menace = partieActuel.echec();
-            menace = partieActuel.echec();
-            this.echec = menace.size() > 0;
+            List<Position> menace =partieActuel.echec();
 
-            //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
-              //  System.out.println("Echec et mat");
-            List<Position> menace = partieActuel.echec();
+            menace = partieActuel.echec();
             if (menace.size()>0){
                 System.out.println("ECHEEEC");
                 this.echec = true;
