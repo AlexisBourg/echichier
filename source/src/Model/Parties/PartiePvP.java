@@ -32,8 +32,38 @@ public class PartiePvP extends Parties{
         return getEchiquier().getCase(tabCoord[0], tabCoord[1]).getPiece().getImage();
     }
 
+//    public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
+//        HashMap<Integer, int[]> liste = new HashMap<>();
+//
+//        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier());
+//
+//        if (!(getEchiquier().getCase(x, y).getPiece() instanceof Roi))
+//            affinageDeplacements(getEchiquier().getCase(x, y).getPiece().getListeDep(), menace);
+//
+//        for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
+//            liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
+//        }
+//
+//        return liste;
+//    }
+
+//    public void affinageDeplacements(List<Position> listeDep, List<Position> menace) {
+//        for (Position p : listeDep){ // Pour chaque déplacement possible pour la pièce
+//            for (Position m : menace){ // Pour chaque menace directe du roi
+//                if (!m.getPiece().getListeDep().contains(p)) // Si la position possible pour la pièce ne peut pas protéger le roi
+//                    listeDep.remove(p); // On l'enlève de la liste de ses déplacements
+//            }
+//        }
+//    }
 
 
+
+//    public boolean isRoiSelectionne(int[] caseDepartPlateau) {
+//        return (this.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece() instanceof Roi);
+//    }
+
+
+<<<<<<< HEAD
     public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
         HashMap<Integer, int[]> liste = new HashMap<>();
 
@@ -100,4 +130,6 @@ public class PartiePvP extends Parties{
     public boolean echecEtMat(List<Position> menace){
         return EchecEtMat.echecEtMat(getJoueurNonCourant(), this.getEchiquier(), menace);
     }
+=======
+>>>>>>> 24f456ab3f91502094725e8ef63adbe446f6691f
 }

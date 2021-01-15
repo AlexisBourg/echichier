@@ -78,7 +78,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(partie); // Les cases qui contenaient des pièces les retrouves
                                 }
-                                TraitementCliqueUn(mouseEvent.getSource());
+                                TraitementCliqueUn(mouseEvent.getSource(),partie);
                                 cliqueUnPasse = true;
                             break;
                             case 2:
