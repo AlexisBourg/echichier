@@ -26,13 +26,8 @@ public class ControllerPartiesPvE extends ControllerPartie {
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
-<<<<<<< HEAD
-                    switch (NumeroClique(partiePvE,mouseEvent.getSource())) {
-                        case 1:
-=======
                     switch (NumeroClique(partiesActuel,mouseEvent.getSource())) {
-                        case 1 -> {
->>>>>>> 24f456ab3f91502094725e8ef63adbe446f6691f
+                        case 1:
                             if (!listeDeplacements.isEmpty()) {
                                 retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                 restaurationImageDeplacementPossible(partiesActuel); // Les cases qui contenaient des pièces les retrouves
@@ -52,13 +47,9 @@ public class ControllerPartiesPvE extends ControllerPartie {
                                 partiesActuel.ChangementJoueurCourant();
                             }
                             cliqueUnPasse = false;
-<<<<<<< HEAD
 
                         break;
-=======
                         }
->>>>>>> 24f456ab3f91502094725e8ef63adbe446f6691f
-                    }
                 });
                 if (echiquier.getCase(x, y).isOccupe())
                     CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());

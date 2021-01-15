@@ -75,13 +75,11 @@ public class ControllerPartiesPvP extends ControllerPartie{
             else
                 finDeDeplacement();
 
-<<<<<<< HEAD
-            this.menace = partiesPvP.echec();
+            menace = partiesActuel.echec();
             this.echec = menace.size() > 0;
 
             //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
               //  System.out.println("Echec et mat");
-=======
             List<Position> menace = partiesActuel.echec();
             if (menace.size()>0){
                 System.out.println("ECHEEEC");
@@ -91,7 +89,6 @@ public class ControllerPartiesPvP extends ControllerPartie{
             }
             else
                 this.echec = false;
->>>>>>> 24f456ab3f91502094725e8ef63adbe446f6691f
 
             partiesActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partiesActuel.getJoueurCourant(), partiesActuel.getJoueurNonCourant());
             partiesActuel.ChangementJoueurCourant();
@@ -104,15 +101,14 @@ public class ControllerPartiesPvP extends ControllerPartie{
         this.pieceMangee = pieceMangee;
     }
 
-<<<<<<< HEAD
     public void declarationDeplacementPossible(int coordGrille, int[] coordPlateau) {
-        if (!partiesPvP.isCaseSansPiece(coordPlateau[0], coordPlateau[1])) {
+        if (!partiesActuel.isCaseSansPiece(coordPlateau[0], coordPlateau[1])) {
             //CssModifier.ChangeBackgroundImage(grille.getChildren().get(coordGrille), "");
         }
 
         CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "red");
 
-        if (!partiesPvP.isCaseSansPiece(coordPlateau[0], coordPlateau[1])) {
+        if (!partiesActuel.isCaseSansPiece(coordPlateau[0], coordPlateau[1])) {
             //CssModifier.ChangeBackgroundImage(grille.getChildren().get(coordGrille), partiesPvP.getEchiquier().getCase(coordPlateau[0], coordPlateau[1]).getPiece().getImage());
         }
     }
@@ -124,7 +120,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
      */
 
     public void montrerDeplacementDispo() {
-        HashMap<Integer, int[]> listeDeplacements = (!this.echec) ? partiesPvP.getDeplacements(caseDepartPlateau[0], caseDepartPlateau[1]) : partiesPvP.getDeplacementsEchec(caseDepartPlateau[0], caseDepartPlateau[1], menace);
+        HashMap<Integer, int[]> listeDeplacements = (!this.echec) ? partiesActuel.getDeplacements(caseDepartPlateau[0], caseDepartPlateau[1]) : partiesActuel.getDeplacementsEchec(caseDepartPlateau[0], caseDepartPlateau[1], menace);
         int coordGrille;
         int[] coordPlateau;
 
@@ -139,8 +135,6 @@ public class ControllerPartiesPvP extends ControllerPartie{
     }
 
 
-=======
->>>>>>> 24f456ab3f91502094725e8ef63adbe446f6691f
     public boolean roiSelectionne(){
         return  partiesActuel.isRoiSelectionne(caseDepartPlateau);
     }

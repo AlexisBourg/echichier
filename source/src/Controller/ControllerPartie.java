@@ -23,7 +23,7 @@ public abstract class ControllerPartie {
     protected int[] caseArriveePlateau;
     protected Piece pieceMangee;
     protected boolean echec =false;
-    private List<Position> menace;
+    protected List<Position> menace;
 
 
     @FXML
@@ -189,4 +189,5 @@ public abstract class ControllerPartie {
         CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), parties.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
 
     }
+
 }

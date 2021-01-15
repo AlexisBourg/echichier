@@ -63,7 +63,6 @@ public class PartiePvP extends Parties{
 //    }
 
 
-<<<<<<< HEAD
     public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
         HashMap<Integer, int[]> liste = new HashMap<>();
 
@@ -130,6 +129,5 @@ public class PartiePvP extends Parties{
     public boolean echecEtMat(List<Position> menace){
         return EchecEtMat.echecEtMat(getJoueurNonCourant(), this.getEchiquier(), menace);
     }
-=======
->>>>>>> 24f456ab3f91502094725e8ef63adbe446f6691f
+
 }
