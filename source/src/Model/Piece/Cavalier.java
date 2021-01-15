@@ -21,6 +21,7 @@ public class Cavalier extends Piece {
         int[][] dep ={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
         getListeDep().clear();
+        getListeProtecDep().clear();
         for (int i=0; i<8; i++) {
             deplacementPossible(plateau, dep[i][0], dep[i][1]);
         }

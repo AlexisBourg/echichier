@@ -91,11 +91,8 @@ public abstract class ControllerPartie {
      */
     public int numClique(int x, int y, Parties parties) {
         if (!parties.isCaseSansPiece(x, y) && parties.isPieceSelecAppartientAuJoueurCourant(x, y, parties.getJoueur(parties.getIndexJoueurCourant()))){
-            System.out.println("oui1");
             return 1;
         }
-        System.out.println(parties.isCaseSansPiece(x, y));
-        System.out.println("oui2");
         return 2;
     }
 

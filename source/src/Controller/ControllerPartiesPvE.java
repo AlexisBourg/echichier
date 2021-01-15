@@ -27,15 +27,15 @@ public class ControllerPartiesPvE extends ControllerPartiesPvP{
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
                     switch (NumeroClique(partiePvE,mouseEvent.getSource())) {
-                        case 1 -> {
+                        case 1:
                             if (!listeDeplacements.isEmpty()) {
                                 retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                 restaurationImageDeplacementPossible(partiePvE); // Les cases qui contenaient des pièces les retrouves
                             }
                             TraitementCliqueUn(mouseEvent.getSource());
                             cliqueUnPasse = true;
-                        }
-                        case 2 -> {
+                        break;
+                        case 2:
                             if (cliqueUnPasse) {
                                 TraitementCliqueDeux(mouseEvent.getSource());
                                 partiePvE.ChangementJoueurCourant();
@@ -47,7 +47,7 @@ public class ControllerPartiesPvE extends ControllerPartiesPvP{
                             }
                             cliqueUnPasse = false;
 
-                        }
+                        break;
                     }
                 });
                 if (echiquier.getCase(x, y).isOccupe())

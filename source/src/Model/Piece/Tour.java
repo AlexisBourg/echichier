@@ -15,6 +15,8 @@ public class Tour extends Piece {
     public void setListeDep(Plateau plateau) {
 
         getListeDep().clear();
+        getListeProtecDep().clear();
+
         int tmpX = getCoordX(), tmpY = getCoordY();
         int[][] dep = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         for (int i = 0; i < 4; i++) {

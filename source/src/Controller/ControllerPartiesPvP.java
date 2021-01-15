@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.PLateau.Position;
+import Model.Parties.EchecEtMat;
 import Model.Parties.PartiePvP;
 import Model.Piece.Piece;
 import javafx.event.EventHandler;
@@ -41,7 +42,6 @@ public class ControllerPartiesPvP  extends ControllerPartie{
                     public void handle(MouseEvent mouseEvent) {
                         switch (NumeroClique(partiesPvP,mouseEvent.getSource())) {
                             case 1:
-                                System.out.println("1111111111111");
                                 if (!listeDeplacements.isEmpty()) { // Si le clique 1 avait déjà été enclenché
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(partiesPvP); // Les cases qui contenaient des pièces les retrouves
@@ -51,7 +51,6 @@ public class ControllerPartiesPvP  extends ControllerPartie{
                                 break;
 
                             case 2:
-                                System.out.println("2222222222222");
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
                                 }
@@ -109,27 +108,21 @@ public class ControllerPartiesPvP  extends ControllerPartie{
 
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
-            /*if (roiSelectionne() && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
+            if (roiSelectionne() && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
                 roque();
-            else*/
+            else
                 finDeDeplacement();
 
-            List<Position> menace = partiesPvP.echec();
-            if (menace.size()>0){
-                System.out.println("ECHEEEC");
-                this.echec = true;
-                if (partiesPvP.echecEtMat(menace))
-                    System.out.println("EchecEtMAAAAAAAAAAAAAAAT");
-            }
-            else
-                this.echec = false;
+            this.menace = partiesPvP.echec();
+            this.echec = menace.size() > 0;
+
+            //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
+              //  System.out.println("Echec et mat");
 
             partiesPvP.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partiesPvP.getJoueurCourant(), partiesPvP.getJoueurNonCourant());
             partiesPvP.ChangementJoueurCourant();
         }
     }
-
-
 
     public void finDeDeplacement(){
         Piece pieceMangee=null;
@@ -141,9 +134,6 @@ public class ControllerPartiesPvP  extends ControllerPartie{
         // Pour arriver sur la case d'arrivée
         this.pieceMangee = pieceMangee;
     }
-
-
-
 
     public void declarationDeplacementPossible(int coordGrille, int[] coordPlateau) {
         if (!partiesPvP.isCaseSansPiece(coordPlateau[0], coordPlateau[1])) {

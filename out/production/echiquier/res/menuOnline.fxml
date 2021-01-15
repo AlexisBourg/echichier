@@ -6,16 +6,81 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" fx:id="page" id="vbox" stylesheets="@styleMenuPrincipal.css" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-    <Button fx:id="boutonLocalPvp" prefWidth="242.0" minWidth="50" minHeight="10" text="Héberger partie">
-        <VBox.margin>
-            <Insets bottom="30.0" top="-50.0" />
-        </VBox.margin>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.shape.Rectangle?>
+<GridPane xmlns:fx="http://javafx.com/fxml" id="gridPane" alignment="center" hgap="20" vgap="11" stylesheets="@styleMenuOnline.css">
+
+    <padding>
+        <Insets top="25" right="25" bottom="10" left="25"/>
+    </padding>
+
+    <Label text="Créer une partie :"
+           GridPane.columnIndex="0" GridPane.rowIndex="0"
+           GridPane.columnSpan="2"
+
+    />
+    <Button fx:id="heberger"
+            GridPane.columnIndex="0" GridPane.rowIndex="3"
+            GridPane.columnSpan="2"
+            prefWidth="242.0"
+            minWidth="50"
+            minHeight="10"
+            text="Créer">
+
     </Button>
-    <Button fx:id="boutonLocalPve" prefWidth="242.0" minWidth="50" minHeight="10" text="Rejoindre partie">
-        <VBox.margin>
-            <Insets bottom="30.0" />
-        </VBox.margin>
+
+    <Label text="Rejoindre une partie :"
+           GridPane.columnIndex="2" GridPane.rowIndex="0"
+           GridPane.columnSpan="2"
+    />
+
+    <VBox  GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <Label text="Entrer l'adresse de connection :"/>
+        <TextField fx:id="ecrirAdresse"/>
+        <HBox.margin>
+            <Insets bottom="30.0" top="-50.0"/>
+        </HBox.margin>
+    </VBox>
+
+
+    <VBox  GridPane.columnIndex="3" GridPane.rowIndex="1">
+        <Label text="Entrer le port de connection :"/>
+        <TextField fx:id="ecrirPort"/>
+        <HBox.margin>
+            <Insets bottom="30.0" top="-50.0"/>
+        </HBox.margin>
+    </VBox>
+
+    <Button fx:id="rejoindre"
+            GridPane.columnIndex="2" GridPane.rowIndex="3"
+            GridPane.columnSpan="2"
+            prefWidth="242.0"
+            minWidth="50"
+            minHeight="10"
+            text="Rejoindre">
+
     </Button>
-</VBox>
+
+    <Button fx:id="retourMenu"
+            prefWidth="242.0"
+            minWidth="50"
+            minHeight="10"
+            text="Retour"
+            GridPane.columnIndex="0" GridPane.rowIndex="4"
+           GridPane.columnSpan="4">
+
+    </Button>
+
+    <Rectangle id="white"
+               GridPane.columnSpan="4" GridPane.rowSpan="4"
+               GridPane.columnIndex="0" GridPane.rowIndex="0"
+    />
+
+</GridPane>
+

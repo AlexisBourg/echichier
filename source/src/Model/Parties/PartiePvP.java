@@ -6,11 +6,15 @@ import Model.Joueur.InterfaceJoueur;
 import Model.Joueur.Joueur;
 import Model.PLateau.Plateau;
 import Model.PLateau.Position;
+import Model.Piece.Couleur;
 import Model.Piece.Piece;
 import Model.Piece.Pion;
 import Model.Piece.Roi;
+import javafx.geometry.Pos;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 public class PartiePvP extends Parties{
@@ -33,30 +37,40 @@ public class PartiePvP extends Parties{
     public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
         HashMap<Integer, int[]> liste = new HashMap<>();
 
-        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier());
+        if (menace.size()>1)
+            return liste;
+
+        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier()); // set la liste de déplacements pour la pièce sélectionnée
 
         if (!(getEchiquier().getCase(x, y).getPiece() instanceof Roi))
-            affinageDeplacements(getEchiquier().getCase(x, y).getPiece().getListeDep(), menace);
+            affinageDeplacements(getEchiquier().getCase(x, y).getPiece(), getEchiquier().getCase(x, y).getPiece().getListeDep(), menace.get(0));
 
-        for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
+        for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){ // On récupère puis retourne l'ensemble des positions disponibles pour la pièce sélectionnée après avoir retiré les positions qui ne permettent pas de protéger le roi
             liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
         }
 
         return liste;
     }
 
-    public void affinageDeplacements(List<Position> listeDep, List<Position> menace) {
-        for (Position p : listeDep){ // Pour chaque déplacement possible pour la pièce
-            for (Position m : menace){ // Pour chaque menace directe du roi
-                if (!m.getPiece().getListeDep().contains(p)) // Si la position possible pour la pièce ne peut pas protéger le roi
-                    listeDep.remove(p); // On l'enlève de la liste de ses déplacements
+    public void affinageDeplacements(Piece piece, List<Position> listeDep, Position m) {
+        LinkedList<Position> caseDispo = new LinkedList<>();
+        LinkedList<Position> newListeDep = new LinkedList<>();
+
+        if (listeDep.contains(m)){
+            newListeDep.add(m);
+        }
+
+        if(!EchecEtMat.isPossibInterpo(this.getJoueurCourant(), m.getX(), m.getY(), getEchiquier(), caseDispo)){
+            listeDep.clear();
+        }
+        else{
+            for (Position p : caseDispo){
+                if (listeDep.contains(p))
+                    newListeDep.add(p);
             }
         }
+        piece.actualiserListeDep(newListeDep);
     }
-
-
-
-
 
     public void roqueTour(int[] arriveeRoi){
         int x = arriveeRoi[0];
