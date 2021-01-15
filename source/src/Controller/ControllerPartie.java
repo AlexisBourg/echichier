@@ -134,7 +134,7 @@ public abstract class ControllerPartie {
      * Cette méthode indique si la case sélectionnée contient une pièce appartenant au joueur et par conséquent, si l'on peut ou non la déplacer
      *
      * @param source : bouton cliqué
-     * @return : le fait que la case fasse (Parties) partiesActuel du jeu du joueur
+     * @return : le fait que la case fasse (Parties) partieActuel du jeu du joueur
      */
     public boolean verificationClique(Object source, Parties parties) {
         return (parties.verifCase(caseDepartPlateau[0], caseDepartPlateau[1], parties.getJoueurCourant()));
@@ -168,7 +168,7 @@ public abstract class ControllerPartie {
         CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "red");
 
         if (!parties.isCaseSansPiece(coordPlateau[0], coordPlateau[1])) {
-            //CssModifier.ChangeBackgroundImage(grille.getChildren().get(coordGrille), (Parties) partiesActuel.getEchiquier().getCase(coordPlateau[0], coordPlateau[1]).getPiece().getImage());
+            //CssModifier.ChangeBackgroundImage(grille.getChildren().get(coordGrille), (Parties) partieActuel.getEchiquier().getCase(coordPlateau[0], coordPlateau[1]).getPiece().getImage());
         }
     }
 
@@ -180,13 +180,39 @@ public abstract class ControllerPartie {
         parties.roqueTour(caseArriveePlateau);
     }
 
-    public void changerBackgroundCase(Parties parties){
+    public Piece changerBackgroundCase(Parties partie){
         Piece pieceMangee=null;
         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
-        restaurationImageDeplacementPossible(parties); // Les cases qui contenaient des pièces les retrouves
+        restaurationImageDeplacementPossible(partie); // Les cases qui contenaient des pièces les retrouves
         CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..
-        pieceMangee = changementsPlateau(parties); // Le plateau effectue les changements de position
-        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), parties.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
+        pieceMangee = changementsPlateau(partie); // Le plateau effectue les changements de position
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partie.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
+        // Pour arriver sur la case d'arrivée
+        return pieceMangee;
+    }
 
+    public boolean roiSelectionne(Parties partieActuel){
+        return  partieActuel.isRoiSelectionne(caseDepartPlateau);
+    }
+
+    public void roque(Parties partieActuel){
+        int xTour;
+        retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
+        restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..
+        pieceMangee = changementsPlateau(partieActuel); // Le plateau effectue les changements de position
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partieActuel.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
+        // Pour arriver sur la case d'arrivée
+
+        xTour = (caseArriveePlateau[0]==2) ? 0 : 7;
+
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(partieActuel.getNumCaseGrille(new int[]{xTour, caseArriveePlateau[1]})), ""); // La pièce de la case de départ disparaît..
+        changementsPlateauRoque(partieActuel); // Le plateau effectue les changements de position
+        if (caseArriveePlateau[0]==2)
+            CssModifier.ChangeBackgroundImage(grille.getChildren().get(partieActuel.getNumCaseGrille(new int[]{caseArriveePlateau[0]+1, caseArriveePlateau[1]})), partieActuel.getEchiquier().getCase(caseArriveePlateau[0]+1, caseArriveePlateau[1]).getPiece().getImage());
+        else
+            CssModifier.ChangeBackgroundImage(grille.getChildren().get(partieActuel.getNumCaseGrille(new int[]{caseArriveePlateau[0]-1, caseArriveePlateau[1]})), partieActuel.getEchiquier().getCase(caseArriveePlateau[0]-1,  caseArriveePlateau[1]).getPiece().getImage());
+
+        // Pour arriver sur la case d'arrivée
     }
 }

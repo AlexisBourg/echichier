@@ -2,50 +2,52 @@ package Controller;
 
 import Model.Joueur.IA;
 import Model.PLateau.Plateau;
+import Model.PLateau.Position;
 import Model.Parties.PartiePvE;
 import Model.Piece.Couleur;
 import Model.Piece.Piece;
 import javafx.fxml.FXML;
 import res.CssModifier;
 
+import java.util.List;
 import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {
 
     private IA ia;
-    private PartiePvE partiesActuel;
+    private PartiePvE partieActuel;
 
     public ControllerPartiesPvE(){
         super();
-        partiesActuel= new PartiePvE();
+        partieActuel= new PartiePvE();
     }
 
     @FXML
     public void chargementPlateau() {
-        Plateau echiquier = partiesActuel.getEchiquier();
+        Plateau echiquier = partieActuel.getEchiquier();
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
-                    switch (NumeroClique(partiesActuel,mouseEvent.getSource())) {
+                    switch (NumeroClique(partieActuel,mouseEvent.getSource())) {
                         case 1 -> {
                             if (!listeDeplacements.isEmpty()) {
                                 retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
-                                restaurationImageDeplacementPossible(partiesActuel); // Les cases qui contenaient des pièces les retrouves
+                                restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
                             }
-                            TraitementCliqueUn(mouseEvent.getSource(), partiesActuel);
+                            TraitementCliqueUn(mouseEvent.getSource(), partieActuel);
                             cliqueUnPasse = true;
                         }
                         case 2 -> {
                             if (cliqueUnPasse) {
-                                TraitementCliqueDeuxIA(mouseEvent.getSource());
-                                System.out.println("test");
-                                partiesActuel.ChangementJoueurCourant();
+                                TraitementCliqueDeux(mouseEvent.getSource());
 
 
-                                ia = partiesActuel.getIA();
+                                partieActuel.ChangementJoueurCourant();
+                                System.out.println("debut ia");
+                                ia = partieActuel.getIA();
                                 deplacementIA(ia);
-                                partiesActuel.ChangementJoueurCourant();
-                            }
+                                partieActuel.ChangementJoueurCourant();
+                                System.out.println("joueuer courant"+partieActuel.getIndexJoueurCourant());                            }
                             cliqueUnPasse = false;
                         }
                     }
@@ -56,27 +58,49 @@ public class ControllerPartiesPvE extends ControllerPartie {
         }
     }
 
+
+    /**
+     * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
+     *
+     * @param source : bouton cliqué
+     */
+    public void TraitementCliqueDeux(Object source) {
+        caseArriveeGrille = partieActuel.getNumCaseGrille(decompositionIdBouton(source));
+
+        if (listeDeplacements.containsKey(caseArriveeGrille)) {
+            caseArriveePlateau = decompositionIdBouton(source);
+            finDeDeplacement();
+        }
+
+    }
+
+    public void finDeDeplacement() {
+        pieceMangee=changerBackgroundCase(partieActuel);
+        //changementsPlateau(partieActuel); // Le plateau effectue les changements de position pour l'ia
+
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partieActuel.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
+        // Pour arriver sur la case d'arrivée
+    }
+
+
+
+    /**
+     * --------------------------------------GESTION DE L'IA------------------------------------------
+     **/
+
     /**
      * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
      * @param source : bouton cliqué
      */
 
     public void TraitementCliqueDeuxIA(Object source) {
-        caseArriveeGrille = partiesActuel.getNumCaseGrille(decompositionIdBouton(source));
+        caseArriveeGrille = partieActuel.getNumCaseGrille(decompositionIdBouton(source));
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
             finDeDeplacementIA();
-            partiesActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partiesActuel.getJoueurCourant(), partiesActuel.getJoueurNonCourant());
+            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
 
         }
-    }
-
-    /**
-     * --------------------------------------GESTION DE L'IA------------------------------------------
-     **/
-
-    public Piece changementsPlateauIA(){
-        return partiesActuel.actualiserPlateauIA(caseDepartPlateau, caseArriveePlateau);
     }
 
     /**
@@ -97,10 +121,10 @@ public class ControllerPartiesPvE extends ControllerPartie {
         int noPiece = genererInt(ia.getPieces().length);
         boolean pieceMorte=true;
         Piece pieceSelectione = ia.getPieces()[noPiece];
-        pieceSelectione.setListeDep(partiesActuel.getEchiquier());
+        pieceSelectione.setListeDep(partieActuel.getEchiquier());
         System.out.println("-------------------------------------------------------------");
 
-        while (pieceSelectione.getCouleur()!= Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || pieceMorte || partiesActuel.isCaseSansPiece(pieceSelectione.getCoordX(),pieceSelectione.getCoordY())) {   //verifie que la piece selectionné puisse se deplacer
+        while (pieceSelectione.getCouleur()!= Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || pieceMorte || partieActuel.isCaseSansPiece(pieceSelectione.getCoordX(),pieceSelectione.getCoordY())) {   //verifie que la piece selectionné puisse se deplacer
             noPiece = genererInt(ia.getPieces().length);
             pieceSelectione = ia.getPieces()[noPiece];
 
@@ -108,34 +132,29 @@ public class ControllerPartiesPvE extends ControllerPartie {
             if (!ia.estPieceMorte(pieceSelectione)){
                 pieceMorte=false;
                 //System.out.println("test piece pas morte");
-                pieceSelectione.setListeDep(partiesActuel.getEchiquier());
+                pieceSelectione.setListeDep(partieActuel.getEchiquier());
 
             }
         }
 
-        System.out.println("la piece selectionné est : "+ pieceSelectione +" la couleur est : "+pieceSelectione.getCouleur());
-
         caseDepartPlateau = attributionCoord(pieceSelectione);
-        caseDepartGrille = partiesActuel.getNumCaseGrille(caseDepartPlateau);
+        caseDepartGrille = partieActuel.getNumCaseGrille(caseDepartPlateau);
 
         caseArriveePlateau = choisirDeplacementPiece(caseDepartPlateau);
-        caseArriveeGrille = partiesActuel.getNumCaseGrille(caseArriveePlateau);
+        caseArriveeGrille = partieActuel.getNumCaseGrille(caseArriveePlateau);
 
-        System.out.println("la piece selectionne se deplace vers : x"+ caseArriveePlateau[0]+" y:"+caseArriveePlateau[1]);
-        finDeDeplacementIA();
+        finDeDeplacement();
     }
 
     public void finDeDeplacementIA() {
-        changerBackgroundCase(partiesActuel);
-        if(partiesActuel.getIndexJoueurCourant()==1){
-            changementsPlateau(partiesActuel); // Le plateau effectue les changements de position pour l'ia
-        }
-        else {
-            changementsPlateauIA(); // Le plateau effectue les changements de position
-        }
-        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partiesActuel.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
+
+        changerBackgroundCase(partieActuel);
+
+        pieceMangee=changementsPlateauIA(); // Le plateau effectue les changements de position
+
+        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partieActuel.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
         // Pour arriver sur la case d'arrivée
-        this.pieceMangee = pieceMangee;
+
     }
 
     private int[] attributionCoord(Piece piece) {
@@ -149,7 +168,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
         int noDep;
         int[] tabCoord ;
 
-        listeDeplacements = partiesActuel.getDeplacements(caseDepPLa[0], caseDepPLa[1]);
+        listeDeplacements = partieActuel.getDeplacements(caseDepPLa[0], caseDepPLa[1]);
 
         noDep = genererInt(64);
         while (!listeDeplacements.containsKey(noDep)) {
@@ -157,5 +176,9 @@ public class ControllerPartiesPvE extends ControllerPartie {
         }
         tabCoord = listeDeplacements.get(noDep);
         return tabCoord;
+    }
+
+    public Piece changementsPlateauIA(){
+        return partieActuel.actualiserPlateauIA(caseDepartPlateau, caseArriveePlateau);
     }
 }
