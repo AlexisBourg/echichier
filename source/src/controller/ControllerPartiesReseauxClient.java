@@ -1,10 +1,9 @@
 package controller;
 
-import model.joueur.Joueur;
 import model.plateau.Plateau;
 import model.parties.PartiePvP;
 import javafx.fxml.FXML;
-import res.CssModifier;
+import res.interfaceGraphique.CssModifier;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

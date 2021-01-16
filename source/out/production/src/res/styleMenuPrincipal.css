@@ -1,9 +1,0 @@
-#vbox{
-    -fx-background-image: url("autreImage/fondMenuPrincipal.jpg");
-    -fx-background-size: cover;
-}
-
-Button{
-    -fx-font-size: 20;
-    -fx-margin-bottom: 30;
-}

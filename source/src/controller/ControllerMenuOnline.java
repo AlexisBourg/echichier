@@ -56,7 +56,7 @@ public class ControllerMenuOnline {
             @Override
             public void handle(MouseEvent mouseEvent) {
 
-                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
+                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/interfaceGraphique/plateau.fxml"));
                 PartiePvP partie = new PartiePvP();
                 ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
                 try {
@@ -94,7 +94,7 @@ public class ControllerMenuOnline {
         rejoindre.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
+                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/interfaceGraphique/plateau.fxml"));
                 PartiePvP partie = new PartiePvP();
                 ControllerPartiesReseauxClient controller = null;
                 try {

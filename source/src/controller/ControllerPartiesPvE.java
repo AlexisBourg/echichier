@@ -1,7 +1,6 @@
 package controller;
 
 import model.joueur.IA;
-import model.joueur.Joueur;
 import model.parties.EchecEtMat;
 import model.plateau.Plateau;
 import model.parties.PartiePvE;
@@ -9,12 +8,12 @@ import model.piece.Couleur;
 import model.piece.Piece;
 import javafx.fxml.FXML;
 import model.plateau.Position;
-import res.CssModifier;
+import res.interfaceGraphique.CssModifier;
 
 import java.util.List;
 import java.util.Random;
 
-public class ControllerPartiesPvE extends ControllerPartie {
+public class ControllerPartiesPvE extends ControllerPartie  {
 
     private IA ia;
     private PartiePvE partieActuel;

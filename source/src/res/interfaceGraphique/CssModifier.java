@@ -1,4 +1,4 @@
-package res;
+package res.interfaceGraphique;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;

@@ -24,7 +24,7 @@ public class Main extends Application {
 
 
 
-        FXMLLoader load = new FXMLLoader(getClass().getResource("../res/menuPrincipal.fxml"));
+        FXMLLoader load = new FXMLLoader(getClass().getResource("../res/interfaceGraphique/menuPrincipal.fxml"));
         //PartieGraph partie = new PartieGraph();
         //ControllerPartiesPvP controller = new ControllerPartiesPvP(partie);
         //load.setController(controller);

@@ -1,16 +1,12 @@
 package controller;
 
-import model.joueur.Joueur;
 import model.parties.PartiePvP;
 import model.parties.Parties;
 import javafx.event.EventHandler;
 import model.plateau.Plateau;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import res.CssModifier;
-
-import java.util.HashMap;
-import java.util.Map;
+import res.interfaceGraphique.CssModifier;
 
 public class ControllerPartiesPvP extends ControllerPartie{
 
@@ -68,8 +64,5 @@ public class ControllerPartiesPvP extends ControllerPartie{
     }
 
     public void arriere(){
-
     }
-
-
 }
