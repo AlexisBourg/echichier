@@ -7,20 +7,21 @@ import model.parties.Parties;
 import model.piece.Piece;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import res.interfaceGraphique.LettrePlateau;
 import res.son.Son;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import res.ChessGrid;
-import res.CssModifier;
+import res.interfaceGraphique.ChessGrid;
+import res.interfaceGraphique.CssModifier;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ControllerPartie {
+public abstract class ControllerPartie extends ControllerAffichage {
 
-    protected HashMap<Integer, int[]> listeDeplacements;
+
     protected boolean cliqueUnPasse = false;
     protected int caseDepartGrille;
     protected int[] caseDepartPlateau;
@@ -29,53 +30,18 @@ public abstract class ControllerPartie {
     protected Piece pieceMangee;
     protected boolean echec =false;
     protected List<Position> menace;
-    protected ObservableList<String> listeCoups = FXCollections.observableArrayList();
+
     protected ControllerSon son= new ControllerSon();
     protected EditeurCoup editeurCoup = new EditeurCoup();
 
 
-    @FXML
-    protected ChessGrid grille;
 
-    @FXML
-    protected ListView<String> coups;
 
-    @FXML
-    protected Button arriere;
 
-    @FXML
-    protected Button suivant;
 
 
     public ControllerPartie(){
         listeDeplacements = new HashMap<>();
-    }
-
-
-    /**
-     * Ré-affecte le style de base des cases de déplacement possible
-     */
-    public void retablissementCouleurCaseDeplacementPossibles() {
-        int coordGrille;
-        int[] coordPlateau;
-
-        for (Map.Entry coord : listeDeplacements.entrySet()) {
-            coordGrille = (int) coord.getKey();
-            coordPlateau = (int[]) coord.getValue();
-
-            if (coordPlateau[1] % 2 == 0) {
-                if (coordPlateau[0] % 2 == 0)
-                    CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "white;");
-                else
-                    CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "black;");
-            } else {
-                if (coordPlateau[0] % 2 == 1)
-                    CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "white;");
-                else
-                    CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "black;");
-            }
-
-        }
     }
 
 
@@ -144,6 +110,47 @@ public abstract class ControllerPartie {
             caseDepartGrille = parties.getNumCaseGrille(decompositionIdBouton(source));
         }
 
+    }
+
+    //--------------------------------------------------------------------
+    /**
+     * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
+     *
+     * @param source : bouton cliqué
+     */
+    public void TraitementCliqueDeux(Object source, Parties partieActuel) {
+
+        caseArriveeGrille = partieActuel.getNumCaseGrille(decompositionIdBouton(source));
+
+        if (listeDeplacements.containsKey(caseArriveeGrille)) {
+            caseArriveePlateau = decompositionIdBouton(source);
+            if (roiSelectionne(partieActuel) && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
+                roque(partieActuel);
+            else
+                finDeDeplacement(partieActuel);
+
+            //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
+            //  System.out.println("Echec et mat");
+
+            menace = partieActuel.echec();
+            if (menace.size()>0){
+                System.out.println("ECHEEEC");
+                this.echec = true;
+                if (partieActuel.echecEtMat(menace))
+                    System.out.println("EchecEtMAAAAAAAAAAAAAAAT");
+            }
+            else
+                this.echec = false;
+
+            ajoutCoupListe(caseDepartPlateau, caseArriveePlateau);
+            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
+            partieActuel.ChangementJoueurCourant();
+        }
+    }
+
+    public void finDeDeplacement(Parties partieActuel){
+        // Pour arriver sur la case d'arrivée
+        this.pieceMangee=changerBackgroundCase(partieActuel);
     }
 
     /**

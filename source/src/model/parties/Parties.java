@@ -34,11 +34,15 @@ public abstract class Parties{
         return echiquier;
     }
 
+<<<<<<< HEAD
     public void setEchiquier(Plateau plateau){
         this.echiquier = plateau;
     }
 
     public Joueur getJoueur(int num){return (Joueur) joueurs[num];}
+=======
+    public InterfaceJoueur getJoueur(int num){return  joueurs[num];}
+>>>>>>> 1dead133b172ed47654c754c391886c961f0f2da
 
     public int getIndexJoueurCourant() { return indexJoueurCourant; }
 
@@ -78,11 +82,11 @@ public abstract class Parties{
         return liste;
     }
 
-    public Joueur getJoueurCourant(){
+    public InterfaceJoueur getJoueurCourant(){
         return getJoueur(indexJoueurCourant);
     }
 
-    public Joueur getJoueurNonCourant(){
+    public InterfaceJoueur getJoueurNonCourant(){
         return getJoueur((indexJoueurCourant+1)%2);
     }
 
@@ -128,7 +132,7 @@ public abstract class Parties{
 
 
 
-    public void stockerCoup(int[] depart, int[] arrivee, Piece pieceMangee, Joueur joueurCourant, Joueur joueurNonCourant){
+    public void stockerCoup(int[] depart, int[] arrivee, Piece pieceMangee, InterfaceJoueur joueurCourant, InterfaceJoueur joueurNonCourant){
         getListeCoup().add(new Coup(depart, arrivee, pieceMangee, joueurCourant, joueurNonCourant));
     }
 

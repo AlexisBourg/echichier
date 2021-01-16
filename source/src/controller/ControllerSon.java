@@ -8,7 +8,6 @@ import java.io.File;
 
 public class ControllerSon {
 
-
     public void jouerSon(String fileName){
         File sound =new File(fileName);
         try{

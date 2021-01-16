@@ -7,10 +7,7 @@ import javafx.event.EventHandler;
 import model.plateau.Plateau;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import res.CssModifier;
-
-import java.util.HashMap;
-import java.util.Map;
+import res.interfaceGraphique.CssModifier;
 
 public class ControllerPartiesPvP extends ControllerPartie{
 
@@ -56,10 +53,14 @@ public class ControllerPartiesPvP extends ControllerPartie{
 
                             case 2:
                                 if (cliqueUnPasse) {
+<<<<<<< HEAD
                                     TraitementCliqueDeux(mouseEvent.getSource());
                                     editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
                                     //System.out.println(editeurCoup.getCoups());
                                     //System.out.println(editeurCoup.getIndexCourant());
+=======
+                                    TraitementCliqueDeux(mouseEvent.getSource(),partieActuel);
+>>>>>>> 1dead133b172ed47654c754c391886c961f0f2da
                                 }
                                 cliqueUnPasse = false;
                                 break;
@@ -74,6 +75,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
         }
     }
 
+<<<<<<< HEAD
     public void actualiserEtatPlateau(){
         Plateau echiquier = partieActuel.getEchiquier();
 
@@ -246,5 +248,8 @@ public class ControllerPartiesPvP extends ControllerPartie{
         // Pour arriver sur la case d'arrivée
         pieceMangee=changerBackgroundCase(partieActuel);
 
+=======
+    public void arriere(){
+>>>>>>> 1dead133b172ed47654c754c391886c961f0f2da
     }
 }

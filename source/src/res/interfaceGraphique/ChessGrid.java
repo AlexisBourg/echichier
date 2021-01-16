@@ -1,15 +1,9 @@
-package res;
+package res.interfaceGraphique;
 
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
-import res.CssModifier;
 
 public class ChessGrid extends GridPane {
 
