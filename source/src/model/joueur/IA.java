@@ -61,6 +61,8 @@ public class IA implements InterfaceJoueur{
         nbPiecesMortes+=1;
     }
 
+    @Override
+    public void removePieceMorte() { piecesMortes[nbPiecesMortes] = null; }
 
 
     public void enleverPiece(Piece piece){

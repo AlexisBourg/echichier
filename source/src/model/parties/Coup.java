@@ -1,5 +1,6 @@
 package model.parties;
 
+import model.joueur.InterfaceJoueur;
 import model.joueur.Joueur;
 import model.piece.Piece;
 
@@ -7,11 +8,11 @@ public class Coup {
     private final int[] depart;
     private final int[] arrivee;
     private final Piece pieceMangee;
-    private final Joueur joueurCourant;
-    private final Joueur joueurNonCourant;
+    private final InterfaceJoueur joueurCourant;
+    private final InterfaceJoueur joueurNonCourant;
     // trait représenté par la couleur du joueur courant.
 
-    public Coup(int[] depart, int[] arrivee, Piece pieceMangee, Joueur joueurCourant, Joueur joueurNonCourant){
+    public Coup(int[] depart, int[] arrivee, Piece pieceMangee, InterfaceJoueur joueurCourant, InterfaceJoueur joueurNonCourant){
         this.depart = depart;
         this.arrivee = arrivee;
         this.pieceMangee = pieceMangee;
@@ -28,11 +29,11 @@ public class Coup {
     }
 
     public Joueur getJoueurCourant() {
-        return joueurCourant;
+        return (Joueur) joueurCourant;
     }
 
     public Joueur getJoueurNonCourant(){
-        return this.joueurNonCourant;
+        return (Joueur) joueurNonCourant;
     }
 
     public Piece getPieceMangee() {

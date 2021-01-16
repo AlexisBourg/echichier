@@ -1,5 +1,6 @@
 package controller;
 
+import model.joueur.Joueur;
 import model.plateau.Plateau;
 import model.parties.PartiePvP;
 import javafx.event.EventHandler;
@@ -116,7 +117,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
             finDeDeplacement();
-            partie.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partie.getJoueurCourant(), partie.getJoueurNonCourant());
+            partie.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partie.getJoueurCourant(),(Joueur) partie.getJoueurNonCourant());
         }
 
     }

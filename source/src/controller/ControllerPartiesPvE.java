@@ -1,13 +1,17 @@
 package controller;
 
 import model.joueur.IA;
+import model.joueur.Joueur;
+import model.parties.EchecEtMat;
 import model.plateau.Plateau;
 import model.parties.PartiePvE;
 import model.piece.Couleur;
 import model.piece.Piece;
 import javafx.fxml.FXML;
+import model.plateau.Position;
 import res.CssModifier;
 
+import java.util.List;
 import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {
@@ -38,8 +42,8 @@ public class ControllerPartiesPvE extends ControllerPartie {
                         case 2:
                             if (cliqueUnPasse) {
                                 TraitementCliqueDeux(mouseEvent.getSource());
-
-                                partieActuel.ChangementJoueurCourant();
+                                System.out.println("test");
+                                //partieActuel.ChangementJoueurCourant();
                                 System.out.println("debut ia");
                                 ia = partieActuel.getIA();
                                 deplacementIA(ia);
@@ -64,13 +68,36 @@ public class ControllerPartiesPvE extends ControllerPartie {
      * @param source : bouton cliqué
      */
     public void TraitementCliqueDeux(Object source) {
+
         caseArriveeGrille = partieActuel.getNumCaseGrille(decompositionIdBouton(source));
 
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
-            finDeDeplacement();
-        }
+            if (roiSelectionne(partieActuel) && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
+                roque(partieActuel);
+            else
+                finDeDeplacement();
 
+            menace = IAechec();
+            this.echec = menace.size() > 0;
+
+            //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
+            //  System.out.println("Echec et mat");
+
+            menace = partieActuel.echec();
+            if (menace.size()>0){
+                System.out.println("ECHEEEC");
+                this.echec = true;
+                if (partieActuel.echecEtMat(menace))
+                    System.out.println("EchecEtMAAAAAAAAAAAAAAAT");
+            }
+            else
+                this.echec = false;
+
+            ajoutCoupListe(caseDepartPlateau, caseArriveePlateau);
+            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
+            partieActuel.ChangementJoueurCourant();
+        }
     }
 
     public void finDeDeplacement() {
@@ -143,6 +170,11 @@ public class ControllerPartiesPvE extends ControllerPartie {
 
         finDeDeplacement();
     }
+
+    public List<Position> IAechec(){
+        return EchecEtMat.echec(partieActuel.getJoueurNonCourant(), this.partieActuel.getEchiquier());
+    }
+
 
 //    public void finDeDeplacementIA() {
 //
