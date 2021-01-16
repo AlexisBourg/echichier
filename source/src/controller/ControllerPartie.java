@@ -1,6 +1,7 @@
 package controller;
 
 
+import javafx.scene.control.Control;
 import model.coups.EditeurCoup;
 import model.plateau.Position;
 import model.parties.Parties;
@@ -38,6 +39,17 @@ public abstract class ControllerPartie extends ControllerAffichage {
         listeDeplacements = new HashMap<>();
     }
 
+//    private static class SingletonHolder
+//    {
+//        /** Instance unique non préinitialisée */
+//        private final static ControllerPartie instance = new ControllerPartie();
+//    }
+//
+//    /** Point d'accès pour l'instance unique du singleton */
+//    public static ControllerPartie getInstance()
+//    {
+//        return SingletonHolder.instance;
+//    }
 
     /**
      * @param source : bouton cliqué

@@ -150,12 +150,7 @@ public class ControllerMenu {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/interfaceGraphique/plateau.fxml"));
                 PartiePvP partie = new PartiePvP();
                 ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
-                try {
-                    System.out.println(controller.getPublicAdresse());
-                    System.out.println(controller.getPort());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
                 controller.CommencerPartie();
 
                 load.setController(controller);

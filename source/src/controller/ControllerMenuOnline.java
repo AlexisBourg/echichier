@@ -60,6 +60,7 @@ public class ControllerMenuOnline {
                 PartiePvP partie = new PartiePvP();
                 ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
                 try {
+                    System.out.println(controller.getLocalAdresse());
                     System.out.println(controller.getPublicAdresse());
                     System.out.println(controller.getPort());
                 } catch (Exception e) {

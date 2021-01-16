@@ -25,6 +25,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
         partieActuel= new PartiePvE();
     }
 
+
     @FXML
     public void chargementPlateau() {
         Plateau echiquier = partieActuel.getEchiquier();

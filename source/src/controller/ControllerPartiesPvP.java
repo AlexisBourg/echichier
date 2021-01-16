@@ -21,6 +21,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
         partieActuel = new PartiePvP();
     }
 
+
     @FXML
     public void chargementPlateau() {
         coups.setItems(listeCoups);

@@ -32,12 +32,10 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
         } catch (IOException e) {
             System.err.println("Impossible d'écouter sur le port: " + port);
         }
-        System.out.println("test");
     }
 
     public void CommencerPartie(){
         try {
-
             clientSocket = serverSocket.accept();
             System.out.println("2");
             clientSocket.setSoTimeout(20000); //TODO à decommenter dans la version final
@@ -46,6 +44,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
             System.out.println("TimeOut: aucune connection");
         }
         try {
+            System.out.println("test2");
             out = new ObjectOutputStream(clientSocket.getOutputStream() );  //sortie pour envoyer
             out.flush();//pour envoyer des info au client necessaire à une bonne connexion
             in = new ObjectInputStream(clientSocket.getInputStream());
@@ -53,7 +52,6 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
             e.printStackTrace();
         }
 
-        this.partie = partie;
         listeDeplacements = new HashMap<>();
     }
 
