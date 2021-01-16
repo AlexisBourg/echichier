@@ -7,6 +7,8 @@ import Model.PLateau.Position;
 import Model.Piece.Piece;
 import Model.Piece.Pion;
 import Model.Piece.Roi;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -17,7 +19,7 @@ public abstract class Parties{
     private final int ROI = 12;
     protected final InterfaceJoueur[] joueurs;
     private Plateau echiquier;
-    private final LinkedList<Coup> listeCoup;
+    private LinkedList<Coup> listeCoup;
 
     public Parties(){
         joueurs = new InterfaceJoueur[2];

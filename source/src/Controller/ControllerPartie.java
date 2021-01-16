@@ -4,8 +4,11 @@ package Controller;
 import Model.PLateau.Position;
 import Model.Parties.Parties;
 import Model.Piece.Piece;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import res.BoxCoups;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import res.ChessGrid;
 import res.CssModifier;
 
@@ -24,13 +27,21 @@ public abstract class ControllerPartie {
     protected Piece pieceMangee;
     protected boolean echec =false;
     protected List<Position> menace;
+    protected ObservableList<String> listeCoups = FXCollections.observableArrayList();
 
 
     @FXML
     protected ChessGrid grille;
 
     @FXML
-    protected BoxCoups listeCoups;
+    protected ListView<String> coups;
+
+    @FXML
+    protected Button arriere;
+
+    @FXML
+    protected Button suivant;
+
 
     public ControllerPartie(){
         listeDeplacements = new HashMap<>();
@@ -128,6 +139,7 @@ public abstract class ControllerPartie {
             montrerDeplacementDispo(parties);
             caseDepartGrille = parties.getNumCaseGrille(decompositionIdBouton(source));
         }
+
     }
 
     /**

@@ -1,10 +1,7 @@
 package Controller;
 
-import Model.PLateau.Position;
-import Model.Parties.EchecEtMat;
 import Model.Parties.PartiePvP;
 import Model.Parties.Parties;
-import Model.Piece.Piece;
 import javafx.event.EventHandler;
 import Model.PLateau.Plateau;
 import javafx.fxml.FXML;
@@ -12,13 +9,14 @@ import javafx.scene.input.MouseEvent;
 import res.CssModifier;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ControllerPartiesPvP extends ControllerPartie{
 
 
     private PartiePvP partiesActuel;
+
+    private int coupCourant=0;
 
     public ControllerPartiesPvP(){
         super();
@@ -27,7 +25,16 @@ public class ControllerPartiesPvP extends ControllerPartie{
 
     @FXML
     public void chargementPlateau() {
+        coups.setItems(listeCoups);
         Plateau echiquier = partiesActuel.getEchiquier();
+        arriere.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (listeCoups.size()>0){
+                    listeCoups.remove(listeCoups.size()-1);
+                }
+            }
+        });
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -60,6 +67,10 @@ public class ControllerPartiesPvP extends ControllerPartie{
         }
     }
 
+    public void arriere(){
+
+    }
+
     /**
      * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
      *
@@ -80,7 +91,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
 
             //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
               //  System.out.println("Echec et mat");
-            List<Position> menace = partiesActuel.echec();
+
             if (menace.size()>0){
                 System.out.println("ECHEEEC");
                 this.echec = true;
@@ -90,9 +101,73 @@ public class ControllerPartiesPvP extends ControllerPartie{
             else
                 this.echec = false;
 
+            ajoutCoupListe(caseDepartPlateau, caseArriveePlateau);
             partiesActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partiesActuel.getJoueurCourant(), partiesActuel.getJoueurNonCourant());
             partiesActuel.ChangementJoueurCourant();
         }
+    }
+
+    public void ajoutCoupListe(int[] caseDepartPlateau, int[] caseArriveePlateau) {
+        String coup = "    "+traductionIntChar(caseDepartPlateau[0])+""+traductionCoordPlateau(caseDepartPlateau[1])+"  ->  "+traductionIntChar(caseArriveePlateau[0])+""+traductionCoordPlateau(caseArriveePlateau[1]);
+        listeCoups.add(coup);
+    }
+
+    public char traductionIntChar(int caractere){
+        switch(caractere){
+            case 0:
+                return 'A';
+
+            case 1:
+                return 'B';
+
+            case 2:
+                return 'C';
+
+            case 3:
+                return 'D';
+
+            case 4:
+                return 'E';
+
+            case 5:
+                return 'F';
+
+            case 6:
+                return 'G';
+
+            case 7:
+                return 'H';
+        }
+        return 'd';
+    }
+
+    public char traductionCoordPlateau(int nombre){
+        switch(nombre){
+            case 0:
+                return '8';
+
+            case 1:
+                return '7';
+
+            case 2:
+                return '6';
+
+            case 3:
+                return '5';
+
+            case 4:
+                return '4';
+
+            case 5:
+                return '3';
+
+            case 6:
+                return '2';
+
+            case 7:
+                return '1';
+        }
+        return 'd';
     }
 
     public void finDeDeplacement(){

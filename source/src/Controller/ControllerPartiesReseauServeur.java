@@ -5,7 +5,6 @@ import Model.Parties.PartiePvP;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import res.BoxCoups;
 import res.CssModifier;
 
 import java.io.IOException;
@@ -23,11 +22,6 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private int port=-1;
-
-    @FXML
-    private BoxCoups listeCoups;
-
-
 
     public ControllerPartiesReseauServeur(PartiePvP partie) {
         super();

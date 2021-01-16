@@ -21,9 +21,13 @@ BorderPane{
     -fx-background-color: white;
 }
 
-BoxCoups{
+#listeCoups{
+    -fx-margin-left: 30;
+    -fx-pref-height: 800;
+    -fx-min-height: 100;
+    -fx-pref-width: 100;
+    -fx-max-width: 300;
     -fx-background-color: red;
-    -fx-border-color: yellow;
 }
 
 VBox{

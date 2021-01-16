@@ -8,17 +8,17 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import res.ChessGrid?>
-<?import res.BoxCoups?>
-
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.ListView?>
 <BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@stylePlateau.css">
     <right>
         <VBox>
-            <BoxCoups fx:id="listeCoups"/>
+            <ListView fx:id="coups" id="listeCoups"/>
+
             <HBox>
-                <Button >Avant</Button>
-                <Button>Arrière</Button>
+                <Button fx:id="arriere">Arrière</Button>
+                <Button fx:id="suivant">Suivant</Button>
             </HBox>
         </VBox>
     </right>
