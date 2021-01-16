@@ -1,6 +1,6 @@
 package controller;
 
-import model.pLateau.Plateau;
+import model.plateau.Plateau;
 import model.parties.PartiePvP;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

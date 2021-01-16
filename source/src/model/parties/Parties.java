@@ -1,24 +1,14 @@
 package model.parties;
 
-<<<<<<< HEAD:source/src/Model/Parties/Parties.java
-import Model.Joueur.Joueur;
-import Model.Joueur.InterfaceJoueur;
-import Model.PLateau.Plateau;
-import Model.PLateau.Position;
-import Model.Piece.Piece;
-import Model.Piece.Pion;
-import Model.Piece.Roi;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-=======
 import model.joueur.Joueur;
 import model.joueur.InterfaceJoueur;
-import model.pLateau.Plateau;
-import model.pLateau.Position;
+import model.plateau.Plateau;
+import model.plateau.Position;
 import model.piece.Piece;
 import model.piece.Pion;
 import model.piece.Roi;
->>>>>>> b3de088f6ed1fdca37b5045f331fe21fa8844bc9:source/src/model/parties/Parties.java
+import model.plateau.Plateau;
+import model.plateau.Position;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,7 +19,7 @@ public abstract class Parties{
     private final int ROI = 12;
     protected final InterfaceJoueur[] joueurs;
     private Plateau echiquier;
-    private LinkedList<Coup> listeCoup;
+    private LinkedList<model.parties.Coup> listeCoup;
 
     public Parties(){
         joueurs = new InterfaceJoueur[2];

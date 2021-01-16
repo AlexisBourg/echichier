@@ -1,9 +1,8 @@
-package model.pLateau;
+package model.plateau;
 
 import model.piece.*;
 
 public class Plateau {
-
 
     private Position[][] plateauDeJeu = new Position[8][8];
 

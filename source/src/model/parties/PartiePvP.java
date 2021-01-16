@@ -1,7 +1,7 @@
 package model.parties;
 
 
-import model.pLateau.Position;
+import model.plateau.Position;
 import model.piece.Piece;
 import model.piece.Roi;
 

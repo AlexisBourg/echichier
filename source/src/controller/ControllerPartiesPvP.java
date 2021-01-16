@@ -1,14 +1,9 @@
 package controller;
 
-<<<<<<< HEAD:source/src/Controller/ControllerPartiesPvP.java
-import Model.Parties.PartiePvP;
-import Model.Parties.Parties;
-=======
 import model.parties.PartiePvP;
 import model.parties.Parties;
->>>>>>> b3de088f6ed1fdca37b5045f331fe21fa8844bc9:source/src/controller/ControllerPartiesPvP.java
 import javafx.event.EventHandler;
-import model.pLateau.Plateau;
+import model.plateau.Plateau;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import res.CssModifier;
@@ -29,9 +24,8 @@ public class ControllerPartiesPvP extends ControllerPartie{
 
     @FXML
     public void chargementPlateau() {
-<<<<<<< HEAD:source/src/Controller/ControllerPartiesPvP.java
         coups.setItems(listeCoups);
-        Plateau echiquier = partiesActuel.getEchiquier();
+        Plateau echiquier = partieActuel.getEchiquier();
         arriere.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -40,9 +34,6 @@ public class ControllerPartiesPvP extends ControllerPartie{
                 }
             }
         });
-=======
-        Plateau echiquier = partieActuel.getEchiquier();
->>>>>>> b3de088f6ed1fdca37b5045f331fe21fa8844bc9:source/src/controller/ControllerPartiesPvP.java
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -94,16 +85,13 @@ public class ControllerPartiesPvP extends ControllerPartie{
             else
                 finDeDeplacement();
 
-<<<<<<< HEAD:source/src/Controller/ControllerPartiesPvP.java
-            menace = partiesActuel.echec();
+            menace = partieActuel.echec();
             this.echec = menace.size() > 0;
 
             //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
               //  System.out.println("Echec et mat");
 
-=======
             menace = partieActuel.echec();
->>>>>>> b3de088f6ed1fdca37b5045f331fe21fa8844bc9:source/src/controller/ControllerPartiesPvP.java
             if (menace.size()>0){
                 System.out.println("ECHEEEC");
                 this.echec = true;
@@ -113,16 +101,11 @@ public class ControllerPartiesPvP extends ControllerPartie{
             else
                 this.echec = false;
 
-<<<<<<< HEAD:source/src/Controller/ControllerPartiesPvP.java
             ajoutCoupListe(caseDepartPlateau, caseArriveePlateau);
-            partiesActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partiesActuel.getJoueurCourant(), partiesActuel.getJoueurNonCourant());
-            partiesActuel.ChangementJoueurCourant();
-=======
             partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
             partieActuel.ChangementJoueurCourant();
-
-
->>>>>>> b3de088f6ed1fdca37b5045f331fe21fa8844bc9:source/src/controller/ControllerPartiesPvP.java
+            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
+            partieActuel.ChangementJoueurCourant();
         }
     }
 

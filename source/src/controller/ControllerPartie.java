@@ -1,18 +1,12 @@
 package controller;
 
 
-<<<<<<< HEAD:source/src/Controller/ControllerPartie.java
-import Model.PLateau.Position;
-import Model.Parties.Parties;
-import Model.Piece.Piece;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-=======
-import model.pLateau.Position;
+import model.plateau.Position;
 import model.parties.Parties;
 import model.piece.Piece;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import res.son.Son;
->>>>>>> b3de088f6ed1fdca37b5045f331fe21fa8844bc9:source/src/controller/ControllerPartie.java
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -34,11 +28,8 @@ public abstract class ControllerPartie {
     protected Piece pieceMangee;
     protected boolean echec =false;
     protected List<Position> menace;
-<<<<<<< HEAD:source/src/Controller/ControllerPartie.java
     protected ObservableList<String> listeCoups = FXCollections.observableArrayList();
-=======
     protected ControllerSon son= new ControllerSon();
->>>>>>> b3de088f6ed1fdca37b5045f331fe21fa8844bc9:source/src/controller/ControllerPartie.java
 
 
     @FXML

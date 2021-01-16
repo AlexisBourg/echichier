@@ -1,7 +1,7 @@
 package model.piece;
 
-import model.pLateau.Plateau;
-import model.pLateau.Position;
+import model.plateau.Plateau;
+import model.plateau.Position;
 
 public class Tour extends Piece {
 

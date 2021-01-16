@@ -1,7 +1,7 @@
 package controller;
 
 import model.joueur.IA;
-import model.pLateau.Plateau;
+import model.plateau.Plateau;
 import model.parties.PartiePvE;
 import model.piece.Couleur;
 import model.piece.Piece;
@@ -27,7 +27,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
                     switch (NumeroClique(partieActuel,mouseEvent.getSource())) {
-                        case 1 -> {
+                        case 1:
                             if (!listeDeplacements.isEmpty()) {
                                 retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                 restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
@@ -35,8 +35,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
                             TraitementCliqueUn(mouseEvent.getSource(), partieActuel);
                             cliqueUnPasse = true;
                             break;
-                        }
-                        case 2 -> {
+                        case 2:
                             if (cliqueUnPasse) {
                                 TraitementCliqueDeux(mouseEvent.getSource());
 
@@ -50,7 +49,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
                             cliqueUnPasse = false;
 
                             break;
-                        }
                     }
                 });
                 if (echiquier.getCase(x, y).isOccupe())

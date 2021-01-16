@@ -1,8 +1,8 @@
 package model.parties;
 
 import model.joueur.InterfaceJoueur;
-import model.pLateau.Plateau;
-import model.pLateau.Position;
+import model.plateau.Plateau;
+import model.plateau.Position;
 import model.piece.Piece;
 import model.piece.Pion;
 

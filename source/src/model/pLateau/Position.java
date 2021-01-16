@@ -1,4 +1,4 @@
-package model.pLateau;
+package model.plateau;
 
 import model.piece.Piece;
 
