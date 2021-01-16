@@ -144,8 +144,47 @@ public abstract class ControllerPartie {
 
     }
 
+    //--------------------------------------------------------------------
+    /**
+     * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
+     *
+     * @param source : bouton cliqué
+     */
+    public void TraitementCliqueDeux(Object source, Parties partieActuel) {
 
+        caseArriveeGrille = partieActuel.getNumCaseGrille(decompositionIdBouton(source));
 
+        if (listeDeplacements.containsKey(caseArriveeGrille)) {
+            caseArriveePlateau = decompositionIdBouton(source);
+            if (roiSelectionne(partieActuel) && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
+                roque(partieActuel);
+            else
+                finDeDeplacement(partieActuel);
+
+            //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
+            //  System.out.println("Echec et mat");
+
+            menace = partieActuel.echec();
+            if (menace.size()>0){
+                System.out.println("ECHEEEC");
+                this.echec = true;
+                if (partieActuel.echecEtMat(menace))
+                    System.out.println("EchecEtMAAAAAAAAAAAAAAAT");
+            }
+            else
+                this.echec = false;
+
+            ajoutCoupListe(caseDepartPlateau, caseArriveePlateau);
+            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
+            partieActuel.ChangementJoueurCourant();
+        }
+    }
+
+    public void finDeDeplacement(Parties partieActuel){
+        // Pour arriver sur la case d'arrivée
+        this.pieceMangee=changerBackgroundCase(partieActuel);
+    }
+    //----------------------------------------------------------------------
     /**
      * Cette méthode indique si la case sélectionnée contient une pièce appartenant au joueur et par conséquent, si l'on peut ou non la déplacer
      *

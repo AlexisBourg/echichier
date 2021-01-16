@@ -41,7 +41,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
                             break;
                         case 2:
                             if (cliqueUnPasse) {
-                                TraitementCliqueDeux(mouseEvent.getSource());
+                                TraitementCliqueDeux(mouseEvent.getSource(),partieActuel);
                                 System.out.println("test");
                                 //partieActuel.ChangementJoueurCourant();
                                 System.out.println("debut ia");
@@ -67,46 +67,9 @@ public class ControllerPartiesPvE extends ControllerPartie {
      *
      * @param source : bouton cliqué
      */
-    public void TraitementCliqueDeux(Object source) {
 
-        caseArriveeGrille = partieActuel.getNumCaseGrille(decompositionIdBouton(source));
 
-        if (listeDeplacements.containsKey(caseArriveeGrille)) {
-            caseArriveePlateau = decompositionIdBouton(source);
-            if (roiSelectionne(partieActuel) && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
-                roque(partieActuel);
-            else
-                finDeDeplacement();
 
-            menace = IAechec();
-            this.echec = menace.size() > 0;
-
-            //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
-            //  System.out.println("Echec et mat");
-
-            menace = partieActuel.echec();
-            if (menace.size()>0){
-                System.out.println("ECHEEEC");
-                this.echec = true;
-                if (partieActuel.echecEtMat(menace))
-                    System.out.println("EchecEtMAAAAAAAAAAAAAAAT");
-            }
-            else
-                this.echec = false;
-
-            ajoutCoupListe(caseDepartPlateau, caseArriveePlateau);
-            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
-            partieActuel.ChangementJoueurCourant();
-        }
-    }
-
-    public void finDeDeplacement() {
-        pieceMangee=changerBackgroundCase(partieActuel);
-        //changementsPlateau(partieActuel); // Le plateau effectue les changements de position pour l'ia
-
-        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partieActuel.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
-        // Pour arriver sur la case d'arrivée
-    }
 
 
 
@@ -114,20 +77,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
      * --------------------------------------GESTION DE L'IA------------------------------------------
      **/
 
-//    /**
-//     * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
-//     * @param source : bouton cliqué
-//     */
-//
-//    public void TraitementCliqueDeuxIA(Object source) {
-//        caseArriveeGrille = partieActuel.getNumCaseGrille(decompositionIdBouton(source));
-//        if (listeDeplacements.containsKey(caseArriveeGrille)) {
-//            caseArriveePlateau = decompositionIdBouton(source);
-//            finDeDeplacementIA();
-//            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
-//
-//        }
-//    }
 
     /**
      * permet de généré un nombre entre 0 et celui entré en paramètre
@@ -168,24 +117,13 @@ public class ControllerPartiesPvE extends ControllerPartie {
         caseArriveePlateau = choisirDeplacementPiece(caseDepartPlateau);
         caseArriveeGrille = partieActuel.getNumCaseGrille(caseArriveePlateau);
 
-        finDeDeplacement();
+        finDeDeplacement(partieActuel);
     }
 
     public List<Position> IAechec(){
         return EchecEtMat.echec(partieActuel.getJoueurNonCourant(), this.partieActuel.getEchiquier());
     }
 
-
-//    public void finDeDeplacementIA() {
-//
-//        changerBackgroundCase(partieActuel);
-//
-//        pieceMangee=changementsPlateauIA(); // Le plateau effectue les changements de position
-//
-//        CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partieActuel.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
-//        // Pour arriver sur la case d'arrivée
-//
-//    }
 
     private int[] attributionCoord(Piece piece) {
         int[] tabCoord = new int[2];
@@ -208,7 +146,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
         return tabCoord;
     }
 
-    public Piece changementsPlateauIA(){
-        return partieActuel.actualiserPlateauIA(caseDepartPlateau, caseArriveePlateau);
-    }
+//    public Piece changementsPlateauIA(){
+//        return partieActuel.actualiserPlateauIA(caseDepartPlateau, caseArriveePlateau);
+//    }
 }

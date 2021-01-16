@@ -57,7 +57,7 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                             break;
                             case 2:
                                 if (cliqueUnPasse) {
-                                    TraitementCliqueDeux(mouseEvent.getSource());
+                                    TraitementCliqueDeux(mouseEvent.getSource(),partie);
                                     try {
                                         in = new ObjectInputStream(serverSocket.getInputStream());
                                         out = new ObjectOutputStream(serverSocket.getOutputStream());
@@ -90,22 +90,6 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
         }
     }
 
-    /**
-     * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
-     *
-     * @param source : bouton cliqué
-     */
-    public void TraitementCliqueDeux(Object source) {
-        caseArriveeGrille = partie.getNumCaseGrille(decompositionIdBouton(source));
-
-        if (listeDeplacements.containsKey(caseArriveeGrille)) {
-            caseArriveePlateau = decompositionIdBouton(source);
-            finDeDeplacement();
-            partie.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partie.getJoueurCourant(),(Joueur) partie.getJoueurNonCourant());
-            partie.ChangementJoueurCourant();
-        }
-
-    }
 
     /**--------------------------partie reseau-------------------*/
 
