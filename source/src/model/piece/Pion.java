@@ -13,6 +13,10 @@ public class Pion extends Piece {
         super(x, y, couleur, Type.PION);
     }
 
+    public Pion(int x, int y, Couleur couleur, Type type, String image){
+        super(x, y, couleur, type, image);
+    }
+
     //Methode
 
     public boolean getPremierDeplacement(){

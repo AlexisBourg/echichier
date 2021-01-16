@@ -3,6 +3,8 @@ package model.piece;
 import model.plateau.Plateau;
 import model.plateau.Position;
 
+import java.util.LinkedList;
+
 public class Cavalier extends Piece {
 
 
@@ -11,6 +13,10 @@ public class Cavalier extends Piece {
     //Constructeur
     public Cavalier(int x, int y, Couleur couleur){
         super(x, y, couleur, Type.CAVALIER);
+    }
+
+    public Cavalier(int x, int y, Couleur couleur, Type type, String image){
+        super(x, y, couleur, type, image);
     }
 
 

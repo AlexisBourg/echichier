@@ -15,7 +15,7 @@ public abstract class Piece {
     private int coordX;
     private int coordY;
     private String image;
-    private final Couleur couleur;
+    private Couleur couleur;
     private List<Position> listePosDep;
     private List<Position> listeProtecDep;
     private Type type;
@@ -80,6 +80,16 @@ public abstract class Piece {
         }
     }
 
+    public Piece(int x, int y, Couleur couleur, Type type, String image){
+        this.coordX = x;
+        this.coordY = y;
+        this.couleur = couleur;
+        this.type = type;
+        this.image = image;
+        this.listePosDep = new LinkedList<>();
+        this.listeProtecDep = new LinkedList<>();
+    }
+
     //Methode
 
         //Getter et Setter
@@ -99,11 +109,17 @@ public abstract class Piece {
         return coordY;
     }
 
+    public void setImage(String image){
+        this.image = image;
+    }
 
     public String getImage() {
         return image;
     }
 
+    public  void setCouleur(Couleur couleur){
+        this.couleur = couleur;
+    }
 
     public Couleur getCouleur() {
         return couleur;

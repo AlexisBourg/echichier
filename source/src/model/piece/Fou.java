@@ -13,6 +13,9 @@ public class Fou extends Piece {
         super(x, y,couleur,Type.FOU);
     }
 
+    public Fou(int x, int y, Couleur couleur, Type type, String image){
+        super(x, y, couleur, type, image);
+    }
 
     //Methode
 

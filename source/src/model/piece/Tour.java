@@ -10,6 +10,9 @@ public class Tour extends Piece {
         super(x, y, couleur, Type.TOUR);
     }
 
+    public Tour(int x, int y, Couleur couleur, Type type, String image){
+        super(x, y, couleur, type, image);
+    }
 
     //Methode
     public void setListeDep(Plateau plateau) {

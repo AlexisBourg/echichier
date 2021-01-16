@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.scene.control.ListCell;
 import model.parties.PartiePvP;
 import model.parties.Parties;
 import javafx.event.EventHandler;
@@ -15,8 +16,6 @@ public class ControllerPartiesPvP extends ControllerPartie{
 
     private PartiePvP partieActuel;
 
-    private int coupCourant=0;
-
     public ControllerPartiesPvP(){
         super();
         partieActuel = new PartiePvP();
@@ -26,11 +25,17 @@ public class ControllerPartiesPvP extends ControllerPartie{
     public void chargementPlateau() {
         coups.setItems(listeCoups);
         Plateau echiquier = partieActuel.getEchiquier();
+        editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
+        System.out.println(editeurCoup.getIndexCourant());
+        //System.out.println(partieActuel.getEchiquier().toString());
+
         arriere.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (listeCoups.size()>0){
-                    listeCoups.remove(listeCoups.size()-1);
+                if (editeurCoup.getIndexCourant()>0) {
+                    partieActuel.recupEtat(editeurCoup.coupPrecedent());
+                    actualiserEtatPlateau();
+                    //System.out.println(partieActuel.getEchiquier().toString());
                 }
             }
         });
@@ -52,6 +57,9 @@ public class ControllerPartiesPvP extends ControllerPartie{
                             case 2:
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource());
+                                    editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
+                                    //System.out.println(editeurCoup.getCoups());
+                                    //System.out.println(editeurCoup.getIndexCourant());
                                 }
                                 cliqueUnPasse = false;
                                 break;
@@ -66,9 +74,20 @@ public class ControllerPartiesPvP extends ControllerPartie{
         }
     }
 
-    public void arriere(){
+    public void actualiserEtatPlateau(){
+        Plateau echiquier = partieActuel.getEchiquier();
 
+        for (int i=0; i<8; i++){
+            for (int j=0; j<8; j++){
+                if (echiquier.getCase(j, i).isOccupe()){
+                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), echiquier.getCase(j, i).getPiece().getImage());
+                    //CssModifier.test((Button)grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                }else
+                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), "");
+            }
+        }
     }
+
 
     /**
      * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
@@ -86,12 +105,6 @@ public class ControllerPartiesPvP extends ControllerPartie{
                 finDeDeplacement();
 
             menace = partieActuel.echec();
-            this.echec = menace.size() > 0;
-
-            //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
-              //  System.out.println("Echec et mat");
-
-            menace = partieActuel.echec();
             if (menace.size()>0){
                 System.out.println("ECHEEEC");
                 this.echec = true;
@@ -101,16 +114,13 @@ public class ControllerPartiesPvP extends ControllerPartie{
             else
                 this.echec = false;
 
-            ajoutCoupListe(caseDepartPlateau, caseArriveePlateau);
-            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
-            partieActuel.ChangementJoueurCourant();
-            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
+            ajoutCoup();
             partieActuel.ChangementJoueurCourant();
         }
     }
 
-    public void ajoutCoupListe(int[] caseDepartPlateau, int[] caseArriveePlateau) {
-        String coup = "    "+traductionIntChar(caseDepartPlateau[0])+""+traductionCoordPlateau(caseDepartPlateau[1])+"  ->  "+traductionIntChar(caseArriveePlateau[0])+""+traductionCoordPlateau(caseArriveePlateau[1]);
+    public void ajoutCoup(){
+        String coup="      "+traductionIntChar(caseDepartPlateau[0])+traductionCoordPlateau(caseDepartPlateau[1])+" -> "+traductionIntChar(caseArriveePlateau[0])+traductionCoordPlateau(caseArriveePlateau[1]);
         listeCoups.add(coup);
     }
 

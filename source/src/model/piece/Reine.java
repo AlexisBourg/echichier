@@ -13,6 +13,9 @@ public class Reine extends Piece {
         super(x, y, couleur, Type.REINE);
     }
 
+    public Reine(int x, int y, Couleur couleur, Type type, String image){
+        super(x, y, couleur, type, image);
+    }
     //Methode
 
     public void setListeDep(Plateau plateau) {

@@ -1,5 +1,6 @@
 package model.parties;
 
+import model.coups.PlateauEtat;
 import model.joueur.Joueur;
 import model.joueur.InterfaceJoueur;
 import model.plateau.Plateau;
@@ -31,6 +32,10 @@ public abstract class Parties{
 
     public Plateau getEchiquier(){
         return echiquier;
+    }
+
+    public void setEchiquier(Plateau plateau){
+        this.echiquier = plateau;
     }
 
     public Joueur getJoueur(int num){return (Joueur) joueurs[num];}
@@ -239,5 +244,15 @@ public abstract class Parties{
         }
     }
 
+    /** Cette méthode permet garder en mémoire l'état de l'échiquier à un instant T
+     *
+     * @return : les informations de l'état courant de l'échiquier
+     */
+    public PlateauEtat creerEtatPlateau(){
+        return new PlateauEtat(this.echiquier);
+    }
 
+    public void recupEtat(PlateauEtat plateau){
+        this.echiquier.setEtat(plateau);
+    }
 }

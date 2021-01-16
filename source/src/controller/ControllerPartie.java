@@ -1,6 +1,7 @@
 package controller;
 
 
+import model.coups.EditeurCoup;
 import model.plateau.Position;
 import model.parties.Parties;
 import model.piece.Piece;
@@ -30,6 +31,7 @@ public abstract class ControllerPartie {
     protected List<Position> menace;
     protected ObservableList<String> listeCoups = FXCollections.observableArrayList();
     protected ControllerSon son= new ControllerSon();
+    protected EditeurCoup editeurCoup = new EditeurCoup();
 
 
     @FXML

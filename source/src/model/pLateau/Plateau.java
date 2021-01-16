@@ -1,5 +1,7 @@
 package model.plateau;
 
+import model.coups.PlateauEtat;
+import model.coups.PositionEtat;
 import model.piece.*;
 
 public class Plateau {
@@ -31,13 +33,7 @@ public class Plateau {
         }
     }
 
-    public void setPlateauDejeu(Position[][] plateauDejeu) {
-        this.plateauDeJeu = plateauDejeu;
-    }
-
-    public Position[][] getPlateauDejeu() {
-        return plateauDeJeu;
-    }
+    public Plateau(){}
 
     public boolean isCaseNull(Position p){
         return p.getX() >= 0 && p.getX() <= 7 && p.getY() >= 0 && p.getY() <= 7;
@@ -50,6 +46,20 @@ public class Plateau {
     //  /!\ on doit verifier en amont que x et y ne correspondent pas à une casse null -> isCaseNull() doit rendre false
     public Position getCase(int x, int y){
         return plateauDeJeu[y][x];
+    }
+
+    public void setEtat(PlateauEtat plateau){
+        //System.out.println(plateau.toString());
+        for (int y=0; y<8; y++){
+            for (int x=0; x<8; x++){
+                this.plateauDeJeu[y][x].setY(plateau.getCaseEtat(x, y).getY());
+                this.plateauDeJeu[y][x].setX(plateau.getCaseEtat(x, y).getX());
+                this.plateauDeJeu[y][x].setEtatPiece(plateau.getCaseEtat(x, y).getPiece());
+                this.plateauDeJeu[y][x].setOccupee(plateau.getCaseEtat(x, y).getOccupe());
+            }
+        }
+        //System.out.println("\n\n\n"+plateau.toString());
+
     }
 
     @Override

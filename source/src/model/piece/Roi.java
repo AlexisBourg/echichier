@@ -19,6 +19,10 @@ public class Roi extends Piece {
         super(x, y, couleur,Type.ROI);
     }
 
+    public Roi(int x, int y, Couleur couleur, Type type, String image){
+        super(x, y, couleur, type, image);
+    }
+
     //Methode
     public void setPremierDeplacement(){this.premierDeplacement = false;}
 
