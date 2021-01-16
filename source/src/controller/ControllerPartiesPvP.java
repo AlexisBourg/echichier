@@ -35,6 +35,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
                 if (editeurCoup.getIndexCourant()>0) {
                     partieActuel.recupEtat(editeurCoup.coupPrecedent());
                     actualiserEtatPlateau(partieActuel);
+                    partieActuel.ChangementJoueurCourant();
                     //System.out.println(partieActuel.getEchiquier().toString());
                 }
             }
@@ -45,6 +46,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
                 if (editeurCoup.getIndexCourant()!=(editeurCoup.getNbEtat()-1)){
                     partieActuel.recupEtat(editeurCoup.coupSuivant());
                     actualiserEtatPlateau(partieActuel);
+                    partieActuel.ChangementJoueurCourant();
                     //System.out.println(partieActuel.getEchiquier().toString());
                 }
             }

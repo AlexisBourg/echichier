@@ -28,6 +28,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
     @FXML
     public void chargementPlateau() {
         Plateau echiquier = partieActuel.getEchiquier();
+        coups.setItems(listeCoups);
         editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
 
         arriere.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -37,6 +38,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
                     partieActuel.recupEtat(editeurCoup.coupPrecedent());
                     actualiserEtatPlateau(partieActuel);
                     partieActuel.ChangementJoueurCourant();
+                    enleverCoup();
                     //System.out.println(partieActuel.getEchiquier().toString());
                 }
             }
@@ -76,6 +78,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
                                 ia = partieActuel.getIA();
                                 deplacementIA(ia);
                                 editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
+                                ajoutCoup();
                                 partieActuel.ChangementJoueurCourant();
                                 System.out.println("joueuer courant " + partieActuel.getIndexJoueurCourant());
                             }
@@ -90,16 +93,9 @@ public class ControllerPartiesPvE extends ControllerPartie  {
         }
     }
 
-
-    /**
-     * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
-     *
-     * @param source : bouton cliqué
-     */
-
-
-
-
+    public void enleverCoup(){
+        listeCoups.remove(listeCoups.size()-1);
+    }
 
 
     /**
