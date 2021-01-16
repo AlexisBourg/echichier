@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import model.parties.Parties;
+import model.plateau.Plateau;
 import res.interfaceGraphique.ChessGrid;
 import res.interfaceGraphique.CssModifier;
 import res.interfaceGraphique.LettrePlateau;
@@ -67,6 +69,19 @@ public abstract class ControllerAffichage {
                     CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "black;");
             }
 
+        }
+    }
+
+    public void actualiserEtatPlateau(Parties partieActuel){
+        Plateau echiquier = partieActuel.getEchiquier();
+
+        for (int i=0; i<8; i++){
+            for (int j=0; j<8; j++){
+                if (echiquier.getCase(j, i).isOccupe()){
+                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), echiquier.getCase(j, i).getPiece().getImage());
+                }else
+                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), "");
+            }
         }
     }
 

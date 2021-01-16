@@ -34,15 +34,11 @@ public abstract class Parties{
         return echiquier;
     }
 
-<<<<<<< HEAD
     public void setEchiquier(Plateau plateau){
         this.echiquier = plateau;
     }
 
-    public Joueur getJoueur(int num){return (Joueur) joueurs[num];}
-=======
     public InterfaceJoueur getJoueur(int num){return  joueurs[num];}
->>>>>>> 1dead133b172ed47654c754c391886c961f0f2da
 
     public int getIndexJoueurCourant() { return indexJoueurCourant; }
 
@@ -130,32 +126,6 @@ public abstract class Parties{
         return pieceMorte;
     }
 
-
-
-    public void stockerCoup(int[] depart, int[] arrivee, Piece pieceMangee, InterfaceJoueur joueurCourant, InterfaceJoueur joueurNonCourant){
-        getListeCoup().add(new Coup(depart, arrivee, pieceMangee, joueurCourant, joueurNonCourant));
-    }
-
-    public void CoupEnArriere(int indexCourant){
-        Coup coupArriere = this.getListeCoup().get(indexCourant-1);
-
-        Piece pieceMorte = deplacerPiece(coupArriere.getArrivee(), coupArriere.getDepart()); // Déplacement dans l'ordre inverse
-
-        // Si le coup précédent a vu une pièce se faire manger
-        if (!coupArriere.isPieceMangeeNull()){
-            this.getJoueurNonCourant().removePieceMorte(); // On enlève la pièce morte de la liste du joueur qui l'a perdu
-            getEchiquier().getCase(coupArriere.getArrivee()[0], coupArriere.getArrivee()[1]).setPiece(coupArriere.getPieceMangee()); // On replace la pièce mangée là où elle été avant le tour
-        }
-        else
-            getEchiquier().getCase(coupArriere.getArrivee()[0], coupArriere.getArrivee()[1]).unsetPiece(); // On actualise la case pour que la pièce qui est revenue en arrière puisse y revenir.
-    }
-
-    public void CoupEnAvant(int indexCourant){
-        Coup coupAvant = this.getListeCoup().get(indexCourant+1);
-
-        Piece pieceMorte = deplacerPiece(coupAvant.getDepart(), coupAvant.getArrivee());
-    }
-
     /** Cette méthode déplace la pièce dont les coordonnées sont données
      *
      * @param depart coordonnées plateau de la case de départ
@@ -163,6 +133,7 @@ public abstract class Parties{
      * @return : la pièce mangée ou null
      */
     public Piece deplacerPiece(int[] depart, int[] arrivee){
+        System.out.println("Déplacer pièce");
         Piece pieceDeplacee, pieceMorte;
         Plateau plateau = getEchiquier();
 
@@ -177,6 +148,7 @@ public abstract class Parties{
         plateau.getCase(arrivee[0], arrivee[1]).setPiece(plateau.getCase(depart[0], depart[1]).getPiece());
         plateau.getCase(depart[0], depart[1]).unsetPiece();
 
+        System.out.println(pieceDeplacee+"ddddddddddddddddddddddddddddddddddddd");
         pieceDeplacee.setCoordX(arrivee[0]);
         pieceDeplacee.setCoordY(arrivee[1]);
 

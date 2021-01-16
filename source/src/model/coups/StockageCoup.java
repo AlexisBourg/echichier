@@ -13,8 +13,8 @@ public class StockageCoup {
         this.etatsPlateau.add(plateau);
     }
 
-    public PlateauEtat getLastEtat(){
-        return this.etatsPlateau.getLast();
+    public void enleverDernierCoup(){
+        etatsPlateau.removeLast();
     }
 
     public int getNbEtat(){

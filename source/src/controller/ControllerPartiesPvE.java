@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import model.joueur.IA;
 import model.parties.EchecEtMat;
 import model.plateau.Plateau;
@@ -26,26 +28,54 @@ public class ControllerPartiesPvE extends ControllerPartie  {
     @FXML
     public void chargementPlateau() {
         Plateau echiquier = partieActuel.getEchiquier();
+        editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
+
+        arriere.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (editeurCoup.getIndexCourant()>0) {
+                    partieActuel.recupEtat(editeurCoup.coupPrecedent());
+                    actualiserEtatPlateau(partieActuel);
+                    partieActuel.ChangementJoueurCourant();
+                    //System.out.println(partieActuel.getEchiquier().toString());
+                }
+            }
+        });
+        suivant.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if (editeurCoup.getIndexCourant()!=(editeurCoup.getNbEtat()-1)){
+                    partieActuel.recupEtat(editeurCoup.coupSuivant());
+                    actualiserEtatPlateau(partieActuel);
+                    partieActuel.ChangementJoueurCourant();
+                    //System.out.println(partieActuel.getEchiquier().toString());
+                }
+            }
+        });
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
                     switch (NumeroClique(partieActuel,mouseEvent.getSource())) {
                         case 1:
-                            if (!listeDeplacements.isEmpty()) {
-                                retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
-                                restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
+                            if (partieActuel.getJoueurCourant().getCouleur()==Couleur.BLANC) {
+                                if (!listeDeplacements.isEmpty()) {
+                                    retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
+                                    restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
+                                }
+                                TraitementCliqueUn(mouseEvent.getSource(), partieActuel);
+                                cliqueUnPasse = true;
                             }
-                            TraitementCliqueUn(mouseEvent.getSource(), partieActuel);
-                            cliqueUnPasse = true;
                             break;
                         case 2:
                             if (cliqueUnPasse) {
                                 TraitementCliqueDeux(mouseEvent.getSource(),partieActuel);
-                                System.out.println("test");
+                                editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
+                                //System.out.println("test");
                                 //partieActuel.ChangementJoueurCourant();
-                                System.out.println("debut ia");
+                                //System.out.println("debut ia");
                                 ia = partieActuel.getIA();
                                 deplacementIA(ia);
+                                editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
                                 partieActuel.ChangementJoueurCourant();
                                 System.out.println("joueuer courant " + partieActuel.getIndexJoueurCourant());
                             }

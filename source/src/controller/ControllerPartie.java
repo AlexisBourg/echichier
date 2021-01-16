@@ -34,12 +34,6 @@ public abstract class ControllerPartie extends ControllerAffichage {
     protected ControllerSon son= new ControllerSon();
     protected EditeurCoup editeurCoup = new EditeurCoup();
 
-
-
-
-
-
-
     public ControllerPartie(){
         listeDeplacements = new HashMap<>();
     }
@@ -92,8 +86,6 @@ public abstract class ControllerPartie extends ControllerAffichage {
         }
     }
 
-
-
     public String urlImageDeplacementPossible(int i, int x, int y, Parties parties) {
         return parties.getEchiquier().getCase(x, y).getPiece().getImage();
     }
@@ -126,8 +118,9 @@ public abstract class ControllerPartie extends ControllerAffichage {
             caseArriveePlateau = decompositionIdBouton(source);
             if (roiSelectionne(partieActuel) && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
                 roque(partieActuel);
-            else
+            else{
                 finDeDeplacement(partieActuel);
+            }
 
             //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
             //  System.out.println("Echec et mat");
@@ -142,10 +135,14 @@ public abstract class ControllerPartie extends ControllerAffichage {
             else
                 this.echec = false;
 
-            ajoutCoupListe(caseDepartPlateau, caseArriveePlateau);
-            partieActuel.stockerCoup(caseDepartPlateau, caseArriveePlateau, pieceMangee, partieActuel.getJoueurCourant(), partieActuel.getJoueurNonCourant());
+            ajoutCoup();
             partieActuel.ChangementJoueurCourant();
         }
+    }
+
+    public void ajoutCoup(){
+        String coup="      "+traductionIntChar(caseDepartPlateau[0])+traductionCoordPlateau(caseDepartPlateau[1])+" -> "+traductionIntChar(caseArriveePlateau[0])+traductionCoordPlateau(caseArriveePlateau[1]);
+        listeCoups.add(coup);
     }
 
     public void finDeDeplacement(Parties partieActuel){

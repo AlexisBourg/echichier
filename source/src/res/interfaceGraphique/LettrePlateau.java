@@ -7,7 +7,8 @@ public enum LettrePlateau {
     D(3,'D'),
     E(4,'E'),
     F(5,'H'),
-    G(6,'G');
+    G(6,'G'),
+    H(7,'H');
 
 
     private final int numeroCase;

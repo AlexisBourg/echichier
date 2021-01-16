@@ -16,18 +16,12 @@ public class EditeurCoup {
     }
 
     public PlateauEtat coupPrecedent(){
-        if (indexCourant>0){
-            System.out.println(listeCoups.getPosition(indexCourant-1));
-            return listeCoups.getPosition(--indexCourant);
-        }
-
-        return null;
+        listeCoups.enleverDernierCoup();
+        return listeCoups.getPosition(--indexCourant);
     }
 
     public PlateauEtat coupSuivant(){
-        if (indexCourant==listeCoups.getNbEtat())
-            return listeCoups.getPosition(++indexCourant);
-        return null;
+        return listeCoups.getPosition(++indexCourant);
     }
 
     public LinkedList<PlateauEtat> getCoups(){
@@ -36,5 +30,9 @@ public class EditeurCoup {
 
     public int getIndexCourant(){
         return this.indexCourant;
+    }
+
+    public int getNbEtat(){
+        return listeCoups.getNbEtat();
     }
 }
