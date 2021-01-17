@@ -21,6 +21,8 @@ import java.net.UnknownHostException;
 public class ControllerMenuOnline {
 
     //Atribut
+    public static final int HAUTEUR_DEFAUT = 800;
+    public static final int LONGUEUR_DEFAUT = 1000;
     @FXML
     private Button heberger;
     @FXML
@@ -36,12 +38,7 @@ public class ControllerMenuOnline {
     @FXML
     private Text textPort;
 
-<<<<<<< HEAD
-    public static final int HAUTEUR_DEFAUT = 800;
-    public static final int LONGUEUR_DEFAUT = 1000;
-=======
     //Constructeur
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
 
     //Methode
     @FXML

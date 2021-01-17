@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Parties{
-<<<<<<< HEAD
+
     public static final int NB_JOUEURS = 2;
     public static final int LONGUEUR_EN_CASE = 8;
     public static final int X_TOUR_AVANT_PETIT_ROQUE = 7;
@@ -22,10 +22,9 @@ public abstract class Parties{
     public static final int X_TOUR_APRES_GRAND_ROQUE = 3;
 
 
-=======
 
     //Atribut
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
+
     protected int indexJoueurCourant = 0;
     protected final InterfaceJoueur[] joueurs;
     private Plateau echiquier;
