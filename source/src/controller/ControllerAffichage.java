@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import model.joueur.InterfaceJoueur;
 import model.parties.Parties;
 import model.plateau.Plateau;
 import res.interfaceGraphique.ChessGrid;
@@ -34,12 +35,20 @@ public class ControllerAffichage {
     //Methode
     /**
      * Permet d'incrementer la liste des coups jouer
-     * @param caseDepartPlateau
-     * @param caseArriveePlateau
+     * @param caseDepartPlateau : case de départ du déplacement
+     * @param caseArriveePlateau : case d'arrivée du déplacement
      */
     public void ajoutCoup(int[] caseDepartPlateau, int[] caseArriveePlateau) {
         String coup = "    "+traductionIntChar(caseDepartPlateau[0])+""+traductionCoordPlateau(caseDepartPlateau[1])+"  ->  "+traductionIntChar(caseArriveePlateau[0])+""+traductionCoordPlateau(caseArriveePlateau[1]);
         listeCoups.add(coup);
+    }
+
+    /** Affiche le gagnant sur l'interface
+     * 
+     * @param joueur : gagnat de la partie
+     */
+    public void ajoutCoupFin(InterfaceJoueur joueur){
+        listeCoups.add("Victoire "+joueur.getCouleur());
     }
 
     /**

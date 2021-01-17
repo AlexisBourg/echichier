@@ -25,6 +25,7 @@ public abstract class ControllerPartie extends ControllerAffichage {
     protected int[] caseArriveePlateau;
     protected Piece pieceMangee;
     protected boolean echec =false;
+    protected boolean echecEtMat =false;
     protected List<Position> menace;
 
     protected ControllerAffichage affichage=new ControllerAffichage();
@@ -131,7 +132,12 @@ public abstract class ControllerPartie extends ControllerAffichage {
             menace = partieActuel.echec();
             this.echec = menace.size() > 0;
 
-            ajoutCoup(caseDepartPlateau, caseArriveePlateau);
+            if (this.echec && partieActuel.echecEtMat(menace)){
+                echecEtMat = true;
+                ajoutCoupFin(partieActuel.getJoueurCourant());
+            }
+            else
+                ajoutCoup(caseDepartPlateau, caseArriveePlateau);
             partieActuel.changementJoueurCourant();
         }
     }

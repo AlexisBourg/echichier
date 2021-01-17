@@ -56,7 +56,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
                     public void handle(MouseEvent mouseEvent) {
                         switch (numeroClique(partieActuel, mouseEvent.getSource())) {
                             case 1:
-                                if (editeurCoup.getIndexCourant() == editeurCoup.getNbEtat()-1) {
+                                if (editeurCoup.getIndexCourant() == editeurCoup.getNbEtat()-1 && !echecEtMat) {
                                     if (!listeDeplacements.isEmpty()) { // Si le clique 1 avait déjà été enclenché
                                         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                         restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves

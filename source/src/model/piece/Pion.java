@@ -28,7 +28,13 @@ public class Pion extends Piece {
         return premierDeplacement;
     }
 
-
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param x : colonne de la pièce dans le plateau
+     * @param y : ligne de la pièce dans le plateau
+     */
+    @Override
     public void setListeDep( Plateau plateau, int x, int y) {
         getListeDep().clear();
         getListeProtecDep().clear();
@@ -37,6 +43,12 @@ public class Pion extends Piece {
         deplacementPossible(plateau, x, y);
     }
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param tmpX : direction que prend la piece
+     * @param tmpY : direction que prend la piece
+     */
     public void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
         //déplacement basique
         Position caseTmp;
@@ -61,6 +73,12 @@ public class Pion extends Piece {
         attaque(plateau, tmpX+UNE_CASE_DEVANT, tmpY);
     }
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param tmpX : colonne de la case potentiellement attaquable par le pion
+     * @param tmpY : ligne de la case potentiellement attaquable par le pion
+     */
     private void attaque(Plateau plateau, int tmpX, int tmpY) {
         Position caseTmp;
 

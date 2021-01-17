@@ -116,8 +116,19 @@ public abstract class Piece {
         return type;
     }
 
+<<<<<<< HEAD
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param x : ligne de la pièce dans le plateau
+     * @param y : colonne de la pièce dans le plateau
+     */
+    public void setListeDep(Plateau plateau, int x, int y) {
+    }
+=======
    public void setListeDep(Plateau plateau, int x, int y) {
    }
+>>>>>>> 720829424a557d2e8529fcc679418605cfd26a7a
 
     public void actualiserListeDep(List<Position> liste){
         this.listePosDep = liste;

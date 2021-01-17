@@ -21,6 +21,12 @@ public enum LettrePlateau {
     }
 
     //Methode
+
+    /** Cette méthode retourne la lettre correspondante au numéro donné
+     *
+     * @param num numéro de la case (de 0 à 7)
+     * @return : la lettre associée au nombre donnée
+     */
     public static char getLettre(int num){
         for(LettrePlateau v : values()) {
             if (v.numeroCase == num) {

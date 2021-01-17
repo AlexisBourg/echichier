@@ -8524,13 +8524,30 @@
 											"height": 13,
 											"text": "+actualiserEtatPlateau(partieActuel: Parties)",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAF3Efey4dfHv7w=",
+											"_parent": {
+												"$ref": "AAAAAAF3EQD9K6Ckn5U="
+											},
+											"model": {
+												"$ref": "AAAAAAF3EfeyxdfANKk="
+											},
+											"font": "Arial;13;0",
+											"left": 1413,
+											"top": 1986,
+											"width": 433.5322265625,
+											"height": 13,
+											"text": "+ajoutCoupFin(joueur: InterfaceJoueur)",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1408,
 									"top": 1906,
 									"width": 443.5322265625,
-									"height": 83
+									"height": 98
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -8573,7 +8590,7 @@
 							"left": 1408,
 							"top": 1768,
 							"width": 443.5322265625,
-							"height": 221,
+							"height": 236,
 							"nameCompartment": {
 								"$ref": "AAAAAAF3EQD9K6Cea+4="
 							},
@@ -9447,13 +9464,30 @@
 											"height": 13,
 											"text": "#editeurCoup: EditeurCoups = new EditeurCoups()",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAF3Efdq1Ne4H6U=",
+											"_parent": {
+												"$ref": "AAAAAAF3EPDyKZ7nq6g="
+											},
+											"model": {
+												"$ref": "AAAAAAF3Efdqqte1auc="
+											},
+											"font": "Arial;13;0",
+											"left": 1901,
+											"top": 1907,
+											"width": 410.76953125,
+											"height": 13,
+											"text": "#echecEtMat: boolean = false",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1896,
 									"top": 1737,
 									"width": 420.76953125,
-									"height": 173
+									"height": 188
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -9476,7 +9510,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 1915,
+											"top": 1930,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+decompositionIdBouton(source: Object)",
@@ -9493,7 +9527,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 1930,
+											"top": 1945,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+numeroClique(parties: Parties, source: Object)",
@@ -9510,7 +9544,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 1945,
+											"top": 1960,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+numClique(x: int, y: int, parties: Parties)",
@@ -9527,7 +9561,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 1960,
+											"top": 1975,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+restaurationImageDeplacementPossible(parties: Parties)",
@@ -9544,7 +9578,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 1975,
+											"top": 1990,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+urlImageDeplacementPossible(x: int, y: int, parties: Parties)",
@@ -9561,7 +9595,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 1990,
+											"top": 2005,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+traitementCliqueUn(source: Object, parties: Parties)",
@@ -9578,7 +9612,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2005,
+											"top": 2020,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+traitementCliqueDeux(source: Object, partieActuel: Parties)",
@@ -9595,7 +9629,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2020,
+											"top": 2035,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+finDeDeplacement(partieActuel: Parties)",
@@ -9612,7 +9646,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2035,
+											"top": 2050,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+verificationClique(parties: Parties)",
@@ -9629,7 +9663,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2050,
+											"top": 2065,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+montrerDeplacementsDispo(parties: Parties)",
@@ -9646,7 +9680,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2065,
+											"top": 2080,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+declarationDeplacementPossible(coordGrille: int)",
@@ -9663,7 +9697,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2080,
+											"top": 2095,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+changementsPlateau(parties: Parties)",
@@ -9680,7 +9714,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2095,
+											"top": 2110,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+changementPlateauRoque(parties: Parties)",
@@ -9697,7 +9731,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2110,
+											"top": 2125,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+changerBackgroundCase(partie: Parties)",
@@ -9714,7 +9748,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2125,
+											"top": 2140,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+roiSelectionne(partieActuel: Parties)",
@@ -9731,7 +9765,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1901,
-											"top": 2140,
+											"top": 2155,
 											"width": 410.76953125,
 											"height": 13,
 											"text": "+roque(partieActuel: Parties)",
@@ -9740,7 +9774,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1896,
-									"top": 1910,
+									"top": 1925,
 									"width": 420.76953125,
 									"height": 248
 								},
@@ -9785,7 +9819,7 @@
 							"left": 1896,
 							"top": 1712,
 							"width": 420.76953125,
-							"height": 446,
+							"height": 461,
 							"nameCompartment": {
 								"$ref": "AAAAAAF3EPDyKJ7i3r4="
 							},
@@ -11520,7 +11554,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1871,
-									"top": 1914,
+									"top": 1922,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -11541,7 +11575,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 1870,
-									"top": 1929,
+									"top": 1937,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -11562,7 +11596,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1874,
-									"top": 1885,
+									"top": 1893,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -11580,7 +11614,7 @@
 								"$ref": "AAAAAAF3EPDyKJ7hwqg="
 							},
 							"lineStyle": 1,
-							"points": "1895:1909;1852:1904",
+							"points": "1895:1917;1852:1912",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF3ER2uAKUgzGg="
@@ -11674,7 +11708,7 @@
 								"$ref": "AAAAAAF3EQ5IHaJxarM="
 							},
 							"lineStyle": 1,
-							"points": "2367:1779;2336:1776;2344:1936;2317:1936",
+							"points": "2367:1779;2336:1776;2344:1936;2317:1937",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF3ER3EGqUx+sc="
@@ -11768,7 +11802,7 @@
 								"$ref": "AAAAAAF3ERJmAqLmQCQ="
 							},
 							"lineStyle": 1,
-							"points": "2367:2025;2344:2024;2344:1936;2317:1936",
+							"points": "2367:2025;2344:2024;2344:1936;2317:1937",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAF3ER3R9qVCJRc="
@@ -16496,6 +16530,27 @@
 											}
 										}
 									]
+								},
+								{
+									"_type": "UMLOperation",
+									"_id": "AAAAAAF3EfeyxdfANKk=",
+									"_parent": {
+										"$ref": "AAAAAAF3EQD9KqCbzB0="
+									},
+									"name": "ajoutCoupFin",
+									"parameters": [
+										{
+											"_type": "UMLParameter",
+											"_id": "AAAAAAF3EfeyxdfBurw=",
+											"_parent": {
+												"$ref": "AAAAAAF3EfeyxdfANKk="
+											},
+											"name": "joueur",
+											"type": {
+												"$ref": "AAAAAAF24s0cObf33A4="
+											}
+										}
+									]
 								}
 							]
 						},
@@ -16848,6 +16903,17 @@
 										"$ref": "AAAAAAF3ENrlapz0z8w="
 									},
 									"defaultValue": "new EditeurCoups()"
+								},
+								{
+									"_type": "UMLAttribute",
+									"_id": "AAAAAAF3Efdqqte1auc=",
+									"_parent": {
+										"$ref": "AAAAAAF3EPDyJ57fF24="
+									},
+									"name": "echecEtMat",
+									"visibility": "protected",
+									"type": "boolean",
+									"defaultValue": "false"
 								}
 							],
 							"operations": [

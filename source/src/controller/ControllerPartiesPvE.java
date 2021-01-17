@@ -62,7 +62,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
                 grille.getChildren().get((LONGUEUR_EN_CASE * (y + 1) - (LONGUEUR_EN_CASE - x))).setOnMouseClicked(mouseEvent -> {
                     switch (numeroClique(partieActuel, mouseEvent.getSource())) {
                         case 1:
-                            if (partieActuel.getJoueurCourant().getCouleur() == Couleur.BLANC) {
+                            if (partieActuel.getJoueurCourant().getCouleur() == Couleur.BLANC && !echecEtMat) {
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
