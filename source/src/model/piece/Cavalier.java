@@ -11,38 +11,36 @@ public class Cavalier extends Piece {
     //Attribue
 
     //Constructeur
-    public Cavalier(int x, int y, Couleur couleur){
-        super(x, y, couleur, Type.CAVALIER);
+    public Cavalier(Couleur couleur){
+        super(couleur, Type.CAVALIER);
     }
 
-    public Cavalier(int x, int y, Couleur couleur, Type type, String image){
-        super(x, y, couleur, type, image);
+    public Cavalier(Couleur couleur, Type type, String image){
+        super(couleur, type, image);
     }
 
 
     //Methode
 
     @Override
-    public void setListeDep(Plateau plateau) {
+    public void setListeDep(Plateau plateau, int x, int y) {
         int[][] dep ={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
 
         getListeDep().clear();
         getListeProtecDep().clear();
         for (int i=0; i<8; i++) {
-            deplacementPossible(plateau, dep[i][0], dep[i][1]);
+            deplacementPossible(plateau, dep[i][0], dep[i][1], x, y);
         }
     }
 
     @Override
-    public void deplacementPossible(Plateau plateau, int x, int y) {
-        int tmpX=getCoordX();
-        int tmpY=getCoordY();
+    public void deplacementPossible(Plateau plateau, int depX, int depY, int x, int y) {
         Position caseTmp;
 
-        if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
+        if(depX+x > LIMIT_SUP || depX+x < LIMIT_INF || depY+y > LIMIT_SUP || depY+y < LIMIT_INF)
             return;
 
-        caseTmp=plateau.getCase(tmpX+x,tmpY+y);
+        caseTmp=plateau.getCase(x+depX,y+depY);
 
         if (!caseTmp.isOccupe() || caseTmp.isOccupe() && caseTmp.getPiece().getCouleur() != this.getCouleur()) {
             getListeDep().add(caseTmp);

@@ -134,9 +134,6 @@ public abstract class ControllerPartie extends ControllerAffichage {
                 finDeDeplacement(partieActuel);
             }
 
-            //if (EchecEtMat.echecEtMat(partiesPvP.getJoueurNonCourant(), partiesPvP.getEchiquier(), menace))
-            //  System.out.println("Echec et mat");
-
             menace = partieActuel.echec();
             if (menace.size()>0){
                 System.out.println("ECHEEEC");
@@ -193,15 +190,7 @@ public abstract class ControllerPartie extends ControllerAffichage {
     }
 
     public void declarationDeplacementPossible(int coordGrille, int[] coordPlateau, Parties parties) {
-        if (!parties.isCaseSansPiece(coordPlateau[0], coordPlateau[1])) {
-            //CssModifier.ChangeBackgroundImage(grille.getChildren().get(coordGrille), "");
-        }
-
         CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "red");
-
-        if (!parties.isCaseSansPiece(coordPlateau[0], coordPlateau[1])) {
-            //CssModifier.ChangeBackgroundImage(grille.getChildren().get(coordGrille), (Parties) partieActuel.getEchiquier().getCase(coordPlateau[0], coordPlateau[1]).getPiece().getImage());
-        }
     }
 
     public Piece changementsPlateau(Parties parties) {

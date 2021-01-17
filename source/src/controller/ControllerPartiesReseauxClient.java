@@ -83,7 +83,6 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                 });
                 if (echiquier.getCase(x, y).isOccupe()){
                     CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
-                    //CssModifier.test((Button)grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
                 }
             }
         }

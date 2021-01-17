@@ -6,34 +6,31 @@ import model.plateau.Position;
 public class Tour extends Piece {
 
     //Constructeur
-    public Tour(int x, int y, Couleur couleur) {
-        super(x, y, couleur, Type.TOUR);
+    public Tour(Couleur couleur) {
+        super(couleur, Type.TOUR);
     }
 
-    public Tour(int x, int y, Couleur couleur, Type type, String image){
-        super(x, y, couleur, type, image);
+    public Tour(Couleur couleur, Type type, String image){
+        super(couleur, type, image);
     }
 
     //Methode
-    public void setListeDep(Plateau plateau) {
+    public void setListeDep(Plateau plateau, int x, int y) {
 
         getListeDep().clear();
         getListeProtecDep().clear();
 
-        int tmpX = getCoordX(), tmpY = getCoordY();
         int[][] dep = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
         for (int i = 0; i < 4; i++) {
-            deplacementPossible(plateau, dep[i][0], dep[i][1]);
+            deplacementPossible(plateau, dep[i][0], dep[i][1], x, y);
         }
 
 
     }
 
     @Override
-    public void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
+    public void deplacementPossible(Plateau plateau, int tmpX, int tmpY, int x, int y) {
         Position caseTmp;
-        int x = getCoordX();
-        int y = getCoordY();
 
         if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
             return;

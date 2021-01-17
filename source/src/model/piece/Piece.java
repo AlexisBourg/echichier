@@ -12,8 +12,6 @@ public abstract class Piece {
     //Atribut
     public static final int LIMIT_SUP = 7;
     public static final int LIMIT_INF = 0;
-    private int coordX;
-    private int coordY;
     private String image;
     private Couleur couleur;
     private List<Position> listePosDep;
@@ -21,11 +19,9 @@ public abstract class Piece {
     private Type type;
 
     //Constructeur
-    public Piece(int x, int y, Couleur couleur, Type type){
+    public Piece(Couleur couleur, Type type){
         listePosDep = new LinkedList<>();
         listeProtecDep = new LinkedList<>();
-        coordX=x;
-        coordY=y;
         this.couleur=couleur;
         this.type=type;
         switch (type){
@@ -80,9 +76,7 @@ public abstract class Piece {
         }
     }
 
-    public Piece(int x, int y, Couleur couleur, Type type, String image){
-        this.coordX = x;
-        this.coordY = y;
+    public Piece(Couleur couleur, Type type, String image){
         this.couleur = couleur;
         this.type = type;
         this.image = image;
@@ -93,22 +87,6 @@ public abstract class Piece {
     //Methode
 
         //Getter et Setter
-    public void setCoordX(int coordX) {
-        this.coordX = coordX;
-    }
-
-    public int getCoordX() {
-        return coordX;
-    }
-
-    public void setCoordY(int coordY) {
-        this.coordY = coordY;
-    }
-
-    public int getCoordY() {
-        return coordY;
-    }
-
     public void setImage(String image){
         this.image = image;
     }
@@ -133,14 +111,14 @@ public abstract class Piece {
         return type;
     }
 
-    public void setListeDep(Plateau plateau) {
+    public void setListeDep(Plateau plateau, int x, int y) {
     }
 
     public void actualiserListeDep(List<Position> liste){
         this.listePosDep = liste;
     }
 
-    public void deplacementPossible(Plateau plateau, int tmpX, int tmpY){}
+    public void deplacementPossible(Plateau plateau, int depX, int depY, int x, int y){}
 
     public List<Position> getListeDep() {
         return listePosDep;
@@ -155,6 +133,6 @@ public abstract class Piece {
 
     @Override
     public String toString(){
-        return "Type: "+getType().name()+"  Couleur: "+getCouleur() + "  x : " + getCoordX() + " y: "+getCoordY();
+        return "Type: "+getType().name()+"  Couleur: "+getCouleur();
     }
 }

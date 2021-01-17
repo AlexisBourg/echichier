@@ -9,32 +9,31 @@ public class Fou extends Piece {
     //Attribue
 
     //Constructeur
-    public Fou(int x, int y, Couleur couleur) {
-        super(x, y,couleur,Type.FOU);
+    public Fou(Couleur couleur) {
+        super(couleur,Type.FOU);
     }
 
-    public Fou(int x, int y, Couleur couleur, Type type, String image){
-        super(x, y, couleur, type, image);
+    public Fou(Couleur couleur, Type type, String image){
+        super(couleur, type, image);
     }
 
     //Methode
 
-    public void setListeDep(Plateau plateau) {
+    public void setListeDep(Plateau plateau, int x, int y) {
         int[][] dep ={{1,1},{-1,1},{1,-1},{-1,-1}};
 
         getListeDep().clear();
         getListeProtecDep().clear();
 
         for (int i = 0; i < 4; i++) {
-            deplacementPossible(plateau, dep[i][0], dep[i][1]);
+            deplacementPossible(plateau, dep[i][0], dep[i][1], x, y);
         }
     }
 
     @Override
-    public void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
+    public void deplacementPossible(Plateau plateau, int tmpX, int tmpY, int x, int y) {
         Position caseTmp;
-        int x = getCoordX();
-        int y = getCoordY();
+
         if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
             return;
 

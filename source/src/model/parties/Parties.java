@@ -8,26 +8,19 @@ import model.plateau.Position;
 import model.piece.Piece;
 import model.piece.Pion;
 import model.piece.Roi;
-import model.plateau.Plateau;
-import model.plateau.Position;
-
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Parties{
     protected int indexJoueurCourant = 0;
-    private final int ROI = 12;
     protected final InterfaceJoueur[] joueurs;
     private Plateau echiquier;
-    private LinkedList<model.parties.Coup> listeCoup;
 
     public Parties(){
         joueurs = new InterfaceJoueur[2];
         joueurs[0] = new Joueur(1); // BLANC
         joueurs[1] = new Joueur(2); // NOIR
         echiquier = new Plateau(joueurs[0].getPieces(), joueurs[1].getPieces());
-        listeCoup = new LinkedList<>();
     }
 
     public Plateau getEchiquier(){
@@ -41,11 +34,6 @@ public abstract class Parties{
     public InterfaceJoueur getJoueur(int num){return  joueurs[num];}
 
     public int getIndexJoueurCourant() { return indexJoueurCourant; }
-
-
-    public LinkedList<Coup> getListeCoup(){
-        return listeCoup;
-    }
 
     public void setJoueurs(int i,InterfaceJoueur joueurs) {
         this.joueurs[i] = joueurs;
@@ -69,7 +57,7 @@ public abstract class Parties{
     public HashMap<Integer, int[]> getDeplacements(int x, int y){
         HashMap<Integer, int[]> liste = new HashMap<>();
 
-        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier());
+        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y);
 
         for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
             liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
@@ -149,8 +137,6 @@ public abstract class Parties{
         plateau.getCase(depart[0], depart[1]).unsetPiece();
 
         System.out.println(pieceDeplacee+"ddddddddddddddddddddddddddddddddddddd");
-        pieceDeplacee.setCoordX(arrivee[0]);
-        pieceDeplacee.setCoordY(arrivee[1]);
 
         if (pieceDeplacee instanceof Pion && ((Pion) pieceDeplacee).getPremierDeplacement())
             ((Pion)pieceDeplacee).setPremierDeplacement();
@@ -168,13 +154,12 @@ public abstract class Parties{
         if (x==2){
             arr= new int[]{3, arriveeRoi[1]};
             dep= new int[]{0, arriveeRoi[1]};
-            Piece pieceMorte = deplacerPiece(dep, arr);
         }
         else{
             arr= new int[]{5, arriveeRoi[1]};
             dep= new int[]{7, arriveeRoi[1]};
-            Piece pieceMorte = deplacerPiece(dep, arr);
         }
+        deplacerPiece(dep, arr);
     }
 
     public List<Position> echec(){
@@ -199,7 +184,7 @@ public abstract class Parties{
     public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
         HashMap<Integer, int[]> liste = new HashMap<>();
 
-        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier());
+        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y);
 
         if (!(getEchiquier().getCase(x, y).getPiece() instanceof Roi))
             affinageDeplacements(getEchiquier().getCase(x, y).getPiece().getListeDep(), menace);

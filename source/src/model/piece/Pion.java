@@ -9,12 +9,12 @@ public class Pion extends Piece {
 
     //Constructeur
 
-    public Pion(int x, int y, Couleur couleur){
-        super(x, y, couleur, Type.PION);
+    public Pion(Couleur couleur){
+        super(couleur, Type.PION);
     }
 
-    public Pion(int x, int y, Couleur couleur, Type type, String image){
-        super(x, y, couleur, type, image);
+    public Pion(Couleur couleur, Type type, String image){
+        super(couleur, type, image);
     }
 
     //Methode
@@ -30,18 +30,14 @@ public class Pion extends Piece {
     }
 
 
-    public void setListeDep( Plateau plateau) {
+    public void setListeDep( Plateau plateau, int x, int y) {
         getListeDep().clear();
         getListeProtecDep().clear();
 
-        int tmpX = getCoordX();
-        int tmpY = getCoordY();
-
-        tmpY = this.getCouleur() == Couleur.BLANC ? tmpY-1 : tmpY+1;
-        deplacementPossible(plateau, tmpX, tmpY);
+        y = this.getCouleur() == Couleur.BLANC ? y-1 : y+1;
+        deplacementPossible(plateau, x, y);
     }
 
-    @Override
     public void deplacementPossible(Plateau plateau, int tmpX, int tmpY) {
         //déplacement basique
         Position caseTmp;

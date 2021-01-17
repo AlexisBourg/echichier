@@ -20,8 +20,9 @@ public class EchecEtMat {
      * @return : le fait que le roi adverse soit en situation d'échec ou non
      */
     public static List<Position> echec(InterfaceJoueur joueurAdverse, Plateau echiquier){
-        int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), // On récupère les coordonnées du Roi
-                yRoi = joueurAdverse.getPieces()[ROI].getCoordY();
+        Roi roiAdverse = (Roi)joueurAdverse.getPieces()[ROI];
+        int xRoi = roiAdverse.getX(), // On récupère les coordonnées du Roi
+                yRoi = roiAdverse.getY();
         return isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, 0); // Si le roi est menacé, échec sinon rien
     }
 
@@ -34,8 +35,9 @@ public class EchecEtMat {
      * @return : le fait que la partie soit terminée ou non
      */
     public static boolean echecEtMat(InterfaceJoueur joueurAdverse, Plateau echiquier, List<Position> menace){
-        int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), // On récupère les coordonnées du Roi
-                yRoi = joueurAdverse.getPieces()[ROI].getCoordY();
+        Roi roiAdverse = (Roi)joueurAdverse.getPieces()[ROI];
+        int xRoi = roiAdverse.getX(), // On récupère les coordonnées du Roi
+                yRoi = roiAdverse.getY();
         List<Position> DepRoiAdverse = joueurAdverse.getPieces()[ROI].getListeDep(); // Liste de déplacements possibles pour le roi adverse
         List<Position> MenacesDeLaMenace;
 
@@ -84,6 +86,7 @@ public class EchecEtMat {
      * @return : retourne la liste des position contenant des pièces pouvant manger la piece (x, y)
      */
     public static List<Position> isPieceMenaOrProtecParAutre(int x, int y, Plateau echiquier, int option){
+
         List<Position> liste = new LinkedList<>();
         int[][] dep={{0,1},{0,-1},{-1,0},{1,0},{1,1},{1,-1},{-1,-1},{-1,1}};
         int[][] depC={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};
@@ -123,7 +126,7 @@ public class EchecEtMat {
             if(option==0) {
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))){
                     if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
-                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier);
+                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);
                     }
 
                     if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) { // DROITE
@@ -146,7 +149,7 @@ public class EchecEtMat {
             else if(option==2){
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))){
                     if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
-                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier);
+                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);
                     }
 
                     if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) { // DROITE
@@ -190,7 +193,7 @@ public class EchecEtMat {
         // tmpX et tmpY représente la case qui peut être menace l'autre
         if(option==0){
             if (!(echiquier.getCase(tmpX, tmpY).getPiece() instanceof Roi))
-                echiquier.getCase(tmpX, tmpY).getPiece().setListeDep(echiquier);
+                echiquier.getCase(tmpX, tmpY).getPiece().setListeDep(echiquier, tmpX, tmpY);
 
             if(echiquier.getCase(tmpX, tmpY).getPiece().getListeDep().contains(echiquier.getCase(x, y))){
                 liste.add(echiquier.getCase(tmpX, tmpY));
@@ -214,9 +217,11 @@ public class EchecEtMat {
      * @return : le fait qu'une pièce puisse s'interposer entre le roi et la menace
      */
     public static boolean isPossibInterpo(InterfaceJoueur joueurAdverse, int xMen, int yMen, Plateau echiquier, LinkedList<Position> casesDispo) {
-        int xRoi = joueurAdverse.getPieces()[ROI].getCoordX(), yRoi = joueurAdverse.getPieces()[ROI].getCoordY(), // On récupère les coordonnées du roi adverse.
+        Roi roiAdverse = (Roi)joueurAdverse.getPieces()[ROI];
+        int xRoi = roiAdverse.getX(), // On récupère les coordonnées du Roi
+                yRoi = roiAdverse.getY(),
                 x = xRoi, y = yRoi;
-        List<Position> pieceDispo = new LinkedList<>();
+        List<Position> pieceDispo;
 
         int[][] dep={{1,1},{1,-1},{1,0},{-1,1},{-1,-1},{-1,0},{0,1},{0,-1}};
 

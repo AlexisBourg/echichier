@@ -13,14 +13,20 @@ public class Roi extends Piece {
 
     //Attribue
     private boolean premierDeplacement=true;
+    private int x;
+    private int y;
 
     //Constructeur
-    public Roi(int x, int y, Couleur couleur) {
-        super(x, y, couleur,Type.ROI);
+    public Roi(Couleur couleur, int x, int y) {
+        super(couleur,Type.ROI);
+        this.x = x;
+        this.y = y;
     }
 
-    public Roi(int x, int y, Couleur couleur, Type type, String image){
-        super(x, y, couleur, type, image);
+    public Roi(Couleur couleur, Type type, String image, int x, int y){
+        super(couleur, type, image);
+        this.x = x;
+        this.y = y;
     }
 
     //Methode
@@ -32,8 +38,24 @@ public class Roi extends Piece {
         return premierDeplacement;
     }
 
+    public int getX(){
+        return x;
+    }
 
-    public void setListeDep( Plateau plateau){
+    public void setX(int x){
+        this.x = x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public void setY(int y){
+        this.y = y;
+    }
+
+
+    public void setListeDep(Plateau plateau){
         int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
         getListeDep().clear();
@@ -43,16 +65,16 @@ public class Roi extends Piece {
             deplacementPossibleRoi(plateau, dep[i][0], dep[i][1]);
         }
 
-        switch (roque(plateau, this.getCoordX(), this.getCoordY())){
+        switch (roque(plateau, x, y)){
             case 1:
-                getListeDep().add(plateau.getCase(this.getCoordX()-2, this.getCoordY()));
+                getListeDep().add(plateau.getCase(x-2, y));
                 break;
             case 2:
-                getListeDep().add(plateau.getCase(this.getCoordX()+2, this.getCoordY()));
+                getListeDep().add(plateau.getCase(x+2, y));
                 break;
             case 3:
-                getListeDep().add(plateau.getCase(this.getCoordX()-2, this.getCoordY()));
-                getListeDep().add(plateau.getCase(this.getCoordX()+2, this.getCoordY()));
+                getListeDep().add(plateau.getCase(x-2, y));
+                getListeDep().add(plateau.getCase(x+2, y));
                 break;
         }
 
@@ -60,8 +82,6 @@ public class Roi extends Piece {
 
     public void deplacementPossibleRoi(Plateau plateau, int tmpX, int tmpY) {
         Position caseTmp;
-        int x = getCoordX();
-        int y = getCoordY();
 
         if(x+tmpX > LIMIT_SUP || x+tmpX < LIMIT_INF || y+tmpY > LIMIT_SUP || y+tmpY < LIMIT_INF)
             return;

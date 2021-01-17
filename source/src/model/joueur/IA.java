@@ -8,7 +8,6 @@ public class IA implements InterfaceJoueur{
     private final Couleur couleur=Couleur.NOIR;
     private final Piece[] pieces;
     private final Piece[] piecesMortes;
-    private Piece[] piecesVivantes;
     private int nbPiecesMortes=0;
 
     public IA(){
@@ -18,24 +17,20 @@ public class IA implements InterfaceJoueur{
     }
 
     public void initPieces(){
-        int yTetes, yPions, x=0;
-
-        yPions = 1;
-        yTetes = 0;
+        int xRoi = 4, yRoi = (couleur==Couleur.NOIR) ? 0 : 7;
 
         for (int i=0; i<8; i++) {
-            pieces[i] = new Pion(x, yPions, couleur);
-            x+=1;
+            pieces[i] = new Pion(couleur);
         }
 
-        pieces[8] = new Tour(0, yTetes, couleur);
-        pieces[9] = new Cavalier(1, yTetes, couleur);
-        pieces[10] = new Fou(2, yTetes, couleur);
-        pieces[11] = new Reine(3, yTetes, couleur);
-        pieces[12] = new Roi(4, yTetes, couleur);
-        pieces[13] = new Fou(5, yTetes, couleur);
-        pieces[14] = new Cavalier(6, yTetes, couleur);
-        pieces[15] = new Tour(7, yTetes, couleur);
+        pieces[8] = new Tour(couleur);
+        pieces[9] = new Cavalier(couleur);
+        pieces[10] = new Fou(couleur);
+        pieces[11] = new Reine(couleur);
+        pieces[12] = new Roi(couleur, xRoi, yRoi);
+        pieces[13] = new Fou(couleur);
+        pieces[14] = new Cavalier(couleur);
+        pieces[15] = new Tour(couleur);
     }
 
     public Piece[] getPieces(){
@@ -63,15 +58,6 @@ public class IA implements InterfaceJoueur{
 
     @Override
     public void removePieceMorte() { piecesMortes[nbPiecesMortes] = null; }
-
-
-    public void enleverPiece(Piece piece){
-        for (int i=0; i<16; i++){
-            if (pieces[i].equals(piece))
-                pieces[i] = null;
-        }
-        System.out.println(Arrays.toString(piecesVivantes));
-    }
 
     public Couleur getCouleur() { return couleur;}
 

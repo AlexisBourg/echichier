@@ -14,7 +14,7 @@ public class PartieConsole extends Parties {
 
     public void partie(){
         int i=0;
-        HashMap<String, int[]> coordDeplacements = new HashMap<>();
+        HashMap<String, int[]> coordDeplacements;
         Piece pieceMorte;
 
         InterfaceJoueur joueurCourant=super.getJoueur(0);
@@ -28,13 +28,6 @@ public class PartieConsole extends Parties {
             if(pieceMorte!=null) {
                 joueurNonCourant.addPieceMorte(pieceMorte);
             }
-
-           /* if (EchecEtMat.echec(joueurNonCourant, super.getEchiquier()) && EchecEtMat.echecEtMat(joueurNonCourant, super.getEchiquier())){
-                System.out.println("ECHEC ET MATTTTT");
-                break;
-            }
-            else if(EchecEtMat.echec(joueurNonCourant, super.getEchiquier()))
-                System.out.println("ECHEC");*/
 
             i=(i+1)%2;
 
@@ -52,12 +45,12 @@ public class PartieConsole extends Parties {
     public HashMap<String, int[]> infosDeplacement(Plateau echiquier, InterfaceJoueur joueurCourant){
         String caseDep, caseArr;
         int[] coordDepart = new int[2], coordArr = new int[2];
-        List<Position> list = new LinkedList<>();
+        List<Position> list;
         HashMap<String, int[]> donnees = new HashMap<>();
         Scanner scan = new Scanner(System.in);
 
         System.out.println("joueur"+joueurCourant+": donnez une case de départ parmi cette liste:");
-        listePiecesJoueur(joueurCourant);
+        listePiecesJoueur(joueurCourant, echiquier);
 
         System.out.print("\n");
 
@@ -70,7 +63,7 @@ public class PartieConsole extends Parties {
             determinerCoord(caseDep, coordDepart);
         }
 
-        echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier);
+        echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier, coordDepart[0], coordDepart[1]);
         list = echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().getListeDep();
 
         while (list.size()==0){
@@ -78,7 +71,7 @@ public class PartieConsole extends Parties {
             System.out.println("joueur"+joueurCourant+": donnez une case de départ.");
             caseDep = scan.next();
             determinerCoord(caseDep, coordDepart);
-            echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier);
+            echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier, coordDepart[0], coordDepart[1]);
             list = echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().getListeDep();
         }
 
@@ -125,14 +118,19 @@ public class PartieConsole extends Parties {
         return a > 8 || a < 0;
     }
 
+
     /**
      *  Cette méthode affiche les pièces du joueur courant qui sont encore en vie et qui sont susceptibles de pouvoir se déplacer
      * @param joueurCourant : joueur en train de jouer
      */
-    public void listePiecesJoueur(InterfaceJoueur joueurCourant){
-        for (int i=0; i<joueurCourant.getPieces().length; i++) {
-            if(joueurCourant.getPieces()[i]!=null)
-                System.out.print(joueurCourant.getPieces()[i].getCoordX() + "" + joueurCourant.getPieces()[i].getCoordY() + ", ");
+    public void listePiecesJoueur(InterfaceJoueur joueurCourant, Plateau echiquier){
+        for(int i=0; i<8; i++){
+            for (int j=0; j<8; j++){
+                for (int k=0; k<joueurCourant.getPieces().length; k++) {
+                    if(joueurCourant.getPieces()[i].equals(echiquier.getCase(j, i).getPiece()))
+                        System.out.print(j+""+i+ ", ");
+                }
+            }
         }
     }
 
@@ -176,9 +174,6 @@ public class PartieConsole extends Parties {
 
         plateau.getCase(arrivee[0], arrivee[1]).setPiece(plateau.getCase(depart[0], depart[1]).getPiece());
         plateau.getCase(depart[0], depart[1]).unsetPiece();
-
-        pieceDeplacee.setCoordX(arrivee[0]);
-        pieceDeplacee.setCoordY(arrivee[1]);
 
         if (pieceDeplacee instanceof Pion && ((Pion) pieceDeplacee).getPremierDeplacement())
             ((Pion) pieceDeplacee).setPremierDeplacement();
