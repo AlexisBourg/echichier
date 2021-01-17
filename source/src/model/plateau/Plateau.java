@@ -11,7 +11,6 @@ public class Plateau {
     private Position[][] plateauDeJeu = new Position[8][8];
 
     //Constructeur
-
     /**
      * un plateau est composé de position (casse) et initialisé avec les piece blanche en bas et les noire en haut
      */
@@ -54,7 +53,6 @@ public class Plateau {
 
         for (int y = LIMIT_INF; y <= LIMIT_SUP; y++) {
             for (int x = LIMIT_INF; x <= LIMIT_SUP; x++) {
-
                 this.plateauDeJeu[y][x].setY(plateau.getCaseEtat(x, y).getY());
                 this.plateauDeJeu[y][x].setX(plateau.getCaseEtat(x, y).getX());
                 this.plateauDeJeu[y][x].setEtatPiece(plateau.getCaseEtat(x, y).getPiece());
@@ -74,4 +72,3 @@ public class Plateau {
         return message.toString();
     }
 }
-

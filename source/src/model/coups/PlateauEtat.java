@@ -49,7 +49,6 @@ public class PlateauEtat {
             for (int j=LIMIT_INF; j<=LIMIT_SUP; j++)
                 message.append(plateau[i][j].toString());
         }
-
         return message.toString();
     }
 }

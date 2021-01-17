@@ -129,6 +129,9 @@ public abstract class Piece {
         return listePosDep;
     }
 
+    public void setListeProtecDep(Plateau plateau) {
+    }
+
     public List<Position> getListeProtecDep() {
         return listeProtecDep;
     }

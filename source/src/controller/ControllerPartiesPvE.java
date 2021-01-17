@@ -130,12 +130,12 @@ public class ControllerPartiesPvE extends ControllerPartie {
             caseDepartPlateau = decompositionIdBoutonIA(s);
             pieceSelectione = partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece();
         }
-    caseDepartGrille =partieActuel.getNumCaseGrille(caseDepartPlateau);
+        caseDepartGrille = partieActuel.getNumCaseGrille(caseDepartPlateau);
 
-    caseArriveePlateau =choisirDeplacementPiece(caseDepartPlateau);
-    caseArriveeGrille =partieActuel.getNumCaseGrille(caseArriveePlateau);
+        caseArriveePlateau = choisirDeplacementPiece(caseDepartPlateau);
+        caseArriveeGrille = partieActuel.getNumCaseGrille(caseArriveePlateau);
 
-    finDeDeplacement(partieActuel);
+        finDeDeplacement(partieActuel);
 
     }
 
