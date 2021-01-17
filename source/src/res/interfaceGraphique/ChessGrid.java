@@ -7,12 +7,11 @@ import javafx.scene.layout.RowConstraints;
 
 public class ChessGrid extends GridPane {
 
+    //Attribue
     public static final double POURCENTAGE_TAILLE= 12.5;
     public static final double TAILLE_PREF= 100;
     public static final int LIMIT_SUP=7;
     public static final int LIMIT_INF=0;
-
-    //Attribue
 
     //Constructeur
 

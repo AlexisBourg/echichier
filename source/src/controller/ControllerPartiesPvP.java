@@ -10,8 +10,8 @@ import res.interfaceGraphique.CssModifier;
 
 public class ControllerPartiesPvP extends ControllerPartie{
 
-    public static final int LONGUEUR_EN_CASE=8;
     //Atribut
+    public static final int LONGUEUR_EN_CASE=8;
     private PartiePvP partieActuel;
 
     //Constructeur

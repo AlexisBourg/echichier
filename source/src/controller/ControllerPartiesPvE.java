@@ -14,9 +14,9 @@ import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {
 
+    //Attribue
     public static final int LONGUEUR_EN_CASE=8;
     public static final int NB_CASES_GRILLE = 64;
-    //Atribut
     private IA ia;
     private PartiePvE partieActuel;
 
@@ -123,11 +123,10 @@ public class ControllerPartiesPvE extends ControllerPartie {
         Piece pieceSelectione=null;
 
         int x, y;
-
-        while (pieceSelectione == null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || ia.estPieceMorte(pieceSelectione) || partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
+        while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || ia.estPieceMorte(pieceSelectione) || partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
             x = genererInt(LONGUEUR_EN_CASE);
-            y = genererInt(LONGUEUR_EN_CASE);
-            s = x + "" + y;
+            y =genererInt(LONGUEUR_EN_CASE);
+            s = x+""+y;
             caseDepartPlateau = decompositionIdBoutonIA(s);
             pieceSelectione = partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece();
         }

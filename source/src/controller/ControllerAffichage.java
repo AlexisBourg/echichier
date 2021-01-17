@@ -17,8 +17,8 @@ import java.util.Map;
 
 public class ControllerAffichage {
 
-    public static final int LONGUEUR_EN_CASE = 8;
     //Atribut
+    public static final int LONGUEUR_EN_CASE = 8;
     protected HashMap<Integer, int[]> listeDeplacements;
     protected ObservableList<String> listeCoups = FXCollections.observableArrayList();
     @FXML

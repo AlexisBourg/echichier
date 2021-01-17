@@ -19,7 +19,7 @@ public class ControllerSon {
      */
     public void jouerSon(String fileName){
         File sound =new File(fileName);
-        /*try{
+        try{
             if(sound.exists()){
                 AudioInputStream audioInput = AudioSystem.getAudioInputStream(sound);
                 Clip clip = AudioSystem.getClip();
@@ -32,6 +32,6 @@ public class ControllerSon {
         }
         catch (Exception e){
             e.printStackTrace();
-        }*/
+        }
     }
 }

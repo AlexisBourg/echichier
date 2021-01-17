@@ -16,8 +16,8 @@ import java.util.Scanner;
 
 public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
 
-    public static final int LONGUEUR_EN_CASE=8;
     //Atribut
+    public static final int LONGUEUR_EN_CASE=8;
     private PartiePvP partie;
     private ServerSocket serverSocket = null;
     private Socket clientSocket;

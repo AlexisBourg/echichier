@@ -3,12 +3,11 @@ package model.joueur;
 import model.piece.*;
 
 public class Joueur implements InterfaceJoueur{
+    //Atribut
     public static final int NB_PIECES = 16;
     public static final int PREMIERE_PIECE_DERNIERE_RANGEE = 8;
     public static final int Y_ROI_NOIR = 0;
     public static final int Y_ROI_BLANC = 7;
-
-    //Atribut
     private Couleur couleur;
     private final Piece[] pieces;
     private final Piece[] piecesMortes;
@@ -23,6 +22,10 @@ public class Joueur implements InterfaceJoueur{
     }
 
     //Methode
+
+    /**
+     * permet d'initaliser les piece du joueur
+     */
     public void initPieces(){
         int xRoi = 4, yRoi = (couleur==Couleur.NOIR) ? Y_ROI_NOIR : Y_ROI_BLANC;
 
@@ -41,22 +44,26 @@ public class Joueur implements InterfaceJoueur{
         pieces[PREMIERE_PIECE_DERNIERE_RANGEE+7] = new Tour(couleur);
     }
 
+    /**
+     * retpurne la liste de piece
+     * @return
+     */
     public Piece[] getPieces(){
         return pieces;
     }
 
-    public Piece[] getPiecesMortes(){
-        return piecesMortes;
-    }
-
+    /**
+     * Permet d'ajouter une piece à la liste des pièces mortes
+     * @param pieceMorte : est la pièce à ajouter
+     */
     public void addPieceMorte(Piece pieceMorte){
         piecesMortes[nbPiecesMortes] = pieceMorte;
         nbPiecesMortes+=1;
     }
 
-    public void removePieceMorte(){
-        piecesMortes[nbPiecesMortes] = null;
-    }
-
+    /**
+     * retourne la couleur du joueur
+     * @return
+     */
     public Couleur getCouleur() { return couleur;}
 }

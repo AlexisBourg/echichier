@@ -14,12 +14,12 @@ import java.util.Map;
 
 public abstract class ControllerPartie extends ControllerAffichage {
 
+    //Atribut
     public static final int LIMIT_INF=0;
     public static final int LIMIT_SUP=7;
     public static final int CLIQUE_1=1;
     public static final int CLIQUE_2=2;
     public static final int DISTANCE_VERS_TOUR=2;
-    //Atribut
     protected boolean cliqueUnPasse = false;
     protected int caseDepartGrille;
     protected int[] caseDepartPlateau;

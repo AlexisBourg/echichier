@@ -3,6 +3,7 @@ package model.coups;
 import model.plateau.Plateau;
 
 public class PlateauEtat {
+
     public static final int LIMIT_INF=0;
     public static final int LIMIT_SUP=7;
 
@@ -48,7 +49,6 @@ public class PlateauEtat {
             for (int j=LIMIT_INF; j<=LIMIT_SUP; j++)
                 message.append(plateau[i][j].toString());
         }
-
         return message.toString();
     }
 }
