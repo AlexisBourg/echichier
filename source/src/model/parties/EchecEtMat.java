@@ -9,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class EchecEtMat {
+
+    //Atribut
     private static final int ROI=12;
     public static final int LIMIT_SUP = 7;
     public static final int LIMIT_INF = 0;
@@ -19,8 +21,9 @@ public class EchecEtMat {
     public static final int PREMIER_DEPLACEMENT_PION = 2;
     public static final int DEPLACEMENT_PION = 1;
 
+
+    //Methode
     /**
-     *
      * @param joueurAdverse : joueur qui n'a pas joué ce tour-ci
      * @param echiquier : plateau du jeu
      * @return : le fait que le roi adverse soit en situation d'échec ou non

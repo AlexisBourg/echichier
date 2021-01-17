@@ -12,5 +12,4 @@ public interface InterfaceJoueur {
 
     public void addPieceMorte(Piece pieceMorte);
 
-    void removePieceMorte();
 }

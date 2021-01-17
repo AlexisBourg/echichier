@@ -16,6 +16,8 @@ import java.util.LinkedList;
 
 
 public class ControllerMenu {
+
+    //Atribut
     @FXML
     private VBox page;
 
@@ -34,10 +36,10 @@ public class ControllerMenu {
     private int port;
     private InetAddress addr;
 
-    public ControllerMenu(){
+    //Constructeur
 
-    }
 
+    //Methode
     @FXML
     public void initialize(){
         comportementBoutonPVE();
@@ -45,6 +47,9 @@ public class ControllerMenu {
         comportementBoutonOnline();
     }
 
+    /**
+     * Permet de definir le comportement du bouton "Partie local PvP"
+     */
     public void comportementBoutonPVP() {
         boutonLocalPvp.setOnMouseClicked(new EventHandler<>() {
             @Override
@@ -52,7 +57,6 @@ public class ControllerMenu {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/interfaceGraphique/plateau.fxml"));
                 ControllerPartiesPvP controller = new ControllerPartiesPvP();
                 load.setController(controller);
-
 
                 try {
                     root = load.load();
@@ -72,6 +76,9 @@ public class ControllerMenu {
         });
     }
 
+    /**
+     * Permet de definir le comportement du bouton "Partie local contre IA"
+     */
     public void comportementBoutonPVE(){
         boutonLocalPve.setOnMouseClicked(new EventHandler<>() {
             @Override
@@ -79,7 +86,6 @@ public class ControllerMenu {
                 FXMLLoader load = new FXMLLoader(getClass().getResource("../res/interfaceGraphique/plateau.fxml"));
                 ControllerPartiesPvE controller = new ControllerPartiesPvE();
                 load.setController(controller);
-
 
                 try {
                     root = load.load();
@@ -99,6 +105,9 @@ public class ControllerMenu {
         });
     }
 
+    /**
+     * Permet de definir le comportement du bouton "Partie en ligne"
+     */
     public void comportementBoutonOnline(){
         boutonEnLigne.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -118,9 +127,7 @@ public class ControllerMenu {
                 primaryStage.setTitle("Echec");
                 primaryStage.setScene(new Scene(root, LONGUEUR_DEFAUT, HAUTEUR_DEFAUT));
                 primaryStage.show();
-
             }
         });
     }
-
 }

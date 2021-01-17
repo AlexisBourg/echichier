@@ -20,6 +20,7 @@ import java.net.UnknownHostException;
 
 public class ControllerMenuOnline {
 
+    //Atribut
     @FXML
     private Button heberger;
     @FXML
@@ -35,24 +36,24 @@ public class ControllerMenuOnline {
     @FXML
     private Text textPort;
 
+<<<<<<< HEAD
     public static final int HAUTEUR_DEFAUT = 800;
     public static final int LONGUEUR_DEFAUT = 1000;
+=======
+    //Constructeur
+>>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
 
-    public ControllerMenuOnline() {
-
-    }
-
+    //Methode
     @FXML
     public void initialize() {
         comportementBoutonHeberger();
         comportementBoutonRejoindre();
         comportementBoutonRetourMenu();
-
-
-        //ecrirAdresse.textProperty().bindBidirectional(adressePcServer.);
-        //ecrirPort.textProperty().bindBidirectional(adressePcServer.portProperty());
     }
 
+    /**
+     * Permet de definir le comportement du bouton "Creer"
+     */
     public void comportementBoutonHeberger() {
         heberger.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -93,6 +94,9 @@ public class ControllerMenuOnline {
 
     }
 
+    /**
+     * Permet de definir le comportement du bouton "Rejoindre"
+     */
     public void comportementBoutonRejoindre() {
         rejoindre.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -115,7 +119,6 @@ public class ControllerMenuOnline {
                     e.printStackTrace();
                     return;
                 }
-
                 controller.chargementPlateau();
 
                 Stage primaryStage = new Stage();
@@ -128,113 +131,11 @@ public class ControllerMenuOnline {
         });
     }
 
-    public void comportementBoutonRetourMenu() {
 
+    public void comportementBoutonRetourMenu() {
         /*Stage stage = (Stage) retourMenu.getScene().getWindow();
         if(!stage.equals(null)) {
             stage.close();
         }*/
     }
 }
-/*
-    public void menuOnline(){
-
-        heberger = new Button("Héberger partie");
-        rejoindre = new Button("Rejoindre partie");
-        retourMenu = new Button("Retour menu");
-        adresse = new TextField();
-        ecrirePort =  new TextField();
-        textAdresse = new Text("Saisir l'adresse de connection :");
-        textPort = new Text("saisir le Port de connection :");
-
-        heberger.setId("boutonLocalPvp");
-        rejoindre.setId("boutonLocalPve");
-        retourMenu.setId("boutonEnLigne");
-        retourMenu.setPrefWidth(170);
-
-        heberger.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartieGraph partie = new PartieGraph();
-                ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
-                try {
-                    System.out.println(controller.getPublicAdresse());
-                    System.out.println(controller.getPort());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                controller.CommencerPartie();
-
-                load.setController(controller);
-
-                Parent root;
-                try {
-                    root = load.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                controller.chargementPlateau();
-
-                Stage primaryStage = new Stage();
-
-                primaryStage.setTitle("Partie Online (Server)");
-                primaryStage.setScene(new Scene(root, 1000, 800));
-                primaryStage.show();
-            }
-        });
-
-        rejoindre.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/plateau.fxml"));
-                PartieGraph partie = new PartieGraph();
-                ControllerPartiesReseauxClient controller = new ControllerPartiesReseauxClient(partie,addr,port);
-
-                load.setController(controller);
-
-                Parent root;
-                try {
-                    root = load.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                controller.chargementPlateau();
-
-                Stage primaryStage = new Stage();
-
-                primaryStage.setTitle("Partie Online (Server)");
-                primaryStage.setScene(new Scene(root, 1000, 800));
-                primaryStage.show();
-
-            }
-        });
-
-        retourMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                page.getChildren().remove(0, 7);
-                page.getChildren().add(premiersBoutons.get(0));
-                page.getChildren().add(premiersBoutons.get(1));
-                page.getChildren().add(premiersBoutons.get(2));
-            }
-        });
-
-        page.getChildren().remove(0, 3);
-        page.getChildren().add(heberger);
-        page.getChildren().add(rejoindre);
-        page.getChildren().add(retourMenu);
-        page.getChildren().add(textAdresse);
-        page.getChildren().add(adresse);
-        page.getChildren().add(textPort);
-        page.getChildren().add(ecrirePort);
-        VBox.setMargin(heberger, new Insets(-50, 0, 30, 0));
-        VBox.setMargin(rejoindre, new Insets(0, 0, 30, 0));
-
-    }
-}
-*/

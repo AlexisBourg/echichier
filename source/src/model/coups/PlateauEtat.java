@@ -3,10 +3,16 @@ package model.coups;
 import model.plateau.Plateau;
 
 public class PlateauEtat {
+<<<<<<< HEAD
     public static final int LIMIT_INF=0;
     public static final int LIMIT_SUP=7;
+=======
+
+    //Atribut
+>>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     private PositionEtat[][] plateau = new PositionEtat[8][8];
 
+    //Constructeur
     public PlateauEtat(Plateau echiquier){
         for (int y=LIMIT_INF; y<=LIMIT_SUP; y++){
             for (int x=LIMIT_INF; x<=LIMIT_SUP; x++){
@@ -15,14 +21,28 @@ public class PlateauEtat {
         }
     }
 
+    //Methode
+    /**
+     *  retourn l'état du plateau à un moment donné
+     * @return l'état du plateau
+     */
     public PositionEtat[][] getPlateau(){
         return this.plateau;
     }
 
+    /**
+     * permet de recuperer l'etat d'une case
+     * @param x : est l'abscisse de la case
+     * @param y : est l'ordonnée de la case
+     * @return retourne la case en question
+     */
     public PositionEtat getCaseEtat(int x, int y){
         return this.plateau[y][x];
     }
 
+    /**
+     * @return retourn tout les toString de toutes les positionsEtat qui le compose
+     */
     @Override
     public String toString(){
         StringBuilder message= new StringBuilder();
@@ -34,5 +54,4 @@ public class PlateauEtat {
 
         return message.toString();
     }
-
 }

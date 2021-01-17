@@ -15,8 +15,12 @@ public class PartieConsole extends Parties {
     public static final int LIMIT_SUP=7;
     public static final int LIMIT_INF=0;
 
+    //Attribue
+
+    //Constructeur
     public PartieConsole(){ super(); }
 
+    //Methode
     public void partie(){
         int i=0;
         HashMap<String, int[]> coordDeplacements;

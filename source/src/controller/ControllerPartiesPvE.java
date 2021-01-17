@@ -14,23 +14,31 @@ import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {
 
+<<<<<<< HEAD
     public static final int LONGUEUR_EN_CASE=8;
     public static final int NB_CASES_GRILLE = 64;
+=======
+    //Atribut
+>>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     private IA ia;
     private PartiePvE partieActuel;
 
+    //Constructeur
     public ControllerPartiesPvE() {
         super();
         partieActuel = new PartiePvE();
     }
 
 
+    //Methode
+    /**
+     * permet de charger une partie contre un ordinateur
+     */
     @FXML
     public void chargementPlateau() {
         Plateau echiquier = partieActuel.getEchiquier();
         coups.setItems(listeCoups);
         editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
-
         arriere.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -40,7 +48,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
                     actualiserEtatPlateau(partieActuel);
                     partieActuel.changementJoueurCourant();
                     enleverCoup();
-                    //System.out.println(partieActuel.getEchiquier().toString());
                 }
             }
         });
@@ -50,8 +57,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
                 if (editeurCoup.getIndexCourant() != (editeurCoup.getNbEtat() - 1)) {
                     partieActuel.recupEtat(editeurCoup.coupSuivant());
                     actualiserEtatPlateau(partieActuel);
-                    partieActuel.changementJoueurCourant();
-                    //System.out.println(partieActuel.getEchiquier().toString());
+                    partieActuel.changementJoueurCourant();;
                 }
             }
         });
@@ -78,7 +84,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
                                 editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
                                 ajoutCoup(caseDepartPlateau, caseArriveePlateau);
                                 partieActuel.changementJoueurCourant();
-                                System.out.println("joueuer courant " + partieActuel.getIndexJoueurCourant());
                             }
                             cliqueUnPasse = false;
 
@@ -96,9 +101,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
     }
 
 
-    /*
-      --------------------------------------GESTION DE L'IA------------------------------------------
-     */
+    /**-----------------------------------GESTION DE L'IA-----------------------------------------*/
 
 
     /**
@@ -107,7 +110,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
      * @param borneSup est le nombre de piece encore "vivante"
      * @return le nombre généré
      */
-
     int genererInt(int borneSup) {
         Random random = new Random();
         int nb, borneInf = 0;
@@ -115,19 +117,27 @@ public class ControllerPartiesPvE extends ControllerPartie {
         return nb;
     }
 
-
+    /**
+     * Effectue un déplacement de l'IA
+     * @param ia : est le l'IA
+     */
     public void deplacementIA(IA ia) {
         String s;
         Piece pieceSelectione=null;
+<<<<<<< HEAD
         int x, y,i=0;
         while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty()/* || ia.estPieceMorte(pieceSelectione) */|| partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
             x = genererInt(LONGUEUR_EN_CASE);
             y =genererInt(LONGUEUR_EN_CASE);
+=======
+        int x, y;
+        while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || ia.estPieceMorte(pieceSelectione) || partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
+            x = genererInt(8);
+            y =genererInt(8);
+>>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
             s = x+""+y;
-            System.out.println(s);
             caseDepartPlateau = decompositionIdBoutonIA(s);
             pieceSelectione = partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece();
-            System.out.println("piece select " + partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece());
         }
     caseDepartGrille =partieActuel.getNumCaseGrille(caseDepartPlateau);
 
@@ -136,9 +146,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
 
     finDeDeplacement(partieActuel);
 
-}
-
-
+    }
 
     /**
      * @param source : bouton cliqué
@@ -151,49 +159,17 @@ public class ControllerPartiesPvE extends ControllerPartie {
         tabCoord[1] = Integer.parseInt(id.substring(1));
         return tabCoord;
     }
-//    public void deplacementIA(IA ia){
-//        int noPiece = genererInt(ia.getPieces().length);
-//        boolean pieceMorte=true;
-//        Piece pieceSelectione = ia.getPieces()[noPiece];
-//        pieceSelectione.setListeDep(partieActuel.getEchiquier());
-//
-//        while (pieceSelectione.getCouleur()!= Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || pieceMorte /*|| partieActuel.isCaseSansPiece(pieceSelectione.getCoordX(),pieceSelectione.getCoordY())*/) {   //verifie que la piece selectionné puisse se deplacer
-//            noPiece = genererInt(ia.getPieces().length);
-//            pieceSelectione = ia.getPieces()[noPiece];
-//
-//
-//            if (!ia.estPieceMorte(pieceSelectione)){
-//                pieceMorte=false;
-//                //System.out.println("test piece pas morte");
-//                pieceSelectione.setListeDep(partieActuel.getEchiquier());
-//
-//            }
-//        }
-//
-//        caseDepartPlateau = attributionCoord(partieActuel.get);
-//        caseDepartGrille = partieActuel.getNumCaseGrille(caseDepartPlateau);
-//
-//        caseArriveePlateau = choisirDeplacementPiece(caseDepartPlateau);
-//        caseArriveeGrille = partieActuel.getNumCaseGrille(caseArriveePlateau);
-//
-//        finDeDeplacement(partieActuel);
-//    }
 
-
-//    private int[] attributionCoord(Piece piece) {
-//        int[] tabCoord = new int[2];
-//
-//
-//        tabCoord[0] = piece.getCoordX();
-//        tabCoord[1] = piece.getCoordY();
-//        return tabCoord;
-//    }
-
-    public int[] choisirDeplacementPiece(int[] caseDepPLa) {
+    /**
+     * Permet de choisr un deplacement au hazard
+     * @param caseDepartPLateau : est la case de depart de la piece selectionné
+     * @return  la case d'arrivé de la pièce
+     */
+    public int[] choisirDeplacementPiece(int[] caseDepartPLateau) {
         int noDep;
         int[] tabCoord ;
 
-        listeDeplacements = partieActuel.getDeplacements(caseDepPLa[0], caseDepPLa[1]);
+        listeDeplacements = partieActuel.getDeplacements(caseDepartPLateau[0], caseDepartPLateau[1]);
 
         noDep = genererInt(NB_CASES_GRILLE);
         while (!listeDeplacements.containsKey(noDep)) {
@@ -202,5 +178,4 @@ public class ControllerPartiesPvE extends ControllerPartie {
         tabCoord = listeDeplacements.get(noDep);
         return tabCoord;
     }
-
 }

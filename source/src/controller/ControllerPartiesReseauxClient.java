@@ -11,7 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
+public class ControllerPartiesReseauxClient extends ControllerPartiesPvP {
 
     public static final int LONGUEUR_EN_CASE=8;
     private PartiePvP partie;
@@ -20,12 +20,18 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
     private ObjectOutputStream out;
     private boolean PremierDeplacementServerEffectuer = false;
 
-
-    public ControllerPartiesReseauxClient(PartiePvP partie, InetAddress addr, int port){
+    //Constructeur
+    /**
+     * Permet de se conecter à une partie en ligne
+     * @param partie : est la partie actuelle
+     * @param addr : est l'adresse de connection
+     * @param port : est le numero du port ou se connecter
+     */
+    public ControllerPartiesReseauxClient(PartiePvP partie, InetAddress addr, int port) {
         super();
         this.partie = partie;
-        try{
-            serverSocket = new Socket(addr,port);
+        try {
+            serverSocket = new Socket(addr, port);
         } catch (IOException e) {
             System.out.println("Impossible de se connecter au server");
         }
@@ -33,12 +39,15 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
             out = new ObjectOutputStream(serverSocket.getOutputStream());  //sortie pour envoyer
             out.flush();//pour envoyer des info au client necessaire à une bonne connexion
             in = new ObjectInputStream(serverSocket.getInputStream());
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //Methode
+    /**
+     * se connecte à une partie e nligne et commence la partie
+     */
     @FXML
     public void chargementPlateau() {
         Plateau echiquier = partie.getEchiquier();
@@ -71,7 +80,7 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                                     }
                                 }
                                 cliqueUnPasse = false;
-                            break;
+                                break;
                         }
                     } else {
                         try {
@@ -88,9 +97,4 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
             }
         }
     }
-
-
-    /**--------------------------partie reseau-------------------*/
-
-
 }

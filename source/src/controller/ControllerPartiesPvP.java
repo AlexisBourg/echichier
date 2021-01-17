@@ -10,14 +10,23 @@ import res.interfaceGraphique.CssModifier;
 
 public class ControllerPartiesPvP extends ControllerPartie{
 
+<<<<<<< HEAD
     public static final int LONGUEUR_EN_CASE=8;
+=======
+    //Atribut
+>>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     private PartiePvP partieActuel;
 
+    //Constructeur
     public ControllerPartiesPvP(){
         super();
         partieActuel = new PartiePvP();
     }
 
+    //Methode
+    /**
+     * permet de charger une partie contre un autre joueur
+     */
     @FXML
     public void chargementPlateau() {
         coups.setItems(listeCoups);

@@ -4,11 +4,11 @@ import model.plateau.Plateau;
 import model.plateau.Position;
 
 public class Pion extends Piece {
+
     //Atttribue
     private boolean premierDeplacement=true;
 
     //Constructeur
-
     public Pion(Couleur couleur){
         super(couleur, Type.PION);
     }
@@ -18,7 +18,6 @@ public class Pion extends Piece {
     }
 
     //Methode
-
     public boolean getPremierDeplacement(){
         return this.premierDeplacement;
     }

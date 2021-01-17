@@ -4,10 +4,11 @@ import javafx.scene.Node;
 
 public class CssModifier {
 
-    public CssModifier(){
+    //Attribue
 
-    }
+    //Constructeur
 
+    //Methode
     public static void changeBackgroundImage(Node n, String url){
         n.setStyle("-fx-background-image: url(\""+url+"\");");
     }
