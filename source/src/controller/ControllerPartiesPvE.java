@@ -15,14 +15,14 @@ import res.interfaceGraphique.CssModifier;
 import java.util.List;
 import java.util.Random;
 
-public class ControllerPartiesPvE extends ControllerPartie  {
+public class ControllerPartiesPvE extends ControllerPartie {
 
     private IA ia;
     private PartiePvE partieActuel;
 
-    public ControllerPartiesPvE(){
+    public ControllerPartiesPvE() {
         super();
-        partieActuel= new PartiePvE();
+        partieActuel = new PartiePvE();
     }
 
 
@@ -35,7 +35,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
         arriere.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (editeurCoup.getIndexCourant()>0) {
+                if (editeurCoup.getIndexCourant() > 0) {
                     partieActuel.recupEtat(editeurCoup.coupPrecedent());
                     actualiserEtatPlateau(partieActuel);
                     partieActuel.ChangementJoueurCourant();
@@ -47,7 +47,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
         suivant.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                if (editeurCoup.getIndexCourant()!=(editeurCoup.getNbEtat()-1)){
+                if (editeurCoup.getIndexCourant() != (editeurCoup.getNbEtat() - 1)) {
                     partieActuel.recupEtat(editeurCoup.coupSuivant());
                     actualiserEtatPlateau(partieActuel);
                     partieActuel.ChangementJoueurCourant();
@@ -58,9 +58,9 @@ public class ControllerPartiesPvE extends ControllerPartie  {
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
-                    switch (NumeroClique(partieActuel,mouseEvent.getSource())) {
+                    switch (NumeroClique(partieActuel, mouseEvent.getSource())) {
                         case 1:
-                            if (partieActuel.getJoueurCourant().getCouleur()==Couleur.BLANC) {
+                            if (partieActuel.getJoueurCourant().getCouleur() == Couleur.BLANC) {
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
@@ -71,7 +71,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
                             break;
                         case 2:
                             if (cliqueUnPasse) {
-                                TraitementCliqueDeux(mouseEvent.getSource(),partieActuel);
+                                TraitementCliqueDeux(mouseEvent.getSource(), partieActuel);
                                 editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
                                 ia = partieActuel.getIA();
                                 deplacementIA(ia);
@@ -91,8 +91,8 @@ public class ControllerPartiesPvE extends ControllerPartie  {
         }
     }
 
-    public void enleverCoup(){
-        listeCoups.remove(listeCoups.size()-1);
+    public void enleverCoup() {
+        listeCoups.remove(listeCoups.size() - 1);
     }
 
 
@@ -117,30 +117,45 @@ public class ControllerPartiesPvE extends ControllerPartie  {
 
 
     public void deplacementIA(IA ia) {
-        int nombreDeCase=63;
-        int[] coodCase;
+        int nombreDeCase = 63;
         String s;
-        Piece pieceSelectione;
-        for(int i=0; i<nombreDeCase;i++) {
-            if (i<10)
-                s= "0"+ i;
+        Piece pieceSelectione=null;
+        int i = -1;
+        while (i == -1 || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || ia.estPieceMorte(pieceSelectione) || !partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
+            i = genererInt(nombreDeCase);
+            if (i < 10)
+                s = "0" + i;
             else
-                s=String.valueOf(i);
-            caseDepartPlateau=decompositionIdBouton(s);
-            pieceSelectione=partieActuel.getEchiquier().getCase(caseDepartPlateau[0],caseDepartPlateau[1]).getPiece();
-
-            if(pieceSelectione.getCouleur()== Couleur.NOIR && !pieceSelectione.getListeDep().isEmpty() && !ia.estPieceMorte(pieceSelectione) && !partieActuel.isCaseSansPiece(caseDepartPlateau[0],caseDepartPlateau[1]))
-                break;
+                s = String.valueOf(i);
+            caseDepartPlateau = decompositionIdBoutonIA(s);
+            pieceSelectione = partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece();
+            System.out.println("piece select " + partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece());
         }
+    caseDepartGrille =partieActuel.getNumCaseGrille(caseDepartPlateau);
 
-        caseDepartGrille = partieActuel.getNumCaseGrille(caseDepartPlateau);
+    caseArriveePlateau =choisirDeplacementPiece(caseDepartPlateau);
+    caseArriveeGrille =partieActuel.getNumCaseGrille(caseArriveePlateau);
 
-        caseArriveePlateau = choisirDeplacementPiece(caseDepartPlateau);
-        caseArriveeGrille = partieActuel.getNumCaseGrille(caseArriveePlateau);
+    finDeDeplacement(partieActuel);
 
-        finDeDeplacement(partieActuel);
+}
 
 
+
+    /**
+     * @param source : bouton cliqué
+     * @return : retourne les coordonnées du PLATEAU correspondant à l'endroit cliqué
+     */
+    public int[] decompositionIdBoutonIA(Object source) {
+        int[] tabCoord = new int[2];
+        String id = source.toString();
+        System.out.println("id avant substring "+id);
+//
+//        id = id.substring(10, 12);
+//        System.out.println("id apres substring "+id);
+        tabCoord[0] = Integer.parseInt(id.substring(0, 1));
+        tabCoord[1] = Integer.parseInt(id.substring(1));
+        return tabCoord;
     }
 //    public void deplacementIA(IA ia){
 //        int noPiece = genererInt(ia.getPieces().length);

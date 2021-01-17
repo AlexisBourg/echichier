@@ -121,7 +121,6 @@ public abstract class Parties{
      * @return : la pièce mangée ou null
      */
     public Piece deplacerPiece(int[] depart, int[] arrivee){
-        System.out.println("Déplacer pièce");
         Piece pieceDeplacee, pieceMorte;
         Plateau plateau = getEchiquier();
 
