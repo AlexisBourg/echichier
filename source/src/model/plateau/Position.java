@@ -4,17 +4,21 @@ import model.coups.PieceEtat;
 import model.piece.*;
 
 public class Position {
+
+    //Atribut
     private int x;
     private int y;
     private boolean occupee=false;
     private Piece piecePresente;
 
+    //Constructeur
     public Position(int y,int x, Piece piece){
         this.x=x;
         this.y=y;
         this.piecePresente=piece;
     }
 
+    //Methode
     public void setX(int x) {
         this.x = x;
     }

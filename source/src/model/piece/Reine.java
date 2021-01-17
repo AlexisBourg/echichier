@@ -12,12 +12,11 @@ public class Reine extends Piece {
     public Reine(Couleur couleur) {
         super(couleur, Type.REINE);
     }
-
     public Reine(Couleur couleur, Type type, String image){
         super(couleur, type, image);
     }
-    //Methode
 
+    //Methode
     @Override
     public void setListeDep(Plateau plateau, int x, int y) {
         int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};

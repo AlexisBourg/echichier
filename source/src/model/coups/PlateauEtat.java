@@ -3,8 +3,11 @@ package model.coups;
 import model.plateau.Plateau;
 
 public class PlateauEtat {
+
+    //Atribut
     private PositionEtat[][] plateau = new PositionEtat[8][8];
 
+    //Constructeur
     public PlateauEtat(Plateau echiquier){
         for (int y=0; y<8; y++){
             for (int x=0; x<8; x++){
@@ -13,6 +16,7 @@ public class PlateauEtat {
         }
     }
 
+    //Methode
     public PositionEtat[][] getPlateau(){
         return this.plateau;
     }

@@ -7,6 +7,9 @@ import javafx.scene.layout.RowConstraints;
 
 public class ChessGrid extends GridPane {
 
+    //Attribue
+
+    //Constructeur
     public ChessGrid(){
         super();
         int x, y;

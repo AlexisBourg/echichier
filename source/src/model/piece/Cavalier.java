@@ -5,8 +5,7 @@ import model.plateau.Position;
 
 public class Cavalier extends Piece {
 
-
-    //Attribue
+    //Atribut
 
     //Constructeur
     public Cavalier(Couleur couleur){
@@ -19,7 +18,6 @@ public class Cavalier extends Piece {
 
 
     //Methode
-
     @Override
     public void setListeDep(Plateau plateau, int x, int y) {
         int[][] dep ={{1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,-1},{-2,1},{-1,2}};

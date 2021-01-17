@@ -5,8 +5,7 @@ import model.plateau.Position;
 
 public class Fou extends Piece {
 
-
-    //Attribue
+    //Atribut
 
     //Constructeur
     public Fou(Couleur couleur) {

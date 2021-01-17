@@ -5,8 +5,10 @@ import model.piece.*;
 
 public class Plateau {
 
+    //Atribut
     private Position[][] plateauDeJeu = new Position[8][8];
 
+    //Constructeur
     /**
      * un plateau est composé de position (casse) et initialisé avec les piece blanche en bas et les noire en haut
      */
@@ -32,8 +34,7 @@ public class Plateau {
         }
     }
 
-    public Plateau(){}
-
+    //Methode
     public boolean isCaseNull(Position p){
         return p.getX() >= 0 && p.getX() <= 7 && p.getY() >= 0 && p.getY() <= 7;
     }
@@ -42,13 +43,11 @@ public class Plateau {
         return p.getPiece() == null;
     }
 
-    //  /!\ on doit verifier en amont que x et y ne correspondent pas à une casse null -> isCaseNull() doit rendre false
     public Position getCase(int x, int y){
         return plateauDeJeu[y][x];
     }
 
     public void setEtat(PlateauEtat plateau){
-        //System.out.println(plateau.toString());
         for (int y=0; y<8; y++){
             for (int x=0; x<8; x++){
                 this.plateauDeJeu[y][x].setY(plateau.getCaseEtat(x, y).getY());
@@ -57,8 +56,6 @@ public class Plateau {
                 this.plateauDeJeu[y][x].setOccupee(plateau.getCaseEtat(x, y).getOccupe());
             }
         }
-        //System.out.println("\n\n\n"+plateau.toString());
-
     }
 
     @Override
@@ -69,7 +66,6 @@ public class Plateau {
             for (int j=0; j<8; j++)
                 message.append(plateauDeJeu[i][j].toString());
         }
-
         return message.toString();
     }
 }

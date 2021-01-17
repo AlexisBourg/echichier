@@ -11,20 +11,27 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
+public class ControllerPartiesReseauxClient extends ControllerPartiesPvP {
 
+    //Atribut
     private PartiePvP partie;
     private Socket serverSocket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
     private boolean PremierDeplacementServerEffectuer = false;
 
-
-    public ControllerPartiesReseauxClient(PartiePvP partie, InetAddress addr, int port){
+    //Constructeur
+    /**
+     * Permet de se conecter à une partie en ligne
+     * @param partie : est la partie actuelle
+     * @param addr : est l'adresse de connection
+     * @param port : est le numero du port ou se connecter
+     */
+    public ControllerPartiesReseauxClient(PartiePvP partie, InetAddress addr, int port) {
         super();
         this.partie = partie;
-        try{
-            serverSocket = new Socket(addr,port);
+        try {
+            serverSocket = new Socket(addr, port);
         } catch (IOException e) {
             System.out.println("Impossible de se connecter au server");
         }
@@ -32,12 +39,15 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
             out = new ObjectOutputStream(serverSocket.getOutputStream());  //sortie pour envoyer
             out.flush();//pour envoyer des info au client necessaire à une bonne connexion
             in = new ObjectInputStream(serverSocket.getInputStream());
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    //Methode
+    /**
+     * se connecte à une partie e nligne et commence la partie
+     */
     @FXML
     public void chargementPlateau() {
         Plateau echiquier = partie.getEchiquier();
@@ -45,18 +55,18 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
                     if (PremierDeplacementServerEffectuer) {
-                        switch (NumeroClique(partie,mouseEvent.getSource())) {
+                        switch (NumeroClique(partie, mouseEvent.getSource())) {
                             case 1:
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(partie); // Les cases qui contenaient des pièces les retrouves
                                 }
-                                TraitementCliqueUn(mouseEvent.getSource(),partie);
+                                TraitementCliqueUn(mouseEvent.getSource(), partie);
                                 cliqueUnPasse = true;
-                            break;
+                                break;
                             case 2:
                                 if (cliqueUnPasse) {
-                                    TraitementCliqueDeux(mouseEvent.getSource(),partie);
+                                    TraitementCliqueDeux(mouseEvent.getSource(), partie);
                                     try {
                                         in = new ObjectInputStream(serverSocket.getInputStream());
                                         out = new ObjectOutputStream(serverSocket.getOutputStream());
@@ -70,7 +80,7 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                                     }
                                 }
                                 cliqueUnPasse = false;
-                            break;
+                                break;
                         }
                     } else {
                         try {
@@ -81,15 +91,10 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                         }
                     }
                 });
-                if (echiquier.getCase(x, y).isOccupe()){
+                if (echiquier.getCase(x, y).isOccupe()) {
                     CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
                 }
             }
         }
     }
-
-
-    /**--------------------------partie reseau-------------------*/
-
-
 }

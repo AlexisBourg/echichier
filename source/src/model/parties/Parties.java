@@ -13,10 +13,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Parties{
+
+    //Atribut
     protected int indexJoueurCourant = 0;
     protected final InterfaceJoueur[] joueurs;
     private Plateau echiquier;
 
+    //Constructeur
     public Parties(){
         joueurs = new InterfaceJoueur[2];
         joueurs[0] = new Joueur(1); // BLANC
@@ -24,6 +27,7 @@ public abstract class Parties{
         echiquier = new Plateau(joueurs[0].getPieces(), joueurs[1].getPieces());
     }
 
+    //Methode
     public Plateau getEchiquier(){
         return echiquier;
     }

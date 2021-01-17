@@ -3,17 +3,21 @@ package model.joueur;
 import model.piece.*;
 
 public class IA implements InterfaceJoueur{
+
+    //Atribut
     private final Couleur couleur=Couleur.NOIR;
     private final Piece[] pieces;
     private final Piece[] piecesMortes;
     private int nbPiecesMortes=0;
 
+    //Constructeur
     public IA(){
         pieces = new Piece[16];
         piecesMortes = new Piece[16];
         initPieces();
     }
 
+    //Methode
     public void initPieces(){
         int xRoi = 4, yRoi = (couleur==Couleur.NOIR) ? 0 : 7;
 
@@ -35,9 +39,7 @@ public class IA implements InterfaceJoueur{
         return pieces;
     }
 
-    public Piece[] getPiecesMortes(){
-        return piecesMortes;
-    }
+
 
     public boolean estPieceMorte(Piece piece){
 
@@ -53,9 +55,6 @@ public class IA implements InterfaceJoueur{
         piecesMortes[nbPiecesMortes] = pieceMorte;
         nbPiecesMortes+=1;
     }
-
-    @Override
-    public void removePieceMorte() { piecesMortes[nbPiecesMortes] = null; }
 
     public Couleur getCouleur() { return couleur;}
 

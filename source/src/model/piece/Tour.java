@@ -5,6 +5,8 @@ import model.plateau.Position;
 
 public class Tour extends Piece {
 
+    //Atribut
+
     //Constructeur
     public Tour(Couleur couleur) {
         super(couleur, Type.TOUR);
@@ -21,11 +23,9 @@ public class Tour extends Piece {
         getListeProtecDep().clear();
 
         int[][] dep = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++){
             deplacementPossible(plateau, dep[i][0], dep[i][1], x, y);
         }
-
-
     }
 
     @Override

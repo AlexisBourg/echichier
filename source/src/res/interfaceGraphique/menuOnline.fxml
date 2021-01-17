@@ -65,7 +65,7 @@
             minHeight="10"
             text="Retour"
             GridPane.columnIndex="0" GridPane.rowIndex="4"
-           GridPane.columnSpan="4">
+            GridPane.columnSpan="4">
 
     </Button>
 

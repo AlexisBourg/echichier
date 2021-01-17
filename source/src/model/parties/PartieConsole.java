@@ -10,8 +10,12 @@ import java.util.*;
 
 public class PartieConsole extends Parties {
 
+    //Attribue
+
+    //Constructeur
     public PartieConsole(){ super(); }
 
+    //Methode
     public void partie(){
         int i=0;
         HashMap<String, int[]> coordDeplacements;

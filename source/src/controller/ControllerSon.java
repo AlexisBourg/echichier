@@ -8,6 +8,15 @@ import java.io.File;
 
 public class ControllerSon {
 
+    //Attribue
+
+    //Constructeur
+
+    //Methode
+    /**
+     * Permet de jouer un son
+     * @param fileName : est l'url de du son à jouer
+     */
     public void jouerSon(String fileName){
         File sound =new File(fileName);
         try{
@@ -18,7 +27,6 @@ public class ControllerSon {
                 clip.start();
             }
             else{
-                //sound.createNewFile();
                 System.out.println("Fichier audio introuvable");
             }
         }

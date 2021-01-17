@@ -14,7 +14,7 @@ import java.util.Map;
 
 public abstract class ControllerPartie extends ControllerAffichage {
 
-
+    //Atribut
     protected boolean cliqueUnPasse = false;
     protected int caseDepartGrille;
     protected int[] caseDepartPlateau;
@@ -28,11 +28,12 @@ public abstract class ControllerPartie extends ControllerAffichage {
     protected ControllerSon son= new ControllerSon();
     protected EditeurCoup editeurCoup = new EditeurCoup();
 
+    //Constructeur
     public ControllerPartie(){
         listeDeplacements = new HashMap<>();
     }
 
-
+    //Methode
     /**
      * @param source : bouton cliqué
      * @return : retourne les coordonnées du PLATEAU correspondant à l'endroit cliqué
@@ -67,6 +68,10 @@ public abstract class ControllerPartie extends ControllerAffichage {
         return 2;
     }
 
+    /**
+     * Efface les case de deplacement lorsqu'une autre piéce est selectionné
+     * @param parties : est la partie actuel
+     */
     public void restaurationImageDeplacementPossible(Parties parties) {
         int x, y, coordGrille;
         for (Map.Entry coord : listeDeplacements.entrySet()) {
@@ -79,14 +84,21 @@ public abstract class ControllerPartie extends ControllerAffichage {
         }
     }
 
+    /**
+     * Permet de remetre l'image d'une piece sur une case pour une pièce pouvait étre déplacé
+     * @param x : est l'abscisse de la case à modifier
+     * @param y : est l'ordonnée de la case à modifier
+     * @param parties : est la partie en cours
+     * @return : l'url de l'image de la piece se trouvant sur la case
+     */
     public String urlImageDeplacementPossible(int x, int y, Parties parties) {
         return parties.getEchiquier().getCase(x, y).getPiece().getImage();
     }
 
     /**
      * Cette méthode s'occupe de traiter le cas du premier clique, c'est à dire, afficher les cases sur lesquelles la pièce peut se déplacer
-     *
      * @param source : bouton cliqué
+     * @param parties : est la partie actuel
      */
     public void TraitementCliqueUn(Object source, Parties parties) {
         caseDepartPlateau = decompositionIdBouton(source);
@@ -97,10 +109,8 @@ public abstract class ControllerPartie extends ControllerAffichage {
 
     }
 
-    //--------------------------------------------------------------------
     /**
      * Cette méthode traite le cas du second clique, c'est à dire, de faire déplacer la pièce dans le plateau et d'actualiser l'interface en conséquence
-     *
      * @param source : bouton cliqué
      */
     public void TraitementCliqueDeux(Object source, Parties partieActuel) {
@@ -130,7 +140,10 @@ public abstract class ControllerPartie extends ControllerAffichage {
         }
     }
 
-
+    /**
+     * Modifie le plateau après que le joueur ou l'ia est confirmé son déplacement
+     * @param partieActuel : est la partie en cours
+     */
     public void finDeDeplacement(Parties partieActuel){
         // Pour arriver sur la case d'arrivée
         this.pieceMangee=changerBackgroundCase(partieActuel);
@@ -138,18 +151,17 @@ public abstract class ControllerPartie extends ControllerAffichage {
 
     /**
      * Cette méthode indique si la case sélectionnée contient une pièce appartenant au joueur et par conséquent, si l'on peut ou non la déplacer
-     *
+     * @param parties : est la partie actuel en cours
      * @return : le fait que la case fasse (Parties) partieActuel du jeu du joueur
      */
     public boolean verificationClique(Parties parties) {
-        return (parties.verifCase(caseDepartPlateau[0], caseDepartPlateau[1], parties.getJoueurCourant()));
+        return parties.verifCase(caseDepartPlateau[0], caseDepartPlateau[1], parties.getJoueurCourant());
     }
 
     /**
      * Cette méthode récupère les liste des déplacements possibles avec la pièce sélectionnée.
-     *
+     * @param parties : est la parties actuel en cours
      */
-
     public void montrerDeplacementDispo(Parties parties) {
         HashMap<Integer, int[]> listeDeplacements = (!this.echec) ? parties.getDeplacements(caseDepartPlateau[0], caseDepartPlateau[1]) : parties.getDeplacementsEchec(caseDepartPlateau[0], caseDepartPlateau[1], menace);
         int coordGrille;
@@ -162,18 +174,36 @@ public abstract class ControllerPartie extends ControllerAffichage {
         this.listeDeplacements = listeDeplacements;
     }
 
+    /**
+     * Permet de modifier une case pour la metre en evidance quand la pièce sélectionné peut se déplacer dessus
+     * @param coordGrille : est la coordonnée de la grille à metre évidence
+     */
     public void declarationDeplacementPossible(int coordGrille) {
         CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "red");
     }
 
+    /**
+     * Permet de changer les case d'un plateau quand on déplace d'une pièce
+     * @param parties : est la partie en cours
+     * @return : la piece qui à été mangé (si mangé)
+     */
     public Piece changementsPlateau(Parties parties) {
         return parties.actualiserPlateau(caseDepartPlateau, caseArriveePlateau);
     }
 
+    /**
+     * Permet de changer les case d'un plateau quand on éffectu un roque
+     * @param parties : est la partie actuelle en cours
+     */
     public void changementsPlateauRoque(Parties parties) { // Déplace la bonne tour par rapport au déplacement fait par le Roi
         parties.roqueTour(caseArriveePlateau);
     }
 
+    /**
+     * Effectue tout les changements lors de n'importe qu'elle deéplacement de pièce
+     * @param partie : est la partie actuelle en cours
+     * @return la piece mangé (si mangé)
+     */
     public Piece changerBackgroundCase(Parties partie){
         son.jouerSon(Son.MOVEPIECE.getBruit());
         Piece pieceMangee;
@@ -186,10 +216,19 @@ public abstract class ControllerPartie extends ControllerAffichage {
         return pieceMangee;
     }
 
+    /**
+     * Verifie si la piece selectionné est un Roi
+     * @param partieActuel : est la partie actuel en cours
+     * @return vrai si un roi est sélectionné sinon retourne faux
+     */
     public boolean roiSelectionne(Parties partieActuel){
         return  partieActuel.isRoiSelectionne(caseDepartPlateau);
     }
 
+    /**
+     * effectuer un roque
+     * @param partieActuel : est la partie actuel en cours
+     */
     public void roque(Parties partieActuel){
         int xTour;
         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine

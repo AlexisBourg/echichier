@@ -3,11 +3,14 @@ package model.coups;
 import model.plateau.Position;
 
 public class PositionEtat {
+
+    //Atribut
     private int x;
     private int y;
     private boolean occupe;
     private PieceEtat piece;
 
+    //Constructeur
     public PositionEtat(Position position){
         this.x = position.getX();
         this.y = position.getY();
@@ -15,6 +18,7 @@ public class PositionEtat {
         this.piece = position.isOccupe() ? new PieceEtat(position) : null;
     }
 
+    //Methode
     public void setX(int x){
         this.x = x;
     }

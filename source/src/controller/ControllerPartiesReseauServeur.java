@@ -16,6 +16,7 @@ import java.util.Scanner;
 
 public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
 
+    //Atribut
     private PartiePvP partie;
     private ServerSocket serverSocket = null;
     private Socket clientSocket;
@@ -23,6 +24,11 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
     private ObjectOutputStream out;
     private int port=-1;
 
+    //Constructeur
+    /**
+     * permet d'heberger une partie contre un autre joueur en ligne
+     * @param partie : est un partie
+     */
     public ControllerPartiesReseauServeur(PartiePvP partie) {
         super();
         this.partie=partie;
@@ -34,11 +40,15 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
         }
     }
 
+    //Methode
+    /**
+     * attends une connection d'un autre joueur avant de lancer une partie
+     */
     public void CommencerPartie(){
         try {
             clientSocket = serverSocket.accept();
             System.out.println("2");
-            clientSocket.setSoTimeout(20000); //TODO à decommenter dans la version final
+            clientSocket.setSoTimeout(20000);
 
         } catch (IOException e) {
             System.out.println("TimeOut: aucune connection");

@@ -4,9 +4,13 @@ import java.util.LinkedList;
 
 public class EditeurCoup {
 
+    //Atribut
     private StockageCoup listeCoups = new StockageCoup();
     private int indexCourant=0;
 
+    //Constructeur
+
+    //Methode
     public void ajoutCoup(PlateauEtat plateau){
         listeCoups.addEtatPlateau(plateau);
         if (listeCoups.getNbEtat()!=1)

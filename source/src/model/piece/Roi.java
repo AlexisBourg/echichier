@@ -41,15 +41,12 @@ public class Roi extends Piece {
     public int getX(){
         return x;
     }
-
     public void setX(int x){
         this.x = x;
     }
-
     public int getY(){
         return y;
     }
-
     public void setY(int y){
         this.y = y;
     }
@@ -64,7 +61,6 @@ public class Roi extends Piece {
         for(int i=0; i<8; i++){
             deplacementPossibleRoi(plateau, dep[i][0], dep[i][1]);
         }
-
         switch (roque(plateau, x, y)){
             case 1:
                 getListeDep().add(plateau.getCase(x-2, y));
@@ -77,7 +73,6 @@ public class Roi extends Piece {
                 getListeDep().add(plateau.getCase(x+2, y));
                 break;
         }
-
     }
 
     public void deplacementPossibleRoi(Plateau plateau, int tmpX, int tmpY) {

@@ -3,11 +3,14 @@ package model.joueur;
 import model.piece.*;
 
 public class Joueur implements InterfaceJoueur{
+
+    //Atribut
     private Couleur couleur;
     private final Piece[] pieces;
     private final Piece[] piecesMortes;
     private int nbPiecesMortes=0;
 
+    //Constructeur
     public Joueur(int numJoueur){ // Constructeur pour partie local
         pieces = new Piece[16];
         piecesMortes = new Piece[16];
@@ -15,6 +18,7 @@ public class Joueur implements InterfaceJoueur{
         initPieces();
     }
 
+    //Methode
     public void initPieces(){
         int xRoi = 4, yRoi = (couleur==Couleur.NOIR) ? 0 : 7;
 

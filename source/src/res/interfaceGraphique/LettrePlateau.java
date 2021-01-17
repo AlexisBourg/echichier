@@ -10,15 +10,17 @@ public enum LettrePlateau {
     G(6,'G'),
     H(7,'H');
 
-
+    //Attribue
     private final int numeroCase;
     private final char lettre;
 
+    //Constructeur
     LettrePlateau(int numeroCase, char lettre) {
         this.numeroCase=numeroCase;
         this.lettre=lettre;
     }
 
+    //Methode
     public static char getLettre(int num){
         for(LettrePlateau v : values()) {
             if (v.numeroCase == num) {

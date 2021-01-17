@@ -5,12 +5,15 @@ import model.piece.Type;
 import model.plateau.Position;
 
 public class PieceEtat {
+
+    //Atribut
     private int x;
     private int y;
     private String image;
     private Couleur couleur;
     private Type type;
 
+    //Constructeur
     public PieceEtat(Position position){
         this.setX(position.getX());
         this.setY(position.getY());
@@ -19,6 +22,7 @@ public class PieceEtat {
         this.setType(position.getPiece().getType());
     }
 
+    //Methode
     public void setX(int x){
         this.x = x;
     }
