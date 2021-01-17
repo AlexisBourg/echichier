@@ -91,7 +91,7 @@ public abstract class Piece {
 
     //Methode
 
-        //Getter et Setter
+    //Getter et Setter
     public void setImage(String image){
         this.image = image;
     }
@@ -116,7 +116,7 @@ public abstract class Piece {
         return type;
     }
 
-<<<<<<< HEAD
+
     /**
      *
      * @param plateau : plateau du jeu
@@ -125,10 +125,6 @@ public abstract class Piece {
      */
     public void setListeDep(Plateau plateau, int x, int y) {
     }
-=======
-   public void setListeDep(Plateau plateau, int x, int y) {
-   }
->>>>>>> 720829424a557d2e8529fcc679418605cfd26a7a
 
     public void actualiserListeDep(List<Position> liste){
         this.listePosDep = liste;
@@ -140,8 +136,6 @@ public abstract class Piece {
         return listePosDep;
     }
 
-    public void setListeProtecDep(Plateau plateau) {
-    }
 
     public List<Position> getListeProtecDep() {
         return listeProtecDep;

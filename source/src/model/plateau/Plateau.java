@@ -37,8 +37,6 @@ public class Plateau {
     }
 
     //Methode
-<<<<<<< HEAD
-
     /**
      *
      * @param p : position qui est potentiellement
@@ -69,30 +67,12 @@ public class Plateau {
 
     /**
      *
-     * @param plateau : etat d'un plateau
+     * @param plateau : est le plateau de la partie actuel
      */
-    public void setEtat(PlateauEtat plateau){
-        //System.out.println(plateau.toString());
-        for (int y=LIMIT_INF; y<=LIMIT_SUP; y++){
-            for (int x=LIMIT_INF; x<=LIMIT_SUP; x++){
-=======
-    public boolean isCaseNull(Position p) {
-        return p.getX() >= LIMIT_INF && p.getX() <= LIMIT_SUP && p.getY() >= LIMIT_INF && p.getY() <= LIMIT_SUP;
-    }
-
-    public boolean isCaseSansPiece(Position p) {
-        return p.getPiece() == null;
-    }
-
-    public Position getCase(int x, int y) {
-        return plateauDeJeu[y][x];
-    }
-
     public void setEtat(PlateauEtat plateau) {
 
         for (int y = LIMIT_INF; y <= LIMIT_SUP; y++) {
             for (int x = LIMIT_INF; x <= LIMIT_SUP; x++) {
->>>>>>> 720829424a557d2e8529fcc679418605cfd26a7a
                 this.plateauDeJeu[y][x].setY(plateau.getCaseEtat(x, y).getY());
                 this.plateauDeJeu[y][x].setX(plateau.getCaseEtat(x, y).getX());
                 this.plateauDeJeu[y][x].setEtatPiece(plateau.getCaseEtat(x, y).getPiece());

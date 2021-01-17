@@ -23,12 +23,10 @@ public class PartieConsole extends Parties {
     //Methode
 
     /**
-<<<<<<< HEAD
      * Mets en place le déroulement d'une partie d'échec
-=======
      * Configure une partie sur le terminal
->>>>>>> 720829424a557d2e8529fcc679418605cfd26a7a
      */
+
     public void partie(){
         int i=0;
         HashMap<String, int[]> coordDeplacements;
