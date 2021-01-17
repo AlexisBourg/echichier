@@ -16,6 +16,9 @@ import java.net.InetAddress;
 public class ControllerMenu {
 
     //Atribut
+    public static final int HAUTEUR_DEFAUT = 800;
+    public static final int LONGUEUR_DEFAUT = 1000;
+    private Parent root=null;
     @FXML
     private VBox page;
 
@@ -27,12 +30,6 @@ public class ControllerMenu {
 
     @FXML
     private Button boutonEnLigne;
-
-    public static final int HAUTEUR_DEFAUT = 800;
-    public static final int LONGUEUR_DEFAUT = 1000;
-    private Parent root=null;
-    private int port;
-    private InetAddress addr;
 
     //Constructeur
 

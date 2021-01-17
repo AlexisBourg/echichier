@@ -6,7 +6,6 @@ import javafx.scene.input.MouseEvent;
 import model.plateau.Plateau;
 import model.parties.PartiePvE;
 import model.piece.Couleur;
-import model.joueur.IA;
 import model.piece.Piece;
 import javafx.fxml.FXML;
 import res.interfaceGraphique.CssModifier;
@@ -19,7 +18,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
     public static final int LONGUEUR_EN_CASE = 8;
     public static final int NB_CASES_GRILLE = 64;
     private PartiePvE partieActuel;
-    private IA ia;
 
     //Constructeur
     public ControllerPartiesPvE() {
@@ -29,7 +27,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
 
 
     //Methode
-
     /**
      * permet de charger une partie contre un ordinateur
      */
@@ -79,8 +76,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
                             if (cliqueUnPasse) {
                                 traitementCliqueDeux(mouseEvent.getSource(), partieActuel);
                                 editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
-                                ia = partieActuel.getIA();
-                                deplacementIA(ia);
+                                deplacementIA();
                                 editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
                                 ajoutCoup(caseDepartPlateau, caseArriveePlateau);
                                 partieActuel.changementJoueurCourant();
@@ -120,11 +116,10 @@ public class ControllerPartiesPvE extends ControllerPartie {
     /**
      * Effectue un déplacement de l'IA
      */
-    public void deplacementIA(IA ia) {
-        Piece pieceSelectione = null;
+    public void deplacementIA() {
+        Piece pieceSelectione;
         String s;
         int x = genererInt(LONGUEUR_EN_CASE), y = genererInt(LONGUEUR_EN_CASE);
-        //caseDepartPlateau = decompositionIdBoutonIA(s);
         pieceSelectione = partieActuel.getEchiquier().getCase(x, y).getPiece();
         if (pieceSelectione != null)
             pieceSelectione.setListeDep(partieActuel.getEchiquier(), x, y);
@@ -138,8 +133,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
             if (pieceSelectione != null)
                 pieceSelectione.setListeDep(partieActuel.getEchiquier(), x, y);
 
-            System.out.println(x + "" + y);
-            //System.out.println(pieceSelectione.toString()+"  ");
         }
         caseDepartGrille = partieActuel.getNumCaseGrille(caseDepartPlateau);
 

@@ -42,7 +42,7 @@
 
 
     <VBox  GridPane.columnIndex="3" GridPane.rowIndex="1">
-        <Label text="Entrer le port de connection :"/>
+        <Label text="Entrer le port de connection :" />
         <TextField fx:id="ecrirPort"/>
         <HBox.margin>
             <Insets bottom="30.0" top="-50.0"/>
@@ -56,16 +56,6 @@
             minWidth="50"
             minHeight="10"
             text="Rejoindre">
-
-    </Button>
-
-    <Button fx:id="retourMenu"
-            prefWidth="242.0"
-            minWidth="50"
-            minHeight="10"
-            text="Retour"
-            GridPane.columnIndex="0" GridPane.rowIndex="4"
-            GridPane.columnSpan="4">
 
     </Button>
 

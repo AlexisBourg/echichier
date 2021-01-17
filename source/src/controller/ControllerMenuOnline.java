@@ -26,8 +26,6 @@ public class ControllerMenuOnline {
     @FXML
     private Button rejoindre;
     @FXML
-    private Button retourMenu;
-    @FXML
     private TextField ecrirAdresse;
     @FXML
     private TextField ecrirPort;
@@ -43,7 +41,7 @@ public class ControllerMenuOnline {
     public void initialize() {
         comportementBoutonHeberger();
         comportementBoutonRejoindre();
-        comportementBoutonRetourMenu();
+
     }
 
     /**
@@ -124,13 +122,5 @@ public class ControllerMenuOnline {
 
             }
         });
-    }
-
-
-    public void comportementBoutonRetourMenu() {
-        /*Stage stage = (Stage) retourMenu.getScene().getWindow();
-        if(!stage.equals(null)) {
-            stage.close();
-        }*/
     }
 }

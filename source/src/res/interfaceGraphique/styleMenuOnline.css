@@ -8,3 +8,10 @@
     -fx-background-size: cover;
 }
 
+Label{
+    -fx-text-fill: "white";
+    -fx-font-size: 20;
+}
+
+VBox
+
