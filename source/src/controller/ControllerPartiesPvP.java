@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import res.interfaceGraphique.CssModifier;
 
-
 public class ControllerPartiesPvP extends ControllerPartie{
 
     //Atribut

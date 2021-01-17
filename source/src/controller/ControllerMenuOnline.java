@@ -11,8 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;

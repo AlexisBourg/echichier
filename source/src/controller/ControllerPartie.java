@@ -1,13 +1,11 @@
 package controller;
 
-
 import model.coups.EditeurCoup;
 import model.plateau.Position;
 import model.parties.Parties;
 import model.piece.Piece;
 import res.son.Son;
 import res.interfaceGraphique.CssModifier;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

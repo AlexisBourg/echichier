@@ -4,7 +4,6 @@ import model.plateau.Plateau;
 import model.parties.PartiePvP;
 import javafx.fxml.FXML;
 import res.interfaceGraphique.CssModifier;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

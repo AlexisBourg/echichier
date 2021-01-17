@@ -9,7 +9,6 @@ import model.piece.Couleur;
 import model.piece.Piece;
 import javafx.fxml.FXML;
 import res.interfaceGraphique.CssModifier;
-
 import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {

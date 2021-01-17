@@ -11,7 +11,6 @@ public class StockageCoup {
     //Constructeur
 
     //Methode
-
     /**
      * permet d'ajouter un etat
      * @param plateau : le plateau à ajouter

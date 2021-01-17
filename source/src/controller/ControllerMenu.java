@@ -9,10 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.LinkedList;
 
 
 public class ControllerMenu {
