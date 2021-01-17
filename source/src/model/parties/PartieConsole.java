@@ -21,7 +21,6 @@ public class PartieConsole extends Parties {
     public PartieConsole(){ super(); }
 
     //Methode
-
     /**
      * Mets en place le déroulement d'une partie d'échec
      * Configure une partie sur le terminal
