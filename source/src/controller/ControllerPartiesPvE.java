@@ -120,13 +120,12 @@ public class ControllerPartiesPvE extends ControllerPartie {
         int nombreDeCase = 63;
         String s;
         Piece pieceSelectione=null;
-        int i = -1;
-        while (i == -1 || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || ia.estPieceMorte(pieceSelectione) || !partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
-            i = genererInt(nombreDeCase);
-            if (i < 10)
-                s = "0" + i;
-            else
-                s = String.valueOf(i);
+        int x, y,i=0;
+        while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty()/* || ia.estPieceMorte(pieceSelectione) */|| partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
+            x = genererInt(8);
+            y =genererInt(8);
+            s = x+""+y;
+            System.out.println(s);
             caseDepartPlateau = decompositionIdBoutonIA(s);
             pieceSelectione = partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece();
             System.out.println("piece select " + partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece());
@@ -149,10 +148,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
     public int[] decompositionIdBoutonIA(Object source) {
         int[] tabCoord = new int[2];
         String id = source.toString();
-        System.out.println("id avant substring "+id);
-//
-//        id = id.substring(10, 12);
-//        System.out.println("id apres substring "+id);
         tabCoord[0] = Integer.parseInt(id.substring(0, 1));
         tabCoord[1] = Integer.parseInt(id.substring(1));
         return tabCoord;
