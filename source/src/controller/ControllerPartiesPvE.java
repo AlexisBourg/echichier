@@ -3,16 +3,13 @@ package controller;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import model.joueur.IA;
-import model.parties.EchecEtMat;
 import model.plateau.Plateau;
 import model.parties.PartiePvE;
 import model.piece.Couleur;
 import model.piece.Piece;
 import javafx.fxml.FXML;
-import model.plateau.Position;
 import res.interfaceGraphique.CssModifier;
 
-import java.util.List;
 import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {
@@ -59,20 +56,20 @@ public class ControllerPartiesPvE extends ControllerPartie {
         for (int y = 0; y < 8; y++) {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
-                    switch (NumeroClique(partieActuel, mouseEvent.getSource())) {
+                    switch (numeroClique(partieActuel, mouseEvent.getSource())) {
                         case 1:
                             if (partieActuel.getJoueurCourant().getCouleur() == Couleur.BLANC) {
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
                                 }
-                                TraitementCliqueUn(mouseEvent.getSource(), partieActuel);
+                                traitementCliqueUn(mouseEvent.getSource(), partieActuel);
                                 cliqueUnPasse = true;
                             }
                             break;
                         case 2:
                             if (cliqueUnPasse) {
-                                TraitementCliqueDeux(mouseEvent.getSource(), partieActuel);
+                                traitementCliqueDeux(mouseEvent.getSource(), partieActuel);
                                 editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
                                 ia = partieActuel.getIA();
                                 deplacementIA(ia);
@@ -87,7 +84,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
                     }
                 });
                 if (echiquier.getCase(x, y).isOccupe())
-                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
             }
         }
     }
