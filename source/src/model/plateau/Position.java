@@ -77,7 +77,7 @@ public class Position {
                 break;
 
             case ROI:
-                this.piecePresente = new Roi(piece.getCouleur(), piece.getType(), piece.getImage());
+                this.piecePresente = new Roi(piece.getCouleur(), piece.getType(), piece.getImage(), this.x, this.y);
                 break;
 
             case PION:

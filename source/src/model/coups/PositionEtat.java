@@ -1,6 +1,5 @@
 package model.coups;
 
-import model.piece.Piece;
 import model.plateau.Position;
 
 public class PositionEtat {
@@ -30,10 +29,6 @@ public class PositionEtat {
 
     public int getY(){
         return this.y;
-    }
-
-    public void setOccupe(boolean occupe){
-        this.occupe = occupe;
     }
 
     public boolean getOccupe(){

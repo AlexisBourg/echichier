@@ -1,19 +1,11 @@
 package controller;
 
 
-import javafx.scene.control.Control;
 import model.coups.EditeurCoup;
 import model.plateau.Position;
 import model.parties.Parties;
 import model.piece.Piece;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import res.interfaceGraphique.LettrePlateau;
 import res.son.Son;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import res.interfaceGraphique.ChessGrid;
 import res.interfaceGraphique.CssModifier;
 
 import java.util.HashMap;
@@ -59,7 +51,6 @@ public abstract class ControllerPartie extends ControllerAffichage {
         int[] tabCoord = new int[2];
         String id = source.toString();
         id = id.substring(10, 12);
-        int x, y;
         tabCoord[0] = Integer.parseInt(id.substring(0, 1));
         tabCoord[1] = Integer.parseInt(id.substring(1));
         return tabCoord;
@@ -94,11 +85,11 @@ public abstract class ControllerPartie extends ControllerAffichage {
             y = ((int[]) coord.getValue())[1];
 
             if (!parties.isCaseSansPiece(x, y))
-                CssModifier.ChangeBackgroundImage(grille.getChildren().get(coordGrille), urlImageDeplacementPossible(coordGrille, x, y, parties));
+                CssModifier.ChangeBackgroundImage(grille.getChildren().get(coordGrille), urlImageDeplacementPossible(x, y, parties));
         }
     }
 
-    public String urlImageDeplacementPossible(int i, int x, int y, Parties parties) {
+    public String urlImageDeplacementPossible(int x, int y, Parties parties) {
         return parties.getEchiquier().getCase(x, y).getPiece().getImage();
     }
 
@@ -109,7 +100,7 @@ public abstract class ControllerPartie extends ControllerAffichage {
      */
     public void TraitementCliqueUn(Object source, Parties parties) {
         caseDepartPlateau = decompositionIdBouton(source);
-        if (verificationClique(source, parties)) {
+        if (verificationClique(parties)) {
             montrerDeplacementDispo(parties);
             caseDepartGrille = parties.getNumCaseGrille(decompositionIdBouton(source));
         }
@@ -144,15 +135,11 @@ public abstract class ControllerPartie extends ControllerAffichage {
             else
                 this.echec = false;
 
-            ajoutCoup();
+            ajoutCoup(caseDepartPlateau, caseArriveePlateau);
             partieActuel.ChangementJoueurCourant();
         }
     }
 
-    public void ajoutCoup(){
-        String coup="      "+traductionIntChar(caseDepartPlateau[0])+traductionCoordPlateau(caseDepartPlateau[1])+" -> "+traductionIntChar(caseArriveePlateau[0])+traductionCoordPlateau(caseArriveePlateau[1]);
-        listeCoups.add(coup);
-    }
 
     public void finDeDeplacement(Parties partieActuel){
         // Pour arriver sur la case d'arrivée
@@ -162,10 +149,9 @@ public abstract class ControllerPartie extends ControllerAffichage {
     /**
      * Cette méthode indique si la case sélectionnée contient une pièce appartenant au joueur et par conséquent, si l'on peut ou non la déplacer
      *
-     * @param source : bouton cliqué
      * @return : le fait que la case fasse (Parties) partieActuel du jeu du joueur
      */
-    public boolean verificationClique(Object source, Parties parties) {
+    public boolean verificationClique(Parties parties) {
         return (parties.verifCase(caseDepartPlateau[0], caseDepartPlateau[1], parties.getJoueurCourant()));
     }
 
@@ -177,19 +163,16 @@ public abstract class ControllerPartie extends ControllerAffichage {
     public void montrerDeplacementDispo(Parties parties) {
         HashMap<Integer, int[]> listeDeplacements = (!this.echec) ? parties.getDeplacements(caseDepartPlateau[0], caseDepartPlateau[1]) : parties.getDeplacementsEchec(caseDepartPlateau[0], caseDepartPlateau[1], menace);
         int coordGrille;
-        int[] coordPlateau;
 
         for (Map.Entry coord : listeDeplacements.entrySet()) { // Pour chaque case dans la liste de déplacements possibles
             coordGrille = (int) coord.getKey();
-            coordPlateau = (int[]) coord.getValue();
-
-            declarationDeplacementPossible(coordGrille, coordPlateau, parties); // On les met en surbrillance
+            declarationDeplacementPossible(coordGrille); // On les met en surbrillance
         }
 
         this.listeDeplacements = listeDeplacements;
     }
 
-    public void declarationDeplacementPossible(int coordGrille, int[] coordPlateau, Parties parties) {
+    public void declarationDeplacementPossible(int coordGrille) {
         CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "red");
     }
 
@@ -203,7 +186,7 @@ public abstract class ControllerPartie extends ControllerAffichage {
 
     public Piece changerBackgroundCase(Parties partie){
         son.jouerSon(Son.MOVEPIECE.getBruit());
-        Piece pieceMangee=null;
+        Piece pieceMangee;
         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
         restaurationImageDeplacementPossible(partie); // Les cases qui contenaient des pièces les retrouves
         CssModifier.ChangeBackgroundImage(grille.getChildren().get(caseDepartGrille), ""); // La pièce de la case de départ disparaît..

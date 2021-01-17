@@ -1,7 +1,6 @@
 package model.coups;
 
 import model.piece.Couleur;
-import model.piece.Piece;
 import model.piece.Type;
 import model.plateau.Position;
 

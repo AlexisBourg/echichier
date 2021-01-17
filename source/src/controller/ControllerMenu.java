@@ -1,10 +1,8 @@
 package controller;
 
-import model.parties.PartiePvP;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -29,8 +27,6 @@ public class ControllerMenu {
 
     @FXML
     private Button boutonEnLigne;
-
-
 
     private Parent root=null;
     private LinkedList<Button> premiersBoutons;
@@ -130,93 +126,4 @@ public class ControllerMenu {
         });
     }
 
-    /**----------------------------------------------------
-     */
-
-    public void menuOnline(){
-        Button heberger, rejoindre, retourMenu;
-        heberger = new Button("Héberger partie");
-        rejoindre = new Button("Rejoindre partie");
-        retourMenu = new Button("Retour menu");
-
-        heberger.setId("boutonLocalPvp");
-        rejoindre.setId("boutonLocalPve");
-        retourMenu.setId("boutonEnLigne");
-        retourMenu.setPrefWidth(170);
-
-        heberger.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/interfaceGraphique/plateau.fxml"));
-                PartiePvP partie = new PartiePvP();
-                ControllerPartiesReseauServeur controller = new ControllerPartiesReseauServeur(partie);
-
-                controller.CommencerPartie();
-
-                load.setController(controller);
-
-                Parent root;
-                try {
-                    root = load.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                controller.chargementPlateau();
-
-                Stage primaryStage = new Stage();
-
-                primaryStage.setTitle("Partie Online (Server)");
-                primaryStage.setScene(new Scene(root, 1000, 800));
-                primaryStage.show();
-            }
-        });
-
-        rejoindre.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                FXMLLoader load = new FXMLLoader(getClass().getResource("../res/interfaceGraphique/plateau.fxml"));
-                PartiePvP partie = new PartiePvP();
-                ControllerPartiesReseauxClient controller = new ControllerPartiesReseauxClient(partie,addr,port);
-
-                load.setController(controller);
-
-                Parent root;
-                try {
-                    root = load.load();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return;
-                }
-
-                controller.chargementPlateau();
-
-                Stage primaryStage = new Stage();
-
-                primaryStage.setTitle("Partie Online (Server)");
-                primaryStage.setScene(new Scene(root, 1000, 800));
-                primaryStage.show();
-
-            }
-        });
-
-        retourMenu.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                page.getChildren().remove(0, 3);
-                page.getChildren().add(premiersBoutons.get(0));
-                page.getChildren().add(premiersBoutons.get(1));
-                page.getChildren().add(premiersBoutons.get(2));
-            }
-        });
-
-        page.getChildren().remove(0, 3);
-        page.getChildren().add(heberger);
-        page.getChildren().add(rejoindre);
-        page.getChildren().add(retourMenu);
-        VBox.setMargin(heberger, new Insets(-50, 0, 30, 0));
-        VBox.setMargin(rejoindre, new Insets(0, 0, 30, 0));
-
-    }
 }

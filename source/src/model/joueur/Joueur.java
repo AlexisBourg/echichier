@@ -9,20 +9,9 @@ public class Joueur implements InterfaceJoueur{
     private int nbPiecesMortes=0;
 
     public Joueur(int numJoueur){ // Constructeur pour partie local
-        prenom = "Joueur";
         pieces = new Piece[16];
         piecesMortes = new Piece[16];
-
-        switch (numJoueur) {
-            case 1 :
-                couleur = Couleur.BLANC;
-                nom = " 1";
-            break;
-            case 2 :
-                couleur = Couleur.NOIR;
-                nom = " 2";
-            break;
-        }
+        couleur = (numJoueur==1) ? Couleur.BLANC : Couleur.NOIR ;
         initPieces();
     }
 

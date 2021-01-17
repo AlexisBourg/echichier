@@ -2,7 +2,6 @@ package model.parties;
 
 import model.joueur.IA;
 import model.joueur.InterfaceJoueur;
-import model.joueur.Joueur;
 import model.piece.Piece;
 
 public class PartiePvE extends Parties{

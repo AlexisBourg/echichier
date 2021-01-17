@@ -143,7 +143,6 @@ public class Roi extends Piece {
                             xDep=1;
                         }
 
-                        xDep += 1;
                     }
                     else{
                         if (x+xDep==7)
@@ -158,8 +157,8 @@ public class Roi extends Piece {
                             break;
                         }
 
-                        xDep += 1;
                     }
+                    xDep += 1;
                 }
             }
             xTour=7;

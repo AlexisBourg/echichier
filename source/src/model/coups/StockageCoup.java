@@ -1,7 +1,5 @@
 package model.coups;
 
-import model.plateau.Plateau;
-import model.plateau.Position;
 
 import java.util.LinkedList;
 
