@@ -10,14 +10,11 @@ public class PartiePvE extends Parties{
         super();
         super.setJoueurs(1,new IA());
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> d8dc896257ce996fa311fad39acc65bfbe68f685
     public IA getIA(){ return (IA) joueurs[1]; }
 
-    public Piece actualiserPlateauIA(int[] depart, int[] arrivee){
-        Piece pieceMorte = deplacerPiece(depart, arrivee);
-        if(pieceMorte!=null) {
-            getIA().addPieceMorte(pieceMorte);
-        }
-        return pieceMorte;
-    }
 }

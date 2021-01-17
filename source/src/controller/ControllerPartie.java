@@ -24,6 +24,7 @@ public abstract class ControllerPartie extends ControllerAffichage {
     protected boolean echec =false;
     protected List<Position> menace;
 
+    protected ControllerAffichage affichage=new ControllerAffichage();
     protected ControllerSon son= new ControllerSon();
     protected EditeurCoup editeurCoup = new EditeurCoup();
 
@@ -31,17 +32,6 @@ public abstract class ControllerPartie extends ControllerAffichage {
         listeDeplacements = new HashMap<>();
     }
 
-//    private static class SingletonHolder
-//    {
-//        /** Instance unique non préinitialisée */
-//        private final static ControllerPartie instance = new ControllerPartie();
-//    }
-//
-//    /** Point d'accès pour l'instance unique du singleton */
-//    public static ControllerPartie getInstance()
-//    {
-//        return SingletonHolder.instance;
-//    }
 
     /**
      * @param source : bouton cliqué

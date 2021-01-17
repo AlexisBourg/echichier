@@ -14,7 +14,7 @@ import res.interfaceGraphique.LettrePlateau;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class ControllerAffichage {
+public class ControllerAffichage {
 
     protected HashMap<Integer, int[]> listeDeplacements;
     protected ObservableList<String> listeCoups = FXCollections.observableArrayList();
