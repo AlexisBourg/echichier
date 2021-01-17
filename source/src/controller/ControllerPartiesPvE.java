@@ -120,7 +120,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
         String s;
         Piece pieceSelectione=null;
         int x, y;
-        while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || ia.estPieceMorte(pieceSelectione) || partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
+        while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() /*|| !ia.estPieceMorte(pieceSelectione) */|| partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
             x = genererInt(8);
             y =genererInt(8);
             s = x+""+y;

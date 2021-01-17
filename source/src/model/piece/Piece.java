@@ -111,8 +111,8 @@ public abstract class Piece {
         return type;
     }
 
-//    public void setListeDep(Plateau plateau, int x, int y) {
-//    }
+   public void setListeDep(Plateau plateau, int x, int y) {
+   }
 
     public void actualiserListeDep(List<Position> liste){
         this.listePosDep = liste;
@@ -123,9 +123,6 @@ public abstract class Piece {
     public List<Position> getListeDep() {
         return listePosDep;
     }
-
-//    public void setListeProtecDep(Plateau plateau) {
-//    }
 
     public List<Position> getListeProtecDep() {
         return listeProtecDep;

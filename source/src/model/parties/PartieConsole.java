@@ -67,7 +67,7 @@ public class PartieConsole extends Parties {
             determinerCoord(caseDep, coordDepart);
         }
 
-        echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier, coordDepart[0], coordDepart[1]);
+        echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece()/*.setListeDep(echiquier, coordDepart[0], coordDepart[1])*/;
         list = echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().getListeDep();
 
         while (list.size()==0){
@@ -75,7 +75,7 @@ public class PartieConsole extends Parties {
             System.out.println("joueur"+joueurCourant+": donnez une case de départ.");
             caseDep = scan.next();
             determinerCoord(caseDep, coordDepart);
-            echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().setListeDep(echiquier, coordDepart[0], coordDepart[1]);
+            echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece()/*.setListeDep(echiquier, coordDepart[0], coordDepart[1])*/;
             list = echiquier.getCase(coordDepart[0], coordDepart[1]).getPiece().getListeDep();
         }
 

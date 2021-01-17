@@ -19,6 +19,10 @@ public class Joueur implements InterfaceJoueur{
     }
 
     //Methode
+
+    /**
+     * permet d'initaliser les piece du joueur
+     */
     public void initPieces(){
         int xRoi = 4, yRoi = (couleur==Couleur.NOIR) ? 0 : 7;
 
@@ -37,22 +41,26 @@ public class Joueur implements InterfaceJoueur{
         pieces[15] = new Tour(couleur);
     }
 
+    /**
+     * retpurne la liste de piece
+     * @return
+     */
     public Piece[] getPieces(){
         return pieces;
     }
 
-    public Piece[] getPiecesMortes(){
-        return piecesMortes;
-    }
-
+    /**
+     * Permet d'ajouter une piece à la liste des pièces mortes
+     * @param pieceMorte : est la pièce à ajouter
+     */
     public void addPieceMorte(Piece pieceMorte){
         piecesMortes[nbPiecesMortes] = pieceMorte;
         nbPiecesMortes+=1;
     }
 
-    public void removePieceMorte(){
-        piecesMortes[nbPiecesMortes] = null;
-    }
-
+    /**
+     * retourne la couleur du joueur
+     * @return
+     */
     public Couleur getCouleur() { return couleur;}
 }

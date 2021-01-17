@@ -149,7 +149,7 @@ public class EchecEtMat {
             if(option==0) {
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))){
                     if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
-                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);
+                        echiquier.getCase(tmpx, tmpy).getPiece()/*.setListeDep(echiquier, tmpx, tmpy)*/;
                     }
 
                     if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) {
@@ -161,7 +161,7 @@ public class EchecEtMat {
             else if (option==1){
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))) {
                     //if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
-                        echiquier.getCase(tmpx, tmpy).getPiece().setListeProtecDep(echiquier);
+                        echiquier.getCase(tmpx, tmpy).getPiece()/*.setListeProtecDep(echiquier)*/;
                         if (echiquier.getCase(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) {
                             liste.add(echiquier.getCase(tmpx, tmpy));
                             break;
@@ -172,7 +172,7 @@ public class EchecEtMat {
             else if(option==2){
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))){
                     if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
-                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);
+                        echiquier.getCase(tmpx, tmpy).getPiece()/*.setListeDep(echiquier, tmpx, tmpy)*/;
                     }
 
                     if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) {
@@ -216,14 +216,14 @@ public class EchecEtMat {
         // tmpX et tmpY représente la case qui peut être menace l'autre
         if(option==0){
             if (!(echiquier.getCase(tmpX, tmpY).getPiece() instanceof Roi))
-                echiquier.getCase(tmpX, tmpY).getPiece().setListeDep(echiquier, tmpX, tmpY);
+                echiquier.getCase(tmpX, tmpY).getPiece()/*.setListeDep(echiquier, tmpX, tmpY)*/;
 
             if(echiquier.getCase(tmpX, tmpY).getPiece().getListeDep().contains(echiquier.getCase(x, y))){
                 liste.add(echiquier.getCase(tmpX, tmpY));
             }
         }
         else{
-            echiquier.getCase(tmpX, tmpY).getPiece().setListeProtecDep(echiquier);
+            echiquier.getCase(tmpX, tmpY).getPiece()/*.setListeProtecDep(echiquier)*/;
             if(echiquier.getCase(tmpX, tmpY).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))){
                 liste.add(echiquier.getCase(tmpX, tmpY));
             }
