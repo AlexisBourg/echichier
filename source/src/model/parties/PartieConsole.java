@@ -21,6 +21,10 @@ public class PartieConsole extends Parties {
     public PartieConsole(){ super(); }
 
     //Methode
+
+    /**
+     * Configure une partie sur le terminal
+     */
     public void partie(){
         int i=0;
         HashMap<String, int[]> coordDeplacements;
@@ -162,7 +166,7 @@ public class PartieConsole extends Parties {
     }
 
     /**
-     *  Cette méthode affecte le plateau en fonction des coordonnées demandées par je joueur courant
+     * Cette méthode affecte le plateau en fonction des coordonnées demandées par je joueur courant
      * @param plateau : plateau du jeu
      * @param donnees : map qui contient les coordonnées des cases de départ et d'arrivée choisies par le joueur
      * @return : la pièce qui a été mangée durant le déplacement ou null sinon
