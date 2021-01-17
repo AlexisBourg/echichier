@@ -11,7 +11,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
 
     //Atribut
     public static final int LONGUEUR_EN_CASE=8;
-    private PartiePvP partieActuel;
+    private final PartiePvP partieActuel;
 
     //Constructeur
     public ControllerPartiesPvP(){

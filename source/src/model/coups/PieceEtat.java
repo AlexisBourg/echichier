@@ -21,7 +21,6 @@ public class PieceEtat {
     }
 
     //Methode
-
     /**
      * permet de setter une image
      * @param image : est l'url le l'image
