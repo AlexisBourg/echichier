@@ -36,6 +36,8 @@ public class ControllerPartiesPvP extends ControllerPartie{
         suivant.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                System.out.println(editeurCoup.getIndexCourant());
+                System.out.println(editeurCoup.getNbEtat());
                 if (editeurCoup.getIndexCourant()!=(editeurCoup.getNbEtat()-1)){
                     partieActuel.recupEtat(editeurCoup.coupSuivant());
                     actualiserEtatPlateau(partieActuel);
@@ -64,6 +66,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
                                 if (cliqueUnPasse) {
                                     TraitementCliqueDeux(mouseEvent.getSource(), partieActuel);
                                     editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
+                                    System.out.println(editeurCoup.getCoups());
                                 }
                                 cliqueUnPasse = false;
                                 break;

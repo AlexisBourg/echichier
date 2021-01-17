@@ -37,6 +37,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
             public void handle(MouseEvent mouseEvent) {
                 if (editeurCoup.getIndexCourant() > 0) {
                     partieActuel.recupEtat(editeurCoup.coupPrecedent());
+                    editeurCoup.enleverCoup();
                     actualiserEtatPlateau(partieActuel);
                     partieActuel.changementJoueurCourant();
                     enleverCoup();

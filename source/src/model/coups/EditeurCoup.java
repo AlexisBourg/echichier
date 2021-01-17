@@ -14,8 +14,11 @@ public class EditeurCoup {
     }
 
     public PlateauEtat coupPrecedent(){
-        listeCoups.enleverDernierCoup();
         return listeCoups.getPosition(--indexCourant);
+    }
+
+    public void enleverCoup(){
+        listeCoups.enleverDernierCoup();
     }
 
     public PlateauEtat coupSuivant(){
