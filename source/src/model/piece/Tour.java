@@ -22,15 +22,12 @@ public class Tour extends Piece {
         getListeDep().clear();
         getListeProtecDep().clear();
 
-<<<<<<< HEAD
         int[][] dep = {{SUR_PLACE, UNE_CASE_DEVANT}, {SUR_PLACE, UNE_CASE_DERRIRE}, {UNE_CASE_DEVANT, SUR_PLACE}, {UNE_CASE_DERRIRE, SUR_PLACE}};
+
         for (int i = 0; i < 4; i++) {
-=======
-        int[][] dep = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        for (int i = 0; i < 4; i++){
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
             deplacementPossible(plateau, dep[i][0], dep[i][1], x, y);
         }
+
     }
 
     @Override
@@ -61,3 +58,4 @@ public class Tour extends Piece {
         }
     }
 }
+

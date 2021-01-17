@@ -3,13 +3,10 @@ package model.coups;
 import model.plateau.Plateau;
 
 public class PlateauEtat {
-<<<<<<< HEAD
     public static final int LIMIT_INF=0;
     public static final int LIMIT_SUP=7;
-=======
 
     //Atribut
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     private PositionEtat[][] plateau = new PositionEtat[8][8];
 
     //Constructeur

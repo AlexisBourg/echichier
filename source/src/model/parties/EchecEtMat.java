@@ -30,7 +30,6 @@ public class EchecEtMat {
      */
     public static List<Position> echec(InterfaceJoueur joueurAdverse, Plateau echiquier){
         Roi roiAdverse = (Roi)joueurAdverse.getPieces()[ROI];
-        System.out.println(roiAdverse);
         int xRoi = roiAdverse.getX(), // On récupère les coordonnées du Roi
                 yRoi = roiAdverse.getY();
         return isPieceMenaOrProtecParAutre(xRoi, yRoi, echiquier, OPTION_0); // Si le roi est menacé, échec sinon rien

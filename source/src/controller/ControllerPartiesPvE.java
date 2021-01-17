@@ -14,12 +14,9 @@ import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {
 
-<<<<<<< HEAD
     public static final int LONGUEUR_EN_CASE=8;
     public static final int NB_CASES_GRILLE = 64;
-=======
     //Atribut
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     private IA ia;
     private PartiePvE partieActuel;
 
@@ -124,27 +121,22 @@ public class ControllerPartiesPvE extends ControllerPartie {
     public void deplacementIA(IA ia) {
         String s;
         Piece pieceSelectione=null;
-<<<<<<< HEAD
-        int x, y,i=0;
-        while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty()/* || ia.estPieceMorte(pieceSelectione) */|| partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
-            x = genererInt(LONGUEUR_EN_CASE);
-            y =genererInt(LONGUEUR_EN_CASE);
-=======
+
         int x, y;
-        while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || ia.estPieceMorte(pieceSelectione) || partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
-            x = genererInt(8);
-            y =genererInt(8);
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
-            s = x+""+y;
+
+        while (pieceSelectione == null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || ia.estPieceMorte(pieceSelectione) || partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
+            x = genererInt(LONGUEUR_EN_CASE);
+            y = genererInt(LONGUEUR_EN_CASE);
+            s = x + "" + y;
             caseDepartPlateau = decompositionIdBoutonIA(s);
             pieceSelectione = partieActuel.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece();
         }
-    caseDepartGrille =partieActuel.getNumCaseGrille(caseDepartPlateau);
+        caseDepartGrille = partieActuel.getNumCaseGrille(caseDepartPlateau);
 
-    caseArriveePlateau =choisirDeplacementPiece(caseDepartPlateau);
-    caseArriveeGrille =partieActuel.getNumCaseGrille(caseArriveePlateau);
+        caseArriveePlateau = choisirDeplacementPiece(caseDepartPlateau);
+        caseArriveeGrille = partieActuel.getNumCaseGrille(caseArriveePlateau);
 
-    finDeDeplacement(partieActuel);
+        finDeDeplacement(partieActuel);
 
     }
 

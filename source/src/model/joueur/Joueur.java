@@ -3,15 +3,12 @@ package model.joueur;
 import model.piece.*;
 
 public class Joueur implements InterfaceJoueur{
-<<<<<<< HEAD
     public static final int NB_PIECES = 16;
     public static final int PREMIERE_PIECE_DERNIERE_RANGEE = 8;
     public static final int Y_ROI_NOIR = 0;
     public static final int Y_ROI_BLANC = 7;
-=======
 
     //Atribut
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     private Couleur couleur;
     private final Piece[] pieces;
     private final Piece[] piecesMortes;

@@ -5,12 +5,9 @@ import model.piece.*;
 
 public class Plateau {
 
-<<<<<<< HEAD
     public static final int LIMIT_INF=0;
     public static final int LIMIT_SUP=7;
-=======
     //Atribut
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     private Position[][] plateauDeJeu = new Position[8][8];
 
     //Constructeur
@@ -53,14 +50,9 @@ public class Plateau {
     }
 
     public void setEtat(PlateauEtat plateau){
-<<<<<<< HEAD
         //System.out.println(plateau.toString());
         for (int y=LIMIT_INF; y<=LIMIT_SUP; y++){
             for (int x=LIMIT_INF; x<=LIMIT_SUP; x++){
-=======
-        for (int y=0; y<8; y++){
-            for (int x=0; x<8; x++){
->>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
                 this.plateauDeJeu[y][x].setY(plateau.getCaseEtat(x, y).getY());
                 this.plateauDeJeu[y][x].setX(plateau.getCaseEtat(x, y).getX());
                 this.plateauDeJeu[y][x].setEtatPiece(plateau.getCaseEtat(x, y).getPiece());
