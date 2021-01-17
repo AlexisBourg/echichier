@@ -38,29 +38,30 @@ public class EchecEtMat {
         Roi roiAdverse = (Roi)joueurAdverse.getPieces()[ROI];
         int xRoi = roiAdverse.getX(), // On récupère les coordonnées du Roi
                 yRoi = roiAdverse.getY();
-        List<Position> DepRoiAdverse = joueurAdverse.getPieces()[ROI].getListeDep(); // Liste de déplacements possibles pour le roi adverse
-        List<Position> MenacesDeLaMenace;
+        List<Position> depRoiAdverse = joueurAdverse.getPieces()[ROI].getListeDep(); // Liste de déplacements possibles pour le roi adverse
+        List<Position> menacesDeLaMenace;
 
-        if(menace.size()==1){ // S'i n'y a qu'une menace
-            MenacesDeLaMenace = isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0);
+        if(nombreDeMenace(menace)==1){ // S'i n'y a qu'une menace
+
+            menacesDeLaMenace = isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 0);
             if(menaceEstUnCavalier(menace) && // Si la menace est un cavalier ET
-                    roiAdverseBloque(DepRoiAdverse) && // Si le roi ne peut plus se déplacer ET
-                    MenacesDeLaMenace.size() == 0) // Si le cavalier n'est pas menacé
+                    roiAdverseBloque(depRoiAdverse) && // Si le roi ne peut plus se déplacer ET
+                    nombreDePieceQuiMenaceLaMenace(menacesDeLaMenace) == 0) // Si le cavalier n'est pas menacé
                 return true;
             if(!menaceEstUnCavalier(menace)) { // Si la menace n'est pas un cavalier
-                if(roiAdverseBloque(DepRoiAdverse) && // Si le Roi ne peut plus de se déplacer ET
-                        (MenacesDeLaMenace.size() == 0 || // Si la menace n'est pas elle même menacée OU
+                if(roiAdverseBloque(depRoiAdverse) && // Si le Roi ne peut plus de se déplacer ET
+                        (nombreDePieceQuiMenaceLaMenace(menacesDeLaMenace) == 0 || // Si la menace n'est pas elle même menacée OU
                                 isPossibInterpo(joueurAdverse, menace.get(0).getX(), menace.get(0).getY(), echiquier, new LinkedList<>()))) // Si aucune pièce alliée au Roi ne peut s'interposer pour le protéger
                     return true;
                 // Que cette même menace est protégée, Echec et mat
-                return (roiAdverseAUnSeulDeplacementPossible(DepRoiAdverse) && // Si le Roi ne peut se déplacer qu'à un seul endroit
-                        DepRoiAdverse.contains(menace.get(0))) && // et que cet endroit est l'emplacement de sa seule menace ET
-                        (MenacesDeLaMenace.size() == 1 &&
-                                MenacesDeLaMenace.contains(echiquier.getCase(xRoi, yRoi))) && // Que sa menace n'est menacée que par lui
+                return (roiAdverseAUnSeulDeplacementPossible(depRoiAdverse) && // Si le Roi ne peut se déplacer qu'à un seul endroit
+                        depRoiAdverse.contains(menace.get(0))) && // et que cet endroit est l'emplacement de sa seule menace ET
+                        (nombreDePieceQuiMenaceLaMenace(menacesDeLaMenace)== 1 &&
+                                seulLeRoiAdverseMenaceLaMenace(menacesDeLaMenace, echiquier, xRoi, yRoi)) && // Que sa menace n'est menacée que par lui
                         isPieceMenaOrProtecParAutre(menace.get(0).getX(), menace.get(0).getY(), echiquier, 1).size() > 0;
             }
-        }else if(menace.size()>1){ // S'il y a plusieurs menaces
-            return roiAdverseBloque(DepRoiAdverse); // Si le roi adverse ne peut plus se déplacer, ECHEC ET MAT
+        }else if(nombreDeMenace(menace)>1){ // S'il y a plusieurs menaces
+            return roiAdverseBloque(depRoiAdverse); // Si le roi adverse ne peut plus se déplacer, ECHEC ET MAT
         }
         return false; // Cas où il n'y a aucune menace
     }
@@ -75,6 +76,18 @@ public class EchecEtMat {
 
     public static boolean menaceEstUnCavalier(List<Position> menace){
         return menace.get(0).getPiece() instanceof Cavalier;
+    }
+
+    public static int nombreDeMenace(List<Position> menace){
+        return menace.size();
+    }
+
+    public static int nombreDePieceQuiMenaceLaMenace(List<Position> menaceDeLaMenace){
+        return menaceDeLaMenace.size();
+    }
+
+    public static boolean seulLeRoiAdverseMenaceLaMenace(List<Position> menaceDeLaMenace, Plateau echiquier, int xRoi, int yRoi){
+        return menaceDeLaMenace.contains(echiquier.getCase(xRoi, yRoi));
     }
 
     /**
@@ -129,7 +142,7 @@ public class EchecEtMat {
                         echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);
                     }
 
-                    if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) { // DROITE
+                    if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) {
                             liste.add(echiquier.getCase(tmpx, tmpy));
                         break;
                     }
@@ -139,7 +152,7 @@ public class EchecEtMat {
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))) {
                     //if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
                         echiquier.getCase(tmpx, tmpy).getPiece().setListeProtecDep(echiquier);
-                        if (echiquier.getCase(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) { // DROITE
+                        if (echiquier.getCase(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) {
                             liste.add(echiquier.getCase(tmpx, tmpy));
                             break;
                         }
@@ -152,7 +165,7 @@ public class EchecEtMat {
                         echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);
                     }
 
-                    if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) { // DROITE
+                    if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) {
                         if (!isPionLaMenace(echiquier, x, y, tmpx, tmpy))
                             liste.add(echiquier.getCase(tmpx, tmpy));
                         break;
@@ -329,5 +342,32 @@ public class EchecEtMat {
         }
 
         return casesDispo.size() <= 0;
+    }
+
+    public static void examinerPiecesAutour(int comportementX, int comportementY, int xRoi, int yRoi, Plateau echiquier, int xMen, int yMen, LinkedList<Position> casesDispo, InterfaceJoueur joueurAdverse){
+        List<Position> pieceDispo;
+        int diffX = (comportementX>0) ? 1 : -1,
+            diffY = (comportementY>0) ? 1 : -1,
+            x = xRoi,
+            y = yRoi;
+
+        if (comportementX==0)
+            diffX=0;
+        if (comportementY==0)
+            diffY=0;
+
+        x+=diffX;
+        y+=diffY;
+
+        while(x!=xMen && y!=yMen){
+            pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+            for (Position p : pieceDispo) {
+                if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                    casesDispo.add(echiquier.getCase(x, y));
+            }
+            x+=diffX;
+            y+=diffY;
+        }
+
     }
 }

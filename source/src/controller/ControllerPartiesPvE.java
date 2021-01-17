@@ -38,7 +38,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
                 if (editeurCoup.getIndexCourant()>0) {
                     partieActuel.recupEtat(editeurCoup.coupPrecedent());
                     actualiserEtatPlateau(partieActuel);
-                    partieActuel.ChangementJoueurCourant();
+                    partieActuel.changementJoueurCourant();
                     enleverCoup();
                     //System.out.println(partieActuel.getEchiquier().toString());
                 }
@@ -50,7 +50,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
                 if (editeurCoup.getIndexCourant()!=(editeurCoup.getNbEtat()-1)){
                     partieActuel.recupEtat(editeurCoup.coupSuivant());
                     actualiserEtatPlateau(partieActuel);
-                    partieActuel.ChangementJoueurCourant();
+                    partieActuel.changementJoueurCourant();
                     //System.out.println(partieActuel.getEchiquier().toString());
                 }
             }
@@ -80,7 +80,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
                                 deplacementIA(ia);
                                 editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
                                 ajoutCoup(caseDepartPlateau, caseArriveePlateau);
-                                partieActuel.ChangementJoueurCourant();
+                                partieActuel.changementJoueurCourant();
                                 System.out.println("joueuer courant " + partieActuel.getIndexJoueurCourant());
                             }
                             cliqueUnPasse = false;

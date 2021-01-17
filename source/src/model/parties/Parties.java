@@ -9,6 +9,7 @@ import model.piece.Piece;
 import model.piece.Pion;
 import model.piece.Roi;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Parties{
@@ -121,7 +122,6 @@ public abstract class Parties{
      * @return : la pièce mangée ou null
      */
     public Piece deplacerPiece(int[] depart, int[] arrivee){
-        System.out.println("Déplacer pièce");
         Piece pieceDeplacee, pieceMorte;
         Plateau plateau = getEchiquier();
 
@@ -136,13 +136,10 @@ public abstract class Parties{
         plateau.getCase(arrivee[0], arrivee[1]).setPiece(plateau.getCase(depart[0], depart[1]).getPiece());
         plateau.getCase(depart[0], depart[1]).unsetPiece();
 
-        System.out.println(pieceDeplacee+"ddddddddddddddddddddddddddddddddddddd");
-
         if (pieceDeplacee instanceof Pion && ((Pion) pieceDeplacee).getPremierDeplacement())
             ((Pion)pieceDeplacee).setPremierDeplacement();
         if (pieceDeplacee instanceof Roi && ((Roi) pieceDeplacee).getPremierDeplacement()){
             ((Roi)pieceDeplacee).setPremierDeplacement();
-            System.out.println("ECHOOOOO");
         }
 
         return pieceMorte;
@@ -173,7 +170,7 @@ public abstract class Parties{
     /**
      * change le joueur courant
      */
-    public void ChangementJoueurCourant(){
+    public void changementJoueurCourant(){
         indexJoueurCourant = (indexJoueurCourant+1)%2;
     }
 
@@ -184,25 +181,39 @@ public abstract class Parties{
     public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
         HashMap<Integer, int[]> liste = new HashMap<>();
 
-        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y);
+        if (menace.size()>1)
+            return liste;
+
+        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y); // set la liste de déplacements pour la pièce sélectionnée
 
         if (!(getEchiquier().getCase(x, y).getPiece() instanceof Roi))
-            affinageDeplacements(getEchiquier().getCase(x, y).getPiece().getListeDep(), menace);
+            affinageDeplacements(getEchiquier().getCase(x, y).getPiece(), getEchiquier().getCase(x, y).getPiece().getListeDep(), menace.get(0));
 
-        for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
+        for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){ // On récupère puis retourne l'ensemble des positions disponibles pour la pièce sélectionnée après avoir retiré les positions qui ne permettent pas de protéger le roi
             liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
         }
 
         return liste;
     }
 
-    public void affinageDeplacements(List<Position> listeDep, List<Position> menace) {
-        for (Position p : listeDep){ // Pour chaque déplacement possible pour la pièce
-            for (Position m : menace){ // Pour chaque menace directe du roi
-                if (!m.getPiece().getListeDep().contains(p)) // Si la position possible pour la pièce ne peut pas protéger le roi
-                    listeDep.remove(p); // On l'enlève de la liste de ses déplacements
+    public void affinageDeplacements(Piece piece, List<Position> listeDep, Position m) {
+        LinkedList<Position> caseDispo = new LinkedList<>();
+        LinkedList<Position> newListeDep = new LinkedList<>();
+
+        if (listeDep.contains(m)){
+            newListeDep.add(m);
+        }
+
+        if(EchecEtMat.isPossibInterpo(this.getJoueurCourant(), m.getX(), m.getY(), getEchiquier(), caseDispo)){
+            listeDep.clear();
+        }
+        else{
+            for (Position p : caseDispo){
+                if (listeDep.contains(p))
+                    newListeDep.add(p);
             }
         }
+        piece.actualiserListeDep(newListeDep);
     }
 
     /** Cette méthode permet garder en mémoire l'état de l'échiquier à un instant T
