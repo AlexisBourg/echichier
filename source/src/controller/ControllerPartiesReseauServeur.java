@@ -74,18 +74,18 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        switch (NumeroClique(partie,mouseEvent.getSource())) {
+                        switch (numeroClique(partie,mouseEvent.getSource())) {
                             case 1:
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(partie); // Les cases qui contenaient des pièces les retrouves
                                 }
-                                TraitementCliqueUn(mouseEvent.getSource(),partie);
+                                traitementCliqueUn(mouseEvent.getSource(),partie);
                                 cliqueUnPasse = true;
                             break;
                             case 2:
                                 if (cliqueUnPasse) {
-                                    TraitementCliqueDeux(mouseEvent.getSource(),partie);
+                                    traitementCliqueDeux(mouseEvent.getSource(),partie);
                                     try {
                                         in = new ObjectInputStream(clientSocket.getInputStream());
                                         out = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -106,7 +106,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
                     }
                 });
                 if (echiquier.getCase(x, y).isOccupe()) {
-                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
                 }
             }
         }

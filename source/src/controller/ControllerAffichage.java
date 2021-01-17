@@ -72,14 +72,14 @@ public class ControllerAffichage {
 
             if (coordPlateau[1] % 2 == 0) {
                 if (coordPlateau[0] % 2 == 0)
-                    CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "white;");
+                    CssModifier.changeBackgroundColor(grille.getChildren().get(coordGrille), "white;");
                 else
-                    CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "black;");
+                    CssModifier.changeBackgroundColor(grille.getChildren().get(coordGrille), "black;");
             } else {
                 if (coordPlateau[0] % 2 == 1)
-                    CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "white;");
+                    CssModifier.changeBackgroundColor(grille.getChildren().get(coordGrille), "white;");
                 else
-                    CssModifier.ChangeBackgroundColor(grille.getChildren().get(coordGrille), "black;");
+                    CssModifier.changeBackgroundColor(grille.getChildren().get(coordGrille), "black;");
             }
         }
     }
@@ -94,9 +94,9 @@ public class ControllerAffichage {
         for (int i=0; i<8; i++){
             for (int j=0; j<8; j++){
                 if (echiquier.getCase(j, i).isOccupe()){
-                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), echiquier.getCase(j, i).getPiece().getImage());
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), echiquier.getCase(j, i).getPiece().getImage());
                 }else
-                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), "");
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), "");
             }
         }
     }

@@ -54,22 +54,23 @@ public class ControllerPartiesPvP extends ControllerPartie{
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
-                        switch (NumeroClique(partieActuel, mouseEvent.getSource())) {
+                        switch (numeroClique(partieActuel, mouseEvent.getSource())) {
                             case 1:
                                 if (editeurCoup.getIndexCourant() == editeurCoup.getNbEtat()-1) {
                                     if (!listeDeplacements.isEmpty()) { // Si le clique 1 avait déjà été enclenché
                                         retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                         restaurationImageDeplacementPossible(partieActuel); // Les cases qui contenaient des pièces les retrouves
                                     }
-                                    TraitementCliqueUn(mouseEvent.getSource(), partieActuel);
+                                    traitementCliqueUn(mouseEvent.getSource(), partieActuel);
                                     cliqueUnPasse = true;
                                 }
                                 break;
 
                             case 2:
                                 if (cliqueUnPasse) {
-                                    TraitementCliqueDeux(mouseEvent.getSource(), partieActuel);
+                                    traitementCliqueDeux(mouseEvent.getSource(), partieActuel);
                                     editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
+                                    System.out.println(editeurCoup.getCoups());
                                 }
                                 cliqueUnPasse = false;
                                 break;
@@ -77,7 +78,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
                     }
                 });
                 if (echiquier.getCase(x, y).isOccupe()){
-                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
                 }
             }
         }

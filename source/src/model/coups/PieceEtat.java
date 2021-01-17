@@ -15,30 +15,12 @@ public class PieceEtat {
 
     //Constructeur
     public PieceEtat(Position position){
-        this.setX(position.getX());
-        this.setY(position.getY());
         this.setCouleur(position.getPiece().getCouleur());
         this.setImage(position.getPiece().getImage());
         this.setType(position.getPiece().getType());
     }
 
     //Methode
-    public void setX(int x){
-        this.x = x;
-    }
-
-    public int getX(){
-        return this.x;
-    }
-
-    public void setY(int y){
-        this.y = y;
-    }
-
-    public int getY(){
-        return this.y;
-    }
-
     public void setImage(String image){
         this.image = image;
     }
@@ -65,6 +47,6 @@ public class PieceEtat {
 
     @Override
     public String toString(){
-        return "Type: "+getType().name()+"  Couleur: "+getCouleur() + "  x : " + getX() + " y: "+getY();
+        return "Type: "+getType().name()+"  Couleur: "+getCouleur();
     }
 }

@@ -31,7 +31,6 @@ public class ControllerMenu {
     private Button boutonEnLigne;
 
     private Parent root=null;
-    private LinkedList<Button> premiersBoutons;
     private int port;
     private InetAddress addr;
 
@@ -41,13 +40,9 @@ public class ControllerMenu {
     //Methode
     @FXML
     public void initialize(){
-        premiersBoutons = new LinkedList<>();
         comportementBoutonPVE();
         comportementBoutonPVP();
         comportementBoutonOnline();
-        premiersBoutons.add(boutonLocalPvp);
-        premiersBoutons.add(boutonLocalPve);
-        premiersBoutons.add(boutonEnLigne);
     }
 
     /**

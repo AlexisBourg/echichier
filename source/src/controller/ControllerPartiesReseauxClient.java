@@ -13,7 +13,6 @@ import java.net.Socket;
 
 public class ControllerPartiesReseauxClient extends ControllerPartiesPvP {
 
-    //Atribut
     private PartiePvP partie;
     private Socket serverSocket;
     private ObjectInputStream in;
@@ -55,18 +54,18 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP {
             for (int x = 0; x < 8; x++) {
                 grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
                     if (PremierDeplacementServerEffectuer) {
-                        switch (NumeroClique(partie, mouseEvent.getSource())) {
+                        switch (numeroClique(partie,mouseEvent.getSource())) {
                             case 1:
                                 if (!listeDeplacements.isEmpty()) {
                                     retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
                                     restaurationImageDeplacementPossible(partie); // Les cases qui contenaient des pièces les retrouves
                                 }
-                                TraitementCliqueUn(mouseEvent.getSource(), partie);
+                                traitementCliqueUn(mouseEvent.getSource(),partie);
                                 cliqueUnPasse = true;
-                                break;
+                            break;
                             case 2:
                                 if (cliqueUnPasse) {
-                                    TraitementCliqueDeux(mouseEvent.getSource(), partie);
+                                    traitementCliqueDeux(mouseEvent.getSource(),partie);
                                     try {
                                         in = new ObjectInputStream(serverSocket.getInputStream());
                                         out = new ObjectOutputStream(serverSocket.getOutputStream());
@@ -91,8 +90,8 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP {
                         }
                     }
                 });
-                if (echiquier.getCase(x, y).isOccupe()) {
-                    CssModifier.ChangeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                if (echiquier.getCase(x, y).isOccupe()){
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
                 }
             }
         }
