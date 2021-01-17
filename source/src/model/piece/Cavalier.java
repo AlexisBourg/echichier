@@ -18,6 +18,13 @@ public class Cavalier extends Piece {
 
 
     //Methode
+
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param x : colonne de la pièce dans le plateau
+     * @param y : ligne de la pièce dans le plateau
+     */
     @Override
     public void setListeDep(Plateau plateau, int x, int y) {
         int[][] dep ={{UNE_CASE_DEVANT,DEUX_CASES_DEVANT},{DEUX_CASES_DEVANT,UNE_CASE_DEVANT},{DEUX_CASES_DEVANT,UNE_CASE_DERRIRE},{UNE_CASE_DEVANT, DEUX_CASES_DERRIRE},{UNE_CASE_DERRIRE, DEUX_CASES_DERRIRE},{DEUX_CASES_DERRIRE, UNE_CASE_DERRIRE},{DEUX_CASES_DERRIRE, UNE_CASE_DEVANT},{UNE_CASE_DERRIRE, DEUX_CASES_DEVANT}};
@@ -29,6 +36,14 @@ public class Cavalier extends Piece {
         }
     }
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param depX : direction que prend la piece
+     * @param depY : direction que prend la piece
+     * @param x : colonne de la pièce dans le plateau
+     * @param y : ligne de la pièce dans le plateau
+     */
     @Override
     public void deplacementPossible(Plateau plateau, int depX, int depY, int x, int y) {
         Position caseTmp;

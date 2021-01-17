@@ -52,6 +52,10 @@ public class Roi extends Piece {
     }
 
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     */
     public void setListeDep(Plateau plateau){
         int[][] dep = {{UNE_CASE_DEVANT, UNE_CASE_DEVANT}, {UNE_CASE_DERRIRE, UNE_CASE_DEVANT}, {UNE_CASE_DEVANT, UNE_CASE_DERRIRE}, {UNE_CASE_DERRIRE, UNE_CASE_DERRIRE}, {SUR_PLACE, UNE_CASE_DEVANT}, {SUR_PLACE, UNE_CASE_DERRIRE}, {UNE_CASE_DEVANT, SUR_PLACE}, {UNE_CASE_DERRIRE, SUR_PLACE}};
 
@@ -75,6 +79,12 @@ public class Roi extends Piece {
         }
     }
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param tmpX : direction que prend la piece
+     * @param tmpY : direction que prend la piece
+     */
     public void deplacementPossibleRoi(Plateau plateau, int tmpX, int tmpY) {
         Position caseTmp;
 
@@ -95,6 +105,13 @@ public class Roi extends Piece {
         }
     }
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param x : colonne de la case potentiellement menacée
+     * @param y : ligne de la case potentiellement menacée
+     * @return : le nombre de pièce qui menacent cette case
+     */
     public int nombreDePiecesMenacantLaCase(Plateau plateau, int x, int y){
         int nbMenaces=0;
         List<Position> piecesMenacantLaCase = EchecEtMat.isPieceMenaOrProtecParAutre(x, y, plateau, 2);
@@ -110,6 +127,13 @@ public class Roi extends Piece {
         return nbMenaces;
     }
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param x : colonne où se trouve le roi
+     * @param y : ligne où se trouve le roi
+     * @return : quels roques sont disponibes ou non
+     */
     public int roque(Plateau plateau, int x, int y){ // 0 = pas de roque, 1= roque gauche, 2 = roque droit, 3 = deux roques dispo
         int xTour=0, yTour, xDep=1, roqueDispo=0;
         Position caseTmp;

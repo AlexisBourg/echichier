@@ -21,6 +21,10 @@ public class PartieConsole extends Parties {
     public PartieConsole(){ super(); }
 
     //Methode
+
+    /**
+     * Mets en place le déroulement d'une partie d'échec
+     */
     public void partie(){
         int i=0;
         HashMap<String, int[]> coordDeplacements;

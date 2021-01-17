@@ -116,6 +116,12 @@ public abstract class Piece {
         return type;
     }
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param x : ligne de la pièce dans le plateau
+     * @param y : colonne de la pièce dans le plateau
+     */
     public void setListeDep(Plateau plateau, int x, int y) {
     }
 

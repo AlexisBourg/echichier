@@ -39,16 +39,28 @@ public class Position {
         return occupee;
     }
 
+    /**
+     *
+     * @param occupe : statut occupe
+     */
     public void setOccupee(boolean occupe){
         this.occupee = occupe;
     }
 
+    /**
+     *  Cette méthode mets une piece donnée en paramètre sur la position
+     * @param piece : piece qui sera mise sur la position
+     */
     public void setPiece(Piece piece) {
         this.piecePresente = piece;
         if (piece!=null)
             occupee = true;
     }
 
+    /**
+     * Cette méthode mets à jour l'état de piece de la position
+     * @param piece : état de la piece de l'état du plateau
+     */
     public void setEtatPiece(PieceEtat piece){
         if (piece==null){ // Si la nouvelle version du plateau n'a pas de pièce à cet endroit
             this.piecePresente=null;
@@ -65,6 +77,9 @@ public class Position {
         }
     }
 
+    /**
+     * Cette méthode enlève la piece courante de la position
+     */
     public void unsetPiece(){
         this.piecePresente = null;
         occupee = false;
@@ -74,6 +89,10 @@ public class Position {
         return piecePresente;
     }
 
+    /**
+     * Cette méthode instancie le bon type de pièce selon l'état de cette dernière donnée en paramètre
+     * @param piece : etat d'un piece
+     */
     public void instanciationType(PieceEtat piece){
         switch(piece.getType()){
             case FOU:

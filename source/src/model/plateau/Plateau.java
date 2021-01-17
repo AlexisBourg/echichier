@@ -37,18 +37,39 @@ public class Plateau {
     }
 
     //Methode
+
+    /**
+     *
+     * @param p : position qui est potentiellement
+     * @return : le fait que la position fasse partie ou non du plateau
+     */
     public boolean isCaseNull(Position p){
         return p.getX() >= LIMIT_INF && p.getX() <= LIMIT_SUP && p.getY() >= LIMIT_INF && p.getY() <= LIMIT_SUP;
     }
 
+    /**
+     *
+     * @param p : position qui est peut être sans pièce
+     * @return : le fait que la position soit vide ou non
+     */
     public boolean isCaseSansPiece(Position p){
         return p.getPiece() == null;
     }
 
+    /**
+     *
+     * @param x colonne de la position
+     * @param y ligne de la position
+     * @return : retourne la position demandée
+     */
     public Position getCase(int x, int y){
         return plateauDeJeu[y][x];
     }
 
+    /**
+     *
+     * @param plateau : etat d'un plateau
+     */
     public void setEtat(PlateauEtat plateau){
         //System.out.println(plateau.toString());
         for (int y=LIMIT_INF; y<=LIMIT_SUP; y++){

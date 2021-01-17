@@ -20,8 +20,6 @@ public abstract class Parties{
     public static final int X_TOUR_APRES_PETIT_ROQUE = 5;
     public static final int X_TOUR_APRES_GRAND_ROQUE = 3;
 
-
-
     //Atribut
     protected int indexJoueurCourant = 0;
     protected final InterfaceJoueur[] joueurs;
@@ -93,6 +91,12 @@ public abstract class Parties{
     }
 
 
+    /**
+     *
+     * @param x : colonne de la case
+     * @param y : ligne de la case
+     * @return : le fait qu'une case comporte une pièce ou non
+     */
     public boolean isCaseSansPiece(int x, int y){
         return (getEchiquier().isCaseSansPiece(getEchiquier().getCase(x, y)));
     }
@@ -111,10 +115,24 @@ public abstract class Parties{
         return !isPieceSelecAppartientAuJoueurAdverse(x, y, joueurCourant);
     }
 
+    /**
+     *
+     * @param x : colonne de la case
+     * @param y : ligne de la case
+     * @param joueurCourant : joueur en train de jouer
+     * @return : le fait que la pièce de case appartiennent au joueur non courant ou non
+     */
     public boolean isPieceSelecAppartientAuJoueurAdverse(int x, int y, InterfaceJoueur joueurCourant){
         return (getEchiquier().getCase(x, y).getPiece().getCouleur()!=joueurCourant.getCouleur());
     }
 
+    /**
+     *
+     * @param x : colonne de la case
+     * @param y : ligne de la case
+     * @param joueurCourant : joueur en train de jouer
+     * @return : le fait que la pièce de case appartiennent au joueur courant ou non
+     */
     public boolean isPieceSelecAppartientAuJoueurCourant(int x, int y, InterfaceJoueur joueurCourant){
         return (getEchiquier().getCase(x, y).getPiece().getCouleur()==joueurCourant.getCouleur());
     }
@@ -167,6 +185,10 @@ public abstract class Parties{
         return pieceMorte;
     }
 
+    /**
+     * Cette méthode détermine et effectue le déplacement de la tour en fonction de l'arrivée du roi (soit la trou droite, soit la tour gauche)
+     * @param arriveeRoi : case d'arrivée du roi après le roque
+     */
     public void roqueTour(int[] arriveeRoi){
         int x = arriveeRoi[0];
         int[] arr, dep;
@@ -181,10 +203,19 @@ public abstract class Parties{
         deplacerPiece(dep, arr);
     }
 
+    /** Cette méthode permet de savoir si et par qui le roi est menacé
+     *
+     * @return : la liste des pièces qui menacent le roi
+     */
     public List<Position> echec(){
         return EchecEtMat.echec(getJoueurNonCourant(), this.getEchiquier());
     }
 
+    /**
+     *
+     * @param menace : pièce(s) qui menace(nt) le roi
+     * @return : le fait que la partie soit terminée ou non
+     */
     public boolean echecEtMat(List<Position> menace){
         return EchecEtMat.echecEtMat(getJoueurNonCourant(), this.getEchiquier(), menace);
     }
@@ -196,10 +227,22 @@ public abstract class Parties{
         indexJoueurCourant = (indexJoueurCourant+1)%NB_JOUEURS;
     }
 
+    /**
+     *
+     * @param caseDepartPlateau : case contenant la pièce qui sera déplacée
+     * @return : le fait que la pièce de la case soit un roi ou non
+     */
     public boolean isRoiSelectionne(int[] caseDepartPlateau) {
         return (this.getEchiquier().getCase(caseDepartPlateau[0], caseDepartPlateau[1]).getPiece() instanceof Roi);
     }
 
+    /**
+     *
+     * @param x : colonne de la case
+     * @param y : ligne de la case
+     * @param menace : menace(s) du roi
+     * @return : une collection avec en clé, le numéro du bouton d'arrivée dans la grid et en valeur, les coordonnées du plateau (de type Plateau) de la case d'arrivée
+     */
     public HashMap<Integer, int[]> getDeplacementsEchec(int x, int y, List<Position> menace){
         HashMap<Integer, int[]> liste = new HashMap<>();
 
@@ -223,6 +266,12 @@ public abstract class Parties{
         return liste;
     }
 
+    /** Cette méthode enlève les positions de la liste de déplacement de la pièce sélectionnée si elles ne permettent pas à cette même pièce de s'interposer entre la menace et le roi
+     *
+     * @param piece : piece sélectionnée
+     * @param listeDep : liste de déplacements de la pièce sélectionnée
+     * @param m : menace du roi
+     */
     public void affinageDeplacements(Piece piece, List<Position> listeDep, Position m) {
         LinkedList<Position> caseDispo = new LinkedList<>();
         LinkedList<Position> newListeDep = new LinkedList<>();
@@ -251,6 +300,10 @@ public abstract class Parties{
         return new PlateauEtat(this.echiquier);
     }
 
+    /** Cette méthode met à jour l'état du plateau
+     *
+     * @param plateau : nouvel état du plateau
+     */
     public void recupEtat(PlateauEtat plateau){
         this.echiquier.setEtat(plateau);
     }

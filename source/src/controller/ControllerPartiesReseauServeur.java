@@ -77,12 +77,14 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
                     public void handle(MouseEvent mouseEvent) {
                         switch (numeroClique(partie,mouseEvent.getSource())) {
                             case 1:
-                                if (!listeDeplacements.isEmpty()) {
-                                    retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
-                                    restaurationImageDeplacementPossible(partie); // Les cases qui contenaient des pièces les retrouves
+                                if (editeurCoup.getIndexCourant() == editeurCoup.getNbEtat()-1 && !echecEtMat) {
+                                    if (!listeDeplacements.isEmpty()) {
+                                        retablissementCouleurCaseDeplacementPossibles(); // Les cases des déplacements possible retrouvent leur couleur d'origine
+                                        restaurationImageDeplacementPossible(partie); // Les cases qui contenaient des pièces les retrouves
+                                    }
+                                    traitementCliqueUn(mouseEvent.getSource(), partie);
+                                    cliqueUnPasse = true;
                                 }
-                                traitementCliqueUn(mouseEvent.getSource(),partie);
-                                cliqueUnPasse = true;
                             break;
                             case 2:
                                 if (cliqueUnPasse) {

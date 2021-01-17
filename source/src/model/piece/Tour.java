@@ -17,6 +17,14 @@ public class Tour extends Piece {
     }
 
     //Methode
+
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param x : colonne de la pièce dans le plateau
+     * @param y : ligne de la pièce dans le plateau
+     */
+    @Override
     public void setListeDep(Plateau plateau, int x, int y) {
 
         getListeDep().clear();
@@ -30,6 +38,14 @@ public class Tour extends Piece {
 
     }
 
+    /**
+     *
+     * @param plateau : plateau du jeu
+     * @param tmpX : direction que prend la piece
+     * @param tmpY : direction que prend la piece
+     * @param x : colonne de la pièce dans le plateau
+     * @param y : ligne de la pièce dans le plateau
+     */
     @Override
     public void deplacementPossible(Plateau plateau, int tmpX, int tmpY, int x, int y) {
         Position caseTmp;

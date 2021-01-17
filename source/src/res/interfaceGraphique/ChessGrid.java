@@ -15,6 +15,10 @@ public class ChessGrid extends GridPane {
     //Attribue
 
     //Constructeur
+
+    /**
+     * Créé une grid qui servira de plateau de jeu
+     */
     public ChessGrid(){
         super();
         int x, y;
