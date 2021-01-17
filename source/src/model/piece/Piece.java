@@ -12,6 +12,11 @@ public abstract class Piece {
     //Atribut
     public static final int LIMIT_SUP = 7;
     public static final int LIMIT_INF = 0;
+    public static final int SUR_PLACE = 0;
+    public static final int UNE_CASE_DEVANT = 1;
+    public static final int UNE_CASE_DERRIRE = -1;
+    public static final int DEUX_CASES_DEVANT = 2;
+    public static final int DEUX_CASES_DERRIRE = -2;
     private String image;
     private Couleur couleur;
     private List<Position> listePosDep;

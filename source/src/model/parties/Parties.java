@@ -13,12 +13,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Parties{
+    public static final int NB_JOUEURS = 2;
+    public static final int LONGUEUR_EN_CASE = 8;
+    public static final int X_TOUR_AVANT_PETIT_ROQUE = 7;
+    public static final int X_TOUR_AVANT_GRAND_ROQUE = 0;
+    public static final int X_TOUR_APRES_PETIT_ROQUE = 5;
+    public static final int X_TOUR_APRES_GRAND_ROQUE = 3;
+
+
     protected int indexJoueurCourant = 0;
     protected final InterfaceJoueur[] joueurs;
     private Plateau echiquier;
 
     public Parties(){
-        joueurs = new InterfaceJoueur[2];
+        joueurs = new InterfaceJoueur[NB_JOUEURS];
         joueurs[0] = new Joueur(1); // BLANC
         joueurs[1] = new Joueur(2); // NOIR
         echiquier = new Plateau(joueurs[0].getPieces(), joueurs[1].getPieces());
@@ -46,7 +54,7 @@ public abstract class Parties{
      * @return : la coordonnée grille
      */
     public int getNumCaseGrille(int[] tabCoord){
-        return ((8*(tabCoord[1]+1)-(8-tabCoord[0])));
+        return ((LONGUEUR_EN_CASE*(tabCoord[1]+1)-(LONGUEUR_EN_CASE-tabCoord[0])));
     }
 
     /**
@@ -66,7 +74,7 @@ public abstract class Parties{
             getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y);
 
         for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
-            liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
+            liste.put(LONGUEUR_EN_CASE*(p.getY()+1)-(LONGUEUR_EN_CASE-p.getX()), new int[]{p.getX(), p.getY()});
         }
 
         return liste;
@@ -115,7 +123,7 @@ public abstract class Parties{
     public Piece actualiserPlateau(int[] depart, int[] arrivee){
         Piece pieceMorte = deplacerPiece(depart, arrivee);
         if(pieceMorte!=null) {
-            getJoueur((indexJoueurCourant + 1) % 2).addPieceMorte(pieceMorte);
+            getJoueur((indexJoueurCourant + 1) % NB_JOUEURS).addPieceMorte(pieceMorte);
         }
         return pieceMorte;
     }
@@ -159,12 +167,12 @@ public abstract class Parties{
         int x = arriveeRoi[0];
         int[] arr, dep;
         if (x==2){
-            arr= new int[]{3, arriveeRoi[1]};
-            dep= new int[]{0, arriveeRoi[1]};
+            arr= new int[]{X_TOUR_APRES_GRAND_ROQUE, arriveeRoi[1]};
+            dep= new int[]{X_TOUR_AVANT_GRAND_ROQUE, arriveeRoi[1]};
         }
         else{
-            arr= new int[]{5, arriveeRoi[1]};
-            dep= new int[]{7, arriveeRoi[1]};
+            arr= new int[]{X_TOUR_APRES_PETIT_ROQUE, arriveeRoi[1]};
+            dep= new int[]{X_TOUR_AVANT_PETIT_ROQUE, arriveeRoi[1]};
         }
         deplacerPiece(dep, arr);
     }
@@ -181,7 +189,7 @@ public abstract class Parties{
      * change le joueur courant
      */
     public void changementJoueurCourant(){
-        indexJoueurCourant = (indexJoueurCourant+1)%2;
+        indexJoueurCourant = (indexJoueurCourant+1)%NB_JOUEURS;
     }
 
     public boolean isRoiSelectionne(int[] caseDepartPlateau) {
@@ -205,7 +213,7 @@ public abstract class Parties{
             affinageDeplacements(getEchiquier().getCase(x, y).getPiece(), getEchiquier().getCase(x, y).getPiece().getListeDep(), menace.get(0));
 
         for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){ // On récupère puis retourne l'ensemble des positions disponibles pour la pièce sélectionnée après avoir retiré les positions qui ne permettent pas de protéger le roi
-            liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
+            liste.put(LONGUEUR_EN_CASE*(p.getY()+1)-(LONGUEUR_EN_CASE-p.getX()), new int[]{p.getX(), p.getY()});
         }
 
         return liste;

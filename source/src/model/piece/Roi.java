@@ -56,7 +56,7 @@ public class Roi extends Piece {
 
 
     public void setListeDep(Plateau plateau){
-        int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int[][] dep = {{UNE_CASE_DEVANT, UNE_CASE_DEVANT}, {UNE_CASE_DERRIRE, UNE_CASE_DEVANT}, {UNE_CASE_DEVANT, UNE_CASE_DERRIRE}, {UNE_CASE_DERRIRE, UNE_CASE_DERRIRE}, {SUR_PLACE, UNE_CASE_DEVANT}, {SUR_PLACE, UNE_CASE_DERRIRE}, {UNE_CASE_DEVANT, SUR_PLACE}, {UNE_CASE_DERRIRE, SUR_PLACE}};
 
         getListeDep().clear();
         getListeProtecDep().clear();
@@ -67,14 +67,14 @@ public class Roi extends Piece {
 
         switch (roque(plateau, x, y)){
             case 1:
-                getListeDep().add(plateau.getCase(x-2, y));
+                getListeDep().add(plateau.getCase(x+DEUX_CASES_DERRIRE, y));
                 break;
             case 2:
-                getListeDep().add(plateau.getCase(x+2, y));
+                getListeDep().add(plateau.getCase(x+DEUX_CASES_DEVANT, y));
                 break;
             case 3:
-                getListeDep().add(plateau.getCase(x-2, y));
-                getListeDep().add(plateau.getCase(x+2, y));
+                getListeDep().add(plateau.getCase(x+DEUX_CASES_DERRIRE, y));
+                getListeDep().add(plateau.getCase(x+DEUX_CASES_DEVANT, y));
                 break;
         }
 
@@ -119,7 +119,7 @@ public class Roi extends Piece {
         int xTour=0, yTour, xDep=1, roqueDispo=0;
         Position caseTmp;
 
-        yTour = this.getCouleur()==Couleur.BLANC ? 7 : 0;
+        yTour = this.getCouleur()==Couleur.BLANC ? LIMIT_SUP : LIMIT_INF;
 
         if (!this.premierDeplacement)
             return roqueDispo;

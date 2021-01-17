@@ -7,28 +7,33 @@ import javafx.scene.layout.RowConstraints;
 
 public class ChessGrid extends GridPane {
 
+    public static final double POURCENTAGE_TAILLE= 12.5;
+    public static final double TAILLE_PREF= 100;
+    public static final int LIMIT_SUP=7;
+    public static final int LIMIT_INF=0;
+
     public ChessGrid(){
         super();
         int x, y;
 
-        for(int i=0; i<8; i++){
+        for(int i=LIMIT_INF; i<=LIMIT_SUP; i++){
             this.addColumn(i);
             this.addRow(i);
         }
 
         RowConstraints rc = new RowConstraints();
-        rc.setPercentHeight(12.5);
+        rc.setPercentHeight(POURCENTAGE_TAILLE);
 
         ColumnConstraints cc = new ColumnConstraints();
-        cc.setPercentWidth(12.5);
+        cc.setPercentWidth(POURCENTAGE_TAILLE);
 
-        for(y=0; y<8; y++){
-            for (x=0; x<8; x++){
+        for(y=LIMIT_INF; y<=LIMIT_SUP; y++){
+            for (x=LIMIT_INF; x<=LIMIT_SUP; x++){
                 Button bouton = new Button();
                 bouton.setId(x+""+y);
 
-                bouton.setPrefWidth(100);
-                bouton.setPrefHeight(100);
+                bouton.setPrefWidth(TAILLE_PREF);
+                bouton.setPrefHeight(TAILLE_PREF);
 
                 bouton.setStyle("-fx-background-size: cover;");
 

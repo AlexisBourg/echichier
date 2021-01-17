@@ -3,11 +3,13 @@ package model.coups;
 import model.plateau.Plateau;
 
 public class PlateauEtat {
+    public static final int LIMIT_INF=0;
+    public static final int LIMIT_SUP=7;
     private PositionEtat[][] plateau = new PositionEtat[8][8];
 
     public PlateauEtat(Plateau echiquier){
-        for (int y=0; y<8; y++){
-            for (int x=0; x<8; x++){
+        for (int y=LIMIT_INF; y<=LIMIT_SUP; y++){
+            for (int x=LIMIT_INF; x<=LIMIT_SUP; x++){
                 this.plateau[y][x] = new PositionEtat(echiquier.getCase(x, y));
             }
         }
@@ -25,8 +27,8 @@ public class PlateauEtat {
     public String toString(){
         StringBuilder message= new StringBuilder();
 
-        for(int i=0; i<8; i++){
-            for (int j=0; j<8; j++)
+        for(int i=LIMIT_INF; i<=LIMIT_SUP; i++){
+            for (int j=LIMIT_INF; j<=LIMIT_SUP; j++)
                 message.append(plateau[i][j].toString());
         }
 

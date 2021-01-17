@@ -5,6 +5,8 @@ import model.piece.*;
 
 public class Plateau {
 
+    public static final int LIMIT_INF=0;
+    public static final int LIMIT_SUP=7;
     private Position[][] plateauDeJeu = new Position[8][8];
 
     /**
@@ -13,19 +15,19 @@ public class Plateau {
     public Plateau(Piece[] piecesBlanc, Piece[] piecesNoir){
         int yb=7, yn=0, i=0;
 
-        for (int x=0;x<8;x++) {
-            for (int y=0;y<8;y++) {
+        for (int x=LIMIT_INF;x<=LIMIT_SUP;x++) {
+            for (int y=LIMIT_INF;y<=LIMIT_SUP;y++) {
                 plateauDeJeu[y][x] = new Position(y,x, null);
             }
         }
-        for (int x=0;x<8;x++){
+        for (int x=LIMIT_INF;x<=LIMIT_SUP;x++){
             plateauDeJeu[1][x].setPiece(piecesNoir[i]);
             plateauDeJeu[6][x].setPiece(piecesBlanc[i]);
             i+=1;
 
         }
 
-        for (int x=0; x<8; x++){
+        for (int x=LIMIT_INF; x<=LIMIT_SUP; x++){
             plateauDeJeu[yn][x].setPiece(piecesNoir[i]);
             plateauDeJeu[yb][x].setPiece(piecesBlanc[i]);
             i+=1;
@@ -35,7 +37,7 @@ public class Plateau {
     public Plateau(){}
 
     public boolean isCaseNull(Position p){
-        return p.getX() >= 0 && p.getX() <= 7 && p.getY() >= 0 && p.getY() <= 7;
+        return p.getX() >= LIMIT_INF && p.getX() <= LIMIT_SUP && p.getY() >= LIMIT_INF && p.getY() <= LIMIT_SUP;
     }
 
     public boolean isCaseSansPiece(Position p){
@@ -49,8 +51,8 @@ public class Plateau {
 
     public void setEtat(PlateauEtat plateau){
         //System.out.println(plateau.toString());
-        for (int y=0; y<8; y++){
-            for (int x=0; x<8; x++){
+        for (int y=LIMIT_INF; y<=LIMIT_SUP; y++){
+            for (int x=LIMIT_INF; x<=LIMIT_SUP; x++){
                 this.plateauDeJeu[y][x].setY(plateau.getCaseEtat(x, y).getY());
                 this.plateauDeJeu[y][x].setX(plateau.getCaseEtat(x, y).getX());
                 this.plateauDeJeu[y][x].setEtatPiece(plateau.getCaseEtat(x, y).getPiece());
@@ -65,8 +67,8 @@ public class Plateau {
     public String toString(){
         StringBuilder message= new StringBuilder();
 
-        for(int i=0; i<8; i++){
-            for (int j=0; j<8; j++)
+        for(int i=LIMIT_INF; i<=LIMIT_SUP; i++){
+            for (int j=LIMIT_INF; j<=LIMIT_SUP; j++)
                 message.append(plateauDeJeu[i][j].toString());
         }
 

@@ -14,7 +14,11 @@ import java.util.Map;
 
 public abstract class ControllerPartie extends ControllerAffichage {
 
-
+    public static final int LIMIT_INF=0;
+    public static final int LIMIT_SUP=7;
+    public static final int CLIQUE_1=1;
+    public static final int CLIQUE_2=2;
+    public static final int DISTANCE_VERS_TOUR=2;
     protected boolean cliqueUnPasse = false;
     protected int caseDepartGrille;
     protected int[] caseDepartPlateau;
@@ -62,9 +66,9 @@ public abstract class ControllerPartie extends ControllerAffichage {
      */
     public int numClique(int x, int y, Parties parties) {
         if (!parties.isCaseSansPiece(x, y) && parties.isPieceSelecAppartientAuJoueurCourant(x, y, parties.getJoueur(parties.getIndexJoueurCourant()))){
-            return 1;
+            return CLIQUE_1;
         }
-        return 2;
+        return CLIQUE_2;
     }
 
     public void restaurationImageDeplacementPossible(Parties parties) {
@@ -109,21 +113,14 @@ public abstract class ControllerPartie extends ControllerAffichage {
 
         if (listeDeplacements.containsKey(caseArriveeGrille)) {
             caseArriveePlateau = decompositionIdBouton(source);
-            if (roiSelectionne(partieActuel) && (caseArriveePlateau[0] == caseDepartPlateau[0]+2 || caseArriveePlateau[0] == caseDepartPlateau[0]-2))
+            if (roiSelectionne(partieActuel) && (caseArriveePlateau[0] == caseDepartPlateau[0]+DISTANCE_VERS_TOUR || caseArriveePlateau[0] == caseDepartPlateau[0]-DISTANCE_VERS_TOUR))
                 roque(partieActuel);
             else{
                 finDeDeplacement(partieActuel);
             }
 
             menace = partieActuel.echec();
-            if (menace.size()>0){
-                System.out.println("ECHEEEC");
-                this.echec = true;
-                if (partieActuel.echecEtMat(menace))
-                    System.out.println("EchecEtMAAAAAAAAAAAAAAAT");
-            }
-            else
-                this.echec = false;
+            this.echec = menace.size() > 0;
 
             ajoutCoup(caseDepartPlateau, caseArriveePlateau);
             partieActuel.changementJoueurCourant();
@@ -199,7 +196,7 @@ public abstract class ControllerPartie extends ControllerAffichage {
         CssModifier.changeBackgroundImage(grille.getChildren().get(caseArriveeGrille), partieActuel.getEchiquier().getCase(caseArriveePlateau[0], caseArriveePlateau[1]).getPiece().getImage());
         // Pour arriver sur la case d'arrivée
 
-        xTour = (caseArriveePlateau[0]==2) ? 0 : 7;
+        xTour = (caseArriveePlateau[0]==2) ? LIMIT_INF : LIMIT_SUP;
 
         CssModifier.changeBackgroundImage(grille.getChildren().get(partieActuel.getNumCaseGrille(new int[]{xTour, caseArriveePlateau[1]})), ""); // La pièce de la case de départ disparaît..
         changementsPlateauRoque(partieActuel); // Le plateau effectue les changements de position

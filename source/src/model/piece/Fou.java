@@ -20,7 +20,7 @@ public class Fou extends Piece {
     //Methode
 
     public void setListeDep(Plateau plateau, int x, int y) {
-        int[][] dep ={{1,1},{-1,1},{1,-1},{-1,-1}};
+        int[][] dep ={{UNE_CASE_DEVANT, UNE_CASE_DEVANT},{UNE_CASE_DERRIRE, UNE_CASE_DEVANT},{UNE_CASE_DEVANT, UNE_CASE_DERRIRE},{UNE_CASE_DERRIRE, UNE_CASE_DERRIRE}};
 
         getListeDep().clear();
         getListeProtecDep().clear();

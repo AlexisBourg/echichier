@@ -28,6 +28,8 @@ public class ControllerMenu {
     @FXML
     private Button boutonEnLigne;
 
+    public static final int HAUTEUR_DEFAUT = 800;
+    public static final int LONGUEUR_DEFAUT = 1000;
     private Parent root=null;
     private int port;
     private InetAddress addr;
@@ -64,7 +66,7 @@ public class ControllerMenu {
                 Stage primaryStage = new Stage();
 
                 primaryStage.setTitle("Partie local PVP");
-                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.setScene(new Scene(root, LONGUEUR_DEFAUT, HAUTEUR_DEFAUT));
                 primaryStage.show();
             }
         });
@@ -91,7 +93,7 @@ public class ControllerMenu {
                 Stage primaryStage = new Stage();
 
                 primaryStage.setTitle("Partie local PVE");
-                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.setScene(new Scene(root, LONGUEUR_DEFAUT, HAUTEUR_DEFAUT));
                 primaryStage.show();
             }
         });
@@ -114,7 +116,7 @@ public class ControllerMenu {
                 }
                 Stage primaryStage = new Stage();
                 primaryStage.setTitle("Echec");
-                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.setScene(new Scene(root, LONGUEUR_DEFAUT, HAUTEUR_DEFAUT));
                 primaryStage.show();
 
             }

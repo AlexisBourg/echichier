@@ -14,6 +14,8 @@ import java.util.Random;
 
 public class ControllerPartiesPvE extends ControllerPartie {
 
+    public static final int LONGUEUR_EN_CASE=8;
+    public static final int NB_CASES_GRILLE = 64;
     private IA ia;
     private PartiePvE partieActuel;
 
@@ -53,9 +55,9 @@ public class ControllerPartiesPvE extends ControllerPartie {
                 }
             }
         });
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
-                grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(mouseEvent -> {
+        for (int y = 0; y < LONGUEUR_EN_CASE; y++) {
+            for (int x = 0; x < LONGUEUR_EN_CASE; x++) {
+                grille.getChildren().get((LONGUEUR_EN_CASE * (y + 1) - (LONGUEUR_EN_CASE - x))).setOnMouseClicked(mouseEvent -> {
                     switch (numeroClique(partieActuel, mouseEvent.getSource())) {
                         case 1:
                             if (partieActuel.getJoueurCourant().getCouleur() == Couleur.BLANC) {
@@ -84,7 +86,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
                     }
                 });
                 if (echiquier.getCase(x, y).isOccupe())
-                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((LONGUEUR_EN_CASE * (y + 1) - (LONGUEUR_EN_CASE - x))), echiquier.getCase(x, y).getPiece().getImage());
             }
         }
     }
@@ -115,13 +117,12 @@ public class ControllerPartiesPvE extends ControllerPartie {
 
 
     public void deplacementIA(IA ia) {
-        int nombreDeCase = 63;
         String s;
         Piece pieceSelectione=null;
         int x, y,i=0;
         while (pieceSelectione==null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty()/* || ia.estPieceMorte(pieceSelectione) */|| partieActuel.isCaseSansPiece(caseDepartPlateau[0], caseDepartPlateau[1])) {
-            x = genererInt(8);
-            y =genererInt(8);
+            x = genererInt(LONGUEUR_EN_CASE);
+            y =genererInt(LONGUEUR_EN_CASE);
             s = x+""+y;
             System.out.println(s);
             caseDepartPlateau = decompositionIdBoutonIA(s);
@@ -194,9 +195,9 @@ public class ControllerPartiesPvE extends ControllerPartie {
 
         listeDeplacements = partieActuel.getDeplacements(caseDepPLa[0], caseDepPLa[1]);
 
-        noDep = genererInt(64);
+        noDep = genererInt(NB_CASES_GRILLE);
         while (!listeDeplacements.containsKey(noDep)) {
-            noDep = genererInt(64);
+            noDep = genererInt(NB_CASES_GRILLE);
         }
         tabCoord = listeDeplacements.get(noDep);
         return tabCoord;

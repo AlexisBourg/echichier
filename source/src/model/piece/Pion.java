@@ -34,7 +34,7 @@ public class Pion extends Piece {
         getListeDep().clear();
         getListeProtecDep().clear();
 
-        y = this.getCouleur() == Couleur.BLANC ? y-1 : y+1;
+        y = this.getCouleur() == Couleur.BLANC ? y+UNE_CASE_DERRIRE : y+UNE_CASE_DEVANT;
         deplacementPossible(plateau, x, y);
     }
 
@@ -51,15 +51,15 @@ public class Pion extends Piece {
             getListeDep().add(plateau.getCase(tmpX, tmpY));
             if (isPremierDeplacement() && !plateau.getCase(tmpX, tmpY).isOccupe()) {
                 if (this.getCouleur()==Couleur.BLANC && !plateau.getCase(tmpX, tmpY-1).isOccupe())
-                    getListeDep().add(plateau.getCase(tmpX, tmpY-1));
+                    getListeDep().add(plateau.getCase(tmpX, tmpY+UNE_CASE_DERRIRE));
                 else {
-                    if (!plateau.getCase(tmpX, tmpY + 1).isOccupe())
-                        getListeDep().add(plateau.getCase(tmpX, tmpY + 1));
+                    if (!plateau.getCase(tmpX, tmpY+UNE_CASE_DEVANT).isOccupe())
+                        getListeDep().add(plateau.getCase(tmpX, tmpY+UNE_CASE_DEVANT));
                 }
             }
         }
-        attaque(plateau, tmpX-1, tmpY);
-        attaque(plateau, tmpX+1, tmpY);
+        attaque(plateau, tmpX+UNE_CASE_DERRIRE, tmpY);
+        attaque(plateau, tmpX+UNE_CASE_DEVANT, tmpY);
     }
 
     private void attaque(Plateau plateau, int tmpX, int tmpY) {

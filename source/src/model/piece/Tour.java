@@ -20,7 +20,7 @@ public class Tour extends Piece {
         getListeDep().clear();
         getListeProtecDep().clear();
 
-        int[][] dep = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int[][] dep = {{SUR_PLACE, UNE_CASE_DEVANT}, {SUR_PLACE, UNE_CASE_DERRIRE}, {UNE_CASE_DEVANT, SUR_PLACE}, {UNE_CASE_DERRIRE, SUR_PLACE}};
         for (int i = 0; i < 4; i++) {
             deplacementPossible(plateau, dep[i][0], dep[i][1], x, y);
         }
