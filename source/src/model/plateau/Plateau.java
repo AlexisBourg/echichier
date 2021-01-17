@@ -1,7 +1,6 @@
 package model.plateau;
 
 import model.coups.PlateauEtat;
-import model.coups.PositionEtat;
 import model.piece.*;
 
 public class Plateau {
@@ -64,7 +63,7 @@ public class Plateau {
 
     @Override
     public String toString(){
-        StringBuilder message= new StringBuilder("");
+        StringBuilder message= new StringBuilder();
 
         for(int i=0; i<8; i++){
             for (int j=0; j<8; j++)

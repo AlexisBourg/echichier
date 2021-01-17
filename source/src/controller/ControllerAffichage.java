@@ -31,8 +31,7 @@ public class ControllerAffichage {
     @FXML
     protected Button suivant;
 
-
-    public void ajoutCoupListe(int[] caseDepartPlateau, int[] caseArriveePlateau) {
+    public void ajoutCoup(int[] caseDepartPlateau, int[] caseArriveePlateau) {
         String coup = "    "+traductionIntChar(caseDepartPlateau[0])+""+traductionCoordPlateau(caseDepartPlateau[1])+"  ->  "+traductionIntChar(caseArriveePlateau[0])+""+traductionCoordPlateau(caseArriveePlateau[1]);
         listeCoups.add(coup);
     }

@@ -3,8 +3,6 @@ package model.piece;
 import model.plateau.Plateau;
 import model.plateau.Position;
 
-import java.util.LinkedList;
-
 public class Cavalier extends Piece {
 
 

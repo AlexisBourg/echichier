@@ -50,7 +50,7 @@ public class EchecEtMat {
             if(!menaceEstUnCavalier(menace)) { // Si la menace n'est pas un cavalier
                 if(roiAdverseBloque(DepRoiAdverse) && // Si le Roi ne peut plus de se déplacer ET
                         (MenacesDeLaMenace.size() == 0 || // Si la menace n'est pas elle même menacée OU
-                                !isPossibInterpo(joueurAdverse, menace.get(0).getX(), menace.get(0).getY(), echiquier, new LinkedList<>()))) // Si aucune pièce alliée au Roi ne peut s'interposer pour le protéger
+                                isPossibInterpo(joueurAdverse, menace.get(0).getX(), menace.get(0).getY(), echiquier, new LinkedList<>()))) // Si aucune pièce alliée au Roi ne peut s'interposer pour le protéger
                     return true;
                 // Que cette même menace est protégée, Echec et mat
                 return (roiAdverseAUnSeulDeplacementPossible(DepRoiAdverse) && // Si le Roi ne peut se déplacer qu'à un seul endroit
@@ -173,7 +173,7 @@ public class EchecEtMat {
      * @param y y de la case menacée
      * @param tmpX x de la piece menaçante
      * @param tmpY y de la piece menaçante
-     * @return
+     * @return  : le fait que la piece qui "menace" la case (x, y) soit un pion ou non
      */
     public static boolean isPionLaMenace(Plateau echiquier, int x, int y, int tmpX, int tmpY){
         if (echiquier.getCase(tmpX, tmpY).getPiece().getCouleur()== Couleur.BLANC){
@@ -222,8 +222,6 @@ public class EchecEtMat {
                 yRoi = roiAdverse.getY(),
                 x = xRoi, y = yRoi;
         List<Position> pieceDispo;
-
-        int[][] dep={{1,1},{1,-1},{1,0},{-1,1},{-1,-1},{-1,0},{0,1},{0,-1}};
 
         // On va vérifier toutes les cases entre le roi adverse et sa menace pour voir si une pièce peut s'interposer et donc protéger le roi
 
@@ -330,6 +328,6 @@ public class EchecEtMat {
             }
         }
 
-        return casesDispo.size() > 0;
+        return casesDispo.size() <= 0;
     }
 }

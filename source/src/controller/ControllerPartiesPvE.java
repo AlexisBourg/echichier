@@ -76,7 +76,7 @@ public class ControllerPartiesPvE extends ControllerPartie  {
                                 ia = partieActuel.getIA();
                                 deplacementIA(ia);
                                 editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
-                                ajoutCoup();
+                                ajoutCoup(caseDepartPlateau, caseArriveePlateau);
                                 partieActuel.ChangementJoueurCourant();
                                 System.out.println("joueuer courant " + partieActuel.getIndexJoueurCourant());
                             }
@@ -96,9 +96,9 @@ public class ControllerPartiesPvE extends ControllerPartie  {
     }
 
 
-    /**
-     * --------------------------------------GESTION DE L'IA------------------------------------------
-     **/
+    /*
+      --------------------------------------GESTION DE L'IA------------------------------------------
+     */
 
 
     /**

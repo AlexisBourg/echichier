@@ -1,7 +1,5 @@
 package model.coups;
 
-import model.plateau.Plateau;
-
 import java.util.LinkedList;
 
 public class EditeurCoup {

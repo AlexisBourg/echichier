@@ -2,8 +2,6 @@ package model.joueur;
 
 import model.piece.*;
 
-import java.util.Arrays;
-
 public class IA implements InterfaceJoueur{
     private final Couleur couleur=Couleur.NOIR;
     private final Piece[] pieces;
