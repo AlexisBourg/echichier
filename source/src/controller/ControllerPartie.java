@@ -126,7 +126,7 @@ public abstract class ControllerPartie extends ControllerAffichage {
                 this.echec = false;
 
             ajoutCoup(caseDepartPlateau, caseArriveePlateau);
-            partieActuel.ChangementJoueurCourant();
+            partieActuel.changementJoueurCourant();
         }
     }
 

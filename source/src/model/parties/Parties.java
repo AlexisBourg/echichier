@@ -58,7 +58,12 @@ public abstract class Parties{
     public HashMap<Integer, int[]> getDeplacements(int x, int y){
         HashMap<Integer, int[]> liste = new HashMap<>();
 
-        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y);
+        if (echiquier.getCase(x, y).getPiece() instanceof Roi) {
+            Roi roi = (Roi) echiquier.getCase(x, y).getPiece();
+            roi.setListeDep(getEchiquier());
+        }
+        else
+            getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y);
 
         for (Position p: getEchiquier().getCase(x, y).getPiece().getListeDep()){
             liste.put(8*(p.getY()+1)-(8-p.getX()), new int[]{p.getX(), p.getY()});
@@ -136,6 +141,11 @@ public abstract class Parties{
         plateau.getCase(arrivee[0], arrivee[1]).setPiece(plateau.getCase(depart[0], depart[1]).getPiece());
         plateau.getCase(depart[0], depart[1]).unsetPiece();
 
+        if (pieceDeplacee instanceof Roi){
+            ((Roi) pieceDeplacee).setX(arrivee[0]);
+            ((Roi) pieceDeplacee).setY(arrivee[1]);
+        }
+
         if (pieceDeplacee instanceof Pion && ((Pion) pieceDeplacee).getPremierDeplacement())
             ((Pion)pieceDeplacee).setPremierDeplacement();
         if (pieceDeplacee instanceof Roi && ((Roi) pieceDeplacee).getPremierDeplacement()){
@@ -184,7 +194,12 @@ public abstract class Parties{
         if (menace.size()>1)
             return liste;
 
-        getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y); // set la liste de déplacements pour la pièce sélectionnée
+        if (echiquier.getCase(x, y).getPiece() instanceof Roi) {
+            Roi roi = (Roi) echiquier.getCase(x, y).getPiece();
+            roi.setListeDep(getEchiquier());
+        }
+        else
+            getEchiquier().getCase(x, y).getPiece().setListeDep(getEchiquier(), x, y); // set la liste de déplacements pour la pièce sélectionnée
 
         if (!(getEchiquier().getCase(x, y).getPiece() instanceof Roi))
             affinageDeplacements(getEchiquier().getCase(x, y).getPiece(), getEchiquier().getCase(x, y).getPiece().getListeDep(), menace.get(0));

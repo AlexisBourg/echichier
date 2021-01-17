@@ -60,7 +60,7 @@ public class ControllerPartiesReseauxClient extends ControllerPartiesPvP{
                                     try {
                                         in = new ObjectInputStream(serverSocket.getInputStream());
                                         out = new ObjectOutputStream(serverSocket.getOutputStream());
-                                        partie.ChangementJoueurCourant();
+                                        partie.changementJoueurCourant();
                                         out.writeObject(partie);
 
                                         partie = (PartiePvP) in.readObject();
