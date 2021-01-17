@@ -9,7 +9,7 @@ public class ChessGrid extends GridPane {
 
     public ChessGrid(){
         super();
-        int x=0, y=0;
+        int x, y;
 
         for(int i=0; i<8; i++){
             this.addColumn(i);

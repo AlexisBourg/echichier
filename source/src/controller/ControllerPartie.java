@@ -32,6 +32,7 @@ public abstract class ControllerPartie extends ControllerAffichage {
     protected boolean echec =false;
     protected List<Position> menace;
 
+    protected ControllerAffichage affichage=new ControllerAffichage();
     protected ControllerSon son= new ControllerSon();
     protected EditeurCoup editeurCoup = new EditeurCoup();
 
@@ -39,17 +40,6 @@ public abstract class ControllerPartie extends ControllerAffichage {
         listeDeplacements = new HashMap<>();
     }
 
-//    private static class SingletonHolder
-//    {
-//        /** Instance unique non préinitialisée */
-//        private final static ControllerPartie instance = new ControllerPartie();
-//    }
-//
-//    /** Point d'accès pour l'instance unique du singleton */
-//    public static ControllerPartie getInstance()
-//    {
-//        return SingletonHolder.instance;
-//    }
 
     /**
      * @param source : bouton cliqué
@@ -59,7 +49,6 @@ public abstract class ControllerPartie extends ControllerAffichage {
         int[] tabCoord = new int[2];
         String id = source.toString();
         id = id.substring(10, 12);
-        int x, y;
         tabCoord[0] = Integer.parseInt(id.substring(0, 1));
         tabCoord[1] = Integer.parseInt(id.substring(1));
         return tabCoord;
