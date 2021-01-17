@@ -17,14 +17,27 @@ public class PlateauEtat {
     }
 
     //Methode
+    /**
+     *  retourn l'état du plateau à un moment donné
+     * @return l'état du plateau
+     */
     public PositionEtat[][] getPlateau(){
         return this.plateau;
     }
 
+    /**
+     * permet de recuperer l'etat d'une case
+     * @param x : est l'abscisse de la case
+     * @param y : est l'ordonnée de la case
+     * @return retourne la case en question
+     */
     public PositionEtat getCaseEtat(int x, int y){
         return this.plateau[y][x];
     }
 
+    /**
+     * @return retourn tout les toString de toutes les positionsEtat qui le compose
+     */
     @Override
     public String toString(){
         StringBuilder message= new StringBuilder();
@@ -36,5 +49,4 @@ public class PlateauEtat {
 
         return message.toString();
     }
-
 }

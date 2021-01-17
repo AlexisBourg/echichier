@@ -44,7 +44,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
     /**
      * attends une connection d'un autre joueur avant de lancer une partie
      */
-    public void CommencerPartie(){
+    public void commencerPartie(){
         try {
             clientSocket = serverSocket.accept();
             System.out.println("2");
