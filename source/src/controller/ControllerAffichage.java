@@ -16,7 +16,11 @@ import java.util.Map;
 
 public class ControllerAffichage {
 
+<<<<<<< HEAD
+    public static final int LONGUEUR_EN_CASE = 8;
+=======
     //Atribut
+>>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     protected HashMap<Integer, int[]> listeDeplacements;
     protected ObservableList<String> listeCoups = FXCollections.observableArrayList();
     @FXML
@@ -91,12 +95,12 @@ public class ControllerAffichage {
     public void actualiserEtatPlateau(Parties partieActuel){
         Plateau echiquier = partieActuel.getEchiquier();
 
-        for (int i=0; i<8; i++){
-            for (int j=0; j<8; j++){
+        for (int i=0; i<LONGUEUR_EN_CASE; i++){
+            for (int j=0; j<LONGUEUR_EN_CASE; j++){
                 if (echiquier.getCase(j, i).isOccupe()){
-                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), echiquier.getCase(j, i).getPiece().getImage());
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((LONGUEUR_EN_CASE  * (i + 1) - (LONGUEUR_EN_CASE  - j))), echiquier.getCase(j, i).getPiece().getImage());
                 }else
-                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (i + 1) - (8 - j))), "");
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((LONGUEUR_EN_CASE  * (i + 1) - (LONGUEUR_EN_CASE  - j))), "");
             }
         }
     }

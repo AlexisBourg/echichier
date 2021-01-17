@@ -10,7 +10,11 @@ import res.interfaceGraphique.CssModifier;
 
 public class ControllerPartiesPvP extends ControllerPartie{
 
+<<<<<<< HEAD
+    public static final int LONGUEUR_EN_CASE=8;
+=======
     //Atribut
+>>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
     private PartiePvP partieActuel;
 
     //Constructeur
@@ -49,9 +53,9 @@ public class ControllerPartiesPvP extends ControllerPartie{
                 }
             }
         });
-        for (int y = 0; y < 8; y++) {
-            for (int x = 0; x < 8; x++) {
-                grille.getChildren().get((8 * (y + 1) - (8 - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
+        for (int y = 0; y <LONGUEUR_EN_CASE; y++) {
+            for (int x = 0; x <LONGUEUR_EN_CASE; x++) {
+                grille.getChildren().get((LONGUEUR_EN_CASE * (y + 1) - (LONGUEUR_EN_CASE - x))).setOnMouseClicked(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         switch (numeroClique(partieActuel, mouseEvent.getSource())) {
@@ -70,7 +74,6 @@ public class ControllerPartiesPvP extends ControllerPartie{
                                 if (cliqueUnPasse) {
                                     traitementCliqueDeux(mouseEvent.getSource(), partieActuel);
                                     editeurCoup.ajoutCoup(partieActuel.creerEtatPlateau());
-                                    System.out.println(editeurCoup.getCoups());
                                 }
                                 cliqueUnPasse = false;
                                 break;
@@ -78,7 +81,7 @@ public class ControllerPartiesPvP extends ControllerPartie{
                     }
                 });
                 if (echiquier.getCase(x, y).isOccupe()){
-                    CssModifier.changeBackgroundImage(grille.getChildren().get((8 * (y + 1) - (8 - x))), echiquier.getCase(x, y).getPiece().getImage());
+                    CssModifier.changeBackgroundImage(grille.getChildren().get((LONGUEUR_EN_CASE * (y + 1) - (LONGUEUR_EN_CASE - x))), echiquier.getCase(x, y).getPiece().getImage());
                 }
             }
         }

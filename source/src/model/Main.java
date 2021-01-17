@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {
+    public static final int LONGUEUR_DEFAUT = 1000;
+    public static final int HAUTEUR_DEFAUT = 800;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -21,7 +23,7 @@ public class Main extends Application {
         Parent root = load.load();
 
         primaryStage.setTitle("Echec");
-        primaryStage.setScene(new Scene(root, 1000, 800));
+        primaryStage.setScene(new Scene(root, LONGUEUR_DEFAUT, HAUTEUR_DEFAUT));
         primaryStage.show();
     }
 

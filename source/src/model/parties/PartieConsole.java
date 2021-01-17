@@ -9,6 +9,11 @@ import model.piece.Pion;
 import java.util.*;
 
 public class PartieConsole extends Parties {
+    public static final int NB_JOUEURS=2;
+    public static final int JOUEUR_1=0;
+    public static final int JOUEUR_2=1;
+    public static final int LIMIT_SUP=7;
+    public static final int LIMIT_INF=0;
 
     //Attribue
 
@@ -21,8 +26,8 @@ public class PartieConsole extends Parties {
         HashMap<String, int[]> coordDeplacements;
         Piece pieceMorte;
 
-        InterfaceJoueur joueurCourant=super.getJoueur(0);
-        InterfaceJoueur joueurNonCourant=super.getJoueur(1);
+        InterfaceJoueur joueurCourant=super.getJoueur(JOUEUR_1);
+        InterfaceJoueur joueurNonCourant=super.getJoueur(JOUEUR_2);
 
         while(true){
             System.out.println("Tour du joueur "+joueurCourant.getCouleur()+":\n");
@@ -33,7 +38,7 @@ public class PartieConsole extends Parties {
                 joueurNonCourant.addPieceMorte(pieceMorte);
             }
 
-            i=(i+1)%2;
+            i=(i+1)%NB_JOUEURS;
 
             joueurCourant=super.getJoueur(i);
             joueurNonCourant= (i == 1) ?  super.getJoueur(i-1) :  super.getJoueur(i+1);
@@ -119,7 +124,7 @@ public class PartieConsole extends Parties {
      * @return : le fait que la coordonnée données est extérieure ou non au plateau
      */
     public boolean coordNonCoherente(int a){
-        return a > 8 || a < 0;
+        return a > LIMIT_SUP || a < LIMIT_INF;
     }
 
 
@@ -128,8 +133,8 @@ public class PartieConsole extends Parties {
      * @param joueurCourant : joueur en train de jouer
      */
     public void listePiecesJoueur(InterfaceJoueur joueurCourant, Plateau echiquier){
-        for(int i=0; i<8; i++){
-            for (int j=0; j<8; j++){
+        for(int i=LIMIT_INF; i<=LIMIT_SUP; i++){
+            for (int j=LIMIT_INF; j<=LIMIT_SUP; j++){
                 for (int k=0; k<joueurCourant.getPieces().length; k++) {
                     if(joueurCourant.getPieces()[i].equals(echiquier.getCase(j, i).getPiece()))
                         System.out.print(j+""+i+ ", ");

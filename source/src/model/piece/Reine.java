@@ -19,7 +19,7 @@ public class Reine extends Piece {
     //Methode
     @Override
     public void setListeDep(Plateau plateau, int x, int y) {
-        int[][] dep = {{1, 1}, {-1, 1}, {1, -1}, {-1, -1}, {0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+        int[][] dep = {{UNE_CASE_DEVANT, UNE_CASE_DEVANT}, {UNE_CASE_DERRIRE, UNE_CASE_DEVANT}, {UNE_CASE_DEVANT, UNE_CASE_DERRIRE}, {UNE_CASE_DERRIRE, UNE_CASE_DERRIRE}, {SUR_PLACE, UNE_CASE_DEVANT}, {SUR_PLACE, UNE_CASE_DERRIRE}, {UNE_CASE_DEVANT, SUR_PLACE}, {UNE_CASE_DERRIRE, SUR_PLACE}};
 
         getListeDep().clear();
         getListeProtecDep().clear();

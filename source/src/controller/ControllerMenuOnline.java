@@ -36,7 +36,12 @@ public class ControllerMenuOnline {
     @FXML
     private Text textPort;
 
+<<<<<<< HEAD
+    public static final int HAUTEUR_DEFAUT = 800;
+    public static final int LONGUEUR_DEFAUT = 1000;
+=======
     //Constructeur
+>>>>>>> 2946f13a9d740fa9a4f0f4f5e965d439eb623709
 
     //Methode
     @FXML
@@ -81,7 +86,7 @@ public class ControllerMenuOnline {
                 Stage primaryStage = new Stage();
 
                 primaryStage.setTitle("Partie Online (Server)");
-                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.setScene(new Scene(root, LONGUEUR_DEFAUT, HAUTEUR_DEFAUT));
                 primaryStage.show();
             }
 
@@ -119,7 +124,7 @@ public class ControllerMenuOnline {
                 Stage primaryStage = new Stage();
 
                 primaryStage.setTitle("Partie Online (Server)");
-                primaryStage.setScene(new Scene(root, 1000, 800));
+                primaryStage.setScene(new Scene(root, LONGUEUR_DEFAUT, HAUTEUR_DEFAUT));
                 primaryStage.show();
 
             }
