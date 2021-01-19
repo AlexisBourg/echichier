@@ -57,8 +57,8 @@ public class EchecEtMat {
                 return true;
             if (!menaceEstUnCavalier(menace)) { // Si la menace n'est pas un cavalier
                 if (roiAdverseBloque(depRoiAdverse) && // Si le Roi ne peut plus de se déplacer ET
-                        (nombreDePieceQuiMenaceLaMenace(menacesDeLaMenace) == 0 || // Si la menace n'est pas elle même menacée OU
-                                isPossibInterpo(joueurAdverse, menace.get(PREMIER_ELEMENT).getX(), menace.get(PREMIER_ELEMENT).getY(), echiquier, new LinkedList<>()))) // Si aucune pièce alliée au Roi ne peut s'interposer pour le protéger
+                        (nombreDePieceQuiMenaceLaMenace(menacesDeLaMenace) == 0 && // Si la menace n'est pas elle même menacée OU
+                                !isPossibInterpo(joueurAdverse, menace.get(PREMIER_ELEMENT).getX(), menace.get(PREMIER_ELEMENT).getY(), echiquier, new LinkedList<>()))) // Si aucune pièce alliée au Roi ne peut s'interposer pour le protéger
                     return true;
                 // Que cette même menace est protégée, Echec et mat
                 return (roiAdverseAUnSeulDeplacementPossible(depRoiAdverse) && // Si le Roi ne peut se déplacer qu'à un seul endroit
@@ -183,7 +183,7 @@ public class EchecEtMat {
             if (option == 0) {
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))) {
                     if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
-                        echiquier.getCase(tmpx, tmpy).getPiece();
+                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);;
                     }
 
                     if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) {
@@ -194,7 +194,7 @@ public class EchecEtMat {
             } else if (option == 1) {
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))) {
 
-                    echiquier.getCase(tmpx, tmpy).getPiece();
+                    echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);;
                     if (echiquier.getCase(tmpx, tmpy).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) {
                         liste.add(echiquier.getCase(tmpx, tmpy));
                         break;
@@ -203,7 +203,7 @@ public class EchecEtMat {
             } else if (option == 2) {
                 if (!echiquier.isCaseSansPiece(echiquier.getCase(tmpx, tmpy))) {
                     if (!(echiquier.getCase(tmpx, tmpy).getPiece() instanceof Roi)) {
-                        echiquier.getCase(tmpx, tmpy).getPiece();
+                        echiquier.getCase(tmpx, tmpy).getPiece().setListeDep(echiquier, tmpx, tmpy);;
                     }
 
                     if (echiquier.getCase(tmpx, tmpy).getPiece().getListeDep().contains(echiquier.getCase(x, y))) {
@@ -257,13 +257,13 @@ public class EchecEtMat {
         // tmpX et tmpY représente la case qui peut être menace l'autre
         if (option == 0) {
             if (!(echiquier.getCase(tmpX, tmpY).getPiece() instanceof Roi))
-                echiquier.getCase(tmpX, tmpY).getPiece();
+                echiquier.getCase(tmpX, tmpY).getPiece().setListeDep(echiquier, tmpX, tmpY);;
 
             if (echiquier.getCase(tmpX, tmpY).getPiece().getListeDep().contains(echiquier.getCase(x, y))) {
                 liste.add(echiquier.getCase(tmpX, tmpY));
             }
         } else {
-            echiquier.getCase(tmpX, tmpY).getPiece();
+            echiquier.getCase(tmpX, tmpY).getPiece().setListeDep(echiquier, tmpX, tmpY);;
             if (echiquier.getCase(tmpX, tmpY).getPiece().getListeProtecDep().contains(echiquier.getCase(x, y))) {
                 liste.add(echiquier.getCase(tmpX, tmpY));
             }
@@ -280,53 +280,172 @@ public class EchecEtMat {
      * @param echiquier     : plateau du jeu
      * @return : le fait qu'une pièce puisse s'interposer entre le roi et la menace
      */
-    public static boolean isPossibInterpo(InterfaceJoueur joueurAdverse, int xMen, int yMen, Plateau echiquier, LinkedList<Position> casesDispo) {
-        Roi roiAdverse = (Roi) joueurAdverse.getPieces()[ROI];
-        int xRoi = roiAdverse.getX(), // On récupère les coordonnées du Roi
-                yRoi = roiAdverse.getY(),
-                x = xRoi, y = yRoi;
-        // On va vérifier toutes les cases entre le roi adverse et sa menace pour voir si une pièce peut s'interposer et donc protéger le roi
-        examinerPiecesAutour((xMen - xRoi), (yMen - yRoi), xRoi, yRoi, echiquier, xMen, yMen, casesDispo, joueurAdverse);
+//        public static boolean isPossibInterpo(InterfaceJoueur joueurAdverse, int xMen, int yMen, Plateau echiquier, LinkedList<Position> casesDispo) {
+//            Roi roiAdverse = (Roi) joueurAdverse.getPieces()[ROI];
+//            int xRoi = roiAdverse.getX(), // On récupère les coordonnées du Roi
+//                    yRoi = roiAdverse.getY(),
+//                    x = xRoi, y = yRoi;
+//            // On va vérifier toutes les cases entre le roi adverse et sa menace pour voir si une pièce peut s'interposer et donc protéger le roi
+//            examinerPiecesAutour((xMen - xRoi), (yMen - yRoi), xRoi, yRoi, echiquier, xMen, yMen, casesDispo, joueurAdverse);
+//            examinerPiecesAutour((xMen - xRoi), (yMen - yRoi), xRoi, yRoi, echiquier, xMen, yMen, casesDispo, joueurAdverse);
+//
+//            return casesDispo.size() <= 0;
+//        }
+//
+//        /**
+//         * Permet n'analyser toutes les cases entre la menace et le roi
+//         *
+//         * @param comportementX : est la différence entre xMen et xRoi
+//         * @param comportementY : est la différence entre yMen et yRoi
+//         * @param xRoi          : est l'abssice du Roi
+//         * @param yRoi          : est l'ordonnée du Roi
+//         * @param echiquier     : est l'échiquier de la paratie actuel
+//         * @param xMen          : est l'abssice de la pièce
+//         * @param yMen          : est l'ordonnée de la pièce
+//         * @param casesDispo    : est une liste qui va contenir les cases que les pièces alliées pourront occuper pour s'interposer
+//         * @param joueurAdverse : est le joueur advairse
+//         */
+        public static void examinerPiecesAutour(int comportementX, int comportementY, int xRoi, int yRoi, Plateau echiquier, int xMen, int yMen, LinkedList<Position> casesDispo, InterfaceJoueur joueurAdverse) {
+            List<Position> pieceDispo;
+            int diffX = (comportementX > 0) ? 1 : -1,
+                    diffY = (comportementY > 0) ? 1 : -1,
+                    x = xRoi,
+                    y = yRoi;
 
-        return casesDispo.size() <= 0;
-    }
+            if (comportementX == 0)
+                diffX = 0;
+            if (comportementY == 0)
+                diffY = 0;
 
-    /**
-     * Permet n'analyser toutes les cases entre la menace et le roi
-     *
-     * @param comportementX : est la différence entre xMen et xRoi
-     * @param comportementY : est la différence entre yMen et yRoi
-     * @param xRoi          : est l'abssice du Roi
-     * @param yRoi          : est l'ordonnée du Roi
-     * @param echiquier     : est l'échiquier de la paratie actuel
-     * @param xMen          : est l'abssice de la pièce
-     * @param yMen          : est l'ordonnée de la pièce
-     * @param casesDispo    : est une liste qui va contenir les cases que les pièces alliées pourront occuper pour s'interposer
-     * @param joueurAdverse : est le joueur advairse
-     */
-    public static void examinerPiecesAutour(int comportementX, int comportementY, int xRoi, int yRoi, Plateau echiquier, int xMen, int yMen, LinkedList<Position> casesDispo, InterfaceJoueur joueurAdverse) {
-        List<Position> pieceDispo;
-        int diffX = (comportementX > 0) ? 1 : -1,
-                diffY = (comportementY > 0) ? 1 : -1,
-                x = xRoi,
-                y = yRoi;
-
-        if (comportementX == 0)
-            diffX = 0;
-        if (comportementY == 0)
-            diffY = 0;
-
-        x += diffX;
-        y += diffY;
-
-        while ((y != yMen) && (x != xMen)) {
-            pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, OPTION_0); // On regarde si la case peut être occupée par une pièce
-            for (Position p : pieceDispo) {
-                if (p.getPiece().getCouleur() == joueurAdverse.getCouleur())
-                    casesDispo.add(echiquier.getCase(x, y));
-            }
             x += diffX;
             y += diffY;
+
+            while ((y != yMen) && (x != xMen)) {
+                pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, OPTION_0); // On regarde si la case peut être occupée par une pièce
+                for (Position p : pieceDispo) {
+                    if (p.getPiece().getCouleur() == joueurAdverse.getCouleur())
+                        casesDispo.add(echiquier.getCase(x, y));
+                }
+                x += diffX;
+                y += diffY;
+            }
         }
+    public static boolean isPossibInterpo(InterfaceJoueur joueurAdverse, int xMen, int yMen, Plateau echiquier, LinkedList<Position> casesDispo) {
+        Roi roiAdverse = (Roi) joueurAdverse.getPieces()[ROI];
+                int xRoi = roiAdverse.getX(), // On récupère les coordonnées du Roi
+                        yRoi = roiAdverse.getY(),
+                        x = xRoi, y = yRoi;
+        List<Position> pieceDispo = new LinkedList<>();
+
+        int[][] dep={{1,1},{1,-1},{1,0},{-1,1},{-1,-1},{-1,0},{0,1},{0,-1}};
+
+        // On va vérifier toutes les cases entre le roi adverse et sa menace pour voir si une pièce peut s'interposer et donc protéger le roi
+
+        if (xMen > xRoi) { // Si la menace est sur la droite du Roi
+            if (yMen > yRoi) { // Si la menace est en bas à droite du Roi
+                x += 1;
+                y += 1;
+                while (x != xMen && y != yMen) { // Tant que l'on a pas parcouru toutes les cases entre le Roi et la menace
+                    pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+                    for (Position p : pieceDispo) {
+                        if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                            casesDispo.add(echiquier.getCase(x, y));
+                    }
+                    x +=1;
+                    y +=1;
+                }
+            }
+            if (yMen < yRoi) { // Si la menace est en haut à droite du Roi
+                x += 1;
+                y -= 1;
+                while (x != xMen && y != yMen) { // Tant que l'on a pas parcouru toutes les cases entre le Roi et la menace
+                    pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+                    for (Position p : pieceDispo) {
+                        if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                            casesDispo.add(echiquier.getCase(x, y));
+                    }
+                    x +=1;
+                    y -=1;
+                }
+            }
+            if (yMen == yRoi) { // Si à droite du Roi et sur la même ligne
+                x += 1;
+                while (x != xMen) { // Tant que l'on a pas parcouru toutes les cases entre le Roi et la menace
+                    pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+                    for (Position p : pieceDispo) {
+                        if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                            casesDispo.add(echiquier.getCase(x, y));
+                    }
+                    x += 1;
+                }
+            }
+        } else if (xMen < xRoi) { // Si la menace est sur la gauche du roi
+            if (yMen > yRoi) { // Si la menace est en bas à gauche du Roi
+                x -= 1;
+                y += 1;
+                while (x != xMen && y != yMen) { // Tant que l'on a pas parcouru toutes les cases entre le Roi et la menace
+                    pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+                    for (Position p : pieceDispo) {
+                        if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                            casesDispo.add(echiquier.getCase(x, y));
+                    }
+                    x -= 1;
+                    y += 1;
+                }
+            }
+            if (yMen < yRoi) { // Si la menace est en haut à gauche du Roi
+                x -= 1;
+                y -= 1;
+                while (x != xMen && y != yMen) { // Tant que l'on a pas parcouru toutes les cases entre le Roi et la menace
+                    pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+                    for (Position p : pieceDispo) {
+                        if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                            casesDispo.add(echiquier.getCase(x, y));
+                    }
+                    x -= 1;
+                    y -= 1;
+                }
+            }
+
+            if (yMen == yRoi) { // Si la menace est à gauche du Roi et sur la même ligne
+                x -= 1;
+                while (x != xMen) { // Tant que l'on a pas parcouru toutes les cases entre le Roi et la menace
+                    pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+                    for (Position p : pieceDispo) {
+                        if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                            casesDispo.add(echiquier.getCase(x, y));
+                    }
+                    x -= 1;
+                }
+            }
+        } else { // Si la menace est dans la même colonne que le roi
+            if (yMen > yRoi) { // Si la menace est sur la même colonne et est plus haute que le Roi
+                y += 1;
+                while (y != yMen) { // Tant que l'on a pas parcouru toutes les cases entre le Roi et la menace
+                    pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+                    for (Position p : pieceDispo) {
+                        if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                            casesDispo.add(echiquier.getCase(x, y));
+                    }
+                    y += 1;
+                }
+            }
+
+            if (yMen < yRoi) { // Si la menace est sur la même colonne et est plus basse que le Roi
+                y -= 1;
+                while (y != yMen) { // Tant que l'on a pas parcouru toutes les cases entre le Roi et la menace
+                    pieceDispo = isPieceMenaOrProtecParAutre(x, y, echiquier, 0); // On regarde si la case peut être occupée par une pièce
+                    for (Position p : pieceDispo) {
+                        if (p.getPiece().getCouleur()==joueurAdverse.getCouleur())
+                            casesDispo.add(echiquier.getCase(x, y));
+                    }
+                    y -= 1;
+                }
+            }
+        }
+
+        return casesDispo.size() > 0;
     }
+
+
 }

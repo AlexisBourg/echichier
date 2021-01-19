@@ -54,7 +54,6 @@ public class ControllerPartiesPvE extends ControllerPartie {
                     partieActuel.recupEtat(editeurCoup.coupSuivant());
                     actualiserEtatPlateau(partieActuel);
                     partieActuel.changementJoueurCourant();
-                    ;
                 }
             }
         });
@@ -122,7 +121,7 @@ public class ControllerPartiesPvE extends ControllerPartie {
         int x = genererInt(LONGUEUR_EN_CASE), y = genererInt(LONGUEUR_EN_CASE);
         pieceSelectione = partieActuel.getEchiquier().getCase(x, y).getPiece();
         if (pieceSelectione != null)
-            pieceSelectione.setListeDep(partieActuel.getEchiquier(), x, y);
+            pieceSelectione.    setListeDep(partieActuel.getEchiquier(), x, y);
 
         while (pieceSelectione == null || pieceSelectione.getCouleur() != Couleur.NOIR || pieceSelectione.getListeDep().isEmpty() || partieActuel.isCaseSansPiece(x, y)) {
             x = genererInt(LONGUEUR_EN_CASE);

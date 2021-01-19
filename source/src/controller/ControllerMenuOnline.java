@@ -62,7 +62,9 @@ public class ControllerMenuOnline {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                controller.commencerPartie();
+                if(!controller.commencerPartie()){
+                    return;
+                }
 
                 load.setController(controller);
 

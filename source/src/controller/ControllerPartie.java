@@ -138,6 +138,11 @@ public abstract class ControllerPartie extends ControllerAffichage {
             }
             else
                 ajoutCoup(caseDepartPlateau, caseArriveePlateau);
+//-----
+            if(echec){
+                System.out.println("echec");
+            }
+//----
             partieActuel.changementJoueurCourant();
         }
     }

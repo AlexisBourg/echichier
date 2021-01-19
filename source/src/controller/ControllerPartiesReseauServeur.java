@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
 
     //Atribut
+    public static final int DELAY_DE_CONNECTION =5000; //en millisecondes
     public static final int LONGUEUR_EN_CASE=8;
     private PartiePvP partie;
     private ServerSocket serverSocket = null;
@@ -44,17 +45,17 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
     /**
      * attends une connection d'un autre joueur avant de lancer une partie
      */
-    public void commencerPartie(){
+    public boolean commencerPartie(){
         try {
+            serverSocket.setSoTimeout(DELAY_DE_CONNECTION);
             clientSocket = serverSocket.accept();
-            System.out.println("2");
-            clientSocket.setSoTimeout(20000);
 
         } catch (IOException e) {
             System.out.println("TimeOut: aucune connection");
+            return false;
         }
         try {
-            System.out.println("test2");
+
             out = new ObjectOutputStream(clientSocket.getOutputStream() );  //sortie pour envoyer
             out.flush();//pour envoyer des info au client necessaire à une bonne connexion
             in = new ObjectInputStream(clientSocket.getInputStream());
@@ -63,6 +64,7 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
         }
 
         listeDeplacements = new HashMap<>();
+        return true;
     }
 
 

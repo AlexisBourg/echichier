@@ -282,7 +282,7 @@ public abstract class Parties{
             newListeDep.add(m);
         }
 
-        if(EchecEtMat.isPossibInterpo(this.getJoueurCourant(), m.getX(), m.getY(), getEchiquier(), caseDispo)){
+        if(!EchecEtMat.isPossibInterpo(this.getJoueurCourant(), m.getX(), m.getY(), getEchiquier(), caseDispo)){
             listeDep.clear();
         }
         else{
