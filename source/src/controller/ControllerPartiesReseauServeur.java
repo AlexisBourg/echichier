@@ -46,15 +46,13 @@ public class ControllerPartiesReseauServeur extends ControllerPartiesPvP {
      */
     public void commencerPartie(){
         try {
+            serverSocket.setSoTimeout(5000);
             clientSocket = serverSocket.accept();
-            System.out.println("2");
-            clientSocket.setSoTimeout(20000);
 
         } catch (IOException e) {
             System.out.println("TimeOut: aucune connection");
         }
         try {
-            System.out.println("test2");
             out = new ObjectOutputStream(clientSocket.getOutputStream() );  //sortie pour envoyer
             out.flush();//pour envoyer des info au client necessaire à une bonne connexion
             in = new ObjectInputStream(clientSocket.getInputStream());
